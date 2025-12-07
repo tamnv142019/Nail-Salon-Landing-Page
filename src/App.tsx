@@ -8,6 +8,7 @@ import { ThemeProvider } from './components/ThemeProvider';
 import { TranslationProvider } from './contexts/TranslationContext';
 import { ScrollProgress } from './components/ScrollProgress';
 import { FloatingCTA } from './components/FloatingCTA';
+import { FloatingLanguageSwitcher } from './components/FloatingLanguageSwitcher';
 import { StepIndicator } from './components/StepIndicator';
 import { StoryTransition } from './components/StoryTransition';
 import { CTABanner } from './components/CTABanner';
@@ -24,6 +25,7 @@ export default function App() {
         <ScrollProgress />
         <StepIndicator />
         <FloatingCTA onBookClick={() => setIsBookingOpen(true)} />
+        <FloatingLanguageSwitcher />
         
         {/* Chapter 1: The Beginning */}
         <StoryHero />

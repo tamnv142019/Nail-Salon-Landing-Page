@@ -2,7 +2,6 @@ import { Calendar, Star, Sparkles, Moon, Sun, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTheme } from './ThemeProvider';
 import { useTranslation } from '../contexts/TranslationContext';
-import { LanguageSwitcher } from './LanguageSwitcher';
 import { BookingModal } from './BookingModal';
 import { MobileMenu } from './MobileMenu';
 
@@ -91,7 +90,6 @@ export function Hero() {
                   {t('nav.contact')}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 dark:bg-rose-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <LanguageSwitcher />
                 <button
                   onClick={toggleTheme}
                   className="p-2.5 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-xl transition-all duration-300 hover:scale-110"
@@ -106,7 +104,6 @@ export function Hero() {
               </div>
               {/* Mobile Menu Button */}
               <div className="md:hidden flex items-center gap-3">
-                <LanguageSwitcher />
                 <button
                   onClick={toggleTheme}
                   className="p-2.5 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-xl transition-all duration-300"
