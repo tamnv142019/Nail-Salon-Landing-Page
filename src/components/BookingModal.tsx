@@ -136,6 +136,144 @@ function CalendarSelector({ value, onChange, minDate }: { value: string; onChang
   );
 }
 
+// Range calendar component
+function RangeCalendarSelector({
+  start,
+  end,
+  onChange,
+  minDate,
+}: {
+  start: string | null;
+  end: string | null;
+  onChange: (range: { start: string | null; end: string | null }) => void;
+  minDate: string;
+}) {
+  const initial = start ? new Date(start) : new Date();
+  const [currentMonth, setCurrentMonth] = useState(new Date(initial));
+
+  const getDaysInMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  const getFirstDayOfMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+
+  const handlePrevMonth = () => {
+    const minDateObj = new Date(minDate);
+    const newDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1);
+    if (newDate >= minDateObj) setCurrentMonth(newDate);
+  };
+
+  const handleNextMonth = () => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+
+  const daysInMonth = getDaysInMonth(currentMonth);
+  const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
+  const days: (number | null)[] = Array(firstDayOfMonth).fill(null).concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));
+
+  const monthName = currentMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+  const minDateObj = new Date(minDate);
+  const startObj = start ? new Date(start) : null;
+  const endObj = end ? new Date(end) : null;
+
+  const inRange = (d: Date) => {
+    if (!startObj || !endObj) return false;
+    return d >= startObj && d <= endObj;
+  };
+
+  const handleSelect = (day: number) => {
+    const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    const dateStr = date.toISOString().split('T')[0];
+
+    // If no start selected, set start
+    if (!start) {
+      onChange({ start: dateStr, end: null });
+      return;
+    }
+
+    // If start selected but no end, set end (swap if end < start)
+    if (start && !end) {
+      const startDate = new Date(start);
+      if (date < startDate) {
+        onChange({ start: dateStr, end: start });
+      } else {
+        onChange({ start, end: dateStr });
+      }
+      return;
+    }
+
+    // If both selected, start new selection
+    onChange({ start: dateStr, end: null });
+  };
+
+  return (
+    <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h4 className="text-lg text-gray-900 dark:text-white font-semibold">{monthName}</h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Click start date, then end date</p>
+        </div>
+        <div className="flex gap-2">
+          <button type="button" onClick={handlePrevMonth} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300 hover:scale-110" title="Previous month">
+            <ChevronLeft size={20} className="text-gray-700 dark:text-gray-300" />
+          </button>
+          <button type="button" onClick={handleNextMonth} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300 hover:scale-110" title="Next month">
+            <ChevronRight size={20} className="text-gray-700 dark:text-gray-300" />
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-7 gap-2 mb-4">
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => (
+          <div key={d} className="text-center text-sm text-gray-600 dark:text-gray-400 font-medium py-2">{d}</div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-7 gap-2">
+        {days.map((day, idx) => {
+          if (day === null) return <div key={`empty-${idx}`} />;
+          const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+          const dateStr = date.toISOString().split('T')[0];
+          const disabled = date < minDateObj;
+          const isStart = startObj && dateStr === start;
+          const isEnd = endObj && dateStr === end;
+          const between = inRange(date);
+
+          const baseClasses = 'py-3 px-1 rounded-lg text-sm font-semibold transition-all duration-300';
+          const stateClasses = disabled
+            ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50'
+            : isStart
+            ? 'bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-lg scale-105 cursor-pointer'
+            : isEnd
+            ? 'bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-lg scale-105 cursor-pointer'
+            : between
+            ? 'bg-rose-100 dark:bg-rose-900/20 text-rose-700 dark:text-rose-300 cursor-pointer border-2 border-rose-200 dark:border-rose-700'
+            : 'text-gray-900 dark:text-white hover:bg-rose-100 dark:hover:bg-rose-900/20 hover:border-2 hover:border-rose-400 dark:hover:border-rose-600 cursor-pointer border-2 border-transparent';
+
+          return (
+            <button key={day} type="button" onClick={() => !disabled && handleSelect(day)} disabled={disabled} title={disabled ? 'Date has passed' : `Select ${date.toDateString()}`} className={`${baseClasses} ${stateClasses}`}>
+              {day}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="mt-6">
+        {start && end ? (
+          <div className="p-4 bg-gradient-to-r from-rose-50 to-purple-50 dark:from-rose-900/20 dark:to-purple-900/20 rounded-xl border-2 border-rose-300 dark:border-rose-700 shadow-sm">
+            <p className="text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Selected Range</p>
+            <p className="text-gray-900 dark:text-white font-bold">{new Date(start).toLocaleDateString()} — {new Date(end).toLocaleDateString()}</p>
+          </div>
+        ) : start ? (
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border-2 border-dashed border-blue-300 dark:border-blue-700">
+            <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Start selected: {new Date(start).toLocaleDateString()}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Click another date to finish range.</p>
+          </div>
+        ) : (
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border-2 border-dashed border-blue-300 dark:border-blue-700">
+            <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">👆 Click on start date to begin selecting a range</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 const services = [
   { id: 'classic', name: 'Classic Manicure', price: 35, duration: 45 },
   { id: 'gel', name: 'Gel Manicure', price: 55, duration: 60 },
@@ -157,9 +295,12 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
     phone: '',
     service: '',
     date: '',
+    startDate: null as string | null,
+    endDate: null as string | null,
     time: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [rangeMode, setRangeMode] = useState(false);
 
   if (!isOpen) return null;
 
@@ -175,6 +316,8 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
         phone: '',
         service: '',
         date: '',
+        startDate: null as string | null,
+        endDate: null as string | null,
         time: '',
       });
       onClose();
@@ -241,7 +384,15 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 Your appointment for {selectedService?.name} is scheduled for
               </p>
               <p className="text-gray-900 dark:text-white mt-2">
-                {new Date(formData.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {formData.time}
+                {formData.startDate && formData.endDate ? (
+                  <>
+                    {new Date(formData.startDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} — {new Date(formData.endDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {formData.time}
+                  </>
+                ) : (
+                  <>
+                    {formData.date ? new Date(formData.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : ''} at {formData.time}
+                  </>
+                )}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
                 A confirmation email has been sent to {formData.email}
@@ -352,17 +503,37 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 <div className="space-y-6 animate-in fade-in slide-in-from-right-5 duration-500">
                   <h3 className="text-xl text-gray-900 dark:text-white mb-6">Choose Date & Time</h3>
                   
-                  <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2">
-                      <Calendar size={18} />
-                      Select Date
-                    </label>
-                    <CalendarSelector 
-                      value={formData.date} 
-                      onChange={(date) => setFormData({ ...formData, date })}
-                      minDate={getTodayDate()}
-                    />
-                  </div>
+                      <div className="flex items-center gap-4 mb-4">
+                        <label className="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                          <input type="radio" name="dateMode" checked={!rangeMode} onChange={() => setRangeMode(false)} className="form-radio" />
+                          Single Date
+                        </label>
+                        <label className="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
+                          <input type="radio" name="dateMode" checked={rangeMode} onChange={() => setRangeMode(true)} className="form-radio" />
+                          Date Range
+                        </label>
+                      </div>
+
+                      <div>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2">
+                          <Calendar size={18} />
+                          Select Date
+                        </label>
+                        {!rangeMode ? (
+                          <CalendarSelector
+                            value={formData.date}
+                            onChange={(date) => setFormData({ ...formData, date, startDate: null, endDate: null })}
+                            minDate={getTodayDate()}
+                          />
+                        ) : (
+                          <RangeCalendarSelector
+                            start={formData.startDate}
+                            end={formData.endDate}
+                            onChange={({ start, end }) => setFormData({ ...formData, startDate: start, endDate: end, date: '' })}
+                            minDate={getTodayDate()}
+                          />
+                        )}
+                      </div>
 
                   <div>
                     <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
@@ -415,7 +586,11 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 ) : (
                   <button
                     type="submit"
-                    disabled={!formData.date || !formData.time}
+                    disabled={
+                      (!rangeMode && !formData.date) ||
+                      (rangeMode && (!formData.startDate || !formData.endDate)) ||
+                      !formData.time
+                    }
                     className="flex-1 px-6 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                   >
                     Confirm Booking
