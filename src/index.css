@@ -130,26 +130,26 @@
     --container-4xl: 56rem;
     --container-5xl: 64rem;
     --container-7xl: 80rem;
-    --text-sm: .875rem;
-    --text-sm--line-height: calc(1.25 / .875);
-    --text-base: 1rem;
-    --text-lg: 1.125rem;
-    --text-lg--line-height: calc(1.75 / 1.125);
-    --text-xl: 1.25rem;
-    --text-xl--line-height: calc(1.75 / 1.25);
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: calc(2.25 / 1.875);
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
-    --text-5xl: 3rem;
+    --text-sm: .765625rem;
+    --text-sm--line-height: calc(1.25 / .765625);
+    --text-base: 0.875rem;
+    --text-lg: 0.984375rem;
+    --text-lg--line-height: calc(1.75 / 0.984375);
+    --text-xl: 1.09375rem;
+    --text-xl--line-height: calc(1.75 / 1.09375);
+    --text-2xl: 1.3125rem;
+    --text-2xl--line-height: calc(2 / 1.3125);
+    --text-3xl: 1.640625rem;
+    --text-3xl--line-height: calc(2.25 / 1.640625);
+    --text-4xl: 1.96875rem;
+    --text-4xl--line-height: calc(2.5 / 1.96875);
+    --text-5xl: 2.625rem;
     --text-5xl--line-height: 1;
-    --text-6xl: 3.75rem;
+    --text-6xl: 3.28125rem;
     --text-6xl--line-height: 1;
-    --text-7xl: 4.5rem;
+    --text-7xl: 3.9375rem;
     --text-7xl--line-height: 1;
-    --text-8xl: 6rem;
+    --text-8xl: 5.25rem;
     --text-8xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
@@ -200,6 +200,7 @@
     font-feature-settings: var(--default-font-feature-settings, normal);
     font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
+    zoom: 90%;
   }
 
   body {
