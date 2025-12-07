@@ -5,6 +5,7 @@ import { Testimonials } from './components/Testimonials';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
+import { TranslationProvider } from './contexts/TranslationContext';
 import { ScrollProgress } from './components/ScrollProgress';
 import { FloatingCTA } from './components/FloatingCTA';
 import { StepIndicator } from './components/StepIndicator';
@@ -17,8 +18,9 @@ export default function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-500" style={{ scrollBehavior: 'smooth' }}>
+    <TranslationProvider>
+      <ThemeProvider>
+        <div className="min-h-screen bg-white dark:bg-black transition-colors duration-500" style={{ scrollBehavior: 'smooth' }}>
         <ScrollProgress />
         <StepIndicator />
         <FloatingCTA onBookClick={() => setIsBookingOpen(true)} />
@@ -70,5 +72,6 @@ export default function App() {
         <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
       </div>
     </ThemeProvider>
+    </TranslationProvider>
   );
 }
