@@ -44,8 +44,7 @@ export function FloatingLanguageSwitcher() {
           <div className="absolute top-0 right-0 flex flex-col gap-2 mb-2 p-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
             <button
               onClick={() => handleLanguageChange('en')}
-              disabled={language === 'en'}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'en'
                   ? 'bg-rose-500 text-white shadow-md'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -57,8 +56,7 @@ export function FloatingLanguageSwitcher() {
             </button>
             <button
               onClick={() => handleLanguageChange('zh')}
-              disabled={language === 'zh'}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'zh'
                   ? 'bg-rose-500 text-white shadow-md'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -70,8 +68,7 @@ export function FloatingLanguageSwitcher() {
             </button>
             <button
               onClick={() => handleLanguageChange('vi')}
-              disabled={language === 'vi'}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'vi'
                   ? 'bg-rose-500 text-white shadow-md'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
