@@ -52,6 +52,22 @@
     build: {
       target: 'esnext',
       outDir: 'dist',
+      minify: 'terser',
+      sourcemap: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor': [
+              'react',
+              'react-dom',
+              '@radix-ui/react-dialog',
+              '@radix-ui/react-dropdown-menu',
+              'recharts',
+              'sonner'
+            ]
+          }
+        }
+      }
     },
     server: {
       port: 3000,

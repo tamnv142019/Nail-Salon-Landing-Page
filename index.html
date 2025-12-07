@@ -1,15 +1,150 @@
 
   <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Nail Salon Landing Page</title>
-    </head>
+<html lang="en">
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Premium nail salon offering classic manicures, gel nails, spa pedicures, and custom nail art. Professional nail care with a luxury experience." />
+    <meta name="keywords" content="nail salon, manicure, pedicure, gel nails, nail art, nail care, beauty salon" />
+    <meta name="author" content="Nail Salon" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="language" content="English" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="business.business" />
+    <meta property="og:site_name" content="Premium Nail Salon" />
+    <meta property="og:title" content="Premium Nail Salon - Professional Nail Care & Design" />
+    <meta property="og:description" content="Experience luxury nail care with our expert team. Manicures, pedicures, gel nails, and custom art." />
+    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Premium Nail Salon - Professional Nail Care & Design" />
+    <meta name="twitter:description" content="Experience luxury nail care with our expert team. Manicures, pedicures, gel nails, and custom art." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Nail Salon" />
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://yourwebsite.com" />
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    
+    <!-- Title -->
+    <title>Premium Nail Salon - Expert Manicures, Pedicures & Nail Art</title>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Premium Nail Salon",
+      "description": "Professional nail salon offering manicures, pedicures, gel nails, and custom nail art",
+      "url": "https://yourwebsite.com",
+      "telephone": "+1-XXX-XXX-XXXX",
+      "email": "contact@yoursalon.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Your Street Address",
+        "addressLocality": "Your City",
+        "addressRegion": "Your State",
+        "postalCode": "12345",
+        "addressCountry": "US"
+      },
+      "priceRange": "$$",
+      "image": "https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200",
+      "sameAs": [
+        "https://www.facebook.com/yourpage",
+        "https://www.instagram.com/yourpage",
+        "https://www.yelp.com/biz/yourpage"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "11:00",
+          "closes": "18:00"
+        }
+      ],
+      "review": {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Client"
+        },
+        "datePublished": "2024-01-01",
+        "reviewBody": "Excellent nail salon with professional staff and beautiful results.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        }
+      }
+    }
+    </script>
 
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Premium Nail Salon",
+      "url": "https://yourwebsite.com",
+      "logo": "https://yourwebsite.com/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/yourpage",
+        "https://www.instagram.com/yourpage"
+      ]
+    }
+    </script>
+
+    <!-- Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Nail Care Services",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Premium Nail Salon",
+        "url": "https://yourwebsite.com"
+      },
+      "serviceType": ["Manicure", "Pedicure", "Gel Nails", "Nail Art"],
+      "areaServed": "US",
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://yourwebsite.com",
+        "servicePhone": "+1-XXX-XXX-XXXX"
+      }
+    }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
   
