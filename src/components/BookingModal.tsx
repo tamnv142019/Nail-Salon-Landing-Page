@@ -504,14 +504,22 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   <h3 className="text-xl text-gray-900 dark:text-white mb-6">Choose Date & Time</h3>
                   
                       <div className="flex items-center gap-4 mb-4">
-                        <label className="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                          <input type="radio" name="dateMode" checked={!rangeMode} onChange={() => setRangeMode(false)} className="form-radio" />
-                          Single Date
-                        </label>
-                        <label className="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                          <input type="radio" name="dateMode" checked={rangeMode} onChange={() => setRangeMode(true)} className="form-radio" />
-                          Date Range
-                        </label>
+                        <div className="inline-flex bg-gray-100 dark:bg-gray-800 p-1 rounded-full">
+                          <button
+                            type="button"
+                            onClick={() => setRangeMode(false)}
+                            className={`px-4 py-2 rounded-full text-sm transition ${!rangeMode ? 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow' : 'text-gray-600 dark:text-gray-300'}`}
+                          >
+                            Single Date
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setRangeMode(true)}
+                            className={`px-4 py-2 rounded-full text-sm transition ${rangeMode ? 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow' : 'text-gray-600 dark:text-gray-300'}`}
+                          >
+                            Date Range
+                          </button>
+                        </div>
                       </div>
 
                       <div>
