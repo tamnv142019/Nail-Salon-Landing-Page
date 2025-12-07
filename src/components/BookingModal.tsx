@@ -45,21 +45,27 @@ function CalendarSelector({ value, onChange, minDate }: { value: string; onChang
   const minDateObj = new Date(minDate);
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+    <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
+      {/* Header with month navigation */}
       <div className="flex items-center justify-between mb-6">
-        <h4 className="text-lg text-gray-900 dark:text-white font-semibold">{monthName}</h4>
+        <div>
+          <h4 className="text-lg text-gray-900 dark:text-white font-semibold">{monthName}</h4>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Click on a date to select</p>
+        </div>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={handlePrevMonth}
-            className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300"
+            className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300 hover:scale-110 cursor-pointer"
+            title="Previous month"
           >
             <ChevronLeft size={20} className="text-gray-700 dark:text-gray-300" />
           </button>
           <button
             type="button"
             onClick={handleNextMonth}
-            className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300"
+            className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300 hover:scale-110 cursor-pointer"
+            title="Next month"
           >
             <ChevronRight size={20} className="text-gray-700 dark:text-gray-300" />
           </button>
@@ -94,15 +100,16 @@ function CalendarSelector({ value, onChange, minDate }: { value: string; onChang
               type="button"
               onClick={() => !isDisabled && handleSelectDate(day)}
               disabled={isDisabled}
-              className={`py-2 px-1 rounded-lg text-sm font-medium transition-all duration-300 ${
+              className={`py-3 px-1 rounded-lg text-sm font-semibold transition-all duration-300 ${
                 isSelected
-                  ? 'bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-md'
+                  ? 'bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-lg scale-105 cursor-pointer'
                   : isToday
-                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-300 dark:border-blue-700'
+                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border-2 border-blue-400 dark:border-blue-600 cursor-pointer hover:scale-105'
                   : isDisabled
-                  ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
-                  : 'text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+                  ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed opacity-50'
+                  : 'text-gray-900 dark:text-white hover:bg-rose-100 dark:hover:bg-rose-900/20 hover:border-2 hover:border-rose-400 dark:hover:border-rose-600 cursor-pointer hover:scale-105 border-2 border-transparent'
               }`}
+              title={isDisabled ? 'Date has passed' : `Select ${new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day).toDateString()}`}
             >
               {day}
             </button>
@@ -112,11 +119,17 @@ function CalendarSelector({ value, onChange, minDate }: { value: string; onChang
 
       {/* Selected date display */}
       {value && (
-        <div className="mt-4 p-3 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-          <p className="text-sm text-gray-600 dark:text-gray-400">Selected:</p>
-          <p className="text-gray-900 dark:text-white font-semibold">
+        <div className="mt-6 p-4 bg-gradient-to-r from-rose-50 to-purple-50 dark:from-rose-900/20 dark:to-purple-900/20 rounded-xl border-2 border-rose-300 dark:border-rose-700 shadow-sm">
+          <p className="text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">✓ Date Selected</p>
+          <p className="text-gray-900 dark:text-white font-bold text-lg">
             {new Date(value).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
+        </div>
+      )}
+      
+      {!value && (
+        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border-2 border-dashed border-blue-300 dark:border-blue-700">
+          <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">👆 Click on a date above to select your appointment date</p>
         </div>
       )}
     </div>
