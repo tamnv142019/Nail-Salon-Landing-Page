@@ -12,8 +12,10 @@ import { FloatingLanguageSwitcher } from './components/FloatingLanguageSwitcher'
 import { StepIndicator } from './components/StepIndicator';
 import { StoryTransition } from './components/StoryTransition';
 import { CTABanner } from './components/CTABanner';
-import { useState } from 'react';
-import { BookingModal } from './components/BookingModal';
+import { useState, lazy, Suspense } from 'react';
+
+// Lazy load booking modal for better initial load
+const BookingModal = lazy(() => import('./components/BookingModal').then(m => ({ default: m.BookingModal })));
 
 export default function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -71,7 +73,9 @@ export default function App() {
         
         <Footer />
         
-        <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+        <Suspense fallback={null}>
+          <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+        </Suspense>
       </div>
     </ThemeProvider>
     </TranslationProvider>
