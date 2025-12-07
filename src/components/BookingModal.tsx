@@ -1,9 +1,126 @@
-import { X, Calendar, Clock, User, Mail, Phone, Check, Sparkles } from 'lucide-react';
+import { X, Calendar, Clock, User, Mail, Phone, Check, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+// Calendar component
+function CalendarSelector({ value, onChange, minDate }: { value: string; onChange: (date: string) => void; minDate: string }) {
+  const [currentMonth, setCurrentMonth] = useState(new Date(value || new Date()));
+
+  const getDaysInMonth = (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  };
+
+  const getFirstDayOfMonth = (date: Date) => {
+    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  };
+
+  const handlePrevMonth = () => {
+    const minDateObj = new Date(minDate);
+    const newDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1);
+    if (newDate >= minDateObj) {
+      setCurrentMonth(newDate);
+    }
+  };
+
+  const handleNextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+  };
+
+  const handleSelectDate = (day: number) => {
+    const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+    const dateStr = date.toISOString().split('T')[0];
+    onChange(dateStr);
+  };
+
+  const daysInMonth = getDaysInMonth(currentMonth);
+  const firstDayOfMonth = getFirstDayOfMonth(currentMonth);
+  const days: (number | null)[] = Array(firstDayOfMonth).fill(null).concat(Array.from({ length: daysInMonth }, (_, i) => i + 1));
+
+  const monthName = currentMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+  const selectedDateObj = value ? new Date(value) : null;
+  const minDateObj = new Date(minDate);
+
+  return (
+    <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+      <div className="flex items-center justify-between mb-6">
+        <h4 className="text-lg text-gray-900 dark:text-white font-semibold">{monthName}</h4>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={handlePrevMonth}
+            className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300"
+          >
+            <ChevronLeft size={20} className="text-gray-700 dark:text-gray-300" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNextMonth}
+            className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg transition-all duration-300"
+          >
+            <ChevronRight size={20} className="text-gray-700 dark:text-gray-300" />
+          </button>
+        </div>
+      </div>
+
+      {/* Weekday headers */}
+      <div className="grid grid-cols-7 gap-2 mb-4">
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+          <div key={day} className="text-center text-sm text-gray-600 dark:text-gray-400 font-medium py-2">
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* Calendar days */}
+      <div className="grid grid-cols-7 gap-2">
+        {days.map((day, index) => {
+          if (day === null) {
+            return <div key={`empty-${index}`} />;
+          }
+
+          const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+          const dateStr = date.toISOString().split('T')[0];
+          const isSelected = selectedDateObj && dateStr === value;
+          const isDisabled = date < minDateObj;
+          const isToday = dateStr === new Date().toISOString().split('T')[0];
+
+          return (
+            <button
+              key={day}
+              type="button"
+              onClick={() => !isDisabled && handleSelectDate(day)}
+              disabled={isDisabled}
+              className={`py-2 px-1 rounded-lg text-sm font-medium transition-all duration-300 ${
+                isSelected
+                  ? 'bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-md'
+                  : isToday
+                  ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-300 dark:border-blue-700'
+                  : isDisabled
+                  ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
+                  : 'text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700'
+              }`}
+            >
+              {day}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Selected date display */}
+      {value && (
+        <div className="mt-4 p-3 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+          <p className="text-sm text-gray-600 dark:text-gray-400">Selected:</p>
+          <p className="text-gray-900 dark:text-white font-semibold">
+            {new Date(value).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+        </div>
+      )}
+    </div>
+  );
 }
 
 const services = [
@@ -223,17 +340,14 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   <h3 className="text-xl text-gray-900 dark:text-white mb-6">Choose Date & Time</h3>
                   
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                    <label className="block text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2">
                       <Calendar size={18} />
                       Select Date
                     </label>
-                    <input
-                      type="date"
-                      required
-                      min={getTodayDate()}
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="w-full px-5 py-4 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:border-rose-500 dark:focus:border-rose-500 text-gray-900 dark:text-white transition-all duration-300"
+                    <CalendarSelector 
+                      value={formData.date} 
+                      onChange={(date) => setFormData({ ...formData, date })}
+                      minDate={getTodayDate()}
                     />
                   </div>
 
