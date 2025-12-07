@@ -315,9 +315,167 @@ export const translations = {
       back: '返回',
     },
   },
+
+  vi: {
+    // Navigation
+    nav: {
+      services: 'Dịch Vụ',
+      gallery: 'Thư Viện',
+      reviews: 'Đánh Giá',
+      contact: 'Liên Hệ',
+    },
+
+    // Hero Section
+    hero: {
+      badge: '✨ Trải Nghiệm Chăm Sóc Móng Cao Cấp',
+      title1: 'Nâng Cao Phong Cách Của Bạn',
+      title2: 'Chăm Sóc Móng Cao Cấp',
+      description: 'Trải nghiệm dịch vụ móng cao cấp trong không gian thư giãn. Kỹ thuật viên chuyên nghiệp, sản phẩm chất lượng, kết quả tuyệt vời.',
+      bookBtn: 'Đặt Lịch',
+      servicesBtn: 'Xem Dịch Vụ',
+    },
+
+    // Services Section
+    services: {
+      chapter: 'Chương Một',
+      title: 'Dịch Vụ Hoàn Hảo Đang Chờ Bạn',
+      subtitle: 'Mỗi kiệt tác bắt đầu với nền tảng chính xác. Khám phá dịch vụ kể câu chuyện độc đáo của bạn.',
+      badge: '💅 Dịch Vụ',
+      heading: 'Các Dịch Vụ Của Chúng Tôi',
+      description: 'Khám phá toàn bộ dịch vụ chăm sóc móng chuyên nghiệp của chúng tôi.',
+      
+      // Individual Services
+      classicManicure: {
+        title: 'Chăm Sóc Móng Cơ Bản',
+        description: 'Chăm sóc móng truyền thống với định hình, chăm sóc cuticle và trang điểm.',
+        price: '$35',
+        duration: '45 phút',
+      },
+      gelManicure: {
+        title: 'Chăm Sóc Móng Gel',
+        description: 'Sơn gel bền vững với liệu pháp UV/LED kéo dài đến 3 tuần.',
+        price: '$55',
+        duration: '60 phút',
+      },
+      spaPedicure: {
+        title: 'Chăm Sóc Chân Spa',
+        description: 'Chăm sóc chân sang trọng với tẩy tế bào chết, massage và trang điểm.',
+        price: '$65',
+        duration: '75 phút',
+      },
+      nailArt: {
+        title: 'Thiết Kế Móng Nghệ Thuật',
+        description: 'Nghệ thuật móng tùy chỉnh và thiết kế sáng tạo để thể hiện phong cách độc đáo của bạn.',
+        price: '$75+',
+        duration: '90 phút',
+      },
+      extensions: {
+        title: 'Nối Dài Móng',
+        description: 'Nối dài móng chuyên nghiệp với vật liệu cao cấp và hoàn thiện.',
+        price: '$60+',
+        duration: '75 phút',
+      },
+      acrylicNails: {
+        title: 'Móng Acrylic',
+        description: 'Móng acrylic bền với hình dáng và thiết kế tùy chỉnh.',
+        price: '$50+',
+        duration: '60 phút',
+      },
+    },
+
+    // Gallery Section
+    gallery: {
+      chapter: 'Chương Hai',
+      title: 'Nơi Nghệ Thuật Gặp Gỡ Sang Trọng',
+      subtitle: 'Nhìn thấy sự biến đổi. Cảm nhận sự khác biệt. Trải nghiệm nghệ thuật làm cho mỗi lần ghé thăm không quên.',
+      badge: '🎨 Danh Mục',
+      heading: 'Các Tác Phẩm Tuyệt Vời Của Chúng Tôi',
+      description: 'Duyệt danh mục các thiết kế móng tuyệt vời và các trường hợp biến đổi của chúng tôi.',
+      followText: 'Theo dõi chúng tôi trên Instagram để có thêm cảm hứng',
+      followBtn: '@LuxeNails',
+    },
+
+    // Testimonials Section
+    testimonials: {
+      chapter: 'Chương Ba',
+      title: 'Những Câu Chuyện Từ Gia Đình Chúng Tôi',
+      subtitle: 'Con người thực. Những biến đổi thực. Sự tự tin thực. Đây là những câu chuyện truyền cảm hứng cho chúng tôi mỗi ngày.',
+      badge: '⭐ Đánh Giá',
+      heading: 'Khách Hàng Nói Gì',
+      description: 'Đừng chỉ lắng nghe chúng tôi. Nghe những khách hàng hài lòng nói gì.',
+    },
+
+    // Contact Section
+    contact: {
+      chapter: 'Chương Cuối',
+      title: 'Bắt Đầu Câu Chuyện Của Bạn Ngày Hôm Nay',
+      subtitle: 'Sự biến đổi của bạn chỉ cách một lần đặt lịch. Hãy cùng chúng tôi viết chương tiếp theo của bạn.',
+      badge: '📞 Liên Hệ',
+      heading: 'Liên Hệ Với Chúng Tôi',
+      description: 'Sẵn sàng đặt lịch hoặc có câu hỏi? Chúng tôi rất vui lòng nghe từ bạn!',
+      
+      contactForm: {
+        name: 'Tên Của Bạn',
+        email: 'Email Của Bạn',
+        phone: 'Số Điện Thoại',
+        service: 'Chọn Dịch Vụ',
+        date: 'Ngày Ưa Thích',
+        message: 'Tin Nhắn',
+        submit: 'Gửi Tin Nhắn',
+        success: 'Tin nhắn được gửi thành công!',
+        error: 'Gửi thất bại. Vui lòng thử lại.',
+      },
+
+      businessHours: 'Giờ Mở Cửa',
+      monday: 'Thứ Hai - Thứ Sáu',
+      saturday: 'Thứ Bảy',
+      sunday: 'Chủ Nhật',
+      closed: 'Đã Đóng',
+    },
+
+    // Booking Modal
+    booking: {
+      title: 'Đặt Lịch',
+      selectService: 'Chọn Dịch Vụ',
+      selectDate: 'Chọn Ngày',
+      selectTime: 'Chọn Giờ',
+      yourName: 'Tên Của Bạn',
+      yourEmail: 'Email Của Bạn',
+      yourPhone: 'Số Điện Thoại',
+      notes: 'Ghi Chú Đặc Biệt',
+      bookBtn: 'Xác Nhận Đặt Lịch',
+      close: 'Đóng',
+    },
+
+    // Footer
+    footer: {
+      company: 'Tiệm Móng Cao Cấp',
+      description: 'Dịch vụ chăm sóc móng cao cấp với kỹ thuật viên chuyên nghiệp và trải nghiệm sang trọng.',
+      quickLinks: 'Liên Kết Nhanh',
+      aboutUs: 'Giới Thiệu',
+      services: 'Dịch Vụ',
+      gallery: 'Thư Viện',
+      contact: 'Liên Hệ',
+      followUs: 'Theo Dõi Chúng Tôi',
+      copyright: '© 2024 Tiệm Móng Cao Cấp. Bảo lưu mọi quyền.',
+      designedBy: 'Được thiết kế bởi công ty của bạn',
+    },
+
+    // Common
+    common: {
+      loading: 'Đang Tải...',
+      close: 'Đóng',
+      submit: 'Gửi',
+      cancel: 'Hủy',
+      save: 'Lưu',
+      delete: 'Xóa',
+      edit: 'Chỉnh Sửa',
+      back: 'Quay Lại',
+    },
+  },
 };
 
-export type Language = 'en' | 'zh';
+export type Language = 'en' | 'zh' | 'vi';
 
 export const getTranslation = (language: Language, key: string, defaultValue: string = '') => {
   const keys = key.split('.');

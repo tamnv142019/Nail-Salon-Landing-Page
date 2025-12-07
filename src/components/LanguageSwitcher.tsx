@@ -7,13 +7,24 @@ export function LanguageSwitcher() {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
 
-  const handleLanguageChange = (lang: 'en' | 'zh') => {
+  const handleLanguageChange = (lang: 'en' | 'zh' | 'vi') => {
     if (language === lang) return; // Don't change if already selected
 
     setLanguage(lang);
 
     // Show notification
-    const message = lang === 'en' ? '✓ Changed to English' : '✓ 已切换到中文';
+    let message = '';
+    switch (lang) {
+      case 'en':
+        message = '✓ Changed to English';
+        break;
+      case 'zh':
+        message = '✓ 已切换到中文';
+        break;
+      case 'vi':
+        message = '✓ Đã chuyển sang Tiếng Việt';
+        break;
+    }
     setNotificationMessage(message);
     setShowNotification(true);
 
@@ -31,7 +42,7 @@ export function LanguageSwitcher() {
         <button
           onClick={() => handleLanguageChange('en')}
           disabled={language === 'en'}
-          className={`flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
+          className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 cursor-pointer text-xs sm:text-sm ${
             language === 'en'
               ? 'bg-rose-500 text-white shadow-lg scale-105'
               : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:scale-105'
@@ -39,13 +50,13 @@ export function LanguageSwitcher() {
           title="English"
           aria-label="Switch to English"
         >
-          {language === 'en' ? <Check size={16} /> : <Globe size={16} />}
-          <span className="text-sm font-medium">EN</span>
+          {language === 'en' ? <Check size={14} /> : <Globe size={14} />}
+          <span className="font-medium">EN</span>
         </button>
         <button
           onClick={() => handleLanguageChange('zh')}
           disabled={language === 'zh'}
-          className={`flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-300 cursor-pointer ${
+          className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 cursor-pointer text-xs sm:text-sm ${
             language === 'zh'
               ? 'bg-rose-500 text-white shadow-lg scale-105'
               : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:scale-105'
@@ -53,8 +64,22 @@ export function LanguageSwitcher() {
           title="中文"
           aria-label="Switch to Chinese"
         >
-          {language === 'zh' ? <Check size={16} /> : <Globe size={16} />}
-          <span className="text-sm font-medium">中</span>
+          {language === 'zh' ? <Check size={14} /> : <Globe size={14} />}
+          <span className="font-medium">中</span>
+        </button>
+        <button
+          onClick={() => handleLanguageChange('vi')}
+          disabled={language === 'vi'}
+          className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 cursor-pointer text-xs sm:text-sm ${
+            language === 'vi'
+              ? 'bg-rose-500 text-white shadow-lg scale-105'
+              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:scale-105'
+          }`}
+          title="Tiếng Việt"
+          aria-label="Switch to Vietnamese"
+        >
+          {language === 'vi' ? <Check size={14} /> : <Globe size={14} />}
+          <span className="font-medium">VI</span>
         </button>
       </div>
 
