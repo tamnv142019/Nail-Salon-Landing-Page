@@ -2,14 +2,9 @@
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
-  import compression from 'vite-plugin-compression';
 
   export default defineConfig({
-    plugins: [
-      react(),
-      compression({ algorithm: 'brotli', ext: '.br' }),
-      compression({ algorithm: 'gzip', ext: '.gz' })
-    ],
+    plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
@@ -18,36 +13,35 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'dist',
+      outDir: 'build',
       minify: 'terser',
-      sourcemap: false,
       terserOptions: {
         compress: {
           drop_console: true,
           drop_debugger: true,
-          passes: 3,
-        },
-        output: {
-          comments: false,
         },
       },
-      reportCompressedSize: true,
-      chunkSizeWarningLimit: 500,
       rollupOptions: {
         output: {
-          manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              if (id.includes('react')) return 'react-vendor';
-              if (id.includes('@radix-ui')) return 'ui-vendor';
-              if (id.includes('lucide')) return 'icons';
-              return 'vendor';
-            }
+          manualChunks: {
+            'vendor': [
+              'react',
+              'react-dom',
+              'react-router-dom',
+            ],
+            'ui': [
+              '@radix-ui/react-dialog',
+              '@radix-ui/react-dropdown-menu',
+              '@radix-ui/react-hover-card',
+              '@radix-ui/react-select',
+            ],
+            'icons': ['lucide-react'],
           },
-          entryFileNames: 'assets/[name]-[hash].js',
-          chunkFileNames: 'assets/[name]-[hash].js',
-          assetFileNames: 'assets/[name]-[hash][extname]',
         },
       },
+      chunkSizeWarningLimit: 1000,
+      cssCodeSplit: true,
+      reportCompressedSize: true,
     },
     server: {
       port: 3000,

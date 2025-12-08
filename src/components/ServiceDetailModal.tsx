@@ -50,7 +50,7 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
               </div>
               <div>
                 <h2 className="text-4xl text-white mb-2">{service.title}</h2>
-                <p className="text-white/90">{service.description}</p>
+                <p className="text-white">{service.description}</p>
               </div>
             </div>
           </div>

@@ -44,7 +44,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
           </span>
         </h2>
         
-        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
+        <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
           Start your transformation today with 20% off your first visit. Because every beautiful story starts with a single step.
         </p>
 
@@ -70,7 +70,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
         </div>
 
         {/* Trust badges with icons */}
-        <div className="flex flex-wrap justify-center gap-12 text-white/90 text-sm animate-in fade-in slide-in-from-bottom-5 duration-700 delay-600">
+        <div className="flex flex-wrap justify-center gap-12 text-white text-sm animate-in fade-in slide-in-from-bottom-5 duration-700 delay-600">
           {[
             { icon: '👩‍⚕️', text: 'Licensed Professionals' },
             { icon: '✨', text: 'Premium Products' },

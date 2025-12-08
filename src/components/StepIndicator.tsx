@@ -5,6 +5,7 @@ const steps = [
   { id: 'services', label: 'Services', icon: Scissors },
   { id: 'gallery', label: 'Gallery', icon: Brush },
   { id: 'testimonials', label: 'Reviews', icon: Heart },
+  { id: 'google-reviews', label: 'Google', icon: Star },
   { id: 'contact', label: 'Contact', icon: MessageCircle },
 ];
 

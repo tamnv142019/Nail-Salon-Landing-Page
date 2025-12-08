@@ -2,24 +2,29 @@ import { useEffect, useRef, useState } from 'react';
 import { Sparkles } from 'lucide-react';
 import { ImageLightbox } from './ImageLightbox';
 
+// Optimized image URLs with smaller default sizes for faster loading
 const galleryImages = [
   {
-    url: 'https://images.unsplash.com/photo-1737214475365-e4f06281dcf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwYXJ0JTIwZGVzaWdufGVufDF8fHx8MTc2NDk4NzY0M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    url: 'https://images.unsplash.com/photo-1737214475365-e4f06281dcf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwYXJ0JTIwZGVzaWdufGVufDF8fHx8MTc2NDk4NzY0M3ww&ixlib=rb-4.1.0&q=80&w=600',
+    fullUrl: 'https://images.unsplash.com/photo-1737214475365-e4f06281dcf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwYXJ0JTIwZGVzaWdufGVufDF8fHx8MTc2NDk4NzY0M3ww&ixlib=rb-4.1.0&q=85&w=1200',
     title: 'Nail Art Design',
     category: 'Art',
   },
   {
-    url: 'https://images.unsplash.com/photo-1659391542239-9648f307c0b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZWwlMjBuYWlscyUyMHBvbGlzaHxlbnwxfHx8fDE3NjUwODg2OTZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    url: 'https://images.unsplash.com/photo-1659391542239-9648f307c0b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZWwlMjBuYWlscyUyMHBvbGlzaHxlbnwxfHx8fDE3NjUwODg2OTZ8MA&ixlib=rb-4.1.0&q=80&w=600',
+    fullUrl: 'https://images.unsplash.com/photo-1659391542239-9648f307c0b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZWwlMjBuYWlscyUyMHBvbGlzaHxlbnwxfHx8fDE3NjUwODg2OTZ8MA&ixlib=rb-4.1.0&q=85&w=1200',
     title: 'Gel Manicure',
     category: 'Gel',
   },
   {
-    url: 'https://images.unsplash.com/photo-1758225490983-0fae7961e425?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGElMjBwZWRpY3VyZXxlbnwxfHx8fDE3NjUwODg2OTV8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    url: 'https://images.unsplash.com/photo-1758225490983-0fae7961e425?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGElMjBwZWRpY3VyZXxlbnwxfHx8fDE3NjUwODg2OTV8MA&ixlib=rb-4.1.0&q=80&w=600',
+    fullUrl: 'https://images.unsplash.com/photo-1758225490983-0fae7961e425?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGElMjBwZWRpY3VyZXxlbnwxfHx8fDE3NjUwODg2OTV8MA&ixlib=rb-4.1.0&q=85&w=1200',
     title: 'Spa Pedicure',
     category: 'Spa',
   },
   {
-    url: 'https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwc2Fsb24lMjBtYW5pY3VyZXxlbnwxfHx8fDE3NjQ5NjQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    url: 'https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwc2Fsb24lMjBtYW5pY3VyZXxlbnwxfHx8fDE3NjQ5NjQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=600',
+    fullUrl: 'https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwc2Fsb24lMjBtYW5pY3VyZXxlbnwxfHx8fDE3NjQ5NjQ5NzN8MA&ixlib=rb-4.1.0&q=85&w=1200',
     title: 'Classic Manicure',
     category: 'Classic',
   },
@@ -29,6 +34,7 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
   const [isVisible, setIsVisible] = useState(false);
   const [scale, setScale] = useState(0.9);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,7 +47,7 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     if (imageRef.current) {
@@ -50,6 +56,14 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
 
     return () => observer.disconnect();
   }, []);
+
+  // Preload full resolution image when hovering
+  useEffect(() => {
+    if (isHovered) {
+      const img = new Image();
+      img.src = image.fullUrl;
+    }
+  }, [isHovered, image.fullUrl]);
 
   return (
     <div
@@ -68,6 +82,9 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
       <img
         src={image.url}
         alt={image.title}
+        loading="lazy"
+        decoding="async"
+        onLoad={() => setImageLoaded(true)}
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-2"
       />
       
@@ -85,7 +102,7 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
       {/* Corner accent with animation */}
       <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-rose-400/0 group-hover:border-rose-400 transition-all duration-500 rounded-tr-2xl"></div>
       
-      {/* Shine effect */}
+      {/* Shine effect - GPU optimized */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
     </div>
   );

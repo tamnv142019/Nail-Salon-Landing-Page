@@ -27,31 +27,51 @@ export function Footer() {
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700">
             <div className="flex items-center gap-3 mb-6">
               <div className="relative">
-                <Gem className="fill-rose-500 text-rose-500 dark:fill-rose-400 dark:text-rose-400 transition-colors duration-500" size={32} />
+                <img src="/logo.png" alt="Queen's Nails Logo" className="w-10 h-10 object-contain" />
               </div>
               <span className="text-2xl bg-gradient-to-r from-gray-900 to-rose-600 dark:from-white dark:to-rose-300 bg-clip-text text-transparent">
-                Luxe Nails
+                Queen's Nails Hair & Skincare
               </span>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 transition-colors duration-500">
-              Premium nail care services for the modern individual. Experience luxury and elegance.
+            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-xs transition-colors duration-500">
+              Experience luxury nail care with premium services and professional artistry.
             </p>
-            <div className="flex gap-3">
-              {[
-                { Icon: Instagram, href: 'https://instagram.com' },
-                { Icon: Facebook, href: 'https://facebook.com' },
-                { Icon: Twitter, href: 'https://twitter.com' }
-              ].map(({ Icon, href }, index) => (
-                <a
-                  key={index}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group w-12 h-12 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-2xl flex items-center justify-center hover:bg-gradient-to-br hover:from-rose-500 hover:to-purple-600 hover:border-transparent transition-all duration-300 hover:scale-110 hover:-rotate-6"
-                >
-                  <Icon size={20} className="text-gray-700 dark:text-gray-300 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
-                </a>
-              ))}
+            <div className="flex gap-2">
+              <span className="text-gray-600 dark:text-gray-400 text-sm">📍 4869 Santa Monica Ave, San Diego</span>
+            </div>
+            <div className="flex gap-2 mt-2">
+              <span className="text-gray-600 dark:text-gray-400 text-sm">📞 (619) 224-5050</span>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <a 
+                href="https://www.facebook.com/profile.php?id=100075740667723&mibextid=LQQJ4d" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group w-10 h-10 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-blue-500 hover:to-blue-600 hover:border-transparent transition-all duration-300 hover:scale-110"
+                aria-label="Visit our Facebook page"
+              >
+                <Facebook size={18} className="text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300" />
+              </a>
+              <a 
+                href="https://www.instagram.com/yourpage" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group w-10 h-10 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-pink-500 hover:to-rose-600 hover:border-transparent transition-all duration-300 hover:scale-110"
+                aria-label="Visit our Instagram page"
+              >
+                <Instagram size={18} className="text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300" />
+              </a>
+              <a 
+                href="https://www.x.com/yourpage" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group w-10 h-10 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-black hover:to-gray-800 dark:hover:from-gray-700 dark:hover:to-black hover:border-transparent transition-all duration-300 hover:scale-110"
+                aria-label="Visit our X page"
+              >
+                <svg className="w-4 h-4 text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.6l-5.165-6.75-5.913 6.75h-3.308l7.73-8.835L.424 2.25h6.7l4.8 6.356 5.52-6.356zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
             </div>
           </div>
 
@@ -123,9 +143,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-300 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 transition-colors duration-500">
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-600 transition-colors duration-500">
           <p className="text-gray-600 dark:text-gray-400 text-sm transition-colors duration-500">
-            &copy; 2025 Luxe Nails. All rights reserved.
+            © {new Date().getFullYear()} Queen's Nails Hair & Skincare. All rights reserved.
           </p>
           <div className="flex gap-6 text-gray-600 dark:text-gray-400 text-sm transition-colors duration-500">
             <a href="#" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300">Privacy Policy</a>

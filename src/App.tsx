@@ -1,83 +1,113 @@
+import { useState, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { StoryHero } from './components/StoryHero';
-import { Services } from './components/Services';
 import { Gallery } from './components/Gallery';
+import { FeaturedServices } from './components/FeaturedServices';
 import { Testimonials } from './components/Testimonials';
+import { GoogleReviews } from './components/GoogleReviews';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ThemeProvider } from './components/ThemeProvider';
-import { TranslationProvider } from './contexts/TranslationContext';
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ScrollProgress } from './components/ScrollProgress';
 import { FloatingCTA } from './components/FloatingCTA';
-import { FloatingLanguageSwitcher } from './components/FloatingLanguageSwitcher';
 import { StepIndicator } from './components/StepIndicator';
 import { StoryTransition } from './components/StoryTransition';
 import { CTABanner } from './components/CTABanner';
-import { useState, lazy, Suspense } from 'react';
+import { BookingModal } from './components/BookingModal';
+import { SkipLinks } from './components/SkipLinks';
 
-// Lazy load booking modal for better initial load
-const BookingModal = lazy(() => import('./components/BookingModal').then(m => ({ default: m.BookingModal })));
+// Code splitting for Services page - loads only when needed
+const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
 
-export default function App() {
+// Loading fallback component
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-white dark:bg-black">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-rose-500"></div>
+    </div>
+  );
+}
+
+function HomePage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
-    <TranslationProvider>
-      <ThemeProvider>
-        <div className="min-h-screen bg-white dark:bg-black transition-colors duration-500" style={{ scrollBehavior: 'smooth' }}>
-        <ScrollProgress />
-        <StepIndicator />
-        <FloatingCTA onBookClick={() => setIsBookingOpen(true)} />
-        <FloatingLanguageSwitcher />
-        
-        {/* Chapter 1: The Beginning */}
-        <StoryHero />
-        
-        {/* Story Transition */}
-        <StoryTransition 
-          chapter="Chapter One"
-          title="Your Perfect Service Awaits"
-          subtitle="Every masterpiece begins with the right foundation. Discover the service that tells your unique story."
-        />
-        
-        <Services />
-        
-        {/* Story Transition */}
-        <StoryTransition 
-          chapter="Chapter Two"
-          title="Where Art Meets Elegance"
-          subtitle="See the transformation. Feel the difference. Experience the artistry that makes every visit unforgettable."
-        />
-        
-        <Gallery />
-        
-        {/* Mid-Story CTA */}
-        <CTABanner onBookClick={() => setIsBookingOpen(true)} />
-        
-        {/* Story Transition */}
-        <StoryTransition 
-          chapter="Chapter Three"
-          title="Stories from Our Family"
-          subtitle="Real people. Real transformations. Real confidence. These are the stories that inspire us every day."
-        />
-        
-        <Testimonials />
-        
-        {/* Story Transition */}
-        <StoryTransition 
-          chapter="Final Chapter"
-          title="Begin Your Story Today"
-          subtitle="Your transformation is just one appointment away. Let's write your next chapter together."
-        />
-        
-        <Contact />
-        
-        <Footer />
-        
-        <Suspense fallback={null}>
-          <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-        </Suspense>
-      </div>
+    <div id="main-content" className="min-h-screen bg-white dark:bg-black transition-colors duration-500" style={{ scrollBehavior: 'smooth' }}>
+      <ScrollProgress />
+      <StepIndicator />
+      <FloatingCTA onBookClick={() => setIsBookingOpen(true)} />
+      
+      {/* Chapter 1: The Beginning */}
+      <StoryHero onNavigateToServices={() => navigate('/services')} />
+      
+      {/* Story Transition */}
+      <StoryTransition 
+        chapter={t('story.chapter2.number')}
+        title={t('story.chapter2.title')}
+        subtitle={t('story.chapter2.subtitle')}
+      />
+      
+      <Gallery />
+      
+      {/* Featured Services Section */}
+      <FeaturedServices />
+      
+      {/* Mid-Story CTA */}
+      <CTABanner onBookClick={() => setIsBookingOpen(true)} />
+      
+      {/* Story Transition */}
+      <StoryTransition 
+        chapter={t('story.chapter3.number')}
+        title={t('story.chapter3.title')}
+        subtitle={t('story.chapter3.subtitle')}
+      />
+      
+      <Testimonials />
+      
+      {/* Google Reviews Section */}
+      <GoogleReviews />
+      
+      {/* Story Transition */}
+      <StoryTransition 
+        chapter={t('story.chapter4.number')}
+        title={t('story.chapter4.title')}
+        subtitle={t('story.chapter4.subtitle')}
+      />
+      
+      <Contact />
+      
+      <Footer />
+      
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+    </div>
+  );
+}
+
+function AppContent() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={
+          <Suspense fallback={<PageLoader />}>
+            <ServicesPage />
+          </Suspense>
+        } />
+      </Routes>
+    </Router>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <SkipLinks />
+        <AppContent />
+      </LanguageProvider>
     </ThemeProvider>
-    </TranslationProvider>
   );
 }

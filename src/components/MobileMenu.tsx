@@ -3,10 +3,11 @@ import { X, Calendar } from 'lucide-react';
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  onBookAppointment: () => void;
+  onBookAppointment?: () => void;
+  onNavigateToServices?: () => void;
 }
 
-export function MobileMenu({ isOpen, onClose, onBookAppointment }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, onBookAppointment, onNavigateToServices }: MobileMenuProps) {
   if (!isOpen) return null;
 
   const handleLinkClick = (href: string) => {
@@ -60,7 +61,8 @@ export function MobileMenu({ isOpen, onClose, onBookAppointment }: MobileMenuPro
           <button
             onClick={() => {
               onClose();
-              onBookAppointment();
+              onBookAppointment?.();
+              onNavigateToServices?.();
             }}
             className="w-full bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white px-6 py-4 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg"
           >

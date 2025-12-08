@@ -1,14 +1,12 @@
 import { Calendar, Star, Sparkles, Moon, Sun, Menu } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTheme } from './ThemeProvider';
-import { useTranslation } from '../contexts/TranslationContext';
 import { BookingModal } from './BookingModal';
 import { MobileMenu } from './MobileMenu';
 
 export function Hero() {
   const [scrollY, setScrollY] = useState(0);
   const { theme, toggleTheme } = useTheme();
-  const { t } = useTranslation();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -75,24 +73,24 @@ export function Hero() {
               </div>
               <div className="hidden md:flex gap-8 text-gray-900 dark:text-white items-center transition-colors duration-500">
                 <a href="#services" className="hover:text-rose-500 dark:hover:text-rose-300 transition-all duration-300 relative group">
-                  {t('nav.services')}
+                  Services
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 dark:bg-rose-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
                 <a href="#gallery" className="hover:text-rose-500 dark:hover:text-rose-300 transition-all duration-300 relative group">
-                  {t('nav.gallery')}
+                  Gallery
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 dark:bg-rose-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
                 <a href="#testimonials" className="hover:text-rose-500 dark:hover:text-rose-300 transition-all duration-300 relative group">
-                  {t('nav.reviews')}
+                  Reviews
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 dark:bg-rose-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
                 <a href="#contact" className="hover:text-rose-500 dark:hover:text-rose-300 transition-all duration-300 relative group">
-                  {t('nav.contact')}
+                  Contact
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 dark:bg-rose-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
                 <button
                   onClick={toggleTheme}
-                  className="p-2.5 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-xl transition-all duration-300 hover:scale-110"
+                  className="ml-4 p-2.5 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-xl transition-all duration-300 hover:scale-110"
                   aria-label="Toggle theme"
                 >
                   {theme === 'dark' ? (
@@ -134,38 +132,40 @@ export function Hero() {
         >
           <div className="mb-6 inline-block">
             <span className="px-6 py-2 bg-rose-500/20 backdrop-blur-sm border border-rose-400/30 rounded-full text-rose-600 dark:text-rose-300 text-sm transition-colors duration-500">
-              {t('hero.badge')}
+              ✨ Premium Nail Care Experience
             </span>
           </div>
           
           <h1 className="text-6xl md:text-8xl mb-8 leading-tight">
             <span className="bg-gradient-to-r from-gray-900 via-rose-600 to-rose-700 dark:from-white dark:via-rose-100 dark:to-rose-200 bg-clip-text text-transparent">
-              {t('hero.title1')}
+              Elevate Your Style
             </span>
             <br />
             <span className="bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 dark:from-rose-200 dark:via-rose-300 dark:to-rose-400 bg-clip-text text-transparent">
-              {t('hero.title2')}
+              Premium Nail Care
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl mb-12 text-gray-700 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed transition-colors duration-500">
-            {t('hero.description')}
+            Experience luxury nail services in a relaxing atmosphere. Expert technicians, premium products, stunning results.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
               onClick={() => setIsBookingOpen(true)}
+              aria-label="Book an appointment"
               className="group relative bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-rose-500/50 hover:shadow-rose-500/70 hover:scale-105"
             >
               <Calendar size={22} />
-              <span>{t('hero.bookBtn')}</span>
+              <span>Book Appointment</span>
               <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             <button 
               onClick={handleViewServices}
+              aria-label="View our services"
               className="group bg-white/80 dark:bg-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white px-10 py-5 rounded-full border-2 border-gray-300 dark:border-white/30 hover:border-rose-500 dark:hover:border-rose-400/50 transition-all duration-300 shadow-lg hover:scale-105"
             >
-              {t('hero.servicesBtn')}
+              View Services
             </button>
           </div>
         </div>

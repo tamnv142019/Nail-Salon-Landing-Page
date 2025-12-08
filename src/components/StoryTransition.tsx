@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface StoryTransitionProps {
+  chapter: string;
   title: string;
   subtitle: string;
-  chapter: string;
 }
 
-export function StoryTransition({ title, subtitle, chapter }: StoryTransitionProps) {
+export function StoryTransition({ chapter, title, subtitle }: StoryTransitionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
