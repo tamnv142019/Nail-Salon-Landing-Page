@@ -13,7 +13,7 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
   const [language, setLanguage] = useState<Language>(() => {
     // Check if language preference is saved
     const savedLanguage = localStorage.getItem('language') as Language | null;
-    if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'zh' || savedLanguage === 'vi')) {
+    if (savedLanguage && ['en', 'zh', 'vi', 'fr', 'es'].includes(savedLanguage)) {
       return savedLanguage;
     }
     // Default to English
@@ -21,8 +21,11 @@ export const TranslationProvider: React.FC<{ children: ReactNode }> = ({ childre
   });
 
   const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem('language', lang);
+    if (['en', 'zh', 'vi', 'fr', 'es'].includes(lang)) {
+      setLanguage(lang);
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+    }
   };
 
   const t = (key: string, defaultValue?: string) => {

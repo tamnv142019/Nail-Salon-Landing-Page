@@ -1,4 +1,4 @@
-import { Star, Instagram, Facebook, Twitter, Heart, Send, Gem } from 'lucide-react';
+import { Star, Instagram, Facebook, MapPin, Heart, Send, Clock } from 'lucide-react';
 import { useState } from 'react';
 
 export function Footer() {
@@ -27,7 +27,7 @@ export function Footer() {
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700">
             <div className="flex items-center gap-3 mb-6">
               <div className="relative">
-                <img src="/logo.png" alt="Queen's Nails Logo" className="w-10 h-10 object-contain" />
+                <img src="/logo.png" alt="Queen's Nails Hair & Skincare Logo" className="h-8 w-auto transition-transform duration-500 hover:scale-110" />
               </div>
               <span className="text-2xl bg-gradient-to-r from-gray-900 to-rose-600 dark:from-white dark:to-rose-300 bg-clip-text text-transparent">
                 Queen's Nails Hair & Skincare
@@ -42,57 +42,61 @@ export function Footer() {
             <div className="flex gap-2 mt-2">
               <span className="text-gray-600 dark:text-gray-400 text-sm">📞 (619) 224-5050</span>
             </div>
-            <div className="flex gap-3 mt-6">
-              <a 
-                href="https://www.facebook.com/profile.php?id=100075740667723&mibextid=LQQJ4d" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group w-10 h-10 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-blue-500 hover:to-blue-600 hover:border-transparent transition-all duration-300 hover:scale-110"
-                aria-label="Visit our Facebook page"
-              >
-                <Facebook size={18} className="text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300" />
-              </a>
-              <a 
-                href="https://www.instagram.com/yourpage" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group w-10 h-10 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-pink-500 hover:to-rose-600 hover:border-transparent transition-all duration-300 hover:scale-110"
-                aria-label="Visit our Instagram page"
-              >
-                <Instagram size={18} className="text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300" />
-              </a>
-              <a 
-                href="https://www.x.com/yourpage" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group w-10 h-10 bg-gray-200 dark:bg-gray-800 backdrop-blur-sm border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-black hover:to-gray-800 dark:hover:from-gray-700 dark:hover:to-black hover:border-transparent transition-all duration-300 hover:scale-110"
-                aria-label="Visit our X page"
-              >
-                <svg className="w-4 h-4 text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.6l-5.165-6.75-5.913 6.75h-3.308l7.73-8.835L.424 2.25h6.7l4.8 6.356 5.52-6.356zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700" style={{ animationDelay: '100ms' }}>
             <h4 className="mb-6 text-lg text-gray-900 dark:text-white transition-all duration-500">
-              Quick Links
+              Hours
             </h4>
-            <ul className="space-y-3 text-gray-600 dark:text-gray-400 transition-colors duration-500">
-              {['Services', 'Gallery', 'Reviews', 'Contact'].map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={`#${link.toLowerCase()}`}
-                    className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300 inline-flex items-center gap-2 group"
-                  >
-                    <span className="w-0 h-0.5 bg-rose-600 dark:bg-rose-400 group-hover:w-4 transition-all duration-300"></span>
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-2 text-gray-600 dark:text-gray-400 transition-colors duration-500">
+              <div className="flex items-center gap-2">
+                <Clock size={16} className="text-rose-500 dark:text-rose-400 flex-shrink-0" />
+                <span className="text-sm">Mon - Fri: 9AM - 7PM</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock size={16} className="text-rose-500 dark:text-rose-400 flex-shrink-0" />
+                <span className="text-sm">Saturday: 9AM - 6PM</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock size={16} className="text-rose-500 dark:text-rose-400 flex-shrink-0" />
+                <span className="text-sm">Sunday: 10AM - 5PM</span>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-6">
+              <h4 className="mb-3 text-lg text-gray-900 dark:text-white">Follow Us</h4>
+              <div className="flex gap-3">
+                <a
+                  href="https://www.facebook.com/profile.php?id=100075740667723&mibextid=LQQJ4d"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Visit our Facebook page"
+                >
+                  <Facebook size={18} />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center hover:bg-pink-600 dark:hover:bg-pink-600 hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Visit our Instagram page"
+                >
+                  <Instagram size={18} />
+                </a>
+                <a
+                  href="https://www.google.com/maps/place/Queen's+Nails+Hair+and+Skincare/@32.7461198,-117.2483223,17z/data=!4m9!1m2!10m1!1e1!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center hover:bg-red-600 dark:hover:bg-red-600 hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label="Find us on Google Maps"
+                >
+                  <MapPin size={18} />
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Services */}

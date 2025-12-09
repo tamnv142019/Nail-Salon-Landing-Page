@@ -473,9 +473,325 @@ export const translations = {
       back: 'Quay Lại',
     },
   },
+
+  fr: {
+    // Navigation
+    nav: {
+      services: 'Services',
+      gallery: 'Galerie',
+      reviews: 'Avis',
+      contact: 'Contact',
+    },
+
+    // Hero Section
+    hero: {
+      badge: '✨ Expérience Premium de Soin des Ongles',
+      title1: 'Élevez Votre Style',
+      title2: 'Soin des Ongles Premium',
+      description: 'Découvrez des services de soin des ongles luxueux dans une atmosphère relaxante. Techniciens experts, produits premium, résultats époustouflants.',
+      bookBtn: 'Réserver un Rendez-vous',
+      servicesBtn: 'Voir les Services',
+    },
+
+    // Services Section
+    services: {
+      chapter: 'Chapitre Un',
+      title: 'Votre Service Parfait Vous Attend',
+      subtitle: 'Chaque chef-d\'œuvre commence par la bonne fondation. Découvrez le service qui raconte votre histoire unique.',
+      badge: '💅 Services',
+      heading: 'Nos Services',
+      description: 'Découvrez notre gamme complète de services professionnels de soin des ongles.',
+      
+      // Individual Services
+      classicManicure: {
+        title: 'Manucure Classique',
+        description: 'Soin traditionnel des ongles avec mise en forme, soin des cuticules et application de vernis.',
+        price: '$35',
+        duration: '45 min',
+      },
+      gelManicure: {
+        title: 'Manucure Gel',
+        description: 'Vernis gel longue durée avec durcissement UV/LED pour jusqu\'à 3 semaines de brillance.',
+        price: '$55',
+        duration: '60 min',
+      },
+      spaPedicure: {
+        title: 'Pédicure Spa',
+        description: 'Traitement luxueux des pieds avec exfoliation, massage et vernis.',
+        price: '$65',
+        duration: '75 min',
+      },
+      nailArt: {
+        title: 'Design Nail Art',
+        description: 'Art personnalisé des ongles et designs créatifs pour exprimer votre style unique.',
+        price: '$75+',
+        duration: '90 min',
+      },
+      extensions: {
+        title: 'Extensions d\'Ongles',
+        description: 'Extensions d\'ongles professionnelles avec matériaux premium et finitions.',
+        price: '$60+',
+        duration: '75 min',
+      },
+      acrylicNails: {
+        title: 'Ongles Acryliques',
+        description: 'Ongles acryliques durables avec formes et designs personnalisés.',
+        price: '$50+',
+        duration: '60 min',
+      },
+    },
+
+    // Gallery Section
+    gallery: {
+      chapter: 'Chapitre Deux',
+      title: 'Où l\'Art Rencontre l\'Élégance',
+      subtitle: 'Voyez la transformation. Ressentez la différence. Vivez l\'art qui rend chaque visite inoubliable.',
+      badge: '🎨 Portfolio',
+      heading: 'Notre Travail Magnifique',
+      description: 'Parcourez notre portfolio de designs d\'ongles et transformations magnifiques.',
+      followText: 'Suivez-nous sur Instagram pour plus d\'inspiration',
+      followBtn: '@LuxeNails',
+    },
+
+    // Testimonials Section
+    testimonials: {
+      chapter: 'Chapitre Trois',
+      title: 'Histoires de Notre Famille',
+      subtitle: 'De vraies personnes. De vraies transformations. De vraie confiance. Ce sont les histoires qui nous inspirent chaque jour.',
+      badge: '⭐ Témoignages',
+      heading: 'Ce Que Disent Nos Clients',
+      description: 'Ne prenez pas juste notre parole. Écoutez nos clients satisfaits.',
+    },
+
+    // Contact Section
+    contact: {
+      chapter: 'Chapitre Final',
+      title: 'Commencez Votre Histoire Aujourd\'hui',
+      subtitle: 'Votre transformation n\'est qu\'à un rendez-vous. Écrivons votre prochain chapitre ensemble.',
+      badge: '📞 Nous Contacter',
+      heading: 'Nous Contacter',
+      description: 'Prêt à réserver ou vous avez des questions? Nous aimerions avoir de vos nouvelles!',
+      
+      contactForm: {
+        name: 'Votre Nom',
+        email: 'Votre Email',
+        phone: 'Numéro de Téléphone',
+        service: 'Sélectionner Service',
+        date: 'Date Préférée',
+        message: 'Message',
+        submit: 'Envoyer le Message',
+        success: 'Message envoyé avec succès!',
+        error: 'L\'envoi a échoué. Veuillez réessayer.',
+      },
+
+      businessHours: 'Heures d\'Ouverture',
+      monday: 'Lundi - Vendredi',
+      saturday: 'Samedi',
+      sunday: 'Dimanche',
+      closed: 'Fermé',
+    },
+
+    // Booking Modal
+    booking: {
+      title: 'Réservez Votre Rendez-vous',
+      selectService: 'Sélectionner le Service',
+      selectDate: 'Sélectionner la Date',
+      selectTime: 'Sélectionner l\'Heure',
+      yourName: 'Votre Nom',
+      yourEmail: 'Votre Email',
+      yourPhone: 'Votre Téléphone',
+      notes: 'Notes Spéciales',
+      bookBtn: 'Confirmer la Réservation',
+      close: 'Fermer',
+    },
+
+    // Footer
+    footer: {
+      company: 'Salon de Manucure',
+      description: 'Services de soin des ongles premium avec techniciens experts et expérience luxueuse.',
+      quickLinks: 'Liens Rapides',
+      aboutUs: 'À Propos',
+      services: 'Services',
+      gallery: 'Galerie',
+      contact: 'Contact',
+      followUs: 'Suivez-nous',
+      copyright: '© 2024 Salon de Manucure. Tous droits réservés.',
+      designedBy: 'Conçu par Votre Entreprise',
+    },
+
+    // Common
+    common: {
+      loading: 'Chargement...',
+      close: 'Fermer',
+      submit: 'Soumettre',
+      cancel: 'Annuler',
+      save: 'Enregistrer',
+      delete: 'Supprimer',
+      edit: 'Éditer',
+      back: 'Retour',
+    },
+  },
+
+  es: {
+    // Navigation
+    nav: {
+      services: 'Servicios',
+      gallery: 'Galería',
+      reviews: 'Reseñas',
+      contact: 'Contacto',
+    },
+
+    // Hero Section
+    hero: {
+      badge: '✨ Experiencia Premium de Cuidado de Uñas',
+      title1: 'Eleva Tu Estilo',
+      title2: 'Cuidado de Uñas Premium',
+      description: 'Experimenta servicios de cuidado de uñas lujosos en una atmósfera relajante. Técnicos expertos, productos premium, resultados impresionantes.',
+      bookBtn: 'Reservar Cita',
+      servicesBtn: 'Ver Servicios',
+    },
+
+    // Services Section
+    services: {
+      chapter: 'Capítulo Uno',
+      title: 'Tu Servicio Perfecto Te Espera',
+      subtitle: 'Cada obra maestra comienza con la base correcta. Descubre el servicio que cuenta tu historia única.',
+      badge: '💅 Servicios',
+      heading: 'Nuestros Servicios',
+      description: 'Descubre nuestra amplia gama de servicios profesionales de cuidado de uñas.',
+      
+      // Individual Services
+      classicManicure: {
+        title: 'Manicura Clásica',
+        description: 'Cuidado tradicional de uñas con forma, cuidado de cutículas y aplicación de esmalte.',
+        price: '$35',
+        duration: '45 min',
+      },
+      gelManicure: {
+        title: 'Manicura de Gel',
+        description: 'Esmalte de gel de larga duración con endurecimiento UV/LED hasta 3 semanas de brillo.',
+        price: '$55',
+        duration: '60 min',
+      },
+      spaPedicure: {
+        title: 'Pedicura Spa',
+        description: 'Tratamiento lujoso de pies con exfoliación, masaje y esmalte.',
+        price: '$65',
+        duration: '75 min',
+      },
+      nailArt: {
+        title: 'Diseño de Arte de Uñas',
+        description: 'Arte de uñas personalizado y diseños creativos para expresar tu estilo único.',
+        price: '$75+',
+        duration: '90 min',
+      },
+      extensions: {
+        title: 'Extensiones de Uñas',
+        description: 'Extensiones de uñas profesionales con materiales premium y acabados.',
+        price: '$60+',
+        duration: '75 min',
+      },
+      acrylicNails: {
+        title: 'Uñas Acrílicas',
+        description: 'Uñas acrílicas duraderas con formas y diseños personalizados.',
+        price: '$50+',
+        duration: '60 min',
+      },
+    },
+
+    // Gallery Section
+    gallery: {
+      chapter: 'Capítulo Dos',
+      title: 'Donde el Arte Encuentra la Elegancia',
+      subtitle: 'Ve la transformación. Siente la diferencia. Experimenta el arte que hace cada visita inolvidable.',
+      badge: '🎨 Portafolio',
+      heading: 'Nuestro Trabajo Espectacular',
+      description: 'Explora nuestro portafolio de diseños de uñas y transformaciones espectaculares.',
+      followText: 'Síguenos en Instagram para más inspiración',
+      followBtn: '@LuxeNails',
+    },
+
+    // Testimonials Section
+    testimonials: {
+      chapter: 'Capítulo Tres',
+      title: 'Historias de Nuestra Familia',
+      subtitle: 'Personas reales. Transformaciones reales. Confianza real. Estas son las historias que nos inspiran cada día.',
+      badge: '⭐ Testimonios',
+      heading: 'Lo Que Dicen Nuestros Clientes',
+      description: 'No solo tomes nuestra palabra. Escucha de nuestros clientes felices.',
+    },
+
+    // Contact Section
+    contact: {
+      chapter: 'Capítulo Final',
+      title: 'Comienza Tu Historia Hoy',
+      subtitle: 'Tu transformación está a solo una cita de distancia. Escribamos tu próximo capítulo juntos.',
+      badge: '📞 Contáctanos',
+      heading: 'Contáctanos',
+      description: '¿Listo para reservar o tienes preguntas? ¡Nos encantaría saber de ti!',
+      
+      contactForm: {
+        name: 'Tu Nombre',
+        email: 'Tu Email',
+        phone: 'Número de Teléfono',
+        service: 'Seleccionar Servicio',
+        date: 'Fecha Preferida',
+        message: 'Mensaje',
+        submit: 'Enviar Mensaje',
+        success: '¡Mensaje enviado exitosamente!',
+        error: 'Error al enviar. Por favor intenta de nuevo.',
+      },
+
+      businessHours: 'Horario de Atención',
+      monday: 'Lunes - Viernes',
+      saturday: 'Sábado',
+      sunday: 'Domingo',
+      closed: 'Cerrado',
+    },
+
+    // Booking Modal
+    booking: {
+      title: 'Reserva Tu Cita',
+      selectService: 'Selecciona el Servicio',
+      selectDate: 'Selecciona la Fecha',
+      selectTime: 'Selecciona la Hora',
+      yourName: 'Tu Nombre',
+      yourEmail: 'Tu Email',
+      yourPhone: 'Tu Teléfono',
+      notes: 'Notas Especiales',
+      bookBtn: 'Confirmar Reserva',
+      close: 'Cerrar',
+    },
+
+    // Footer
+    footer: {
+      company: 'Salón de Uñas',
+      description: 'Servicios premium de cuidado de uñas con técnicos expertos y experiencia lujosa.',
+      quickLinks: 'Enlaces Rápidos',
+      aboutUs: 'Acerca de Nosotros',
+      services: 'Servicios',
+      gallery: 'Galería',
+      contact: 'Contacto',
+      followUs: 'Síguenos',
+      copyright: '© 2024 Salón de Uñas. Todos los derechos reservados.',
+      designedBy: 'Diseñado por Tu Empresa',
+    },
+
+    // Common
+    common: {
+      loading: 'Cargando...',
+      close: 'Cerrar',
+      submit: 'Enviar',
+      cancel: 'Cancelar',
+      save: 'Guardar',
+      delete: 'Eliminar',
+      edit: 'Editar',
+      back: 'Atrás',
+    },
+  },
 };
 
-export type Language = 'en' | 'zh' | 'vi';
+export type Language = 'en' | 'zh' | 'vi' | 'fr' | 'es';
 
 export const getTranslation = (language: Language, key: string, defaultValue: string = '') => {
   const keys = key.split('.');

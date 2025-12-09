@@ -1,14 +1,14 @@
-import { useTranslation } from '../contexts/TranslationContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { Globe, Check } from 'lucide-react';
 import { useState } from 'react';
 
 export function FloatingLanguageSwitcher() {
-  const { language, setLanguage } = useTranslation();
+  const { language, setLanguage } = useLanguage();
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleLanguageChange = (lang: 'en' | 'zh' | 'vi') => {
+  const handleLanguageChange = (lang: 'en' | 'zh' | 'vi' | 'fr' | 'es') => {
     if (language === lang) return;
 
     setLanguage(lang);
@@ -23,6 +23,12 @@ export function FloatingLanguageSwitcher() {
         break;
       case 'vi':
         message = '✓ Đã chuyển sang Tiếng Việt';
+        break;
+      case 'fr':
+        message = '✓ Changé en Français';
+        break;
+      case 'es':
+        message = '✓ Cambiado a Español';
         break;
     }
     setNotificationMessage(message);
@@ -77,6 +83,30 @@ export function FloatingLanguageSwitcher() {
             >
               {language === 'vi' ? <Check size={16} /> : <Globe size={16} />}
               <span className="text-sm font-medium">Tiếng Việt</span>
+            </button>
+            <button
+              onClick={() => handleLanguageChange('fr')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
+                language === 'fr'
+                  ? 'bg-rose-500 text-white shadow-md'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+              title="Français"
+            >
+              {language === 'fr' ? <Check size={16} /> : <Globe size={16} />}
+              <span className="text-sm font-medium">Français</span>
+            </button>
+            <button
+              onClick={() => handleLanguageChange('es')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
+                language === 'es'
+                  ? 'bg-rose-500 text-white shadow-md'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+              title="Español"
+            >
+              {language === 'es' ? <Check size={16} /> : <Globe size={16} />}
+              <span className="text-sm font-medium">Español</span>
             </button>
           </div>
         )}

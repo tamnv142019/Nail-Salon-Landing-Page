@@ -8,6 +8,7 @@
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
+        'figma:asset/9bec472ae90f90102b38538430cb42ea555b4e96.png': path.resolve(__dirname, './src/assets/9bec472ae90f90102b38538430cb42ea555b4e96.png'),
         '@': path.resolve(__dirname, './src'),
       },
     },
@@ -20,31 +21,44 @@
           drop_console: true,
           drop_debugger: true,
         },
+        format: {
+          comments: false,
+        },
       },
       rollupOptions: {
         output: {
           manualChunks: {
-            'vendor': [
-              'react',
-              'react-dom',
-              'react-router-dom',
-            ],
-            'ui': [
+            'vendor-react': ['react', 'react-dom'],
+            'vendor-ui': [
+              '@radix-ui/react-accordion',
+              '@radix-ui/react-alert-dialog',
+              '@radix-ui/react-aspect-ratio',
+              '@radix-ui/react-avatar',
+              '@radix-ui/react-checkbox',
+              '@radix-ui/react-collapsible',
+              '@radix-ui/react-context-menu',
               '@radix-ui/react-dialog',
               '@radix-ui/react-dropdown-menu',
-              '@radix-ui/react-hover-card',
-              '@radix-ui/react-select',
             ],
-            'icons': ['lucide-react'],
+            'vendor-icons': ['lucide-react'],
+            'vendor-other': ['recharts', 'sonner', 'cmdk'],
           },
         },
       },
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 500,
       cssCodeSplit: true,
-      reportCompressedSize: true,
+      sourcemap: false,
     },
     server: {
       port: 3000,
       open: true,
+    },
+    optimizeDeps: {
+      include: [
+        'react',
+        'react-dom',
+        'lucide-react',
+        '@radix-ui/react-dialog',
+      ],
     },
   });

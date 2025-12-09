@@ -1,95 +1,77 @@
-import { useTranslation } from '../contexts/TranslationContext';
-import { Globe, Check } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
-export function LanguageSwitcher() {
-  const { language, setLanguage } = useTranslation();
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationMessage, setNotificationMessage] = useState('');
+const languages = [
+  { code: 'en' as const, name: 'English', flag: '🇺🇸' },
+  // { code: 'vi' as const, name: 'Tiếng Việt', flag: '🇻🇳' },
+  // { code: 'fr' as const, name: 'Français', flag: '🇫🇷' },
+  // { code: 'es' as const, name: 'Español', flag: '🇪🇸' },
+  // { code: 'zh' as const, name: '中文', flag: '🇨🇳' },
+];
 
-  const handleLanguageChange = (lang: 'en' | 'zh' | 'vi') => {
-    if (language === lang) return; // Don't change if already selected
+interface LanguageSwitcherProps {
+  isScrolled?: boolean;
+  isDark?: boolean;
+}
 
-    setLanguage(lang);
+export function LanguageSwitcher({ isScrolled = false, isDark = false }: LanguageSwitcherProps) {
+  const { language, setLanguage } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Show notification
-    let message = '';
-    switch (lang) {
-      case 'en':
-        message = '✓ Changed to English';
-        break;
-      case 'zh':
-        message = '✓ 已切换到中文';
-        break;
-      case 'vi':
-        message = '✓ Đã chuyển sang Tiếng Việt';
-        break;
+  const currentLanguage = languages.find((lang) => lang.code === language) || languages[0];
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
     }
-    setNotificationMessage(message);
-    setShowNotification(true);
 
-    // Hide notification after 2 seconds
-    setTimeout(() => setShowNotification(false), 2000);
-
-    // Dispatch custom event for other components to listen
-    const event = new CustomEvent('languageChanged', { detail: { language: lang } });
-    window.dispatchEvent(event);
-  };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
-    <>
-      <div className="flex items-center gap-2 bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/20 rounded-full p-1 shadow-md hover:shadow-lg transition-shadow duration-300">
-        <button
-          onClick={() => handleLanguageChange('en')}
-          disabled={language === 'en'}
-          className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 cursor-pointer text-xs sm:text-sm ${
-            language === 'en'
-              ? 'bg-rose-500 text-white shadow-lg scale-105'
-              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:scale-105'
-          }`}
-          title="English"
-          aria-label="Switch to English"
-        >
-          {language === 'en' ? <Check size={14} /> : <Globe size={14} />}
-          <span className="font-medium">EN</span>
-        </button>
-        <button
-          onClick={() => handleLanguageChange('zh')}
-          disabled={language === 'zh'}
-          className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 cursor-pointer text-xs sm:text-sm ${
-            language === 'zh'
-              ? 'bg-rose-500 text-white shadow-lg scale-105'
-              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:scale-105'
-          }`}
-          title="中文"
-          aria-label="Switch to Chinese"
-        >
-          {language === 'zh' ? <Check size={14} /> : <Globe size={14} />}
-          <span className="font-medium">中</span>
-        </button>
-        <button
-          onClick={() => handleLanguageChange('vi')}
-          disabled={language === 'vi'}
-          className={`flex items-center gap-1 px-3 py-2 rounded-full transition-all duration-300 cursor-pointer text-xs sm:text-sm ${
-            language === 'vi'
-              ? 'bg-rose-500 text-white shadow-lg scale-105'
-              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 hover:scale-105'
-          }`}
-          title="Tiếng Việt"
-          aria-label="Switch to Vietnamese"
-        >
-          {language === 'vi' ? <Check size={14} /> : <Globe size={14} />}
-          <span className="font-medium">VI</span>
-        </button>
-      </div>
+    <div ref={dropdownRef} className="relative">
+      {/* Trigger Button - Minimal Flag Only */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 outline-none hover:scale-105 ${
+          isScrolled || isDark
+            ? 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 hover:bg-white/80 dark:hover:bg-gray-800/80'
+            : 'bg-white/20 backdrop-blur-xl border border-white/20 hover:bg-white/30'
+        }`}
+        aria-label="Change Language"
+      >
+        <span className="text-xl">{currentLanguage.flag}</span>
+      </button>
 
-      {/* Toast Notification */}
-      {showNotification && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-6 py-3 rounded-full text-white bg-rose-500 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <Check size={20} />
-          <span className="text-sm font-medium">{notificationMessage}</span>
+      {/* Dropdown Menu - iOS Glass Style */}
+      {isOpen && (
+        <div className="absolute top-full right-0 mt-2 w-48 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/30 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => {
+                setLanguage(lang.code);
+                setIsOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-200 ${
+                language === lang.code
+                  ? 'bg-rose-500/20 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-800/50'
+              }`}
+            >
+              <span className="text-2xl">{lang.flag}</span>
+              <span className="flex-1 text-left font-medium">{lang.name}</span>
+              {language === lang.code && (
+                <span className="text-rose-500">✓</span>
+              )}
+            </button>
+          ))}
         </div>
       )}
-    </>
+    </div>
   );
 }

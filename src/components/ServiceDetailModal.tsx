@@ -40,6 +40,7 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
             <button
               onClick={onClose}
               className="absolute top-6 right-6 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-90"
+              aria-label="Close service details"
             >
               <X className="text-white" size={20} />
             </button>
@@ -50,7 +51,7 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
               </div>
               <div>
                 <h2 className="text-4xl text-white mb-2">{service.title}</h2>
-                <p className="text-white">{service.description}</p>
+                <p className="text-white/90">{service.description}</p>
               </div>
             </div>
           </div>

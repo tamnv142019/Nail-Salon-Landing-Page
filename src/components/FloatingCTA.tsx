@@ -30,7 +30,7 @@ export function FloatingCTA({ onBookClick }: FloatingCTAProps) {
       {/* Floating Book Button */}
       <button
         onClick={onBookClick}
-        className={`fixed bottom-8 right-8 z-40 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white px-6 py-4 rounded-full shadow-2xl shadow-rose-500/50 flex items-center gap-3 transition-all duration-500 hover:scale-110 group ${
+        className={`fixed bottom-8 right-8 z-40 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white px-6 py-4 rounded-full shadow-2xl shadow-rose-500/50 flex items-center gap-3 transition-all duration-500 hover:scale-110 group cursor-pointer ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
         }`}
       >
@@ -44,6 +44,7 @@ export function FloatingCTA({ onBookClick }: FloatingCTAProps) {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
+        aria-label="Scroll back to top"
         className={`fixed bottom-8 right-8 z-30 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white p-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-110 ${
           showScrollTop && !isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
         }`}

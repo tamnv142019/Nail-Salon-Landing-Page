@@ -9,7 +9,7 @@ const contactInfo = [
     content: '4869 Santa Monica Ave',
     subContent: 'San Diego, CA 92107',
     gradient: 'from-rose-500 to-pink-500',
-    link: 'https://www.google.com/maps/place/Queen%27s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z',
+    link: 'https://www.google.com/maps/place/Queen\'s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z/data=!4m15!1m8!3m7!1s0x80deaa3766574c6f:0xf7a6636c79fc1c5d!2s4869+Santa+Monica+Ave,+San+Diego,+CA+92107,+USA!3b1!8m2!3d32.7461198!4d-117.2483223!16s%2Fg%2F11bw3xx9cy!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D',
     action: 'Get Directions',
   },
   {
@@ -34,8 +34,8 @@ const contactInfo = [
 
 const businessHours = [
   { day: 'Monday - Friday', hours: '9:00 AM - 7:00 PM', isToday: false },
-  { day: 'Saturday', hours: '10:00 AM - 6:00 PM', isToday: false },
-  { day: 'Sunday', hours: '11:00 AM - 5:00 PM', isToday: false },
+  { day: 'Saturday', hours: '9:00 AM - 6:00 PM', isToday: false },
+  { day: 'Sunday', hours: '10:00 AM - 5:00 PM', isToday: false },
 ];
 
 // Check if salon is currently open
@@ -49,9 +49,9 @@ function isCurrentlyOpen(): boolean {
   if (day >= 1 && day <= 5) { // Monday - Friday
     return timeInMinutes >= 9 * 60 && timeInMinutes < 19 * 60;
   } else if (day === 6) { // Saturday
-    return timeInMinutes >= 10 * 60 && timeInMinutes < 18 * 60;
+    return timeInMinutes >= 9 * 60 && timeInMinutes < 18 * 60;
   } else if (day === 0) { // Sunday
-    return timeInMinutes >= 11 * 60 && timeInMinutes < 17 * 60;
+    return timeInMinutes >= 10 * 60 && timeInMinutes < 17 * 60;
   }
   return false;
 }
@@ -386,8 +386,7 @@ export function Contact() {
               </div>
               <div className="relative h-96">
                 <iframe
-                  title="Queen's Nails Hair and Skincare location on Google Maps"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.7789!2d-117.2508972!3d32.7461198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80deaa3766bc71cd%3A0x58947b412e099a07!2sQueen%27s%20Nails%20Hair%20and%20Skincare!5e0!3m2!1sen!2sus!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.7789!2d-117.2508972!3d32.7461198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80deaa3766bc71cd%3A0x58947b412e099a07!2sQueen's%20Nails%20Hair%20and%20Skincare!5e0!3m2!1sen!2sus!4v1234567890"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

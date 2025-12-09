@@ -44,7 +44,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
           </span>
         </h2>
         
-        <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
+        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-5 duration-700 delay-200">
           Start your transformation today with 20% off your first visit. Because every beautiful story starts with a single step.
         </p>
 
@@ -52,7 +52,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-400">
           <button
             onClick={onBookClick}
-            className="group relative bg-white hover:bg-gray-100 text-gray-900 px-10 py-5 rounded-full transition-all duration-300 shadow-2xl hover:shadow-white/50 hover:scale-110 flex items-center justify-center gap-3 overflow-hidden"
+            className="group relative bg-white hover:bg-gray-100 text-gray-900 px-10 py-5 rounded-full transition-all duration-300 shadow-2xl hover:shadow-white/50 hover:scale-110 flex items-center justify-center gap-3 overflow-hidden cursor-pointer"
           >
             <Calendar size={22} className="group-hover:rotate-12 transition-transform duration-300" />
             <span className="text-lg">Begin Your Story Now</span>
@@ -70,7 +70,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
         </div>
 
         {/* Trust badges with icons */}
-        <div className="flex flex-wrap justify-center gap-12 text-white text-sm animate-in fade-in slide-in-from-bottom-5 duration-700 delay-600">
+        <div className="flex flex-wrap justify-center gap-12 text-white/90 text-sm animate-in fade-in slide-in-from-bottom-5 duration-700 delay-600">
           {[
             { icon: '👩‍⚕️', text: 'Licensed Professionals' },
             { icon: '✨', text: 'Premium Products' },

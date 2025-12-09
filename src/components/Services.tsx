@@ -245,12 +245,11 @@ function ServiceTier({ tier, gradient, index, onBook }: { tier: any; gradient: s
 
       <button
         onClick={() => onBook(tier.name)}
-        className={`w-full py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn ${
+        className={`w-full py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn cursor-pointer ${
           tier.featured || tier.popular
             ? `bg-gradient-to-r ${gradient} text-white hover:shadow-lg hover:scale-105`
             : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600'
         }`}
-        type="button"
       >
         <Calendar size={18} />
         <span>Book Now</span>
@@ -289,20 +288,16 @@ function SimpleServiceCard({ service, gradient, index, onBook }: { service: any;
         service.popular
           ? 'border-rose-400 dark:border-rose-400 shadow-lg shadow-rose-500/20'
           : 'border-gray-200 dark:border-gray-700'
-      } p-5 rounded-xl transition-all duration-300 hover:shadow-lg hover:border-rose-300 dark:hover:border-rose-600 group`}
+      } p-5 rounded-xl transition-all duration-300 hover:shadow-lg hover:border-rose-300 dark:hover:border-rose-600 group cursor-pointer`}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: `translateY(${isVisible ? 0 : 20}px)`,
         transitionDelay: `${index * 50}ms`,
       }}
+      onClick={() => onBook(service.name)}
     >
       <div className="flex items-center justify-between">
-        <div 
-          className="flex-1 cursor-pointer"
-          onClick={() => onBook(service.name)}
-          role="button"
-          tabIndex={0}
-        >
+        <div className="flex-1">
           <h4 className="text-lg text-gray-900 dark:text-white mb-1 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors duration-300">
             {service.name}
           </h4>
@@ -320,7 +315,6 @@ function SimpleServiceCard({ service, gradient, index, onBook }: { service: any;
               onBook(service.name);
             }}
             className={`p-2 bg-gradient-to-r ${gradient} text-white rounded-lg hover:scale-110 transition-all duration-300 shadow-md`}
-            type="button"
           >
             <Calendar size={18} />
           </button>
@@ -467,7 +461,7 @@ export function Services() {
           </div>
 
           {/* Quick Navigation Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-16 sticky top-20 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl py-4 rounded-full px-6 shadow-lg border border-gray-200 dark:border-gray-800">
+          <div className="flex flex-wrap justify-center gap-3 mb-16 sticky top-20 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl py-4 rounded-full px-6 shadow-lg border border-gray-200 dark:border-gray-800">
             {serviceCategories.map((category) => (
               <button
                 key={category.id}
@@ -477,7 +471,7 @@ export function Services() {
                     ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg scale-105`
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                 }`}
-                type="button"
+                aria-label={`Filter services by ${category.title}`}
               >
                 <category.icon size={18} />
                 <span className="text-sm font-medium">{category.title}</span>
@@ -509,7 +503,8 @@ export function Services() {
                 </a>
                 <button
                   onClick={() => handleBookService('Consultation')}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:border-rose-500 dark:hover:border-rose-500 text-gray-900 dark:text-white rounded-full transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:border-rose-500 dark:hover:border-rose-500 text-gray-900 dark:text-white rounded-full transition-all duration-300 hover:scale-105 cursor-pointer"
+                  aria-label="Book an appointment"
                 >
                   <Calendar size={20} />
                   <span className="text-lg">Book Appointment</span>

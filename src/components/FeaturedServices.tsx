@@ -167,7 +167,7 @@ export function FeaturedServices() {
                     </span>
                     <button 
                       onClick={() => handleLearnMore(service.serviceId)}
-                      className="px-6 py-2 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                      className="px-6 py-2 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer">
                       Learn More
                     </button>
                   </div>

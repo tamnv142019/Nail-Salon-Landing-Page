@@ -1,30 +1,32 @@
 import { Calendar, Star, Sparkles, Moon, Sun, Menu } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { useTheme } from './ThemeProvider';
 import { BookingModal } from './BookingModal';
 import { MobileMenu } from './MobileMenu';
+import { useMagicClickAnimation } from '../hooks/useMagicClickAnimation';
 
 export function Hero() {
   const [scrollY, setScrollY] = useState(0);
   const { theme, toggleTheme } = useTheme();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const magicClick = useMagicClickAnimation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+  const handleScroll = useCallback(() => {
+    setScrollY(window.scrollY);
   }, []);
 
-  const scale = 1 + scrollY * 0.0003;
-  const opacity = 1 - scrollY * 0.001;
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
-  const handleViewServices = () => {
+  const scale = useMemo(() => 1 + scrollY * 0.0003, [scrollY]);
+  const opacity = useMemo(() => 1 - scrollY * 0.001, [scrollY]);
+
+  const handleViewServices = useCallback(() => {
     document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   return (
     <>
@@ -152,20 +154,25 @@ export function Hero() {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
-              onClick={() => setIsBookingOpen(true)}
-              aria-label="Book an appointment"
-              className="group relative bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-rose-500/50 hover:shadow-rose-500/70 hover:scale-105"
+              onClick={(e) => {
+                magicClick(e);
+                setIsBookingOpen(true);
+              }}
+              className="group relative bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-rose-500/50 hover:shadow-rose-500/70 hover:scale-110 cursor-pointer overflow-hidden"
             >
-              <Calendar size={22} />
-              <span>Book Appointment</span>
-              <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Calendar size={22} className="relative z-10" />
+              <span className="relative z-10">Book Appointment</span>
+              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
             <button 
-              onClick={handleViewServices}
-              aria-label="View our services"
-              className="group bg-white/80 dark:bg-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white px-10 py-5 rounded-full border-2 border-gray-300 dark:border-white/30 hover:border-rose-500 dark:hover:border-rose-400/50 transition-all duration-300 shadow-lg hover:scale-105"
+              onClick={(e) => {
+                magicClick(e);
+                handleViewServices();
+              }}
+              className="group relative bg-white/80 dark:bg-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white px-10 py-5 rounded-full border-2 border-gray-300 dark:border-white/30 hover:border-rose-500 dark:hover:border-rose-400/50 transition-all duration-300 shadow-lg hover:shadow-rose-500/50 hover:scale-110 cursor-pointer overflow-hidden"
             >
-              View Services
+              <span className="relative z-10">View Services</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-rose-500/0 via-rose-500/20 to-rose-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
         </div>

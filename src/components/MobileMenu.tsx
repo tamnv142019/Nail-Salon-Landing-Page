@@ -33,6 +33,7 @@ export function MobileMenu({ isOpen, onClose, onBookAppointment, onNavigateToSer
             <h2 className="text-2xl text-gray-900 dark:text-white">Menu</h2>
             <button
               onClick={onClose}
+              aria-label="Close menu"
               className="w-10 h-10 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-full flex items-center justify-center transition-all duration-300"
             >
               <X className="text-gray-900 dark:text-white" size={20} />

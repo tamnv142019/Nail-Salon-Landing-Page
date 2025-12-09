@@ -5,22 +5,28 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { BookingModal } from './BookingModal';
 import { MobileMenu } from './MobileMenu';
 import { LanguageSelector } from './LanguageSelector';
-import { useMagicClick } from '../hooks/useMagicClick';
 
 export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () => void }) {
   const [scrollY, setScrollY] = useState(0);
   const { theme, toggleTheme } = useTheme();
   const { t } = useLanguage();
-  const { createMagicEffect } = useMagicClick();
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [currentWord, setCurrentWord] = useState(0);
+  const [currentBgImage, setCurrentBgImage] = useState(0);
 
   const storyWords = [
     t('hero.word1'),
     t('hero.word2'),
     t('hero.word3'),
     t('hero.word4'),
+  ];
+
+  const backgroundImages = [
+    'https://images.unsplash.com/photo-1720086196723-a1e0656a90a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwc2Fsb24lMjBsdXh1cnl8ZW58MXx8fHwxNzY1MjYwOTI2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    'https://images.unsplash.com/photo-1758225490983-0fae7961e425?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzcGElMjBwZWRpY3VyZXxlbnwxfHx8fDE3NjUyMDU2MDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    'https://images.unsplash.com/photo-1737214475365-e4f06281dcf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwYXJ0JTIwbWFuaWN1cmV8ZW58MXx8fHwxNzY1MjM0NDE3fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    'https://images.unsplash.com/photo-1626383137804-ff908d2753a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dHklMjBzYWxvbiUyMGludGVyaW9yfGVufDF8fHx8MTc2NTIyODM3NXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
   ];
 
   useEffect(() => {
@@ -39,6 +45,13 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBgImage((prev) => (prev + 1) % backgroundImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   const scale = 1 + scrollY * 0.0003;
   const opacity = 1 - scrollY * 0.001;
   const parallaxY = scrollY * 0.5;
@@ -54,35 +67,38 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
   return (
     <>
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Parallax Background Image */}
-        <div 
-          className="absolute inset-0 z-0 will-change-transform"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1650176491728-a5e6edd08575?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwc2Fsb24lMjBtYW5pY3VyZXxlbnwxfHx8fDE3NjQ5NjQ5NzN8MA&ixlib=rb-4.1.0&q=80&w=1200)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
-            transform: `scale(${scale}) translateY(${parallaxY}px)`,
-            transition: 'transform 0.1s ease-out',
-            contain: 'layout style paint',
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-white/90 dark:to-black transition-colors duration-500"></div>
+        {/* Parallax Background Images with Slideshow */}
+        <div className="absolute inset-0 z-0">
+          {backgroundImages.map((image, index) => (
+            <div
+              key={index}
+              className="absolute inset-0 will-change-transform transition-opacity duration-1000"
+              style={{
+                backgroundImage: `url(${image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                transform: `scale(${scale}) translateY(${parallaxY}px)`,
+                opacity: currentBgImage === index ? 1 : 0,
+                transition: 'opacity 1s ease-in-out, transform 0.1s ease-out',
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-white/90 dark:to-black transition-colors duration-500"></div>
+            </div>
+          ))}
         </div>
 
-        {/* Animated particles with parallax - Reduced for performance */}
+        {/* Animated particles with parallax */}
         <div className="absolute inset-0 z-[1]">
-          {[...Array(15)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-rose-400/40 rounded-full animate-pulse will-change-transform"
+              className="absolute w-1 h-1 bg-rose-400/40 rounded-full animate-pulse"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 3}s`,
                 animationDuration: `${2 + Math.random() * 3}s`,
-                transform: `translateY(${scrollY * (0.05 + Math.random() * 0.1)}px)`,
-                contain: 'layout style paint',
+                transform: `translateY(${scrollY * (0.1 + Math.random() * 0.3)}px)`,
               }}
             />
           ))}
@@ -94,11 +110,11 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
             <div className="flex items-center justify-between">
               <div className="text-gray-900 dark:text-white flex items-center gap-3 transition-colors duration-500">
                 <div className="relative">
-                  <div className="text-3xl bg-gradient-to-r from-rose-500 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-tight italic">
+                  <div className="text-4xl bg-gradient-to-r from-rose-500 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-tight italic">
                     Queens
                   </div>
                 </div>
-                <span className="text-lg md:text-xl bg-gradient-to-r from-gray-900 to-rose-600 dark:from-white dark:to-rose-200 bg-clip-text text-transparent">
+                <span className="text-xl md:text-2xl bg-gradient-to-r from-gray-900 to-rose-600 dark:from-white dark:to-rose-200 bg-clip-text text-transparent">
                   Nails Hair & Skincare
                 </span>
               </div>
@@ -106,6 +122,7 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
                 <button 
                   onClick={() => onNavigateToServices && onNavigateToServices()}
                   className="hover:text-rose-500 dark:hover:text-rose-300 transition-all duration-300 relative group"
+                  aria-label={t('nav.services')}
                 >
                   {t('nav.services')}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rose-500 dark:bg-rose-400 group-hover:w-full transition-all duration-300"></span>
@@ -201,12 +218,8 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center animate-in fade-in slide-in-from-bottom-5 duration-700 delay-800">
             <button 
-              onClick={(e) => {
-                createMagicEffect(e);
-                setIsBookingOpen(true);
-              }}
-              aria-label="Book an appointment"
-              className="group relative bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-rose-500/50 hover:shadow-rose-500/70 hover:scale-105 overflow-hidden"
+              onClick={() => setIsBookingOpen(true)}
+              className="group relative bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white px-10 py-5 rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-rose-500/50 hover:shadow-rose-500/70 hover:scale-105 overflow-hidden cursor-pointer"
             >
               <Calendar size={22} className="relative z-10" />
               <span className="relative z-10">{t('hero.cta1')}</span>
@@ -214,12 +227,9 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
             </button>
             <button 
-              onClick={(e) => {
-                createMagicEffect(e);
-                handleViewServices();
-              }}
-              aria-label="View our services"
-              className="group bg-white/80 dark:bg-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white px-10 py-5 rounded-full border-2 border-gray-300 dark:border-white/30 hover:border-rose-500 dark:hover:border-rose-400/50 transition-all duration-300 shadow-lg hover:scale-105"
+              onClick={handleViewServices}
+              className="group bg-white/80 dark:bg-white/10 backdrop-blur-sm hover:bg-white dark:hover:bg-white/20 text-gray-900 dark:text-white px-10 py-5 rounded-full border-2 border-gray-300 dark:border-white/30 hover:border-rose-500 dark:hover:border-rose-400/50 transition-all duration-300 shadow-lg hover:scale-105 cursor-pointer"
+              aria-label={t('hero.cta2')}
             >
               {t('hero.cta2')}
             </button>

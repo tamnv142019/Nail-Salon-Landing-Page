@@ -130,6 +130,15 @@
     -moz-osx-font-smoothing: grayscale;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
+
+  button,
+  a,
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select {
+    cursor: pointer;
+  }
 }
 
 /**
@@ -190,8 +199,32 @@
 html {
   font-size: var(--font-size);
   scroll-behavior: smooth;
+  scroll-timeline: view();
 }
 
 * {
   scroll-behavior: smooth;
+}
+
+/* Slow scroll animation */
+@supports (animation-timeline: view()) {
+  html {
+    scroll-timeline: view();
+  }
+}
+
+/* Add scroll delay for slower animation */
+html {
+  animation-duration: 2s;
+}
+
+/* Fix dropdown select appearance in dark mode */
+select option {
+  background-color: white;
+  color: #000;
+}
+
+.dark select option {
+  background-color: #1f2937;
+  color: #fff;
 }
