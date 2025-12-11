@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { X } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const galleryImages = [
   'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80',
@@ -23,6 +24,7 @@ const galleryImages = [
 
 export function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,10 +49,10 @@ export function GallerySection() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Our Work
+              {t('gallerySection.title', 'Our Work')}
             </h2>
             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-              Browse our gallery of beautiful nails and satisfied clients
+              {t('gallerySection.subtitle', 'Browse our gallery of beautiful nails and satisfied clients')}
             </p>
           </motion.div>
         </div>

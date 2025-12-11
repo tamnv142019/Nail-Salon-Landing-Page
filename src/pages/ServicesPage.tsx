@@ -5,6 +5,7 @@ import { Navigation } from '../components/home/Navigation';
 import { Footer } from '../components/Footer';
 import { ScrollToTopButton } from '../components/ScrollToTopButton';
 import { useMagicClickAnimation } from '../hooks/useMagicClickAnimation';
+import { useLanguage } from '../contexts/LanguageContext';
 import { motion } from 'motion/react';
 
 interface ServicesPageProps {
@@ -12,137 +13,88 @@ interface ServicesPageProps {
   scrollToService?: string;
 }
 
-const servicesData = [
-  {
-    id: 'regular-pedicure',
-    category: 'Pedicure Services',
-    title: 'SPA REGULAR PEDICURE SERVICE',
-    image: 'https://images.unsplash.com/photo-1746143795871-dcb6ddd9d9ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZWRpY3VyZSUyMGZsb3dlcnMlMjBzcGF8ZW58MXx8fHwxNzY1MjkyNDg4fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Indulge in our luxurious pedicure services featuring premium products, relaxing massage, and meticulous nail care.',
-    services: [
-      { name: 'REGULAR MANICURE', price: '$25' },
-      { name: 'REGULAR PEDICURE & FRENCH OR NAIL COLOR TIPS', price: '$30' },
-      { name: 'REGULAR PEDICURE & CALLUS REMOVER', price: '$35' },
-      { name: 'REGULAR PEDICURE & SUGAR SCRUB', price: '$30' },
-      { name: 'REGULAR PEDICURE & MASK', price: '$30' },
-      { name: 'REGULAR PEDICURE & PARAFFIN', price: '$33' },
-      { name: 'REGULAR PEDICURE DELUXE', price: '$55', note: 'Includes callus, sugar scrub, paraffin wax' },
-      { name: 'BOMB GEL PEDICURE (SAVE)', price: '$53', note: 'With bomb gel add on with service' },
-      { name: 'BOMB DELUXE PEDICURE (SAVE)', price: '$63', note: 'With bomb gel add on with service and callus remover, sugar scrub, paraffin wax' },
-    ],
-  },
-  {
-    id: 'gel-pedicure',
-    category: 'Pedicure Services',
-    title: 'SPA GEL PEDICURE SERVICE',
-    image: 'https://images.unsplash.com/photo-1657726736244-455fc25d777b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnZWwlMjBwZWRpY3VyZSUyMHBvbGlzaHxlbnwxfHx8fDE3NjUyOTI0ODh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Long-lasting gel pedicure with vibrant colors that won\'t chip for weeks. Perfect for busy lifestyles.',
-    services: [
-      { name: 'GEL PEDICURE', price: '$35' },
-      { name: 'GEL PEDICURE & FRENCH OR NAIL COLOR TIPS', price: '$40' },
-      { name: 'GEL PEDICURE & SUGAR SCRUB', price: '$40' },
-      { name: 'GEL PEDICURE & MASK', price: '$40' },
-      { name: 'GEL PEDICURE & CALLUS REMOVAL', price: '$45' },
-      { name: 'GEL PEDICURE & PARAFFIN', price: '$43' },
-      { name: 'GEL DELUXE PEDICURE', price: '$60' },
-      { name: 'BOMB GEL PEDICURE (SAVE)', price: '$65', note: 'With bomb gel add on with package' },
-    ],
-  },
+const getServicesData = (t: (key: string, fallback: string) => string) => [
   {
     id: 'manicure',
-    category: 'Manicure Services',
-    title: 'ADD-ON SERVICE FOR PEDICURE & MANICURE',
+    category: t('servicesPage.manicureCategory', 'Manicure Services'),
+    title: t('servicesPage.manicureTitle', 'MANICURE'),
     image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Expert nail care and design with attention to every detail.',
+    description: t('servicesPage.manicureDesc', 'Your satisfaction deserves our attention. Expert manicure services with premium products and skilled technicians.'),
+    popular: true,
     services: [
-      { name: 'FILL PRICE TIPS', price: '$5' },
-      { name: 'DESIGN ON 3 BIG TOES', price: '$5' },
-      { name: 'SHINY BUFFER', price: '$5' },
-      { name: 'CALLUS REMOVAL', price: '$10' },
-      { name: 'SUGAR SCRUB', price: '$5' },
-      { name: 'MASK', price: '$5' },
-      { name: 'PARAFFIN', price: '$8' },
-      { name: 'TAKE OFF GEL COLOR', price: '$5', note: 'With the service' },
-      { name: 'TAKE OFF GEL COLOR ONLY', price: '$10' },
-      { name: 'REGULAR MANICURE (NO COLOR)', price: '$10' },
-      { name: 'REGULAR MANICURE WITH COLOR', price: '$20' },
-      { name: 'GEL MANICURE', price: '$30' },
-      { name: 'GEL MANICURE WITH TAKE OFF OR COLOR', price: '$35' },
-      { name: 'TAKE OFF GEL COLOR ONLY', price: '$10' },
+      { name: t('servicesPage.regularManicure', 'Regular Manicure'), price: '$20' },
+      { name: t('servicesPage.europeanManicure', 'European Manicure'), price: '$25', note: t('servicesPage.europeanManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion') },
+      { name: t('servicesPage.deluxeManicure', 'Deluxe Manicure'), price: '$30', note: t('servicesPage.deluxeManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion, Rejuvenate – Marine Mask'), popular: true },
+      { name: t('servicesPage.signatureSpaManicure', 'Signature Spa Manicure'), price: '$35', note: t('servicesPage.signatureSpaManicureNote', 'Exfoliates – exfoliating crystal, Rejuvenate – Marine Mask, Deep moisturization – Special Lotion, Deep Penetration – Paraffin Wax, 10 Minutes Massage – Warming Lotion') },
     ],
   },
   {
-    id: 'acrylic',
-    category: 'Nail Enhancements',
-    title: 'ACRYLIC',
-    image: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY3J5bGljJTIwbmFpbHN8ZW58MXx8fHwxNzY1MTkyNzA0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Durable and beautiful acrylic nails customized to your preferred length and shape. Professional application guaranteed.',
+    id: 'pedicure',
+    category: t('servicesPage.pedicureCategory', 'Pedicure Services'),
+    title: t('servicesPage.pedicureTitle', 'PEDICURE SERVICES'),
+    image: 'https://images.unsplash.com/photo-1746143795871-dcb6ddd9d9ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZWRpY3VyZSUyMGZsb3dlcnMlMjBzcGF8ZW58MXx8fHwxNzY1MjkyNDg4fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
+    popular: true,
     services: [
-      { name: 'FULL SET SHORT OR OVERLAY', price: '$35+', note: 'Refill: $30+' },
-      { name: 'FULL SET SHORT NAILS WITH WHITE TIPS', price: '$40+', note: 'Refill: $30+' },
-      { name: 'FULL SET REGULAR WITH ANY SHAPE', price: '$45+', note: 'Refill: $30+' },
-      { name: 'FULL SET PINK & WHITE OR GLITTER POWDER', price: '$60+', note: 'Refill: $40+' },
-      { name: 'FULL SET OMBRE POWDER WITH ANY SHAPE', price: '$55+', note: 'Refill: $40+' },
-      { name: 'NAIL FIX', price: '$5+' },
-      { name: 'CUT SHORT NAILS AND RESHAPE', price: '$10' },
-      { name: 'TAKE OFF ACRYLIC POWDER & DO NEW SET', price: '$10' },
-      { name: 'TAKE OFF ACRYLIC POWDER ONLY', price: '$15' },
-      { name: 'FULL SET GEL X', price: '$50+', note: 'Refill: $40+' },
+      { name: t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure'), price: '$25', popular: true },
+      { name: t('servicesPage.fullFace', 'Full Face'), price: '$40' },
+      { name: t('servicesPage.bikini', 'Bikini'), price: '$35' },
+      { name: t('servicesPage.chest', 'Chest'), price: '$35' },
+      { name: t('servicesPage.fullArms', 'Full Arms'), price: '$45' },
+      { name: t('servicesPage.halfLegs', 'Half Legs'), price: '$35' },
     ],
   },
   {
-    id: 'lashes',
-    category: 'Lash Services',
-    title: 'LASH SERVICE',
-    image: 'https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleWVsYXNoJTIwZXh0ZW5zaW9uc3xlbnwxfHx8fDE3NjUyMzQ0MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Professional eyelash extensions for dramatic, natural beauty. Wake up with perfect lashes every day.',
+    id: 'powder',
+    category: t('servicesPage.powderCategory', 'Organic Nail Powder'),
+    title: t('servicesPage.powderTitle', 'ORGANIC NAIL POWDER (DIPPING POWDER)'),
+    image: 'https://images.unsplash.com/photo-1535588986102-0e9c0c60cba2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwcG93ZGVyJTIwbmFpbHN8ZW58MXx8fHwxNzY1MjE2MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPage.powderDesc', 'Dipping powder collection with beautiful and long-lasting finishes.'),
     services: [
-      { name: 'CLASSIC', price: '$95', note: '2 weeks refill: $60 | 3 weeks refill or more: $95+' },
-      { name: 'HYBRID SET', price: '$105', note: '2 weeks refill: $70 | 3 weeks refill: $95+' },
-      { name: 'VOLUME LOAD', price: '$125+', note: '2 weeks refill: $75+ | 3 weeks refill: $105+' },
-      { name: 'MEGA VOLUME', price: '$140+', note: '(Mega lash price depend on how thick, how long you like) | 2 weeks refill: $85+ | 3 weeks refill: $130+' },
-      { name: 'STYLE WISPY', price: '$30+' },
-      { name: 'STYLE COLOR LASH', price: '$50' },
-      { name: 'REMOVAL, HYGIENE AND REDO NEW SET', price: '$30' },
-      { name: 'REMOVE, HYGIENE ONLY', price: '$20' },
+      { name: t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder'), price: '$50' },
+      { name: t('servicesPage.frenchTipPowder', 'French Tip Powder'), price: '$55' },
+      { name: t('servicesPage.dippingColor', 'Dipping Color'), price: '$45' },
+      { name: t('servicesPage.hybridGel', 'Hybrid Gel'), price: '$60' },
+      { name: t('servicesPage.gelX', 'Gel X'), price: '$60' },
     ],
   },
   {
     id: 'waxing',
-    category: 'Waxing Services',
-    title: 'WAXING SERVICE',
-    image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXhpbmclMjBzcGF8ZW58MXx8fHwxNzY1MjkyOTcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Smooth, professional hair removal services using premium wax for sensitive skin. Quick and efficient.',
+    category: t('servicesPage.waxingCategory', 'Waxing Services'),
+    title: t('servicesPage.waxingTitle', 'WAXING SERVICES'),
+    image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHdheGluZyUyMHNwYXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPage.waxingDesc', 'Smooth and professional hair removal services for your entire body.'),
+    sale: true,
     services: [
-      { name: 'EYEBROW', price: '$12' },
-      { name: 'UPPER LIP', price: '$5' },
-      { name: 'CHIN', price: '$10' },
-      { name: 'SIDEBURNS OR CHEEK', price: '$15+' },
-      { name: 'FULL FACE', price: '$25+' },
-      { name: 'FULL ARM', price: '$35+' },
-      { name: 'HALF ARM', price: '$25+' },
-      { name: 'UNDER ARM', price: '$20+' },
-      { name: 'STOMACH', price: '$15+' },
-      { name: 'CHEST OR BACK', price: '$30+' },
-      { name: 'FULL LEGS', price: '$50+' },
-      { name: 'HALF LEGS', price: '$30+' },
-      { name: 'BIKINI LINES', price: '$30+' },
-      { name: 'BRAZILIAN', price: '$40+' },
+      { name: t('servicesPage.fullLegs', 'Full Legs'), price: '$60' },
+      { name: t('servicesPage.fullBack', 'Full Back'), price: '$45' },
+      { name: t('servicesPage.brazilian', 'Brazilian'), price: '$60' },
+      { name: t('servicesPage.fullFace', 'Full Face'), price: '$40' },
+      { name: t('servicesPage.bikini', 'Bikini'), price: '$35' },
+      { name: t('servicesPage.chest', 'Chest'), price: '$35' },
+      { name: t('servicesPage.fullArms', 'Full Arms'), price: '$45' },
+      { name: t('servicesPage.halfLegs', 'Half Legs'), price: '$35' },
+      { name: t('servicesPage.halfArms', 'Half Arms'), price: '$30' },
+      { name: t('servicesPage.underArms', 'Under Arms'), price: '$20' },
+      { name: t('servicesPage.eyebrows', 'Eyebrows'), price: '$15' },
+      { name: t('servicesPage.stomach', 'Stomach'), price: '$15' },
+      { name: t('servicesPage.chin', 'Chin'), price: '$10' },
+      { name: t('servicesPage.sideBurns', 'Side Burns'), price: '$10' },
+      { name: t('servicesPage.upperLip', 'Upper Lip'), price: '$8' },
     ],
   },
   {
-    id: 'facial',
-    category: 'Facial Services',
-    title: 'FACIAL SERVICES',
-    image: 'https://images.unsplash.com/photo-1664549760921-2198b054a592?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYWNpYWwlMjBzcGElMjB0cmVhdG1lbnR8ZW58MXx8fHwxNzY1MjkyOTcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Rejuvenating skincare treatments customized for your skin type. Professional products and techniques.',
+    id: 'additional',
+    category: t('servicesPage.additionalCategory', 'Additional Services'),
+    title: t('servicesPage.additionalTitle', 'ADDITIONAL SERVICES'),
+    image: 'https://images.unsplash.com/photo-1737214475365-e4f06281dcf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwYXJ0JTIwZGVzaWdufGVufDF8fHx8MTc2NTIxNjM0MHww&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPage.additionalDesc', 'Enhance your beauty experience with our add-on services.'),
     services: [
-      { name: 'EXPRESS FACIAL', price: '$30', note: 'Double cleanse, exfoliation, mask, finishing products' },
-      { name: 'CLASSIC FACIAL', price: '$50', note: 'Double cleanse, exfoliation, extractions (if needed), massage & scalp massage, mask, finishing prod more...' },
-      { name: 'ACNE FACIAL', price: '$60', note: 'Double cleanse, exfoliation, extractions (if needed), high frequency, massage & scalp massage, mask, read more...' },
-      { name: 'MICRODERMABRASION FACIAL', price: '$70', note: 'Double cleanse, microdermabrasion, extractions (if needed), massage & scalp massage, mask, finishing read more...' },
-      { name: 'ULTIMATE GLOW FACIAL', price: '$80', note: 'Double cleanse, enzyme mask, microdermabrasion, extractions (if needed), massage & scalp massage, red read more...' },
-      { name: 'BACK FACIAL', price: '$50', note: 'Double cleanse, exfoliation, extractions (if needed), massage, mask, finishing products' },
+      { name: t('servicesPage.french', 'French'), price: '$5' },
+      { name: t('servicesPage.twoDesigns', 'Two Designs'), price: '$5' },
+      { name: t('servicesPage.naturalBuffShine', 'Natural Buff Shine'), price: '$5' },
+      { name: t('servicesPage.massageFoot', '15 Minutes Massage Foots'), price: '$20' },
+      { name: t('servicesPage.massageNeck', '15 Minutes Massage Neck Shoulder'), price: '$20' },
     ],
   },
 ];
@@ -150,8 +102,11 @@ const servicesData = [
 export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPageProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
-  const [expandedServices, setExpandedServices] = useState<string[]>([servicesData[0].id]);
   const magicClick = useMagicClickAnimation();
+  const { t } = useLanguage();
+  
+  const servicesData = getServicesData(t);
+  const [expandedServices, setExpandedServices] = useState<string[]>([servicesData[0].id]);
 
   const handleBookService = useCallback((serviceName: string) => {
     setSelectedService(serviceName);
@@ -205,10 +160,10 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl text-white mb-6 font-bold drop-shadow-lg">
-              Services & Pricing
+              {t('servicesPage.title', 'Services & Pricing')}
             </h1>
             <p className="text-base md:text-xl text-white/95 max-w-3xl leading-relaxed drop-shadow-md">
-              Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.
+              {t('servicesPage.subtitle', 'Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.')}
             </p>
           </motion.div>
         </div>
@@ -233,8 +188,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                   onClick={() => toggleService(service.id)}
                   className="cursor-pointer hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-colors duration-300"
                 >
-                  <div className="flex items-center gap-4 md:gap-6 p-4 md:p-6">
-                    {/* Image */}
+                  <div className="relative flex items-center gap-4 md:gap-6 p-4 md:p-6">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0 border-4 border-white dark:border-gray-700 shadow-lg hover:scale-110 transition-transform duration-300">
                       <img
                         src={service.image}
@@ -288,7 +242,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                           <div
                             key={idx}
                             onClick={() => handleBookService(item.name)}
-                            className="group flex items-start justify-between gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200 cursor-pointer"
+                            className="group relative flex items-start justify-between gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200 cursor-pointer"
                           >
                             <div className="flex-1 min-w-0">
                               <div className="text-sm md:text-base font-medium text-gray-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
@@ -315,7 +269,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                         }}
                         className="mt-6 w-full relative px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-lg font-semibold cursor-pointer overflow-hidden group"
                       >
-                        <span className="relative z-10">Book {service.title}</span>
+                        <span className="relative z-10">{t('servicesPage.bookNow', 'Book Now')} {service.title}</span>
                         <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </button>
                     </div>
@@ -332,10 +286,10 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                 <Phone className="text-white" size={32} />
               </div>
               <h3 className="text-2xl md:text-4xl mb-4 text-gray-900 dark:text-white font-bold">
-                Questions About Our Services?
+                {t('servicesPage.questionsTitle', 'Questions About Our Services?')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-8 text-base md:text-lg leading-relaxed">
-                Our experienced staff is ready to help you choose the perfect service for your needs. Call us or book online!
+                {t('servicesPage.questionsDesc', 'Our experienced staff is ready to help you choose the perfect service for your needs. Call us or book online!')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -354,7 +308,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:border-rose-500 dark:hover:border-rose-500 text-gray-900 dark:text-white rounded-full transition-all duration-300 hover:scale-110 hover:shadow-rose-500/30 hover:shadow-lg shadow-lg text-lg font-semibold cursor-pointer relative overflow-hidden group"
                 >
                   <Calendar size={20} className="relative z-10" />
-                  <span className="relative z-10">Book Appointment</span>
+                  <span className="relative z-10">{t('contactSection.bookAppointment', 'Book Appointment')}</span>
                   <div className="absolute inset-0 bg-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </div>

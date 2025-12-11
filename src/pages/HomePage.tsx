@@ -13,9 +13,11 @@ import { ScrollToTopButton } from '../components/ScrollToTopButton';
 
 interface HomePageProps {
   onNavigateToServices: (serviceId?: string) => void;
+  onNavigateToPrivacy: () => void;
+  onNavigateToTerms: () => void;
 }
 
-export function HomePage({ onNavigateToServices }: HomePageProps) {
+export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigateToTerms }: HomePageProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   return (
@@ -54,7 +56,7 @@ export function HomePage({ onNavigateToServices }: HomePageProps) {
       <ContactSection onBookClick={() => setIsBookingOpen(true)} />
       
       {/* Footer */}
-      <Footer />
+      <Footer onNavigateToPrivacy={onNavigateToPrivacy} onNavigateToTerms={onNavigateToTerms} />
 
       {/* Scroll to Top Button */}
       <ScrollToTopButton />

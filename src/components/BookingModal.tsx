@@ -1,5 +1,6 @@
 import { X, Calendar, Clock, User, Phone, Check, Sparkles, Mail } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -87,11 +89,11 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
           </button>
           <div className="flex items-center gap-3 mb-2">
             <Sparkles className="text-white" size={28} />
-            <h2 className="text-2xl text-white">Book Appointment</h2>
+            <h2 className="text-2xl text-white">{t('booking.title', 'Book Appointment')}</h2>
           </div>
           {preSelectedService && (
             <p className="text-white/90 mt-1 text-sm">
-              Service: <span className="font-semibold">{preSelectedService}</span>
+              {t('booking.selectService', 'Service')}: <span className="font-semibold">{preSelectedService}</span>
             </p>
           )}
         </div>
@@ -103,12 +105,12 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 backdrop-blur-xl rounded-full flex items-center justify-center mx-auto mb-6 border border-green-200 dark:border-green-800">
                 <Check className="text-green-600 dark:text-green-400" size={40} />
               </div>
-              <h3 className="text-2xl mb-4 text-gray-900 dark:text-white">Booking Confirmed!</h3>
+              <h3 className="text-2xl mb-4 text-gray-900 dark:text-white">{t('booking.successTitle', 'Booking Confirmed!')}</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-2">
-                Thank you, {formData.name}!
+                {t('common.thankYou', 'Thank you')}, {formData.name}!
               </p>
               <p className="text-gray-600 dark:text-gray-300">
-                Your appointment for <span className="font-semibold">{preSelectedService}</span> is scheduled for
+                {t('booking.successMessage', 'Your appointment has been successfully booked.')}
               </p>
               <p className="text-gray-900 dark:text-white mt-2">
                 {new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {selectedTime}

@@ -1,14 +1,17 @@
 import { motion } from 'motion/react';
 import { Award, Heart, Users, Clock } from 'lucide-react';
-
-const stats = [
-  { icon: Users, value: '1000+', label: 'Happy Clients' },
-  { icon: Award, value: '10+', label: 'Years Experience' },
-  { icon: Heart, value: '5.0', label: 'Average Rating' },
-  { icon: Clock, value: '7 Days', label: 'Open Weekly' },
-];
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export function AboutSection() {
+  const { t } = useLanguage();
+  
+  const stats = [
+    { icon: Users, value: '1000+', labelKey: 'aboutStats.happyClients' },
+    { icon: Award, value: '10+', labelKey: 'aboutStats.yearsExperience' },
+    { icon: Heart, value: '5.0', labelKey: 'aboutStats.averageRating' },
+    { icon: Clock, value: '7 Days', labelKey: 'aboutStats.openWeekly' },
+  ];
+  
   return (
     <section id="about" className="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -38,7 +41,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">10+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Years of Excellence</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{t('aboutStats.yearsOfExcellence', 'Years of Excellence')}</div>
                 </div>
               </div>
             </div>
@@ -52,13 +55,13 @@ export function AboutSection() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 whitespace-nowrap">
-              Welcome to Queen's Nails
+              {t('home.about.title', 'Welcome to Queen\'s Nails')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              Since 2015, Queen's Nails Hair & Skincare has been San Diego's premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.
+              {t('home.about.text1', 'Since 2015, Queen\'s Nails Hair & Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.')}
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              Our team of experienced professionals is dedicated to providing you with the highest quality treatments using premium products and the latest techniques. From classic manicures to intricate nail art, we ensure every visit leaves you feeling pampered and beautiful.
+              {t('home.about.text2', 'Our team of experienced professionals is dedicated to providing you with the highest quality treatments using premium products and the latest techniques. From classic manicures to intricate nail art, we ensure every visit leaves you feeling pampered and beautiful.')}
             </p>
 
             {/* Stats Grid */}
@@ -72,7 +75,7 @@ export function AboutSection() {
                     {stat.value}
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">
-                    {stat.label}
+                    {t(stat.labelKey, stat.labelKey)}
                   </div>
                 </div>
               ))}
@@ -81,18 +84,18 @@ export function AboutSection() {
             {/* Features List */}
             <div className="space-y-3 mb-12">
               {[
-                'Licensed & Experienced Professionals',
-                'Premium Quality Products',
-                'Sanitized Equipment & Tools',
-                'Relaxing Spa Atmosphere',
-              ].map((feature, index) => (
+                'aboutFeatures.feature1',
+                'aboutFeatures.feature2',
+                'aboutFeatures.feature3',
+                'aboutFeatures.feature4',
+              ].map((featureKey, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-gradient-to-br from-rose-500 to-purple-600 flex items-center justify-center flex-shrink-0">
                     <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                  <span className="text-gray-700 dark:text-gray-300">{t(featureKey, featureKey)}</span>
                 </div>
               ))}
             </div>

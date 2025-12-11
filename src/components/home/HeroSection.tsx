@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface HeroSectionProps {
   onBookClick: () => void;
@@ -16,6 +17,7 @@ const backgroundImages = [
 
 export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,12 +58,12 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
         >
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-4 md:mb-6 leading-tight">
-            Queen's Nails Hair<br />& Skincare
+            {t('home.hero.title', 'Queen\'s Nails Hair')}<br />{t('home.hero.subtitle2', '& Skincare')}
           </h1>
 
           {/* Subheading */}
           <p className="text-lg md:text-2xl text-white/90 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed">
-            Premier Nail Salon & Spa in San Diego
+            {t('home.hero.description', 'Premier Nail Salon & Spa in San Diego')}
           </p>
 
           {/* Location */}
@@ -80,13 +82,13 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
                 const targetPosition = servicesElement.getBoundingClientRect().top + window.scrollY;
                 const distance = targetPosition - startPosition;
                 const duration = 1500; // 1.5 seconds for smooth scroll
-                let start = null;
+                let start: number | null = null;
 
-                const easeInOutCubic = (t) => {
+                const easeInOutCubic = (t: number) => {
                   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                 };
 
-                const scroll = (timestamp) => {
+                const scroll = (timestamp: number) => {
                   if (!start) start = timestamp;
                   const progress = (timestamp - start) / duration;
 
@@ -104,7 +106,7 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
             className="group relative px-8 py-4 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-2xl text-lg font-semibold w-full sm:w-auto cursor-pointer"
           >
             <span className="flex items-center justify-center gap-2">
-              Find Out More
+              {t('home.hero.button', 'Find Out More')}
             </span>
           </button>
         </motion.div>

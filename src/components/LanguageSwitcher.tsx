@@ -3,10 +3,10 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const languages = [
   { code: 'en' as const, name: 'English', flag: '🇺🇸' },
-  // { code: 'vi' as const, name: 'Tiếng Việt', flag: '🇻🇳' },
-  // { code: 'fr' as const, name: 'Français', flag: '🇫🇷' },
-  // { code: 'es' as const, name: 'Español', flag: '🇪🇸' },
-  // { code: 'zh' as const, name: '中文', flag: '🇨🇳' },
+  { code: 'vi' as const, name: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'fr' as const, name: 'Français', flag: '🇫🇷' },
+  { code: 'es' as const, name: 'Español', flag: '🇪🇸' },
+  { code: 'zh' as const, name: '中文', flag: '🇨🇳' },
 ];
 
 interface LanguageSwitcherProps {

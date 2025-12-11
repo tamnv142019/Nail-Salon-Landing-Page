@@ -41,12 +41,14 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
     }
   };
 
+  const { t } = useLanguage();
+  
   const navLinks = [
-    { id: 'services', label: 'Services' },
-    { id: 'about', label: 'About' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'testimonials', label: 'Reviews' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'services', label: t('nav.services', 'Services') },
+    { id: 'about', label: t('nav.about', 'About') },
+    { id: 'gallery', label: t('nav.gallery', 'Gallery') },
+    { id: 'testimonials', label: t('nav.reviews', 'Reviews') },
+    { id: 'contact', label: t('nav.contact', 'Contact') },
   ];
 
   return (
@@ -139,7 +141,7 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
               <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 opacity-75 animate-ping"></span>
               <div className="relative flex items-center gap-2 px-4 md:px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg text-sm font-semibold backdrop-blur-xl cursor-pointer">
                 <Calendar size={16} />
-                <span>Book Now</span>
+                <span>{t('servicesPage.bookNow', 'Book Now')}</span>
               </div>
             </button>
 

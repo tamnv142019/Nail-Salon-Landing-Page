@@ -1,9 +1,16 @@
 import { Star, Instagram, Facebook, MapPin, Heart, Send, Clock } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
-export function Footer() {
+interface FooterProps {
+  onNavigateToPrivacy?: () => void;
+  onNavigateToTerms?: () => void;
+}
+
+export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps = {}) {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const { t } = useLanguage();
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +41,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-xs transition-colors duration-500">
-              Experience luxury nail care with premium services and professional artistry.
+              {t('footer.description', 'Experience luxury nail care with premium services and professional artistry.')}
             </p>
             <div className="flex gap-2">
               <span className="text-gray-600 dark:text-gray-400 text-sm">📍 4869 Santa Monica Ave, San Diego</span>
@@ -47,7 +54,7 @@ export function Footer() {
           {/* Quick Links */}
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700" style={{ animationDelay: '100ms' }}>
             <h4 className="mb-6 text-lg text-gray-900 dark:text-white transition-all duration-500">
-              Hours
+              {t('footer.hours', 'Hours')}
             </h4>
             <div className="space-y-2 text-gray-600 dark:text-gray-400 transition-colors duration-500">
               <div className="flex items-center gap-2">
@@ -66,7 +73,7 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="mt-6">
-              <h4 className="mb-3 text-lg text-gray-900 dark:text-white">Follow Us</h4>
+              <h4 className="mb-3 text-lg text-gray-900 dark:text-white">{t('footer.followUs', 'Follow Us')}</h4>
               <div className="flex gap-3">
                 <a
                   href="https://www.facebook.com/profile.php?id=100075740667723&mibextid=LQQJ4d"
@@ -102,12 +109,17 @@ export function Footer() {
           {/* Services */}
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700" style={{ animationDelay: '200ms' }}>
             <h4 className="mb-6 text-lg text-gray-900 dark:text-white transition-all duration-500">
-              Services
+              {t('footer.services', 'Services')}
             </h4>
             <ul className="space-y-3 text-gray-600 dark:text-gray-400 transition-colors duration-500">
-              {['Classic Manicure', 'Gel Manicure', 'Spa Pedicure', 'Nail Art Design'].map((service, index) => (
+              {[
+                { key: 'services.classicManicure.title', default: 'Classic Manicure' },
+                { key: 'services.gelManicure.title', default: 'Gel Manicure' },
+                { key: 'services.spaPedicure.title', default: 'Spa Pedicure' },
+                { key: 'services.nailArt.title', default: 'Nail Art Design' },
+              ].map((service, index) => (
                 <li key={index} className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300 cursor-pointer">
-                  {service}
+                  {t(service.key, service.default)}
                 </li>
               ))}
             </ul>
@@ -116,15 +128,15 @@ export function Footer() {
           {/* Newsletter */}
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700" style={{ animationDelay: '300ms' }}>
             <h4 className="mb-6 text-lg text-gray-900 dark:text-white transition-all duration-500">
-              Stay Updated
+              {t('footer.stayUpdated', 'Stay Updated')}
             </h4>
             <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed transition-colors duration-500">
-              Subscribe to get special offers and beauty tips.
+              {t('footer.newsletterText', 'Subscribe to get special offers and beauty tips.')}
             </p>
             {isSubscribed ? (
               <div className="flex items-center gap-2 p-4 bg-green-100 dark:bg-green-900/30 rounded-xl border border-green-300 dark:border-green-700 transition-all duration-300 animate-in zoom-in">
                 <Heart size={18} className="text-green-600 dark:text-green-400 fill-green-600 dark:fill-green-400 animate-pulse" />
-                <span className="text-green-700 dark:text-green-300 text-sm">Subscribed successfully!</span>
+                <span className="text-green-700 dark:text-green-300 text-sm">{t('footer.subscribeSuccess', 'Subscribed successfully!')}</span>
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
@@ -132,7 +144,7 @@ export function Footer() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
+                  placeholder={t('footer.emailPlaceholder', 'Your email')}
                   required
                   className="flex-1 px-4 py-3 rounded-xl bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 focus:outline-none focus:border-rose-500 dark:focus:border-rose-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 text-sm backdrop-blur-sm transition-all duration-300"
                 />
@@ -152,8 +164,18 @@ export function Footer() {
             © {new Date().getFullYear()} Queen's Nails Hair & Skincare. All rights reserved.
           </p>
           <div className="flex gap-6 text-gray-600 dark:text-gray-400 text-sm transition-colors duration-500">
-            <a href="#" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300">Privacy Policy</a>
-            <a href="#" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300">Terms of Service</a>
+            <button
+              onClick={onNavigateToPrivacy}
+              className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300 cursor-pointer underline-offset-4 hover:underline"
+            >
+              {t('footer.privacyPolicy', 'Privacy Policy')}
+            </button>
+            <button
+              onClick={onNavigateToTerms}
+              className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors duration-300 cursor-pointer underline-offset-4 hover:underline"
+            >
+              {t('footer.termsOfService', 'Terms of Service')}
+            </button>
           </div>
         </div>
       </div>

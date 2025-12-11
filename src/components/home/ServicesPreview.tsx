@@ -1,95 +1,104 @@
 import { ArrowRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ServicesPreviewProps {
   onViewAll: (serviceId?: string) => void;
   onBookClick: () => void;
 }
 
-const services = [
-  {
-    id: 'regular-pedicure',
-    title: 'Pedicure Services',
-    image: 'https://images.unsplash.com/photo-1746143795871-dcb6ddd9d9ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZWRpY3VyZSUyMGZsb3dlcnMlMjBzcGF8ZW58MXx8fHwxNzY1MjkyNDg4fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Luxury spa treatments for your feet with premium products and relaxing massage',
-    features: [
-      'Regular Pedicure',
-      'Gel Pedicure',
-      'Spa Pedicure with Sugar Scrub',
-      'Callus Removal Treatment',
-      'Paraffin Wax Treatment',
-    ],
-  },
+const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'manicure',
-    title: 'Manicure Services',
+    title: t('servicesPage.manicureCategory', 'Manicure Services'),
     image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Expert nail care and design with attention to every detail',
+    description: t('servicesPreview.manicureDesc', 'Expert nail care and design with attention to every detail'),
     features: [
-      'Classic Manicure',
-      'Gel Manicure',
-      'French Manicure',
-      'Nail Art & Design',
-      'Nail Repair & Strengthening',
+      `${t('servicesPage.regularManicure', 'Regular Manicure')} - $20`,
+      `${t('servicesPage.europeanManicure', 'European Manicure')} - $25`,
+      `${t('servicesPage.deluxeManicure', 'Deluxe Manicure')} - $30`,
+      `${t('servicesPage.signatureSpaManicure', 'Signature Spa Manicure')} - $35`,
     ],
   },
   {
-    id: 'acrylic',
-    title: 'Acrylic & Gel',
-    image: 'https://images.unsplash.com/photo-1632345031435-8727f6897d53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY3J5bGljJTIwbmFpbHN8ZW58MXx8fHwxNzY1MTkyNzA0fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Long-lasting beautiful nails with various shapes and designs',
+    id: 'pedicure',
+    title: t('servicesPage.pedicureCategory', 'Pedicure Services'),
+    image: 'https://images.unsplash.com/photo-1746143795871-dcb6ddd9d9ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZWRpY3VyZSUyMGZsb3dlcnMlMjBzcGF8ZW58MXx8fHwxNzY1MjkyNDg4fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPreview.pedicureDesc', 'Luxury spa treatments for your feet with premium products'),
     features: [
-      'Full Set Acrylic',
-      'Acrylic Refill',
-      'Pink & White',
-      'Ombre Powder',
-      'Gel X Extensions',
+      `${t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure')} - $25`,
+      `${t('servicesPage.fullFace', 'Full Face')} - $40`,
+      `${t('servicesPage.bikini', 'Bikini')} - $35`,
+      `${t('servicesPage.chest', 'Chest')} - $35`,
+      `${t('servicesPage.fullArms', 'Full Arms')} - $45`,
+      `${t('servicesPage.halfLegs', 'Half Legs')} - $35`,
     ],
   },
   {
-    id: 'lashes',
-    title: 'Lash Extensions',
-    image: 'https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxleWVsYXNoJTIwZXh0ZW5zaW9uc3xlbnwxfHx8fDE3NjUyMzQ0MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Professional eyelash extensions for dramatic, natural beauty',
+    id: 'powder',
+    title: t('servicesPage.powderCategory', 'Organic Nail Powder'),
+    image: 'https://images.unsplash.com/photo-1535588986102-0e9c0c60cba2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwcG93ZGVyJTIwbmFpbHN8ZW58MXx8fHwxNzY1MjE2MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPreview.powderDesc', 'Dipping powder collection with beautiful finishes'),
     features: [
-      'Classic Lashes',
-      'Hybrid Lashes',
-      'Volume Lashes',
-      'Mega Volume',
-      'Wispy Style & Color Lashes',
+      `${t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder')} - $50`,
+      `${t('servicesPage.frenchTipPowder', 'French Tip Powder')} - $55`,
+      `${t('servicesPage.dippingColor', 'Dipping Color')} - $45`,
+      `${t('servicesPage.hybridGel', 'Hybrid Gel')} - $60`,
+      `${t('servicesPage.gelX', 'Gel X')} - $60`,
     ],
   },
   {
     id: 'waxing',
-    title: 'Waxing Services',
+    title: t('servicesPage.waxingCategory', 'Waxing Services'),
     image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXhpbmclMjBzcGF8ZW58MXx8fHwxNzY1MjkyOTcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Smooth & professional hair removal services',
+    description: t('servicesPreview.waxingDesc', 'Smooth & professional hair removal services'),
     features: [
-      'Eyebrow Shaping',
-      'Facial Waxing',
-      'Full Body Waxing',
-      'Brazilian Waxing',
-      'Bikini Line Waxing',
+      `${t('servicesPage.fullLegs', 'Full Legs')} - $60`,
+      `${t('servicesPage.fullBack', 'Full Back')} - $45`,
+      `${t('servicesPage.brazilian', 'Brazilian')} - $60`,
+      `${t('servicesPage.fullFace', 'Full Face')} - $40`,
+      `${t('servicesPage.fullArms', 'Full Arms')} - $45`,
+      `${t('servicesPage.eyebrows', 'Eyebrows')} - $15`,
     ],
   },
   {
-    id: 'facial',
-    title: 'Facial Services',
-    image: 'https://images.unsplash.com/photo-1664549760921-2198b054a592?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYWNpYWwlMjBzcGElMjB0cmVhdG1lbnR8ZW58MXx8fHwxNzY1MjkyOTcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: 'Rejuvenating skincare treatments for radiant, healthy skin',
+    id: 'additional',
+    title: t('servicesPage.additionalCategory', 'Additional Services'),
+    image: 'https://images.unsplash.com/photo-1737214475365-e4f06281dcf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYWlsJTIwYXJ0JTIwZGVzaWdufGVufDF8fHx8MTc2NTIxNjM0MHww&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPreview.additionalDesc', 'Enhance your beauty experience with add-on services'),
     features: [
-      'Express Facial',
-      'Classic Facial',
-      'Acne Treatment Facial',
-      'Microdermabrasion',
-      'Ultimate Glow Facial',
+      `${t('servicesPage.french', 'French')} - $5`,
+      `${t('servicesPage.twoDesigns', 'Two Designs')} - $5`,
+      `${t('servicesPage.naturalBuffShine', 'Natural Buff Shine')} - $5`,
+      `${t('servicesPage.massageFoot', '15 Minutes Massage Foots')} - $20`,
+      `${t('servicesPage.massageNeck', '15 Minutes Massage Neck Shoulder')} - $20`,
     ],
   },
 ];
 
 export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps) {
+  const { t } = useLanguage();
+  const services = getServices(t);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && selectedService) {
+        setSelectedService(null);
+      }
+    };
+
+    if (selectedService) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedService]);
 
   return (
     <>
@@ -104,16 +113,16 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                Our Services
+                {t('services.heading', 'Our Services')}
               </h2>
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-                Discover our premium beauty services designed to make you look and feel amazing
+                {t('home.services.subtitle', 'Discover our premium beauty services designed to make you look and feel amazing')}
               </p>
             </motion.div>
           </div>
 
           {/* Services Grid - Circular Images */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12 mb-12 place-items-center">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
@@ -145,11 +154,11 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
           {/* View All Button */}
           <div className="text-center">
             <button
-              onClick={onViewAll}
-              aria-label="View all services and prices"
+              onClick={() => onViewAll()}
+              aria-label={t('contactSection.viewAllServicesAndPrices', 'View All Services & Prices')}
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-lg text-lg font-semibold"
             >
-              <span className="cursor-pointer hover:opacity-90 transition-opacity">View All Services & Prices</span>
+              <span className="cursor-pointer hover:opacity-90 transition-opacity">{t('contactSection.viewAllServicesAndPrices', 'View All Services & Prices')}</span>
               <ArrowRight size={20} />
             </button>
           </div>
@@ -201,7 +210,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                 {/* Features List */}
                 <div className="mb-6">
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                    What's Included:
+                    {t('home.services.whatsIncluded', "What's Included:")}
                   </h4>
                   <div className="space-y-2">
                     {selectedService.features.map((feature, index) => (
@@ -222,7 +231,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                     }}
                     className="flex-1 px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-semibold cursor-pointer"
                   >
-                    View Prices
+                    {t('home.services.viewPrices', 'View Prices')}
                   </button>
                   <button
                     onClick={() => {
@@ -231,7 +240,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                     }}
                     className="flex-1 px-6 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-full transition-all duration-300 hover:scale-105 font-semibold cursor-pointer"
                   >
-                    Book Now
+                    {t('home.services.bookNow', 'Book Now')}
                   </button>
                 </div>
               </div>

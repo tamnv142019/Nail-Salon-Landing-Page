@@ -1,4 +1,5 @@
 import { X, Calendar } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -8,6 +9,24 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, onBookAppointment, onNavigateToServices }: MobileMenuProps) {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleLinkClick = (href: string) => {

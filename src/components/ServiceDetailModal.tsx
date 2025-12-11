@@ -1,5 +1,5 @@
 import { X, Clock, DollarSign, Check } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BookingModal } from './BookingModal';
 
 interface Service {
@@ -21,6 +21,24 @@ interface ServiceDetailModalProps {
 
 export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailModalProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen || !service) return null;
 

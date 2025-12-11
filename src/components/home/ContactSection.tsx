@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, XCircle } from 'lucide-react';
 import { useMemo } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface ContactSectionProps {
   onBookClick: () => void;
@@ -8,9 +9,9 @@ interface ContactSectionProps {
 }
 
 const businessHours = [
-  { day: 'Monday - Friday', hours: '9:00 AM - 7:00 PM', dayIndex: [1, 2, 3, 4, 5], startTime: 9, endTime: 19 },
-  { day: 'Saturday', hours: '9:00 AM - 6:00 PM', dayIndex: [6], startTime: 9, endTime: 18 },
-  { day: 'Sunday', hours: '10:00 AM - 5:00 PM', dayIndex: [0], startTime: 10, endTime: 17 },
+  { dayKey: 'contactSection.mondayFriday', hours: '9:00 AM - 7:00 PM', dayIndex: [1, 2, 3, 4, 5], startTime: 9, endTime: 19 },
+  { dayKey: 'contactSection.saturday', hours: '9:00 AM - 6:00 PM', dayIndex: [6], startTime: 9, endTime: 18 },
+  { dayKey: 'contactSection.sunday', hours: '10:00 AM - 5:00 PM', dayIndex: [0], startTime: 10, endTime: 17 },
 ];
 
 // Function to check if business is currently open (San Diego timezone: America/Los_Angeles)
@@ -56,6 +57,8 @@ const isBusinessOpen = (): { isOpen: boolean; message: string } => {
 
 export function ContactSection({ onBookClick, onNavigateToServices }: ContactSectionProps) {
   const businessStatus = useMemo(() => isBusinessOpen(), []);
+  const { t } = useLanguage();
+  
   return (
     <section id="contact" className="py-20 md:py-32 bg-white dark:bg-gray-900 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -68,10 +71,10 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Visit Us Today
+              {t('contactSection.title', 'Visit Us Today')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-              We're conveniently located in Ocean Beach, San Diego. Walk-ins welcome, but appointments are recommended for your preferred time slot.
+              {t('contactSection.subtitle', 'We\'re conveniently located in Ocean Beach, San Diego. Walk-ins welcome, but appointments are recommended for your preferred time slot.')}
             </p>
 
             {/* Contact Cards */}
@@ -85,7 +88,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <Phone className="text-white" size={20} />
                 </div>
                 <div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Phone</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">{t('contactSection.phone', 'Phone')}</div>
                   <div className="text-lg font-semibold text-gray-900 dark:text-white">(619) 224-5050</div>
                 </div>
               </a>
@@ -99,7 +102,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <Mail className="text-white" size={20} />
                 </div>
                 <div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Email</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">{t('contactSection.email', 'Email')}</div>
                   <div className="text-lg font-semibold text-gray-900 dark:text-white">queenspham505@gmail.com</div>
                 </div>
               </a>
@@ -115,7 +118,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <MapPin className="text-white" size={20} />
                 </div>
                 <div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Address</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">{t('contactSection.location', 'Address')}</div>
                   <div className="text-lg font-semibold text-gray-900 dark:text-white">
                     4869 Santa Monica Ave<br />San Diego, CA 92107
                   </div>
@@ -138,18 +141,18 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   >
                     <Clock className="text-white" size={20} />
                   </motion.div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Business Hours</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{t('contactSection.hours', 'Business Hours')}</h3>
                 </div>
                 <div className="flex items-center gap-2">
                   {businessStatus.isOpen ? (
                     <>
                       <CheckCircle className="text-green-500" size={20} />
-                      <span className="text-sm font-semibold text-green-600 dark:text-green-400">{businessStatus.message}</span>
+                      <span className="text-sm font-semibold text-green-600 dark:text-green-400">{t('contactSection.openNow', businessStatus.message)}</span>
                     </>
                   ) : (
                     <>
                       <XCircle className="text-red-500" size={20} />
-                      <span className="text-sm font-semibold text-red-600 dark:text-red-400">{businessStatus.message}</span>
+                      <span className="text-sm font-semibold text-red-600 dark:text-red-400">{t('contactSection.closedNow', businessStatus.message)}</span>
                     </>
                   )}
                 </div>
@@ -163,7 +166,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                     whileHover={{ opacity: 1, x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <span className="text-gray-600 dark:text-gray-400">{item.day}</span>
+                    <span className="text-gray-600 dark:text-gray-400">{t(item.dayKey, item.dayKey)}</span>
                     <span className="font-semibold text-gray-900 dark:text-white">{item.hours}</span>
                   </motion.div>
                 ))}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const testimonials = [
   {
@@ -31,6 +32,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useLanguage();
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -54,10 +56,10 @@ export function TestimonialsSection() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              What Our Clients Say
+              {t('testimonialsSection.title', 'What Our Clients Say')}
             </h2>
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
-              Don't just take our word for it - hear from our satisfied customers
+              {t('testimonialsSection.subtitle', 'Don\'t just take our word for it - hear from our satisfied customers')}
             </p>
           </motion.div>
         </div>
