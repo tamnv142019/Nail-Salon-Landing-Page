@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { SEO } from '../components/SEO/SEO';
+import { generateLocalBusinessSchema, generateWebPageSchema } from '../utils/schema-generators';
 import { Navigation } from '../components/home/Navigation';
 import { HeroSection } from '../components/home/HeroSection';
 import { ServicesPreview } from '../components/home/ServicesPreview';
@@ -20,13 +22,30 @@ interface HomePageProps {
 export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigateToTerms }: HomePageProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
+  // SEO schemas
+  const schemas = [
+    generateLocalBusinessSchema(),
+    generateWebPageSchema({
+      name: "Home - Queen's Nails Hair & Skincare",
+      description: "Premier nail salon in San Diego offering luxury manicures, pedicures, nail art, and spa services. Expert technicians, premium products, beautiful results.",
+      url: "https://queensnails.live/"
+    })
+  ];
+
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
-      {/* SEO Meta Tags */}
-      <title>Queen's Nails Hair & Skincare - Premier Nail Salon in San Diego</title>
-      
-      {/* Navigation */}
-      <Navigation onBookClick={() => setIsBookingOpen(true)} />
+    <>
+      <SEO
+        title="Queen's Nails Hair & Skincare - Premier Nail Salon in San Diego"
+        description="Premier nail salon in San Diego offering luxury manicures, pedicures, gel nails, nail art, and spa services. Expert technicians, premium products. Book your appointment today!"
+        canonical="https://queensnails.live/"
+        keywords="nail salon San Diego, manicure San Diego, pedicure San Diego, gel nails, nail art, spa services, Ocean Beach salon, nail salon near me"
+        ogImage="https://queensnails.live/og-home.jpg"
+        schema={schemas}
+      />
+
+      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
+        {/* Navigation */}
+        <Navigation onBookClick={() => setIsBookingOpen(true)} />
       
       {/* Hero Section */}
       <HeroSection 
@@ -63,6 +82,7 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
 
       {/* Booking Modal */}
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-    </div>
+      </main>
+    </>
   );
 }

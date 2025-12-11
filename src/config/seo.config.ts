@@ -37,14 +37,14 @@ export const businessInfo: BusinessInfo = {
   name: "Queen's Nails Hair & Skincare",
   description:
     'Premium nail salon, hair salon, and skincare services in San Diego',
-  url: 'https://queensnails.com',
-  email: 'info@queensnails.com',
-  phone: '(619) 123-4567',
+  url: 'https://queensnails.live',
+  email: 'info@queensnails.live',
+  phone: '(619) 224-5050',
   address: {
-    streetAddress: '123 Main Street',
+    streetAddress: '4869 Santa Monica Ave',
     addressLocality: 'San Diego',
     addressRegion: 'CA',
-    postalCode: '92101',
+    postalCode: '92107',
     addressCountry: 'US',
   },
   geo: {

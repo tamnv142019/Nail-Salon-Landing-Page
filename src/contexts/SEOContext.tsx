@@ -30,10 +30,10 @@ export function SEOProvider({ children }: SEOProviderProps) {
       'Premium nail salon in San Diego offering professional nail care, hair services, and skincare treatments. Book your appointment today!',
     keywords:
       'nail salon, nail care, manicure, pedicure, hair salon, skincare, San Diego',
-    ogImage: 'https://queensnails.com/og-image.jpg',
-    ogUrl: 'https://queensnails.com',
+    ogImage: 'https://queensnails.live/og-image.jpg',
+    ogUrl: 'https://queensnails.live',
     ogType: 'website',
-    canonical: 'https://queensnails.com/',
+    canonical: 'https://queensnails.live/',
   });
 
   const updateTitle = (title: string) => {

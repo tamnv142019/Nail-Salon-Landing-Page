@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './components/ThemeProvider';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ServicesPage } from './pages/ServicesPage';
@@ -74,10 +75,12 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AppContent />
-      </LanguageProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AppContent />
+        </LanguageProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }

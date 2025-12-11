@@ -1,4 +1,6 @@
-    import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { SEO } from '../components/SEO/SEO';
+import { generateWebPageSchema } from '../utils/schema-generators';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface PrivacyPolicyPageProps {
@@ -8,18 +10,26 @@ interface PrivacyPolicyPageProps {
 export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
   const { t } = useLanguage();
 
+  const schema = generateWebPageSchema({
+    name: "Privacy Policy - Queen's Nails Hair & Skincare",
+    description: "Privacy policy for Queen's Nails Hair & Skincare. Learn how we protect and handle your personal information.",
+    url: "https://queensnails.live/privacy"
+  });
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
+    <>
+      <SEO
+        title="Privacy Policy"
+        description="Privacy policy for Queen's Nails Hair & Skincare. Learn how we protect and handle your personal information."
+        canonical="https://queensnails.live/privacy"
+        noindex={true}
+        schema={schema}
+      />
+
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-lg">
         <div className="max-w-5xl mx-auto px-6 py-6">
-          <button
-            onClick={onNavigateBack}
-            className="flex items-center gap-2 mb-4 hover:gap-3 transition-all duration-300 text-white/90 hover:text-white"
-          >
-            <ArrowLeft size={20} />
-            <span>Back to Home</span>
-          </button>
           <h1 className="text-4xl font-bold">{t('privacy.title', 'Privacy Policy')}</h1>
           <p className="text-white/80 mt-2">
             {t('privacy.effectiveDate', 'Effective Date')}: {t('privacy.date', 'December 12, 2025')}
@@ -211,7 +221,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
                 <p className="font-semibold text-gray-900 dark:text-white">Queen's Nails Hair & Skincare</p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
-                <p>Email: info@queensnails.com</p>
+                <p>Email: info@queensnails.live</p>
               </div>
             </section>
           </div>
@@ -227,6 +237,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </>
   );
 }

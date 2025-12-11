@@ -1,4 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
+import { SEO } from '../components/SEO/SEO';
+import { generateWebPageSchema } from '../utils/schema-generators';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface TermsOfServicePageProps {
@@ -8,18 +10,26 @@ interface TermsOfServicePageProps {
 export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) {
   const { t } = useLanguage();
 
+  const schema = generateWebPageSchema({
+    name: "Terms of Service - Queen's Nails Hair & Skincare",
+    description: "Terms of service for Queen's Nails Hair & Skincare. Review our service terms, policies, and guidelines.",
+    url: "https://queensnails.live/terms"
+  });
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
+    <>
+      <SEO
+        title="Terms of Service"
+        description="Terms of service for Queen's Nails Hair & Skincare. Review our service terms, policies, and guidelines."
+        canonical="https://queensnails.live/terms"
+        noindex={true}
+        schema={schema}
+      />
+
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
         <div className="max-w-5xl mx-auto px-6 py-6">
-          <button
-            onClick={onNavigateBack}
-            className="flex items-center gap-2 mb-4 hover:gap-3 transition-all duration-300 text-white/90 hover:text-white"
-          >
-            <ArrowLeft size={20} />
-            <span>Back to Home</span>
-          </button>
           <h1 className="text-4xl font-bold">{t('terms.title', 'Terms of Service')}</h1>
           <p className="text-white/80 mt-2">
             {t('terms.effectiveDate', 'Effective Date')}: {t('terms.date', 'December 12, 2025')}
@@ -284,6 +294,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </>
   );
 }

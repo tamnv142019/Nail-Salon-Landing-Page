@@ -1,5 +1,7 @@
 import { Phone, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
+import { SEO } from '../components/SEO/SEO';
+import { generateBreadcrumbSchema, generateServiceSchema } from '../utils/schema-generators';
 import { BookingModal } from '../components/BookingModal';
 import { Navigation } from '../components/home/Navigation';
 import { Footer } from '../components/Footer';
@@ -13,7 +15,26 @@ interface ServicesPageProps {
   scrollToService?: string;
 }
 
-const getServicesData = (t: (key: string, fallback: string) => string) => [
+interface ServiceItem {
+  name: string;
+  price: string;
+  note?: string;
+  bestSeller?: boolean;
+  popular?: boolean;
+}
+
+interface ServiceCategory {
+  id: string;
+  category: string;
+  title: string;
+  image: string;
+  description: string;
+  popular?: boolean;
+  sale?: boolean;
+  services: ServiceItem[];
+}
+
+const getServicesData = (t: (key: string, fallback: string) => string): ServiceCategory[] => [
   {
     id: 'manicure',
     category: t('servicesPage.manicureCategory', 'Manicure Services'),
@@ -24,7 +45,7 @@ const getServicesData = (t: (key: string, fallback: string) => string) => [
     services: [
       { name: t('servicesPage.regularManicure', 'Regular Manicure'), price: '$20' },
       { name: t('servicesPage.europeanManicure', 'European Manicure'), price: '$25', note: t('servicesPage.europeanManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion') },
-      { name: t('servicesPage.deluxeManicure', 'Deluxe Manicure'), price: '$30', note: t('servicesPage.deluxeManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion, Rejuvenate – Marine Mask'), popular: true },
+      { name: t('servicesPage.deluxeManicure', 'Deluxe Manicure'), price: '$30', note: t('servicesPage.deluxeManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion, Rejuvenate – Marine Mask'), bestSeller: true },
       { name: t('servicesPage.signatureSpaManicure', 'Signature Spa Manicure'), price: '$35', note: t('servicesPage.signatureSpaManicureNote', 'Exfoliates – exfoliating crystal, Rejuvenate – Marine Mask, Deep moisturization – Special Lotion, Deep Penetration – Paraffin Wax, 10 Minutes Massage – Warming Lotion') },
     ],
   },
@@ -36,7 +57,7 @@ const getServicesData = (t: (key: string, fallback: string) => string) => [
     description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
     popular: true,
     services: [
-      { name: t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure'), price: '$25', popular: true },
+      { name: t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure'), price: '$25', bestSeller: true },
       { name: t('servicesPage.fullFace', 'Full Face'), price: '$40' },
       { name: t('servicesPage.bikini', 'Bikini'), price: '$35' },
       { name: t('servicesPage.chest', 'Chest'), price: '$35' },
@@ -53,7 +74,7 @@ const getServicesData = (t: (key: string, fallback: string) => string) => [
     services: [
       { name: t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder'), price: '$50' },
       { name: t('servicesPage.frenchTipPowder', 'French Tip Powder'), price: '$55' },
-      { name: t('servicesPage.dippingColor', 'Dipping Color'), price: '$45' },
+      { name: t('servicesPage.dippingColor', 'Dipping Color'), price: '$45', bestSeller: true },
       { name: t('servicesPage.hybridGel', 'Hybrid Gel'), price: '$60' },
       { name: t('servicesPage.gelX', 'Gel X'), price: '$60' },
     ],
@@ -108,6 +129,35 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
   const servicesData = getServicesData(t);
   const [expandedServices, setExpandedServices] = useState<string[]>([servicesData[0].id]);
 
+  // SEO schemas
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://queensnails.live/" },
+    { name: "Services", url: "https://queensnails.live/services" }
+  ]);
+
+  const serviceSchemas = [
+    generateServiceSchema({
+      name: "Manicure Services",
+      description: "Professional manicure services including regular, European, deluxe, and signature spa manicures with premium products",
+      price: "20.00"
+    }),
+    generateServiceSchema({
+      name: "Pedicure Services",
+      description: "Luxury pedicure services featuring premium products, exfoliation, and relaxing massage",
+      price: "25.00"
+    }),
+    generateServiceSchema({
+      name: "Organic Nail Powder",
+      description: "Dipping powder collection with beautiful and long-lasting finishes including ombre and French tips",
+      price: "45.00"
+    }),
+    generateServiceSchema({
+      name: "Waxing Services",
+      description: "Professional hair removal services for smooth skin using premium waxing products",
+      price: "8.00"
+    })
+  ];
+
   const handleBookService = useCallback((serviceName: string) => {
     setSelectedService(serviceName);
     setIsBookingOpen(true);
@@ -143,12 +193,19 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
-      {/* SEO Meta Tags */}
-      <title>Services & Pricing - Queen's Nails Hair & Skincare | San Diego Nail Salon</title>
+    <>
+      <SEO
+        title="Services & Pricing - Nail Salon in San Diego"
+        description="Explore our nail services: manicures from $20, pedicures from $25, gel nails, dipping powder, nail art, and waxing. Premium quality, expert technicians. Book online!"
+        canonical="https://queensnails.live/services"
+        keywords="nail services San Diego, manicure prices, pedicure prices, gel nails cost, dipping powder, nail art pricing, waxing services"
+        ogImage="https://queensnails.live/og-services.jpg"
+        schema={[breadcrumbSchema, ...serviceSchemas]}
+      />
 
-      {/* Navigation */}
-      <Navigation onBookClick={() => setIsBookingOpen(true)} onNavigateHome={onNavigateHome} />
+      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
+        {/* Navigation */}
+        <Navigation onBookClick={() => setIsBookingOpen(true)} onNavigateHome={onNavigateHome} />
 
       {/* Header */}
       <div className="pt-32 pb-16 md:pb-20 px-4 md:px-6 bg-gradient-to-br from-rose-500 via-purple-600 to-pink-500 relative overflow-hidden">
@@ -245,8 +302,15 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                             className="group relative flex items-start justify-between gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200 cursor-pointer"
                           >
                             <div className="flex-1 min-w-0">
-                              <div className="text-sm md:text-base font-medium text-gray-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
-                                {item.name}
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <div className="text-sm md:text-base font-medium text-gray-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                                  {item.name}
+                                </div>
+                                {item.bestSeller && (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-sm">
+                                    {t('servicesPage.bestSeller', 'Best Seller')}
+                                  </span>
+                                )}
                               </div>
                               {item.note && (
                                 <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
@@ -329,6 +393,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
 
       {/* Scroll to Top Button */}
       <ScrollToTopButton />
-    </div>
+      </div>
+    </>
   );
 }
