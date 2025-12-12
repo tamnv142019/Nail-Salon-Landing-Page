@@ -43,9 +43,9 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
         schema={schemas}
       />
 
-      <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
+      <main className="min-h-screen bg-background text-foreground transition-colors duration-500">
         {/* Navigation */}
-        <Navigation onBookClick={() => setIsBookingOpen(true)} />
+        <Navigation onBookClick={() => setIsBookingOpen(true)} transparentOnTop />
       
       {/* Hero Section */}
       <HeroSection 

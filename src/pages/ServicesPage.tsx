@@ -1,4 +1,4 @@
-import { Phone, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
+import { Phone, Calendar, ChevronDown, ChevronUp, Star } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { SEO } from '../components/SEO/SEO';
 import { generateBreadcrumbSchema, generateServiceSchema } from '../utils/schema-generators';
@@ -203,23 +203,27 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
         schema={[breadcrumbSchema, ...serviceSchemas]}
       />
 
-      <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500">
+      <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
         {/* Navigation */}
         <Navigation onBookClick={() => setIsBookingOpen(true)} onNavigateHome={onNavigateHome} />
 
       {/* Header */}
-      <div className="pt-32 pb-16 md:pb-20 px-4 md:px-6 bg-gradient-to-br from-rose-500 via-purple-600 to-pink-500 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="max-w-7xl mx-auto relative z-10">
+      <div className="relative pt-32 pb-16 md:pb-20 px-4 md:px-6 bg-secondary dark:bg-secondary border-b border-border overflow-hidden transition-colors duration-500">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-brand-gold-soft/35 dark:bg-brand-gold/10 blur-3xl" />
+          <div className="absolute -bottom-28 -left-24 h-96 w-96 rounded-full bg-brand-sapphire/10 blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-6xl text-white mb-6 font-bold drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl mb-6 font-bold bg-linear-to-r from-foreground via-brand-gold to-brand-gold-muted bg-clip-text text-transparent">
               {t('servicesPage.title', 'Services & Pricing')}
             </h1>
-            <p className="text-base md:text-xl text-white/95 max-w-3xl leading-relaxed drop-shadow-md">
+            <p className="text-base md:text-xl text-muted-foreground max-w-3xl leading-relaxed">
               {t('servicesPage.subtitle', 'Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.')}
             </p>
           </motion.div>
@@ -227,7 +231,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
       </div>
 
       {/* Services Content */}
-      <div className="py-16 md:py-24 px-4 md:px-6 bg-white dark:bg-gray-900 transition-colors duration-500">
+      <div className="py-16 md:py-24 px-4 md:px-6 bg-background transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
           {/* Services List */}
           <div className="space-y-6">
@@ -238,15 +242,15 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-rose-300 dark:hover:border-rose-600"
+                className="bg-card rounded-2xl shadow-lg border border-border overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-brand-gold-muted dark:hover:border-brand-gold"
               >
                 {/* Service Header - Always Visible */}
                 <div
                   onClick={() => toggleService(service.id)}
-                  className="cursor-pointer hover:bg-gray-100/50 dark:hover:bg-gray-700/50 transition-colors duration-300"
+                  className="cursor-pointer hover:bg-secondary/60 dark:hover:bg-secondary/60 transition-colors duration-300"
                 >
                   <div className="relative flex items-center gap-4 md:gap-6 p-4 md:p-6">
-                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0 border-4 border-white dark:border-gray-700 shadow-lg hover:scale-110 transition-transform duration-300">
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0 border-4 border-card shadow-lg hover:scale-110 transition-transform duration-300">
                       <img
                         src={service.image}
                         alt={service.title}
@@ -256,23 +260,23 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
 
                     {/* Title & Category */}
                     <div className="flex-1 min-w-0">
-                      <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
+                      <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wider mb-1">
                         {service.category}
                       </div>
-                      <h2 className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                      <h2 className="text-lg md:text-2xl font-bold text-foreground mb-1">
                         {service.title}
                       </h2>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
+                      <p className="text-sm text-muted-foreground line-clamp-1">
                         {service.description}
                       </p>
                     </div>
 
                     {/* Expand Icon */}
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       {expandedServices.includes(service.id) ? (
-                        <ChevronUp className="text-gray-400" size={24} />
+                        <ChevronUp className="text-muted-foreground" size={24} />
                       ) : (
-                        <ChevronDown className="text-gray-400" size={24} />
+                        <ChevronDown className="text-muted-foreground" size={24} />
                       )}
                     </div>
                   </div>
@@ -285,11 +289,11 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="border-t border-gray-200 dark:border-gray-700"
+                    className="border-t border-border"
                   >
-                    <div className="p-4 md:p-6 bg-white dark:bg-gray-800/50">
+                    <div className="p-4 md:p-6 bg-background">
                       {/* Description */}
-                      <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
                         {service.description}
                       </p>
 
@@ -299,26 +303,29 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                           <div
                             key={idx}
                             onClick={() => handleBookService(item.name)}
-                            className="group relative flex items-start justify-between gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200 cursor-pointer"
+                            className="group relative flex items-start justify-between gap-4 p-3 rounded-xl hover:bg-secondary/60 dark:hover:bg-secondary/60 transition-all duration-200 cursor-pointer"
                           >
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <div className="text-sm md:text-base font-medium text-gray-900 dark:text-white group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+                                <div className="text-sm md:text-base font-medium text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold transition-colors">
                                   {item.name}
                                 </div>
                                 {item.bestSeller && (
-                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-sm">
-                                    {t('servicesPage.bestSeller', 'Best Seller')}
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-ruby text-white border border-white/25 shadow-sm ring-1 ring-inset ring-white/10 transition-all duration-300 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-lg">
+                                    <Star className="w-3.5 h-3.5" />
+                                    <span className="text-outline">
+                                      {t('servicesPage.bestSeller', 'Best Seller')}
+                                    </span>
                                   </span>
                                 )}
                               </div>
                               {item.note && (
-                                <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                <div className="text-xs text-muted-foreground mt-1">
                                   {item.note}
                                 </div>
                               )}
                             </div>
-                            <div className="text-base md:text-lg font-bold text-gray-900 dark:text-white whitespace-nowrap flex-shrink-0">
+                            <div className="text-base md:text-lg font-bold text-foreground whitespace-nowrap shrink-0">
                               {item.price}
                             </div>
                           </div>
@@ -331,7 +338,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                           magicClick(e);
                           handleBookService(service.title);
                         }}
-                        className="mt-6 w-full relative px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-lg font-semibold cursor-pointer overflow-hidden group"
+                        className="mt-6 w-full relative px-6 py-3 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-lg font-semibold cursor-pointer overflow-hidden group bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
                       >
                         <span className="relative z-10">{t('servicesPage.bookNow', 'Book Now')} {service.title}</span>
                         <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -345,20 +352,20 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
 
           {/* CTA Section */}
           <div className="mt-16 md:mt-20 text-center">
-            <div className="inline-block bg-gradient-to-br from-gray-50 to-rose-50 dark:from-gray-800 dark:to-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-3xl p-8 md:p-12 shadow-xl max-w-3xl">
-              <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-rose-500 to-purple-600 rounded-2xl mb-6 shadow-xl">
-                <Phone className="text-white" size={32} />
+            <div className="inline-block bg-card border-2 border-border rounded-3xl p-8 md:p-12 shadow-xl max-w-3xl">
+              <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-brand-gold-soft rounded-2xl mb-6 shadow-xl">
+                <Phone className="text-brand-dark" size={32} />
               </div>
-              <h3 className="text-2xl md:text-4xl mb-4 text-gray-900 dark:text-white font-bold">
+              <h3 className="text-2xl md:text-4xl mb-4 text-foreground font-bold">
                 {t('servicesPage.questionsTitle', 'Questions About Our Services?')}
               </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-8 text-base md:text-lg leading-relaxed">
+              <p className="text-muted-foreground mb-8 text-base md:text-lg leading-relaxed">
                 {t('servicesPage.questionsDesc', 'Our experienced staff is ready to help you choose the perfect service for your needs. Call us or book online!')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="tel:6192245050"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-lg text-lg font-semibold cursor-pointer relative overflow-hidden group"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-xl shadow-lg text-lg font-semibold cursor-pointer relative overflow-hidden group bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
                 >
                   <Phone size={20} className="relative z-10" />
                   <span className="relative z-10">(619) 224-5050</span>
@@ -369,11 +376,11 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                     magicClick(e);
                     handleBookService('Consultation');
                   }}
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 hover:border-rose-500 dark:hover:border-rose-500 text-gray-900 dark:text-white rounded-full transition-all duration-300 hover:scale-110 hover:shadow-rose-500/30 hover:shadow-lg shadow-lg text-lg font-semibold cursor-pointer relative overflow-hidden group"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-card border-2 border-border hover:border-brand-gold-muted dark:hover:border-brand-gold text-foreground rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg shadow-lg text-lg font-semibold cursor-pointer relative overflow-hidden group"
                 >
                   <Calendar size={20} className="relative z-10" />
                   <span className="relative z-10">{t('contactSection.bookAppointment', 'Book Appointment')}</span>
-                  <div className="absolute inset-0 bg-rose-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-brand-gold-soft/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
               </div>
             </div>

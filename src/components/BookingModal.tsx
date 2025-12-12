@@ -76,23 +76,23 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
       <div 
-        className="relative w-full max-w-lg bg-white/90 dark:bg-gray-900/90 backdrop-blur-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-white/20 dark:border-gray-700/30"
+        className="relative w-full max-w-lg bg-card/85 backdrop-blur-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-border/60 ring-1 ring-inset ring-white/10 dark:ring-white/5"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header - iOS Glass Style */}
-        <div className="relative bg-gradient-to-r from-rose-500 to-purple-600 px-8 py-6">
+        <div className="relative bg-linear-to-r from-brand-gold to-brand-gold-muted px-8 py-6">
           <button
             onClick={handleClose}
-            className="absolute top-6 right-6 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-xl rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-white/30"
+            className="absolute top-6 right-6 w-10 h-10 bg-black/10 hover:bg-black/15 dark:bg-white/10 dark:hover:bg-white/15 backdrop-blur-xl rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-white/20"
           >
-            <X className="text-white" size={20} />
+            <X className="text-brand-dark" size={20} />
           </button>
           <div className="flex items-center gap-3 mb-2">
-            <Sparkles className="text-white" size={28} />
-            <h2 className="text-2xl text-white">{t('booking.title', 'Book Appointment')}</h2>
+            <Sparkles className="text-brand-dark" size={28} />
+            <h2 className="text-2xl text-brand-dark">{t('booking.title', 'Book Appointment')}</h2>
           </div>
           {preSelectedService && (
-            <p className="text-white/90 mt-1 text-sm">
+            <p className="text-brand-dark/90 mt-1 text-sm">
               {t('booking.selectService', 'Service')}: <span className="font-semibold">{preSelectedService}</span>
             </p>
           )}
@@ -102,20 +102,20 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         <div className="p-8 max-h-[70vh] overflow-y-auto">
           {isSubmitted ? (
             <div className="text-center py-12 animate-in fade-in zoom-in-95 duration-500">
-              <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 backdrop-blur-xl rounded-full flex items-center justify-center mx-auto mb-6 border border-green-200 dark:border-green-800">
-                <Check className="text-green-600 dark:text-green-400" size={40} />
+              <div className="w-20 h-20 bg-brand-emerald/10 backdrop-blur-xl rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-emerald/20">
+                <Check className="text-brand-emerald" size={40} />
               </div>
-              <h3 className="text-2xl mb-4 text-gray-900 dark:text-white">{t('booking.successTitle', 'Booking Confirmed!')}</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-2">
+              <h3 className="text-2xl mb-4 text-foreground">{t('booking.successTitle', 'Booking Confirmed!')}</h3>
+              <p className="text-muted-foreground mb-2">
                 {t('common.thankYou', 'Thank you')}, {formData.name}!
               </p>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-muted-foreground">
                 {t('booking.successMessage', 'Your appointment has been successfully booked.')}
               </p>
-              <p className="text-gray-900 dark:text-white mt-2">
+              <p className="text-foreground mt-2">
                 {new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {selectedTime}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
+              <p className="text-sm text-muted-foreground mt-6">
                 We'll call you at {formData.phone} to confirm
               </p>
             </div>
@@ -123,7 +123,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                <label className="block text-foreground mb-2 flex items-center gap-2">
                   <User size={18} />
                   Full Name
                 </label>
@@ -132,14 +132,14 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 focus:outline-none focus:border-rose-500 dark:focus:border-rose-500 text-gray-900 dark:text-white placeholder-gray-500 transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-muted-foreground transition-all duration-300"
                   placeholder="Enter your name"
                 />
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                <label className="block text-foreground mb-2 flex items-center gap-2">
                   <Mail size={18} />
                   Email Address
                 </label>
@@ -148,14 +148,14 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 focus:outline-none focus:border-rose-500 dark:focus:border-rose-500 text-gray-900 dark:text-white placeholder-gray-500 transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-muted-foreground transition-all duration-300"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                <label className="block text-foreground mb-2 flex items-center gap-2">
                   <Phone size={18} />
                   Phone Number
                 </label>
@@ -164,14 +164,14 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 focus:outline-none focus:border-rose-500 dark:focus:border-rose-500 text-gray-900 dark:text-white placeholder-gray-500 transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-muted-foreground transition-all duration-300"
                   placeholder="(619) 224-5050"
                 />
               </div>
 
               {/* Date */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                <label className="block text-foreground mb-2 flex items-center gap-2">
                   <Calendar size={18} />
                   Select Date
                 </label>
@@ -181,13 +181,13 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   min={getTodayDate()}
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 focus:outline-none focus:border-rose-500 dark:focus:border-rose-500 text-gray-900 dark:text-white transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground transition-all duration-300"
                 />
               </div>
 
               {/* Time */}
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
+                <label className="block text-foreground mb-2 flex items-center gap-2">
                   <Clock size={18} />
                   Select Time
                 </label>
@@ -199,8 +199,8 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       onClick={() => setSelectedTime(time)}
                       className={`px-4 py-3 rounded-xl border-2 transition-all duration-300 text-sm backdrop-blur-xl cursor-pointer ${
                         selectedTime === time
-                          ? 'border-rose-500 bg-rose-500 text-white'
-                          : 'border-white/20 dark:border-gray-700/30 bg-white/50 dark:bg-gray-800/50 text-gray-900 dark:text-white hover:border-rose-300 dark:hover:border-rose-700'
+                          ? 'border-brand-gold bg-brand-gold-soft text-brand-dark'
+                          : 'border-border/60 bg-background/50 text-foreground hover:border-brand-gold/40'
                       }`}
                     >
                       {time}
@@ -213,7 +213,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               <button
                 type="submit"
                 disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime}
-                className="w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-xl cursor-pointer"
+                className="w-full px-6 py-4 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-xl cursor-pointer bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
               >
                 Confirm Booking
               </button>

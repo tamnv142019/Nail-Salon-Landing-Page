@@ -26,12 +26,12 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
         schema={schema}
       />
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
+      <div className="min-h-screen bg-secondary dark:bg-background transition-colors duration-500">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-rose-500 to-purple-600 text-white shadow-lg">
+      <header className="sticky top-0 z-50 bg-background text-foreground shadow-lg border-b border-border">
         <div className="max-w-5xl mx-auto px-6 py-6">
           <h1 className="text-4xl font-bold">{t('privacy.title', 'Privacy Policy')}</h1>
-          <p className="text-white/80 mt-2">
+          <p className="text-muted-foreground mt-2">
             {t('privacy.effectiveDate', 'Effective Date')}: {t('privacy.date', 'December 12, 2025')}
           </p>
         </div>
@@ -39,11 +39,11 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
       {/* Content */}
       <main className="max-w-5xl mx-auto px-6 py-12">
-        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12 text-gray-700 dark:text-gray-300 transition-colors duration-500">
+        <div className="bg-card rounded-2xl shadow-xl p-8 md:p-12 text-foreground transition-colors duration-500 border border-border">
           <div className="space-y-8">
             {/* Introduction */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.introduction.title', '1. Introduction')}
               </h2>
               <p className="leading-relaxed text-lg">
@@ -55,12 +55,12 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Information We Collect */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.collection.title', '2. Information We Collect')}
               </h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {t('privacy.collection.personal.title', 'Personal Information')}
                   </h3>
                   <p className="leading-relaxed mb-2">
@@ -82,7 +82,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {t('privacy.collection.automatic.title', 'Automatically Collected Information')}
                   </h3>
                   <p className="leading-relaxed">
@@ -96,7 +96,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* How We Use Your Information */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.usage.title', '3. How We Use Your Information')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -115,7 +115,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Information Sharing */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.sharing.title', '4. Information Sharing and Disclosure')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -132,7 +132,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Data Security */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.security.title', '5. Data Security')}
               </h2>
               <p className="leading-relaxed">
@@ -144,7 +144,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Your Rights */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.rights.title', '6. Your Privacy Rights')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -161,7 +161,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Cookies */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.cookies.title', '7. Cookies and Tracking Technologies')}
               </h2>
               <p className="leading-relaxed">
@@ -173,7 +173,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Data Retention */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.retention.title', '8. Data Retention')}
               </h2>
               <p className="leading-relaxed">
@@ -185,7 +185,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Children's Privacy */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.children.title', '9. Children\'s Privacy')}
               </h2>
               <p className="leading-relaxed">
@@ -197,7 +197,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Changes to Policy */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.changes.title', '10. Changes to This Privacy Policy')}
               </h2>
               <p className="leading-relaxed">
@@ -209,7 +209,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
             {/* Contact */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('privacy.contact.title', '11. Contact Us')}
               </h2>
               <p className="leading-relaxed mb-4">
@@ -217,8 +217,10 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
                   'If you have questions or concerns about this Privacy Policy, please contact us at:'
                 )}
               </p>
-              <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg space-y-2 transition-colors duration-500">
-                <p className="font-semibold text-gray-900 dark:text-white">Queen's Nails Hair & Skincare</p>
+              <div className="bg-secondary dark:bg-secondary p-6 rounded-lg space-y-2 transition-colors duration-500 border border-border">
+                <p className="inline-block font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
+                  Queen's Nails Hair & Skincare
+                </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
                 <p>Email: info@queensnails.live</p>
@@ -227,10 +229,10 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
           </div>
 
           {/* Back Button */}
-          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="mt-12 pt-8 border-t border-border">
             <button
               onClick={onNavigateBack}
-              className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-rose-500 to-purple-600 text-white rounded-xl hover:from-rose-600 hover:to-purple-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl"
+              className="w-full md:w-auto px-8 py-4 rounded-xl transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
             >
               Back to Home
             </button>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './components/ThemeProvider';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { SnowEffect } from './components/SnowEffect';
 import { ServicesPage } from './pages/ServicesPage';
 import { HomePage } from './pages/HomePage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
@@ -78,6 +79,7 @@ export default function App() {
     <HelmetProvider>
       <ThemeProvider>
         <LanguageProvider>
+          <SnowEffect respectReducedMotion={false} />
           <AppContent />
         </LanguageProvider>
       </ThemeProvider>

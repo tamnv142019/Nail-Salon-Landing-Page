@@ -8,6 +8,7 @@ export const translations = {
       gallery: 'Gallery',
       reviews: 'Reviews',
       contact: 'Contact',
+      holidayGreeting: 'Merry Christmas & Happy New Year',
     },
 
     // Home Page
@@ -505,6 +506,7 @@ export const translations = {
       gallery: '作品集',
       reviews: '评价',
       contact: '联系',
+      holidayGreeting: '圣诞快乐，新年快乐',
     },
 
     // Home Page
@@ -1002,6 +1004,7 @@ export const translations = {
       gallery: 'Thư Viện',
       reviews: 'Đánh Giá',
       contact: 'Liên Hệ',
+      holidayGreeting: 'Chúc Mừng Giáng Sinh & Năm Mới',
     },
 
     // Home Page
@@ -1364,6 +1367,7 @@ export const translations = {
       gallery: 'Galerie',
       reviews: 'Avis',
       contact: 'Contact',
+      holidayGreeting: 'Joyeux Noël et Bonne Année',
     },
 
     // Home Page
@@ -1726,6 +1730,7 @@ export const translations = {
       gallery: 'Galería',
       reviews: 'Reseñas',
       contact: 'Contacto',
+      holidayGreeting: 'Feliz Navidad y Próspero Año Nuevo',
     },
 
     // Home Page

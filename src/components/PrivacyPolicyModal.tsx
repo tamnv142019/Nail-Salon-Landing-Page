@@ -29,7 +29,7 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
 
   return (
     <div 
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-9999 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div 
@@ -37,7 +37,7 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-rose-500 to-purple-600 text-white px-6 py-4 flex justify-between items-center z-10">
+        <div className="sticky top-0 bg-linear-to-r from-rose-500 to-purple-600 text-white px-6 py-4 flex justify-between items-center z-10">
           <h2 className="text-2xl font-bold">{t('privacy.title', 'Privacy Policy')}</h2>
           <button
             onClick={onClose}
@@ -235,7 +235,11 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
                 )}
               </p>
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-1">
-                <p><strong>Queen's Nails Hair & Skincare</strong></p>
+                <p>
+                  <strong className="inline-block transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
+                    Queen's Nails Hair & Skincare
+                  </strong>
+                </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
                 <p>Email: info@queensnails.com</p>
@@ -248,7 +252,7 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
         <div className="sticky bottom-0 bg-gray-100 dark:bg-gray-800 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={onClose}
-            className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 text-white rounded-xl hover:from-rose-600 hover:to-purple-700 transition-all duration-300 font-semibold"
+            className="w-full px-6 py-3 bg-linear-to-r from-rose-500 to-purple-600 text-white rounded-xl hover:from-rose-600 hover:to-purple-700 transition-all duration-300 font-semibold"
           >
             {t('privacy.close', 'Close')}
           </button>

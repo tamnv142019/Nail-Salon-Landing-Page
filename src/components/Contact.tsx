@@ -8,7 +8,7 @@ const contactInfo = [
     title: 'Visit Us',
     content: '4869 Santa Monica Ave',
     subContent: 'San Diego, CA 92107',
-    gradient: 'from-rose-500 to-pink-500',
+    gradient: 'from-brand-gold-soft to-brand-gold',
     link: 'https://www.google.com/maps/place/Queen\'s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z/data=!4m15!1m8!3m7!1s0x80deaa3766574c6f:0xf7a6636c79fc1c5d!2s4869+Santa+Monica+Ave,+San+Diego,+CA+92107,+USA!3b1!8m2!3d32.7461198!4d-117.2483223!16s%2Fg%2F11bw3xx9cy!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D',
     action: 'Get Directions',
   },
@@ -17,7 +17,7 @@ const contactInfo = [
     title: 'Call Us',
     content: '(619) 224-5050',
     subContent: 'Available during business hours',
-    gradient: 'from-purple-500 to-blue-500',
+    gradient: 'from-brand-sapphire to-brand-gold-soft',
     link: 'tel:6192245050',
     action: 'Call Now',
   },
@@ -26,7 +26,7 @@ const contactInfo = [
     title: 'Email Us',
     content: 'queenspham505@gmail.com',
     subContent: 'We respond within 24 hours',
-    gradient: 'from-blue-500 to-cyan-500',
+    gradient: 'from-brand-emerald to-brand-gold-soft',
     link: 'mailto:queenspham505@gmail.com',
     action: 'Send Email',
   },
@@ -150,20 +150,20 @@ export function Contact() {
 
   return (
     <>
-      <section id="contact" className="py-24 px-6 bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black relative overflow-hidden transition-colors duration-500" ref={sectionRef}>
+      <section id="contact" className="py-24 px-6 bg-secondary dark:bg-background relative overflow-hidden transition-colors duration-500" ref={sectionRef}>
         {/* Background effects */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-rose-300/10 dark:bg-rose-500/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-purple-300/10 dark:bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-brand-gold-soft/15 dark:bg-brand-gold/6 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-brand-sapphire/10 dark:bg-brand-sapphire/6 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl mb-6 bg-gradient-to-r from-gray-900 via-rose-600 to-purple-600 dark:from-white dark:via-rose-300 dark:to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-6xl mb-6 bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
               Get in Touch
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               We'd love to hear from you. Visit us, call us, or send us a message.
             </p>
           </div>
@@ -173,24 +173,24 @@ export function Contact() {
             {contactInfo.map((info, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="bg-card rounded-2xl p-6 shadow-lg border border-border hover:shadow-xl transition-all duration-300 hover:scale-105"
                 style={{
                   opacity: isVisible ? 1 : 0,
                   transform: `translateY(${isVisible ? 0 : 40}px)`,
                   transitionDelay: `${index * 100}ms`,
                 }}
               >
-                <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${info.gradient} rounded-2xl mb-4 shadow-lg`}>
+                <div className={`inline-flex items-center justify-center w-14 h-14 bg-linear-to-br ${info.gradient} rounded-2xl mb-4 shadow-lg`}>
                   <info.icon className="text-white" size={28} />
                 </div>
-                <h3 className="text-xl text-gray-900 dark:text-white mb-2">{info.title}</h3>
-                <p className="text-gray-900 dark:text-white mb-1 font-medium">{info.content}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{info.subContent}</p>
+                <h3 className="text-xl text-foreground mb-2">{info.title}</h3>
+                <p className="text-foreground mb-1 font-medium">{info.content}</p>
+                <p className="text-sm text-muted-foreground mb-4">{info.subContent}</p>
                 <a
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${info.gradient} text-white rounded-lg hover:scale-105 transition-all duration-300 shadow-md text-sm font-medium`}
+                  className={`inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r ${info.gradient} text-white rounded-lg hover:scale-105 transition-all duration-300 shadow-md text-sm font-medium`}
                 >
                   <span>{info.action}</span>
                   <ExternalLink size={16} />
@@ -200,20 +200,20 @@ export function Contact() {
           </div>
 
           {/* Business Hours Card */}
-          <div className="bg-gradient-to-br from-white to-rose-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 shadow-xl border-2 border-rose-200 dark:border-rose-800 mb-16">
+          <div className="bg-card rounded-3xl p-8 shadow-xl border border-border mb-16">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-rose-500 to-purple-600 rounded-xl shadow-lg">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-brand-gold-soft to-brand-gold rounded-xl shadow-lg">
                     <Clock className="text-white" size={24} />
                   </div>
-                  <h3 className="text-2xl text-gray-900 dark:text-white">Business Hours</h3>
+                  <h3 className="text-2xl text-foreground">Business Hours</h3>
                 </div>
                 <div className="space-y-2">
                   {businessHours.map((schedule, idx) => (
                     <div key={idx} className="flex items-center justify-between gap-8">
-                      <span className="text-gray-700 dark:text-gray-300">{schedule.day}</span>
-                      <span className="text-gray-900 dark:text-white font-medium">{schedule.hours}</span>
+                      <span className="text-muted-foreground">{schedule.day}</span>
+                      <span className="text-foreground font-medium">{schedule.hours}</span>
                     </div>
                   ))}
                 </div>
@@ -222,14 +222,14 @@ export function Contact() {
                 <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full ${
                   isOpen 
                     ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' 
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                    : 'bg-secondary text-muted-foreground border border-border'
                 } mb-4`}>
-                  <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-gray-500'}`}></div>
+                  <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-muted-foreground'}`}></div>
                   <span className="font-semibold">{isOpen ? 'Open Now' : 'Closed Now'}</span>
                 </div>
                 <button
                   onClick={() => setIsBookingOpen(true)}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg font-semibold"
+                  className="w-full px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg font-semibold bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
                 >
                   Book Appointment
                 </button>
@@ -240,7 +240,7 @@ export function Contact() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div
-              className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-200 dark:border-gray-700"
+              className="bg-card rounded-3xl p-8 shadow-xl border border-border"
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: `translateX(${isVisible ? 0 : -40}px)`,
@@ -248,10 +248,10 @@ export function Contact() {
               }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-rose-500 to-purple-600 rounded-xl shadow-lg">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-brand-gold-soft to-brand-gold rounded-xl shadow-lg">
                   <MessageCircle className="text-white" size={24} />
                 </div>
-                <h3 className="text-2xl text-gray-900 dark:text-white">Send us a Message</h3>
+                <h3 className="text-2xl text-foreground">Send us a Message</h3>
               </div>
 
               {isSubmitted ? (
@@ -259,8 +259,8 @@ export function Contact() {
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full mb-6">
                     <CheckCircle className="text-emerald-600 dark:text-emerald-400" size={40} />
                   </div>
-                  <h4 className="text-2xl text-gray-900 dark:text-white mb-2">Message Sent!</h4>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <h4 className="text-2xl text-foreground mb-2">Message Sent!</h4>
+                  <p className="text-muted-foreground">
                     We'll get back to you within 24 hours.
                   </p>
                 </div>
@@ -268,16 +268,16 @@ export function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Name */}
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-muted-foreground mb-2">
                       Full Name *
                     </label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border ${
-                        formErrors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                      } focus:outline-none focus:border-rose-500 text-gray-900 dark:text-white transition-colors duration-300`}
+                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
+                        formErrors.name ? 'border-red-500' : 'border-border'
+                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300`}
                       placeholder="Your name"
                     />
                     {formErrors.name && (
@@ -287,16 +287,16 @@ export function Contact() {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-muted-foreground mb-2">
                       Email Address *
                     </label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border ${
-                        formErrors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                      } focus:outline-none focus:border-rose-500 text-gray-900 dark:text-white transition-colors duration-300`}
+                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
+                        formErrors.email ? 'border-red-500' : 'border-border'
+                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300`}
                       placeholder="your@email.com"
                     />
                     {formErrors.email && (
@@ -306,16 +306,16 @@ export function Contact() {
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-muted-foreground mb-2">
                       Phone Number *
                     </label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border ${
-                        formErrors.phone ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                      } focus:outline-none focus:border-rose-500 text-gray-900 dark:text-white transition-colors duration-300`}
+                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
+                        formErrors.phone ? 'border-red-500' : 'border-border'
+                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300`}
                       placeholder="(619) 224-5050"
                     />
                     {formErrors.phone && (
@@ -325,16 +325,16 @@ export function Contact() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-muted-foreground mb-2">
                       Message *
                     </label>
                     <textarea
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
                       rows={5}
-                      className={`w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border ${
-                        formErrors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                      } focus:outline-none focus:border-rose-500 text-gray-900 dark:text-white transition-colors duration-300 resize-none`}
+                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
+                        formErrors.message ? 'border-red-500' : 'border-border'
+                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300 resize-none`}
                       placeholder="Tell us about your nail care needs..."
                     ></textarea>
                     {formErrors.message && (
@@ -346,7 +346,7 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full px-6 py-4 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+                    className="w-full px-6 py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed font-semibold bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
                   >
                     {isSubmitting ? (
                       <>
@@ -366,7 +366,7 @@ export function Contact() {
 
             {/* Google Maps */}
             <div
-              className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700"
+              className="bg-card rounded-3xl overflow-hidden shadow-xl border border-border"
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: `translateX(${isVisible ? 0 : 40}px)`,
@@ -375,12 +375,12 @@ export function Contact() {
             >
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-xl shadow-lg">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-brand-gold-soft to-brand-gold rounded-xl shadow-lg">
                     <Navigation className="text-white" size={24} />
                   </div>
-                  <h3 className="text-2xl text-gray-900 dark:text-white">Find Us</h3>
+                  <h3 className="text-2xl text-foreground">Find Us</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Located in the heart of Ocean Beach, San Diego
                 </p>
               </div>
@@ -401,7 +401,7 @@ export function Contact() {
                   href="https://www.google.com/maps/place/Queen%27s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2 font-semibold"
+                  className="w-full px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2 font-semibold bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
                 >
                   <Navigation size={20} />
                   <span>Open in Google Maps</span>

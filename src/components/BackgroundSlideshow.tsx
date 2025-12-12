@@ -108,13 +108,13 @@ export function BackgroundSlideshow({ autoplay = true, interval = 5000, onNaviga
           contain: 'layout style paint',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-white/90 dark:to-black transition-colors duration-500"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-white/90 dark:to-black transition-colors duration-500"></div>
       </div>
 
       {/* Fade transition effect */}
       {isTransitioning && (
         <div
-          className="absolute inset-0 z-[1] will-change-transform"
+          className="absolute inset-0 z-1 will-change-transform"
           style={{
             backgroundImage: `url(${slides[nextSlide].image})`,
             backgroundSize: 'cover',
@@ -124,16 +124,16 @@ export function BackgroundSlideshow({ autoplay = true, interval = 5000, onNaviga
             contain: 'layout style paint',
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-white/90 dark:to-black transition-colors duration-500"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-white/90 dark:to-black transition-colors duration-500"></div>
         </div>
       )}
 
       {/* Animated particles with parallax */}
-      <div className="absolute inset-0 z-[1]">
+      <div className="absolute inset-0 z-1">
         {[...Array(15)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-rose-400/40 rounded-full animate-pulse will-change-transform"
+            className="absolute w-1 h-1 bg-brand-gold-soft/40 rounded-full animate-pulse will-change-transform"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -164,7 +164,7 @@ export function BackgroundSlideshow({ autoplay = true, interval = 5000, onNaviga
 
           <button
             onClick={onNavigateToServices}
-            className="inline-block px-10 py-4 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl"
+            className="inline-block px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-3xl bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
           >
             Discover Our Services
           </button>

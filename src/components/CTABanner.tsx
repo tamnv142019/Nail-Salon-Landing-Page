@@ -8,7 +8,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
   return (
     <section className="relative py-32 px-6 overflow-hidden">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-rose-500 via-purple-600 to-blue-600 animate-gradient-x">
+      <div className="absolute inset-0 bg-linear-to-r from-brand-gold-muted via-brand-gold to-brand-sapphire animate-gradient-x">
         <div className="absolute inset-0 opacity-30">
           {[...Array(30)].map((_, i) => (
             <div
@@ -39,7 +39,7 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
         <h2 className="text-5xl md:text-7xl text-white mb-6 animate-in fade-in slide-in-from-bottom-5 duration-700">
           Your Story Deserves
           <br />
-          <span className="bg-gradient-to-r from-yellow-200 via-white to-yellow-200 bg-clip-text text-transparent animate-gradient-x">
+          <span className="bg-linear-to-r from-brand-gold-soft via-white to-brand-gold-soft bg-clip-text text-transparent animate-gradient-x">
             The Best Beginning
           </span>
         </h2>
@@ -52,13 +52,13 @@ export function CTABanner({ onBookClick }: CTABannerProps) {
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-400">
           <button
             onClick={onBookClick}
-            className="group relative bg-white hover:bg-gray-100 text-gray-900 px-10 py-5 rounded-full transition-all duration-300 shadow-2xl hover:shadow-white/50 hover:scale-110 flex items-center justify-center gap-3 overflow-hidden cursor-pointer"
+            className="group relative px-10 py-5 rounded-full transition-all duration-300 shadow-2xl hover:shadow-white/50 hover:scale-110 flex items-center justify-center gap-3 overflow-hidden cursor-pointer bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
           >
             <Calendar size={22} className="group-hover:rotate-12 transition-transform duration-300" />
             <span className="text-lg">Begin Your Story Now</span>
             
             {/* Shine effect */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-yellow-200/30 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
+            <div className="absolute inset-0 rounded-full bg-linear-to-r from-transparent via-brand-gold-soft/30 to-transparent -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
           </button>
 
           <a

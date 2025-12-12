@@ -1,189 +1,128 @@
-import { useEffect, useRef } from 'react';
+import { useMemo } from 'react';
 
-// SVG Snowflake component
-function Snowflake({ x, y, size, opacity, delay }: { x: number; y: number; size: number; opacity: number; delay: number }) {
-  return (
-    <svg
-      className="absolute pointer-events-none"
-      style={{
-        left: `${x}px`,
-        top: `${y}px`,
-        opacity,
-        animation: `float ${20 + Math.random() * 20}s infinite ease-in-out`,
-        animationDelay: `${delay}s`,
-      }}
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g fill="#ffffff" opacity={opacity}>
-        {/* Main star */}
-        <path d="M50 0 L61 35 L100 50 L61 65 L50 100 L39 65 L0 50 L39 35 Z" />
-        {/* Smaller branches */}
-        <circle cx="50" cy="50" r="8" />
-        <path d="M50 25 L45 40 L55 40 Z" />
-        <path d="M50 75 L45 60 L55 60 Z" />
-        <path d="M25 50 L40 45 L40 55 Z" />
-        <path d="M75 50 L60 45 L60 55 Z" />
-      </g>
-    </svg>
-  );
+type SnowflakeConfig = {
+  leftVw: number;
+  sizePx: number;
+  opacity: number;
+  blurPx: number;
+  durationS: number;
+  delayS: number;
+  drift1Px: number;
+  drift2Px: number;
+  rotateDeg: number;
+};
+
+type SnowEffectProps = {
+  /** Number of flakes to render (safe: 50–100). */
+  count?: number;
+  /** When true, disables animation for users who prefer reduced motion. */
+  respectReducedMotion?: boolean;
+};
+
+function clampInt(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, Math.round(value)));
 }
 
-export function SnowEffect() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const backgroundRef = useRef<HTMLDivElement>(null);
+export function SnowEffect({ count = 80, respectReducedMotion = true }: SnowEffectProps) {
+  const flakeCount = clampInt(count, 50, 100);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const flakes = useMemo<SnowflakeConfig[]>(() => {
+    const randomBetween = (min: number, max: number) => min + Math.random() * (max - min);
 
-    const createFallingSnowflake = () => {
-      const snowflake = document.createElement('div');
-      const size = Math.random() * 4 + 2;
-      const duration = Math.random() * 10 + 10;
-      const delay = Math.random() * 2;
-      const xOffset = Math.random() * window.innerWidth;
-      const opacity = Math.random() * 0.7 + 0.3;
+    return Array.from({ length: flakeCount }, () => {
+      const sizePx = randomBetween(2, 6.5);
+      const durationS = randomBetween(10, 22);
+      const delayS = -randomBetween(0, durationS);
+      const driftMagnitude = randomBetween(12, 60);
+      const drift1Px = (Math.random() > 0.5 ? 1 : -1) * driftMagnitude;
+      const drift2Px = (Math.random() > 0.5 ? 1 : -1) * driftMagnitude;
 
-      snowflake.style.position = 'fixed';
-      snowflake.style.top = '-10px';
-      snowflake.style.left = xOffset + 'px';
-      snowflake.style.width = size + 'px';
-      snowflake.style.height = size + 'px';
-      snowflake.style.backgroundColor = '#ffffff';
-      snowflake.style.borderRadius = '50%';
-      snowflake.style.pointerEvents = 'none';
-      snowflake.style.zIndex = '5';
-      snowflake.style.opacity = String(opacity);
-      snowflake.style.boxShadow = `0 0 ${size}px rgba(255, 255, 255, 0.8)`;
+      return {
+        leftVw: randomBetween(0, 100),
+        sizePx,
+        opacity: randomBetween(0.25, 0.9),
+        blurPx: randomBetween(0, 1.6),
+        durationS,
+        delayS,
+        drift1Px,
+        drift2Px,
+        rotateDeg: randomBetween(-140, 140),
+      };
+    });
+  }, [flakeCount]);
 
-      // Add CSS keyframes for falling animation
-      if (!document.getElementById('snowAnimation')) {
-        const style = document.createElement('style');
-        style.id = 'snowAnimation';
-        style.textContent = `
-          @keyframes fall {
-            to {
-              transform: translateY(100vh) translateX(${(Math.random() - 0.5) * 200}px);
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-40">
+      <style>
+        {`
+          ${respectReducedMotion ? `
+          @media (prefers-reduced-motion: reduce) {
+            .snowfx-flake { animation: none !important; }
+          }
+          ` : ''}
+
+          @keyframes snowfx-fall {
+            0% {
+              transform: translate3d(0, -12vh, 0) rotate(0deg);
+              opacity: var(--snowfx-opacity);
+            }
+            50% {
+              transform: translate3d(var(--snowfx-drift1), 48vh, 0) rotate(var(--snowfx-rotate));
+              opacity: var(--snowfx-opacity);
+            }
+            100% {
+              transform: translate3d(var(--snowfx-drift2), 112vh, 0) rotate(var(--snowfx-rotate));
               opacity: 0;
             }
           }
-          @keyframes sway {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            50% { transform: translateX(${Math.random() * 40 - 20}px) rotate(180deg); }
-          }
-          @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-          }
-        `;
-        document.head.appendChild(style);
-      }
+        `}
+      </style>
 
-      snowflake.style.animation = `fall ${duration}s linear ${delay}s infinite, sway ${duration * 0.3}s ease-in-out ${delay}s infinite`;
-
-      container.appendChild(snowflake);
-
-      // Clean up after animation completes
-      setTimeout(
-        () => {
-          snowflake.remove();
-        },
-        (duration + delay) * 1000
-      );
-    };
-
-    // Create snowflakes at intervals
-    const interval = setInterval(createFallingSnowflake, 300);
-
-    // Create initial batch of snowflakes
-    for (let i = 0; i < 10; i++) {
-      setTimeout(createFallingSnowflake, i * 100);
-    }
-
-    return () => clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const background = backgroundRef.current;
-    if (!background) return;
-
-    // Create background snowflakes
-    const backgroundSnowflakes = [];
-    for (let i = 0; i < 15; i++) {
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      const size = Math.random() * 20 + 10;
-      const opacity = Math.random() * 0.15 + 0.05;
-      const delay = Math.random() * 20;
-
-      const snowflakeEl = document.createElement('div');
-      snowflakeEl.style.position = 'fixed';
-      snowflakeEl.style.left = `${x}%`;
-      snowflakeEl.style.top = `${y}%`;
-      snowflakeEl.style.width = `${size}px`;
-      snowflakeEl.style.height = `${size}px`;
-      snowflakeEl.style.pointerEvents = 'none';
-      snowflakeEl.style.zIndex = '2';
-      snowflakeEl.style.opacity = String(opacity);
-      snowflakeEl.style.animation = `float ${20 + Math.random() * 20}s infinite ease-in-out`;
-      snowflakeEl.style.animationDelay = `${delay}s`;
-
-      // Create SVG snowflake
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('viewBox', '0 0 100 100');
-      svg.setAttribute('width', String(size));
-      svg.setAttribute('height', String(size));
-      svg.style.width = '100%';
-      svg.style.height = '100%';
-
-      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      g.setAttribute('fill', '#ffffff');
-      g.setAttribute('opacity', String(opacity));
-
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('d', 'M50 0 L61 35 L100 50 L61 65 L50 100 L39 65 L0 50 L39 35 Z');
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', '50');
-      circle.setAttribute('cy', '50');
-      circle.setAttribute('r', '8');
-
-      g.appendChild(path);
-      g.appendChild(circle);
-      svg.appendChild(g);
-      snowflakeEl.appendChild(svg);
-
-      background.appendChild(snowflakeEl);
-      backgroundSnowflakes.push(snowflakeEl);
-    }
-
-    return () => {
-      backgroundSnowflakes.forEach(el => el.remove());
-    };
-  }, []);
-
-  return (
-    <>
-      <div
-        ref={backgroundRef}
-        className="fixed inset-0 pointer-events-none"
-        style={{
-          zIndex: '2',
-          overflow: 'hidden',
-        }}
-      />
-      <div
-        ref={containerRef}
-        className="fixed inset-0 pointer-events-none z-[5]"
-        style={{
-          overflow: 'hidden',
-          width: '100%',
-          height: '100%',
-        }}
-      />
-    </>
+      {flakes.map((flake, index) => (
+        <span
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+          className="absolute top-0"
+          style={{ left: `${flake.leftVw}vw` }}
+        >
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            className="snowfx-flake block will-change-transform"
+            width={flake.sizePx}
+            height={flake.sizePx}
+            viewBox="0 0 100 100"
+            style={
+              {
+                filter: `blur(${flake.blurPx}px) drop-shadow(0 0 8px rgba(255, 255, 255, 0.22))`,
+                color: 'rgba(255, 255, 255, 0.92)',
+                animation: `snowfx-fall ${flake.durationS}s linear ${flake.delayS}s infinite`,
+                ['--snowfx-opacity' as any]: String(flake.opacity),
+                ['--snowfx-drift1' as any]: `${flake.drift1Px}px`,
+                ['--snowfx-drift2' as any]: `${flake.drift2Px}px`,
+                ['--snowfx-rotate' as any]: `${flake.rotateDeg}deg`,
+              } as React.CSSProperties
+            }
+          >
+            {/* Petal-style snowflake (6 rounded "cánh") */}
+            <g fill="currentColor">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <ellipse
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={i}
+                  cx="50"
+                  cy="28"
+                  rx="10"
+                  ry="22"
+                  transform={`rotate(${i * 60} 50 50)`}
+                />
+              ))}
+              <circle cx="50" cy="50" r="10" />
+              <circle cx="50" cy="50" r="4" fill="rgba(255, 255, 255, 0.65)" />
+            </g>
+          </svg>
+        </span>
+      ))}
+    </div>
   );
 }

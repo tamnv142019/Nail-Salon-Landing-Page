@@ -38,7 +38,7 @@ export function GallerySection() {
   }, []);
 
   return (
-    <section id="gallery" className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-black dark:to-gray-900 transition-colors duration-500">
+    <section id="gallery" className="py-20 md:py-32 bg-secondary dark:bg-background transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -48,10 +48,10 @@ export function GallerySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
               {t('gallerySection.title', 'Our Work')}
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
               {t('gallerySection.subtitle', 'Browse our gallery of beautiful nails and satisfied clients')}
             </p>
           </motion.div>
@@ -74,7 +74,7 @@ export function GallerySection() {
                 alt={`Gallery ${index + 1}`}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.div>
           ))}
         </div>

@@ -50,26 +50,26 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 text-center group">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-4 md:mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-4 md:mb-6 leading-tight transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-1">
             {t('home.hero.title', 'Queen\'s Nails Hair')}<br />{t('home.hero.subtitle2', '& Skincare')}
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg md:text-2xl text-white/90 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-2xl text-white/90 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed transition-colors duration-300 motion-reduce:transition-none group-hover:text-white">
             {t('home.hero.description', 'Premier Nail Salon & Spa in San Diego')}
           </p>
 
           {/* Location */}
-          <div className="flex items-center justify-center gap-2 text-white/80 mb-10">
+          <div className="flex items-center justify-center gap-2 text-white/80 mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-0.5">
             <MapPin size={20} />
-            <span className="text-base md:text-lg">4869 Santa Monica Ave, San Diego, CA 92107</span>
+            <span className="text-base md:text-lg transition-opacity duration-300 motion-reduce:transition-none group-hover:opacity-100">4869 Santa Monica Ave, San Diego, CA 92107</span>
           </div>
 
           {/* CTA Button */}
@@ -103,10 +103,12 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
                 requestAnimationFrame(scroll);
               }
             }}
-            className="group relative px-8 py-4 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-full transition-all duration-300 hover:scale-105 shadow-2xl text-lg font-semibold w-full sm:w-auto cursor-pointer"
+            className="group relative px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-2xl text-lg font-semibold w-full sm:w-auto cursor-pointer bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
           >
             <span className="flex items-center justify-center gap-2">
-              {t('home.hero.button', 'Find Out More')}
+              <span className="transition-all duration-300 motion-reduce:transition-none group-hover:tracking-wide">
+                {t('home.hero.button', 'Find Out More')}
+              </span>
             </span>
           </button>
         </motion.div>

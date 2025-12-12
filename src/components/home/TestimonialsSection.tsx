@@ -43,9 +43,9 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section id="testimonials" className="py-20 md:py-32 bg-gradient-to-br from-rose-500 via-purple-600 to-pink-500 relative overflow-hidden">
-      <div className="absolute inset-0 bg-black/20"></div>
-      
+    <section id="testimonials" className="py-20 md:py-32 bg-secondary dark:bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-linear-to-br from-brand-gold-soft/40 via-transparent to-transparent"></div>
+
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -55,10 +55,10 @@ export function TestimonialsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
               {t('testimonialsSection.title', 'What Our Clients Say')}
             </h2>
-            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
               {t('testimonialsSection.subtitle', 'Don\'t just take our word for it - hear from our satisfied customers')}
             </p>
           </motion.div>
@@ -66,11 +66,11 @@ export function TestimonialsSection() {
 
         {/* Testimonials Carousel */}
         <div className="max-w-4xl mx-auto">
-          <div className="relative bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl">
+          <div className="relative bg-card border border-border rounded-3xl p-8 md:p-12 shadow-2xl">
             {/* Quote Icon */}
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-              <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-purple-600 rounded-full flex items-center justify-center shadow-xl">
-                <Quote className="text-white" size={24} />
+              <div className="w-12 h-12 bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white rounded-full flex items-center justify-center shadow-xl">
+                <Quote className="text-current" size={24} />
               </div>
             </div>
 
@@ -85,21 +85,21 @@ export function TestimonialsSection() {
               {/* Stars */}
               <div className="flex items-center justify-center gap-1 mb-6">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} size={24} className="fill-yellow-400 text-yellow-400" />
+                  <Star key={i} size={24} className="fill-brand-gold text-brand-gold" />
                 ))}
               </div>
 
               {/* Text */}
-              <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed italic">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed italic">
                 "{testimonials[currentIndex].text}"
               </p>
 
               {/* Author */}
               <div>
-                <div className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-1">
+                <div className="text-lg md:text-xl font-bold text-foreground mb-1">
                   {testimonials[currentIndex].name}
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-muted-foreground">
                   {testimonials[currentIndex].service}
                 </div>
               </div>
@@ -109,9 +109,9 @@ export function TestimonialsSection() {
             <div className="flex items-center justify-center gap-4 mt-8">
               <button
                 onClick={prevTestimonial}
-                className="w-12 h-12 bg-gradient-to-br from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
+                className="w-12 h-12 bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
               >
-                <ChevronLeft className="text-white" size={24} />
+                <ChevronLeft className="text-current" size={24} />
               </button>
 
               {/* Dots */}
@@ -122,8 +122,8 @@ export function TestimonialsSection() {
                     onClick={() => setCurrentIndex(index)}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
                       index === currentIndex
-                        ? 'w-8 bg-gradient-to-r from-rose-500 to-purple-600'
-                        : 'bg-gray-300 dark:bg-gray-600'
+                        ? 'w-8 bg-brand-gold'
+                        : 'bg-border'
                     }`}
                   />
                 ))}
@@ -131,9 +131,9 @@ export function TestimonialsSection() {
 
               <button
                 onClick={nextTestimonial}
-                className="w-12 h-12 bg-gradient-to-br from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
+                className="w-12 h-12 bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
               >
-                <ChevronRight className="text-white" size={24} />
+                <ChevronRight className="text-current" size={24} />
               </button>
             </div>
           </div>

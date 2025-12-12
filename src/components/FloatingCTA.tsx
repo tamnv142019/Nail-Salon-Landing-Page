@@ -30,7 +30,7 @@ export function FloatingCTA({ onBookClick }: FloatingCTAProps) {
       {/* Floating Book Button */}
       <button
         onClick={onBookClick}
-        className={`fixed bottom-8 right-8 z-40 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white px-6 py-4 rounded-full shadow-2xl shadow-rose-500/50 flex items-center gap-3 transition-all duration-500 hover:scale-110 group cursor-pointer ${
+        className={`fixed bottom-8 right-8 z-40 bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-3 transition-all duration-500 hover:scale-110 group cursor-pointer ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
         }`}
       >
@@ -38,14 +38,14 @@ export function FloatingCTA({ onBookClick }: FloatingCTAProps) {
         <span className="hidden sm:inline">Book Now</span>
         
         {/* Ripple effect */}
-        <span className="absolute inset-0 rounded-full bg-rose-400 animate-ping opacity-20"></span>
+        <span className="absolute inset-0 rounded-full bg-brand-gold-soft animate-ping opacity-20"></span>
       </button>
 
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
         aria-label="Scroll back to top"
-        className={`fixed bottom-8 right-8 z-30 bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white p-3 rounded-full shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-110 ${
+        className={`fixed bottom-8 right-8 z-30 bg-card border-2 border-border text-foreground p-3 rounded-full shadow-xl hover:shadow-2xl hover:border-brand-gold-muted transition-all duration-500 hover:scale-110 ${
           showScrollTop && !isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
         }`}
       >

@@ -26,12 +26,12 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
         schema={schema}
       />
 
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors duration-500">
+      <div className="min-h-screen bg-secondary dark:bg-background transition-colors duration-500">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg">
+      <header className="sticky top-0 z-50 bg-background text-foreground shadow-lg border-b border-border">
         <div className="max-w-5xl mx-auto px-6 py-6">
           <h1 className="text-4xl font-bold">{t('terms.title', 'Terms of Service')}</h1>
-          <p className="text-white/80 mt-2">
+          <p className="text-muted-foreground mt-2">
             {t('terms.effectiveDate', 'Effective Date')}: {t('terms.date', 'December 12, 2025')}
           </p>
         </div>
@@ -39,11 +39,11 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
       {/* Content */}
       <main className="max-w-5xl mx-auto px-6 py-12">
-        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12 text-gray-700 dark:text-gray-300 transition-colors duration-500">
+        <div className="bg-card rounded-2xl shadow-xl p-8 md:p-12 text-foreground transition-colors duration-500 border border-border">
           <div className="space-y-8">
             {/* Introduction */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.introduction.title', '1. Agreement to Terms')}
               </h2>
               <p className="leading-relaxed text-lg">
@@ -55,7 +55,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Services */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.services.title', '2. Services Description')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -70,7 +70,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
                 <li>{t('terms.services.item4', 'Skincare treatments')}</li>
                 <li>{t('terms.services.item5', 'Spa and relaxation services')}</li>
               </ul>
-              <p className="leading-relaxed text-gray-600 dark:text-gray-400">
+              <p className="leading-relaxed text-muted-foreground">
                 {t('terms.services.disclaimer', 
                   'Services and pricing are subject to change. We reserve the right to modify, suspend, or discontinue any service at any time without prior notice.'
                 )}
@@ -79,12 +79,12 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Appointments */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.appointments.title', '3. Appointments and Bookings')}
               </h2>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {t('terms.appointments.booking.title', 'Booking')}
                   </h3>
                   <p className="leading-relaxed">
@@ -95,7 +95,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {t('terms.appointments.cancellation.title', 'Cancellation Policy')}
                   </h3>
                   <p className="leading-relaxed">
@@ -106,7 +106,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {t('terms.appointments.lateness.title', 'Late Arrivals')}
                   </h3>
                   <p className="leading-relaxed">
@@ -120,7 +120,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Payment */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.payment.title', '4. Payment Terms')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -137,7 +137,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Health and Safety */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.health.title', '5. Health and Safety')}
               </h2>
               <div className="space-y-4">
@@ -161,7 +161,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Liability */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.liability.title', '6. Limitation of Liability')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -180,7 +180,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Intellectual Property */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.intellectual.title', '7. Intellectual Property')}
               </h2>
               <p className="leading-relaxed">
@@ -192,7 +192,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* User Conduct */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.conduct.title', '8. User Conduct')}
               </h2>
               <p className="leading-relaxed mb-2">
@@ -209,7 +209,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Privacy */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.privacy.title', '9. Privacy')}
               </h2>
               <p className="leading-relaxed">
@@ -221,7 +221,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Modifications */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.modifications.title', '10. Modifications to Terms')}
               </h2>
               <p className="leading-relaxed">
@@ -233,7 +233,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Governing Law */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.law.title', '11. Governing Law')}
               </h2>
               <p className="leading-relaxed">
@@ -245,7 +245,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Severability */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.severability.title', '12. Severability')}
               </h2>
               <p className="leading-relaxed">
@@ -257,7 +257,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
 
             {/* Contact */}
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-2xl font-semibold text-foreground mb-4">
                 {t('terms.contact.title', '13. Contact Information')}
               </h2>
               <p className="leading-relaxed mb-4">
@@ -265,8 +265,10 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
                   'If you have any questions about these Terms of Service, please contact us at:'
                 )}
               </p>
-              <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg space-y-2 transition-colors duration-500">
-                <p className="font-semibold text-gray-900 dark:text-white">Queen's Nails Hair & Skincare</p>
+              <div className="bg-secondary dark:bg-secondary p-6 rounded-lg space-y-2 transition-colors duration-500 border border-border">
+                <p className="inline-block font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
+                  Queen's Nails Hair & Skincare
+                </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
                 <p>Email: info@queensnails.com</p>
@@ -274,7 +276,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
             </section>
 
             {/* Acknowledgment */}
-            <section className="bg-purple-50 dark:bg-purple-950/20 p-6 rounded-lg border border-purple-200 dark:border-purple-800 transition-colors duration-500">
+            <section className="bg-secondary dark:bg-secondary p-6 rounded-lg border border-border transition-colors duration-500">
               <p className="leading-relaxed">
                 {t('terms.acknowledgment', 
                   'By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.'
@@ -284,10 +286,10 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
           </div>
 
           {/* Back Button */}
-          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="mt-12 pt-8 border-t border-border">
             <button
               onClick={onNavigateBack}
-              className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl"
+              className="w-full md:w-auto px-8 py-4 rounded-xl transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
             >
               Back to Home
             </button>

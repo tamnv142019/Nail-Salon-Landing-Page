@@ -140,7 +140,7 @@ function ServiceBadge({ type }: { type: BadgeType }) {
       Icon: BadgePercent,
     },
     'Best Seller': {
-      gradient: 'from-amber-400 via-yellow-400 to-orange-400',
+      gradient: 'from-brand-ruby via-brand-ruby to-brand-ruby',
       Icon: Star,
     },
   } as const;
@@ -153,10 +153,18 @@ function ServiceBadge({ type }: { type: BadgeType }) {
     type === 'Popular' ? 'common.popular' : type === 'Best Seller' ? 'common.bestSeller' : type === 'Save' ? 'common.save' : undefined;
   const label = labelKey ? t(labelKey, type) : type;
 
+  const isBestSeller = type === 'Best Seller';
+
   return (
-    <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-lg shadow-black/10 border border-white/40 bg-gradient-to-r ${gradient}`}>
+    <span
+      className={
+        isBestSeller
+          ? `inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-lg shadow-black/10 border border-white/25 ring-1 ring-inset ring-white/10 bg-linear-to-r ${gradient} transition-all duration-300 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-xl`
+          : `inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold text-white shadow-lg shadow-black/10 border border-white/40 bg-gradient-to-r ${gradient}`
+      }
+    >
       <IconComp className="w-4 h-4" />
-      <span className="uppercase tracking-wide">{label}</span>
+      <span className={isBestSeller ? 'uppercase tracking-wide text-outline' : 'uppercase tracking-wide'}>{label}</span>
     </span>
   );
 }
@@ -473,11 +481,11 @@ export function Services() {
 
   return (
     <>
-      <section id="services" className="py-32 px-6 bg-white dark:bg-gray-900 relative overflow-hidden transition-colors duration-500">
+      <section id="services" className="py-32 px-6 bg-secondary dark:bg-background relative overflow-hidden transition-colors duration-500">
         {/* Animated background gradients */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-300/20 dark:bg-rose-500/10 rounded-full blur-3xl animate-pulse transition-colors duration-500"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-300/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse transition-colors duration-500" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-gold-soft/35 dark:bg-brand-gold/10 rounded-full blur-3xl animate-pulse transition-colors duration-500"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-sapphire-soft/25 dark:bg-brand-sapphire/10 rounded-full blur-3xl animate-pulse transition-colors duration-500" style={{ animationDelay: '1s' }}></div>
         </div>
         
         <div className="max-w-7xl mx-auto relative z-10">
@@ -519,8 +527,8 @@ export function Services() {
           </div>
 
           {/* Quick Navigation Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-20 sticky top-20 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl py-5 px-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 transition-all duration-300">
-            <span className="hidden sm:inline-block text-gray-600 dark:text-gray-400 font-medium mr-2">Quick Navigation:</span>
+          <div className="flex flex-wrap justify-center gap-3 mb-20 sticky top-20 z-40 bg-card/90 backdrop-blur-xl py-5 px-8 rounded-2xl shadow-xl border border-border transition-all duration-300">
+            <span className="hidden sm:inline-block text-muted-foreground font-medium mr-2">Quick Navigation:</span>
             {serviceCategories.map((category) => (
               <button
                 key={category.id}

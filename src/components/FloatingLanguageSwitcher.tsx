@@ -47,13 +47,13 @@ export function FloatingLanguageSwitcher() {
       <div className="fixed top-6 right-6 z-50">
         {/* Expanded Menu */}
         {isExpanded && (
-          <div className="absolute top-0 right-0 flex flex-col gap-2 mb-2 p-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="absolute top-0 right-0 flex flex-col gap-2 mb-2 p-3 bg-background/90 dark:bg-background/90 backdrop-blur-xl border border-border rounded-2xl shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
             <button
               onClick={() => handleLanguageChange('en')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'en'
-                  ? 'bg-rose-500 text-white shadow-md'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-secondary'
               }`}
               title="English"
             >
@@ -64,8 +64,8 @@ export function FloatingLanguageSwitcher() {
               onClick={() => handleLanguageChange('zh')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'zh'
-                  ? 'bg-rose-500 text-white shadow-md'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-secondary'
               }`}
               title="中文"
             >
@@ -76,8 +76,8 @@ export function FloatingLanguageSwitcher() {
               onClick={() => handleLanguageChange('vi')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'vi'
-                  ? 'bg-rose-500 text-white shadow-md'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-secondary'
               }`}
               title="Tiếng Việt"
             >
@@ -88,8 +88,8 @@ export function FloatingLanguageSwitcher() {
               onClick={() => handleLanguageChange('fr')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'fr'
-                  ? 'bg-rose-500 text-white shadow-md'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-secondary'
               }`}
               title="Français"
             >
@@ -100,8 +100,8 @@ export function FloatingLanguageSwitcher() {
               onClick={() => handleLanguageChange('es')}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'es'
-                  ? 'bg-rose-500 text-white shadow-md'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                  ? 'bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white shadow-md'
+                  : 'text-muted-foreground hover:bg-secondary'
               }`}
               title="Español"
             >
@@ -114,7 +114,7 @@ export function FloatingLanguageSwitcher() {
         {/* Main Button */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+          className="flex items-center justify-center w-14 h-14 rounded-full bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
           title="Change Language"
           aria-label="Change Language"
         >
@@ -124,7 +124,7 @@ export function FloatingLanguageSwitcher() {
 
       {/* Toast Notification */}
       {showNotification && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-6 py-3 rounded-full text-white bg-rose-500 shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-6 py-3 rounded-full bg-brand-gold-soft text-brand-dark dark:bg-brand-gold dark:text-white shadow-lg animate-in fade-in slide-in-from-bottom-4 duration-300">
           <Check size={20} />
           <span className="text-sm font-medium">{notificationMessage}</span>
         </div>

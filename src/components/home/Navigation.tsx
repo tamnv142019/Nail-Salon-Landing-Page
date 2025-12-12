@@ -3,18 +3,23 @@ import { Phone, Calendar, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../ThemeProvider';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { LanguageSwitcher } from '../LanguageSwitcher';
-import logoImage from 'figma:asset/9bec472ae90f90102b38538430cb42ea555b4e96.png';
+import { NoelHat } from '../NoelHat';
+import logoImage from '../../assets/9bec472ae90f90102b38538430cb42ea555b4e96.png';
 
 interface NavigationProps {
   onBookClick: () => void;
   onNavigateHome?: () => void;
+  /** When true, the nav starts transparent until scrolled (use on Home hero). */
+  transparentOnTop?: boolean;
 }
 
-export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
+export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = false }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
+
+  const isSolid = !transparentOnTop || isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +33,7 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80;
+      const offset = 60;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - offset,
@@ -53,12 +58,15 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-lg border-b border-white/20 dark:border-gray-700/30'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 animate-fade-down"
     >
+      <div
+        className={`relative overflow-visible border-b transition-all duration-500 ease-out ${
+          isSolid
+            ? 'bg-background/60 backdrop-blur-2xl backdrop-saturate-200 border-border/60 shadow-lg ring-1 ring-inset ring-white/10 dark:ring-white/5 before:opacity-70 after:opacity-100 after:animate-[glass-shine_3.8s_ease-in-out_infinite]'
+            : 'bg-transparent border-transparent shadow-none before:opacity-0 after:opacity-0'
+        } before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-b before:from-white/22 before:via-white/8 before:to-transparent dark:before:from-white/12 dark:before:via-white/6 after:content-[''] after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-1/3 after:bg-linear-to-r after:from-transparent after:via-white/40 after:to-transparent dark:after:via-white/24`}
+      >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -70,20 +78,34 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            className="flex-shrink-0 flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity duration-300"
+            className="group shrink-0 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:opacity-90"
           >
-            <img
-              src={logoImage}
-              alt="Queen's Nails Logo"
-              className="h-10 md:h-12 transition-colors duration-300"
-            />
-            <span className={`hidden sm:block text-xl md:text-2xl font-bold transition-colors duration-300 ${
-              isScrolled || isDark
-                ? 'text-gray-900 dark:text-white'
-                : 'text-white'
-            }`}>
-              Queen's Nails
+            <span className="relative shrink-0 overflow-hidden rounded-md">
+              <img
+                src={logoImage}
+                alt="Queen's Nails Logo"
+                className="h-10 md:h-12 transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <span className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-white/55 to-transparent opacity-30 mix-blend-overlay animate-[glass-shine_2.8s_ease-in-out_infinite] motion-reduce:animate-none" />
             </span>
+            <div className="hidden sm:flex flex-col">
+              <span className={`relative text-xl md:text-2xl font-bold transition-all duration-300 group-hover:-translate-y-0.5 group-hover:tracking-wide ${
+                isSolid || isDark
+                  ? 'text-foreground group-hover:text-brand-gold'
+                  : 'text-white group-hover:text-white'
+              }`}>
+                Queen's Nails
+                  <NoelHat className="absolute -top-4 -right-6 w-12 h-9 origin-bottom-left animate-hat-sway motion-reduce:animate-none pointer-events-none" />
+                <span className="pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-transparent via-brand-gold/70 to-transparent transition-transform duration-300 group-hover:scale-x-100" />
+              </span>
+              <span className={`text-[11px] md:text-xs font-medium tracking-wide ${
+                isSolid || isDark
+                  ? 'text-foreground/70 group-hover:text-brand-gold/90'
+                  : 'text-white/80'
+              }`}>
+                {t('nav.holidayGreeting', 'Merry Christmas & Happy New Year')}
+              </span>
+            </div>
           </button>
 
           {/* Desktop Navigation */}
@@ -92,9 +114,9 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className={`text-sm font-medium transition-colors duration-300 hover:text-rose-500 cursor-pointer ${
-                  isScrolled || isDark
-                    ? 'text-gray-700 dark:text-gray-300'
+                className={`text-sm font-medium transition-colors duration-300 hover:text-brand-gold cursor-pointer ${
+                  isSolid || isDark
+                    ? 'text-foreground/90'
                     : 'text-white/90'
                 }`}
               >
@@ -114,8 +136,8 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
             <button
               onClick={toggleTheme}
               className={`flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 cursor-pointer hover:cursor-pointer ${
-                isScrolled || isDark
-                  ? 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30 text-gray-900 dark:text-white'
+                isSolid || isDark
+                  ? 'bg-background/70 backdrop-blur-xl border border-border/40 text-foreground'
                   : 'bg-white/20 text-white backdrop-blur-xl border border-white/20'
               }`}
             >
@@ -125,12 +147,17 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
             {/* Phone Button - iOS Glass Style */}
             <a
               href="tel:6192245050"
-              className="hidden md:block relative group cursor-pointer"
+              className={`hidden md:flex items-center justify-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 cursor-pointer hover:cursor-pointer ${
+                isSolid || isDark
+                  ? 'bg-card/70 backdrop-blur-xl border border-border/40 text-foreground hover:border-brand-gold/40'
+                  : 'bg-white/20 text-white backdrop-blur-xl border border-white/20 hover:border-brand-gold/40'
+              }`}
             >
-              <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg text-sm font-semibold backdrop-blur-xl cursor-pointer">
-                <Phone size={16} />
-                <span className="hidden xl:inline">(619) 224-5050</span>
-              </div>
+              <Phone
+                size={16}
+                className={isSolid || isDark ? 'text-brand-gold' : 'text-white'}
+              />
+              <span className="hidden xl:inline text-sm font-semibold">(619) 224-5050</span>
             </a>
 
             {/* Book Button - iOS Glass Style */}
@@ -138,10 +165,12 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
               onClick={onBookClick}
               className="relative group cursor-pointer"
             >
-              <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 opacity-75 animate-ping"></span>
-              <div className="relative flex items-center gap-2 px-4 md:px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl transition-all duration-300 hover:scale-105 shadow-lg text-sm font-semibold backdrop-blur-xl cursor-pointer">
+              <span className="pointer-events-none absolute -inset-1 rounded-xl bg-linear-to-r from-brand-gold to-brand-gold-muted opacity-80 animate-[pulse_0.9s_ease-in-out_infinite]"></span>
+              <div
+                className="relative z-10 flex items-center justify-center gap-2 px-4 md:px-6 py-2 rounded-xl transition-all duration-300 cursor-pointer hover:cursor-pointer bg-brand-gold-soft hover:bg-brand-gold-muted text-brand-dark dark:bg-brand-gold-soft dark:hover:bg-brand-gold dark:text-white"
+              >
                 <Calendar size={16} />
-                <span>{t('servicesPage.bookNow', 'Book Now')}</span>
+                <span className="text-sm font-semibold">{t('servicesPage.bookNow', 'Book Now')}</span>
               </div>
             </button>
 
@@ -149,8 +178,8 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`lg:hidden flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-300 cursor-pointer ${
-                isScrolled || isDark
-                  ? 'text-gray-900 dark:text-white bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/20 dark:border-gray-700/30'
+                isSolid || isDark
+                  ? 'text-foreground bg-background/70 backdrop-blur-xl border border-border/40'
                   : 'text-white bg-white/20 backdrop-blur-xl border border-white/20'
               }`}
             >
@@ -161,13 +190,13 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
 
         {/* Mobile Menu - iOS Glass Style */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-white/20 dark:border-gray-700/30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl">
+          <div className="lg:hidden py-4 border-t border-border/40 bg-background/80 backdrop-blur-xl origin-top animate-scale-in">
             <div className="flex flex-col space-y-3">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-800/50 rounded-xl transition-colors duration-200 backdrop-blur-xl cursor-pointer"
+                  className="text-left px-4 py-2 text-muted-foreground hover:bg-secondary rounded-xl transition-colors duration-200 backdrop-blur-xl cursor-pointer"
                 >
                   {link.label}
                 </button>
@@ -189,8 +218,8 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
                       }}
                       className={`flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-300 text-lg cursor-pointer ${
                         language === lang.code
-                          ? 'bg-rose-500 shadow-md scale-110'
-                          : 'bg-white/50 dark:bg-gray-700/50 hover:bg-white/70 dark:hover:bg-gray-700/70'
+                          ? 'bg-brand-gold-soft shadow-md scale-110'
+                          : 'bg-background/50 hover:bg-background/70 border border-border/40'
                       }`}
                     >
                       {lang.flag}
@@ -199,7 +228,7 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
                 </div>
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center justify-center w-10 h-10 bg-white/70 dark:bg-gray-800/70 text-gray-900 dark:text-white rounded-xl backdrop-blur-xl border border-white/20 dark:border-gray-700/30 cursor-pointer"
+                  className="flex items-center justify-center w-10 h-10 bg-background/70 text-foreground rounded-xl backdrop-blur-xl border border-border/40 cursor-pointer"
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
@@ -207,6 +236,7 @@ export function Navigation({ onBookClick, onNavigateHome }: NavigationProps) {
             </div>
           </div>
         )}
+      </div>
       </div>
     </nav>
   );

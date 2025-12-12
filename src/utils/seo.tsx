@@ -182,10 +182,10 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
       <nav aria-label="breadcrumb" className="flex gap-2">
         {items.map((item, index) => (
           <div key={index} className="flex items-center gap-2">
-            <a href={item.url} className="text-rose-500 hover:text-rose-600">
+            <a href={item.url} className="text-brand-gold-muted hover:text-brand-gold">
               {item.name}
             </a>
-            {index < items.length - 1 && <span className="text-gray-400">/</span>}
+            {index < items.length - 1 && <span className="text-muted-foreground">/</span>}
           </div>
         ))}
       </nav>
