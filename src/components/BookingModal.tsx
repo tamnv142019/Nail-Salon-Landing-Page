@@ -1,5 +1,5 @@
 import { X, Calendar, Clock, User, Phone, Check, Sparkles, Mail } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface BookingModalProps {
@@ -19,6 +19,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   const [selectedTime, setSelectedTime] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { t } = useLanguage();
+  const dateInputRef = useRef<HTMLInputElement | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -175,14 +176,32 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   <Calendar size={18} />
                   Select Date
                 </label>
-                <input
-                  type="date"
-                  required
-                  min={getTodayDate()}
-                  value={selectedDate}
-                  onChange={(e) => setSelectedDate(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground transition-all duration-300"
-                />
+                <div className="relative">
+                  <input
+                    type="date"
+                    required
+                    min={getTodayDate()}
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    ref={dateInputRef}
+                    data-native-picker="date"
+                    className="w-full px-5 py-4 pr-12 rounded-2xl bg-background/60 hover:bg-background/70 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 focus:ring-2 focus:ring-brand-gold/20 text-foreground transition-all duration-300"
+                  />
+                  <button
+                    type="button"
+                    aria-label={t('booking.openDatePicker', 'Open date picker')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:bg-black/5 dark:text-brand-light/90 dark:hover:bg-white/10 transition"
+                    onClick={() => {
+                      const input = dateInputRef.current;
+                      if (!input) return;
+                      // Chrome/Edge support showPicker(); others will just focus.
+                      (input as any).showPicker?.();
+                      input.focus();
+                    }}
+                  >
+                    <Calendar aria-hidden="true" size={18} />
+                  </button>
+                </div>
               </div>
 
               {/* Time */}
@@ -199,8 +218,8 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       onClick={() => setSelectedTime(time)}
                       className={`px-4 py-3 rounded-xl border-2 transition-all duration-300 text-sm backdrop-blur-xl cursor-pointer ${
                         selectedTime === time
-                          ? 'border-brand-gold bg-brand-gold-soft text-brand-dark'
-                          : 'border-border/60 bg-background/50 text-foreground hover:border-brand-gold/40'
+                          ? 'border-brand-gold bg-brand-gold-soft text-brand-dark shadow-sm'
+                          : 'border-border/60 bg-background/50 text-foreground hover:border-brand-gold/40 hover:bg-background/60'
                       }`}
                     >
                       {time}

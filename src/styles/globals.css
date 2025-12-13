@@ -184,11 +184,20 @@
     color-scheme: dark;
   }
 
-  .dark input[type='date']::-webkit-calendar-picker-indicator,
-  .dark input[type='time']::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    opacity: 0.9;
+  input[type='date'],
+  input[type='time'] {
+    color-scheme: light;
   }
+
+  input[data-native-picker='date']::-webkit-calendar-picker-indicator,
+  input[data-native-picker='time']::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    display: block;
+    width: 2.75rem;
+    height: 100%;
+    cursor: pointer;
+  }
+
 }
 
 /**
