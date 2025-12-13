@@ -18,6 +18,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const { t } = useLanguage();
   const dateInputRef = useRef<HTMLInputElement | null>(null);
   const [formData, setFormData] = useState({
@@ -56,12 +57,40 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     onClose();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      handleClose();
-    }, 3000);
+    setIsSending(true);
+
+    try {
+      const res = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          date: selectedDate,
+          time: selectedTime,
+          service: preSelectedService || null,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || 'Failed to send booking');
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        handleClose();
+      }, 3000);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Booking submission error', error);
+      alert('Could not complete booking. Please try again later.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const getTodayDate = () => {
@@ -231,10 +260,10 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime}
+                disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime || isSending}
                 className="w-full px-6 py-4 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-xl cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:scale-102 active:brightness-95"
               >
-                Confirm Booking
+                {isSending ? 'Sending...' : 'Confirm Booking'}
               </button>
             </form>
           )}
