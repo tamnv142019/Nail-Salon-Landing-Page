@@ -1,6 +1,6 @@
 import { Phone, Calendar, Star } from 'lucide-react';
 import { OptimizedImage } from '../components/OptimizedImage';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { SEO } from '../components/SEO/SEO';
 import { generateBreadcrumbSchema, generateServiceSchema } from '../utils/schema-generators';
 import { BookingModal } from '../components/BookingModal';
@@ -154,61 +154,44 @@ function formatNote(note: string) {
   ));
 }
 
+// Static SEO schemas (defined once to avoid recreating each render)
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://queensnails.live/' },
+  { name: 'Services', url: 'https://queensnails.live/services' },
+]);
+
+const serviceSchemas = [
+  generateServiceSchema({
+    name: 'Manicure Services',
+    description: 'Professional manicure services including regular, European, deluxe, and signature spa manicures with premium products',
+    price: '20.00',
+  }),
+  generateServiceSchema({
+    name: 'Pedicure Services',
+    description: 'Luxury pedicure services featuring premium products, exfoliation, and relaxing massage',
+    price: '25.00',
+  }),
+  generateServiceSchema({
+    name: 'Organic Nail Powder',
+    description: 'Dipping powder collection with beautiful and long-lasting finishes including ombre and French tips',
+    price: '45.00',
+  }),
+  generateServiceSchema({
+    name: 'Waxing Services',
+    description: 'Professional hair removal services for smooth skin using premium waxing products',
+    price: '8.00',
+  }),
+];
+
 export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPageProps) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
   const magicClick = useMagicClickAnimation();
   const { t } = useLanguage();
   
-  const servicesData = getServicesData(t);
-  const waxingService = servicesData.find((service) => service.id === 'waxing');
-  const nonWaxingServices = servicesData.filter((service) => service.id !== 'waxing');
-
-  const getServiceAccent = (serviceId: string) => {
-    switch (serviceId) {
-      case 'manicure':
-        return { card: 'border-l-4 border-l-rose-500', header: 'bg-rose-500/10' };
-      case 'pedicure':
-        return { card: 'border-l-4 border-l-emerald-500', header: 'bg-emerald-500/10' };
-      case 'powder':
-        return { card: 'border-l-4 border-l-violet-500', header: 'bg-violet-500/10' };
-      case 'additional':
-        return { card: 'border-l-4 border-l-amber-500', header: 'bg-amber-500/10' };
-      case 'waxing':
-        return { card: 'border-l-4 border-l-sky-500', header: 'bg-sky-500/10' };
-      default:
-        return { card: 'border-l-4 border-l-border', header: '' };
-    }
-  };
-
-  // SEO schemas
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "https://queensnails.live/" },
-    { name: "Services", url: "https://queensnails.live/services" }
-  ]);
-
-  const serviceSchemas = [
-    generateServiceSchema({
-      name: "Manicure Services",
-      description: "Professional manicure services including regular, European, deluxe, and signature spa manicures with premium products",
-      price: "20.00"
-    }),
-    generateServiceSchema({
-      name: "Pedicure Services",
-      description: "Luxury pedicure services featuring premium products, exfoliation, and relaxing massage",
-      price: "25.00"
-    }),
-    generateServiceSchema({
-      name: "Organic Nail Powder",
-      description: "Dipping powder collection with beautiful and long-lasting finishes including ombre and French tips",
-      price: "45.00"
-    }),
-    generateServiceSchema({
-      name: "Waxing Services",
-      description: "Professional hair removal services for smooth skin using premium waxing products",
-      price: "8.00"
-    })
-  ];
+  const servicesData = useMemo(() => getServicesData(t), [t]);
+  const waxingService = useMemo(() => servicesData.find((service) => service.id === 'waxing'), [servicesData]);
+  const nonWaxingServices = useMemo(() => servicesData.filter((service) => service.id !== 'waxing'), [servicesData]);
 
   const handleBookService = useCallback((serviceName: string) => {
     setSelectedService(serviceName);
@@ -216,20 +199,36 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
   }, []);
 
   useEffect(() => {
-    if (scrollToService) {
-      // Wait for the page to render
-      setTimeout(() => {
-        const element = document.getElementById(scrollToService);
-        if (element) {
-          const offset = 100;
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-          window.scrollTo({
-            top: elementPosition - offset,
-            behavior: 'smooth',
-          });
-        }
-      }, 100);
-    }
+    if (!scrollToService) return;
+
+    // Respect user's reduced motion preference
+    const prefersReduced = typeof window !== 'undefined' &&
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const behavior: ScrollBehavior = prefersReduced ? 'auto' : 'smooth';
+
+    let rafId: number | null = null;
+    let attempts = 0;
+
+    const tryScroll = () => {
+      const element = document.getElementById(scrollToService);
+      if (element) {
+        const offset = 100;
+        const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior });
+        return;
+      }
+
+      // Retry for up to ~1s (60 frames) while the DOM settles
+      attempts += 1;
+      if (attempts < 60) {
+        rafId = requestAnimationFrame(tryScroll);
+      }
+    };
+
+    rafId = requestAnimationFrame(tryScroll);
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [scrollToService]);
 
   return (
@@ -276,96 +275,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
           {/* Services List */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {nonWaxingServices.map((service, index) => (
-              (() => {
-                const accent = getServiceAccent(service.id);
-                return (
-              <motion.div
-                key={service.id}
-                id={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`bg-card rounded-2xl shadow-lg border border-border overflow-hidden transition-all duration-300 hover:shadow-xl ${accent.card}`}
-              >
-                {/* Service Header - Always Visible */}
-                <div className={`transition-colors duration-300 ${accent.header} hover:bg-secondary/60 dark:hover:bg-secondary/60`}>
-                  <div className="relative flex items-center gap-4 md:gap-5 p-4 md:p-5">
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border-4 border-card shadow-lg hover:scale-110 transition-transform duration-300">
-                      <OptimizedImage
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover"
-                        width={160}
-                        height={160}
-                      />
-                    </div>
-
-                    {/* Title & Category */}
-                    <div className="flex-1 min-w-0">
-                      <div className="text-base md:text-lg text-muted-foreground uppercase tracking-wider mb-1">
-                        {service.category}
-                      </div>
-                      <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-1">
-                        {service.title}
-                      </h2>
-                      <p className="text-base text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content (always visible) */}
-                <div className="border-t border-border">
-                  <div className="p-4 md:p-5 bg-background">
-                    {/* Description */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    {/* Services Grid */}
-                      <div className="grid gap-3">
-                      {service.services.map((item, idx) => (
-                        <div
-                          key={idx}
-                          onClick={() => {
-                            setSelectedService(item.name);
-                            setIsBookingOpen(true);
-                          }}
-                          className="group relative flex items-start justify-between gap-4 p-3 rounded-xl border border-border/60 bg-secondary/20 backdrop-blur-md shadow-sm hover:bg-secondary/60 dark:hover:bg-secondary/60 transition-all duration-200 cursor-pointer"
-                        >
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <div className="text-[20px] md:text-[22px] font-semibold text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold transition-colors whitespace-normal wrap-break-word">
-                                {item.name}
-                              </div>
-                              {item.bestSeller && (
-                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-btn-accent/90 text-btn-theme-foreground border border-brand-gold-muted/40 dark:border-brand-gold/30 shadow-sm ring-1 ring-inset ring-white/10 backdrop-blur-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-lg">
-                                  <Star className="w-3.5 h-3.5" />
-                                  <span className="text-outline">
-                                    {t('servicesPage.bestSeller', 'Best Seller')}
-                                  </span>
-                                </span>
-                              )}
-                            </div>
-                            {item.note && (
-                              <div className="text-[18px] md:text-[20px] text-muted-foreground mt-1 whitespace-normal wrap-break-word">
-                                {formatNote(item.note)}
-                              </div>
-                            )}
-                          </div>
-                          <div className="text-[20px] md:text-[22px] font-bold whitespace-nowrap shrink-0">
-                            <div style={{ color: 'oklch(.592 .249 .584)' }}>{item.price}</div>
-                            {item.duration && <div className="text-sm text-muted-foreground mt-0.5">{item.duration}</div>}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-                );
-              })()
+              <ServiceCard key={service.id} service={service} index={index} onBook={handleBookService} />
             ))}
           </div>
 
@@ -398,9 +308,11 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
 
                     {/* Title & Category */}
                     <div className="w-full max-w-2xl">
-                      <div className="text-base md:text-lg text-muted-foreground uppercase tracking-wider mb-1">
-                        {waxingService.category}
-                      </div>
+                      {waxingService.category && stripDiacritics(waxingService.category).toLowerCase() !== stripDiacritics(waxingService.title).toLowerCase() && (
+                        <div className="text-base md:text-lg text-muted-foreground uppercase tracking-wider mb-1">
+                          {waxingService.category}
+                        </div>
+                      )}
                       <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-1">
                         {waxingService.title}
                       </h2>
@@ -511,3 +423,88 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
     </>
   );
 }
+
+const getServiceAccent = (serviceId: string) => {
+  switch (serviceId) {
+    case 'manicure':
+      return { card: 'border-l-4 border-l-rose-500', header: 'bg-rose-500/10' };
+    case 'pedicure':
+      return { card: 'border-l-4 border-l-emerald-500', header: 'bg-emerald-500/10' };
+    case 'powder':
+      return { card: 'border-l-4 border-l-violet-500', header: 'bg-violet-500/10' };
+    case 'additional':
+      return { card: 'border-l-4 border-l-amber-500', header: 'bg-amber-500/10' };
+    case 'waxing':
+      return { card: 'border-l-4 border-l-sky-500', header: 'bg-sky-500/10' };
+    default:
+      return { card: 'border-l-4 border-l-border', header: '' };
+  }
+};
+
+
+
+// Small memoized card to avoid rerendering all service rows when unrelated state updates
+interface ServiceCardProps {
+  service: ServiceCategory;
+  index?: number;
+  onBook: (name: string) => void;
+}
+
+const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: ServiceCardProps) {
+  const accent = getServiceAccent(service.id);
+
+  return (
+    <motion.div
+      key={service.id}
+      id={service.id}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className={`bg-card rounded-2xl shadow-lg border border-border overflow-hidden transition-all duration-300 hover:shadow-xl ${accent.card}`}
+    >
+      <div className={`transition-colors duration-300 ${accent.header} hover:bg-secondary/60 dark:hover:bg-secondary/60`}>
+        <div className="relative flex items-center gap-4 md:gap-5 p-4 md:p-5">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border-4 border-card shadow-lg hover:scale-110 transition-transform duration-300">
+            <OptimizedImage src={service.image} alt={service.title} className="w-full h-full object-cover" width={160} height={160} />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-1">{service.title}</h2>
+            <p className="text-base text-muted-foreground leading-relaxed">{service.description}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-border">
+        <div className="p-4 md:p-5 bg-background">
+          <div className="grid gap-3">
+            {service.services.map((item, idx) => (
+              <div
+                key={idx}
+                onClick={() => onBook(item.name)}
+                className="group relative flex items-start justify-between gap-4 p-3 rounded-xl border border-border/60 bg-secondary/20 backdrop-blur-md shadow-sm hover:bg-secondary/60 dark:hover:bg-secondary/60 transition-all duration-200 cursor-pointer"
+              >
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="text-[20px] md:text-[22px] font-semibold text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold transition-colors whitespace-normal wrap-break-word">{item.name}</div>
+                    {item.bestSeller && (
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-btn-accent/90 text-btn-theme-foreground border border-brand-gold-muted/40 dark:border-brand-gold/30 shadow-sm ring-1 ring-inset ring-white/10 backdrop-blur-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-lg">
+                        <Star className="w-3.5 h-3.5" />
+                        <span className="text-outline">Best Seller</span>
+                      </span>
+                    )}
+                  </div>
+                  {item.note && <div className="text-[18px] md:text-[20px] text-muted-foreground mt-1 whitespace-normal wrap-break-word">{formatNote(item.note)}</div>}
+                </div>
+                <div className="text-[20px] md:text-[22px] font-bold whitespace-nowrap shrink-0">
+                  <div style={{ color: 'oklch(.592 .249 .584)' }}>{item.price}</div>
+                  {item.duration && <div className="text-sm text-muted-foreground mt-0.5">{item.duration}</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+});
