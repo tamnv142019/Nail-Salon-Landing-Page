@@ -178,6 +178,17 @@
   select {
     cursor: pointer;
   }
+
+  .dark input[type='date'],
+  .dark input[type='time'] {
+    color-scheme: dark;
+  }
+
+  .dark input[type='date']::-webkit-calendar-picker-indicator,
+  .dark input[type='time']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.9;
+  }
 }
 
 /**
@@ -328,24 +339,6 @@ select option {
   }
 }
 
-@keyframes hat-sway {
-  0% {
-    transform: rotate(10deg) translateY(0);
-  }
-  25% {
-    transform: rotate(7deg) translateY(1px);
-  }
-  50% {
-    transform: rotate(14deg) translateY(0);
-  }
-  75% {
-    transform: rotate(8deg) translateY(1px);
-  }
-  100% {
-    transform: rotate(10deg) translateY(0);
-  }
-}
-
 @keyframes blink-soft {
   0%,
   100% {
@@ -371,10 +364,6 @@ select option {
 
   .animate-float-soft {
     animation: float-soft 6s ease-in-out infinite;
-  }
-
-  .animate-hat-sway {
-    animation: hat-sway 3.2s ease-in-out infinite;
   }
 
   .animate-blink-soft {

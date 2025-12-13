@@ -95,7 +95,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                   : 'text-white group-hover:text-white'
               }`}>
                 Queen's Nails
-                  <NoelHat className="absolute -top-4 -right-6 w-12 h-9 origin-bottom-left animate-hat-sway motion-reduce:animate-none pointer-events-none" />
+                  <NoelHat className="absolute -top-4 -right-6 w-12 h-9 origin-bottom-left rotate-10 pointer-events-none" />
                 <span className="pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-transparent via-brand-gold/70 to-transparent transition-transform duration-300 group-hover:scale-x-100" />
               </span>
               <span className={`text-[11px] md:text-xs font-medium tracking-wide ${

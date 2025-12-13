@@ -74,13 +74,13 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
       <div 
         className="relative w-full max-w-lg bg-card/85 backdrop-blur-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-border/60 ring-1 ring-inset ring-white/10 dark:ring-white/5"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header - iOS Glass Style */}
-        <div className="relative bg-linear-to-r from-brand-gold to-brand-gold-muted px-8 py-6">
+        <div className="relative bg-linear-to-r from-brand-gold-soft to-brand-gold-muted px-8 py-6">
           <button
             onClick={handleClose}
             className="absolute top-6 right-6 w-10 h-10 bg-black/10 hover:bg-black/15 dark:bg-white/10 dark:hover:bg-white/15 backdrop-blur-xl rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-white/20"
@@ -123,7 +123,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
-                <label className="block text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2">
                   <User size={18} />
                   Full Name
                 </label>
@@ -139,7 +139,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Email */}
               <div>
-                <label className="block text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2">
                   <Mail size={18} />
                   Email Address
                 </label>
@@ -155,7 +155,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Phone */}
               <div>
-                <label className="block text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2">
                   <Phone size={18} />
                   Phone Number
                 </label>
@@ -171,7 +171,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Date */}
               <div>
-                <label className="block text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2">
                   <Calendar size={18} />
                   Select Date
                 </label>
@@ -187,7 +187,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Time */}
               <div>
-                <label className="block text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2">
                   <Clock size={18} />
                   Select Time
                 </label>

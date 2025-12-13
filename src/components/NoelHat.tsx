@@ -4,7 +4,7 @@ type NoelHatProps = {
 
 export function NoelHat({ className }: NoelHatProps) {
   const defaultClassName =
-    "absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-12 origin-bottom-left animate-hat-sway motion-reduce:animate-none pointer-events-none";
+    "absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-12 origin-bottom-left rotate-10 pointer-events-none";
 
   return (
     <svg
