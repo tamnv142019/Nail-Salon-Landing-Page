@@ -24,10 +24,10 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    content: 'queenspham505@gmail.com',
+    content: 'helenpham505@gmail.com',
     subContent: 'We respond within 24 hours',
     gradient: 'from-brand-emerald to-brand-gold-soft',
-    link: 'mailto:queenspham505@gmail.com',
+    link: 'mailto:helenpham505@gmail.com',
     action: 'Send Email',
   },
 ];

@@ -101,7 +101,7 @@ export function Testimonials() {
     <section id="testimonials" className="py-32 px-6 bg-secondary dark:bg-secondary relative overflow-hidden transition-colors duration-500">
       {/* Background effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-linear-to-r from-brand-gold-soft/20 via-brand-sapphire/10 to-brand-emerald/10 dark:from-brand-gold/12 dark:via-brand-sapphire/8 dark:to-brand-emerald/8 rounded-full blur-3xl transition-colors duration-500"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-linear-to-r from-brand-gold-soft/20 via-brand-sapphire/10 to-brand-emerald/10 dark:from-brand-gold/12 dark:via-brand-sapphire/8 dark:to-brand-emerald/8 rounded-full blur-3xl transition-colors duration-500"></div>
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">

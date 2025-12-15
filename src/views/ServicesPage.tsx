@@ -499,7 +499,6 @@ const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: Se
                 <div className="text-[20px] md:text-[22px] font-bold whitespace-nowrap shrink-0">
                   <div style={{ color: 'oklch(.592 .249 .584)' }}>{item.price}</div>
                   {item.duration && <div className="text-sm text-muted-foreground mt-0.5">{item.duration}</div>}
-                  
                 </div>
               </div>
             ))}
