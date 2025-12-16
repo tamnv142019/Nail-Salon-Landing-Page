@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { Language, getTranslation } from '../translations';
 

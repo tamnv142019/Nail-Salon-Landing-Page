@@ -17,7 +17,7 @@ export function CenteredCTASection() {
             <h2 className="text-4xl md:text-6xl font-bold text-foreground mb-8 text-center max-w-2xl">
             {t('cta.title', 'Ready to Transform Your Beauty?')}
           </h2>
-            <p className="text-xl text-muted-foreground mb-12 text-center max-w-2xl">
+            <p className="text-xl text-foreground mb-12 text-center max-w-2xl">
             {t('cta.subtitle', 'Discover our exclusive services and book your appointment today')}
           </p>
           

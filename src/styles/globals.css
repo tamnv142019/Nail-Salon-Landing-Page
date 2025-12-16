@@ -1,7 +1,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-size: 16px;
+  /* Base font size increased to make all text one size larger */
+  --font-size: 18px;
   --gradient-primary-action: linear-gradient(135deg, #245A9E 0%, #89CFF0 100%);
   /* Background Colors */
   --background: #FFFFFF;
@@ -70,8 +71,9 @@
   --input: transparent;
   --input-background: #FFFFFF;
   --switch-background: var(--lightaqua);
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
+  /* Default font weights (adjusted for available Roboto weights) */
+  --font-weight-normal: 500;
+  --font-weight-medium: 700;
   --ring: var(--primary);
   --focus-ring: rgba(137, 207, 240, 0.4);
   --chart-1: var(--skyteal);

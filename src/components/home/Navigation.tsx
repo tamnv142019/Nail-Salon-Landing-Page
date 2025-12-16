@@ -1,4 +1,7 @@
+"use client";
+
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { Phone, Calendar, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../ThemeProvider';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -7,7 +10,7 @@ import logoImage from '../../assets/9bec472ae90f90102b38538430cb42ea555b4e96.png
 
 interface NavigationProps {
   onBookClick: () => void;
-  onNavigateHome?: () => void;
+  onNavigateHome?: () => boolean | void;
   /** When true, the nav starts transparent until scrolled (use on Home hero). */
   transparentOnTop?: boolean;
 }
@@ -17,6 +20,17 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const { language, setLanguage } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Map section IDs to their clean paths for URL updates
+  const sectionPathMapping: Record<string, string> = {
+    services: '/services',
+    about: '/queens-nails-hair-skincare',
+    gallery: '/gallery',
+    testimonials: '/reviews',
+    contact: '/contact',
+  };
 
   const isSolid = !transparentOnTop || isScrolled;
 
@@ -39,13 +53,37 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
         behavior: 'smooth',
       });
       setIsMobileMenuOpen(false);
+      try {
+        const targetPath = sectionPathMapping[id] || `/${id}`;
+        window.history.replaceState(null, '', targetPath);
+      } catch (e) {
+        // fallback to router replace for environments without history
+        const targetPath = sectionPathMapping[id] || `/${id}`;
+        router.replace(targetPath);
+      }
     } else {
-      // If section not found, navigate to home page with hash
-      window.location.href = `/#${id}`;
+      // If section not found on the current page, navigate to the dedicated page
+      const target = sectionPathMapping[id] || '/';
+      router.push(target);
     }
   };
 
   const { t } = useLanguage();
+  
+  const isHome = typeof pathname === 'string' && (pathname === '/' || pathname === '');
+
+  const handleNavClick = (id: string) => {
+    const targetPath = sectionPathMapping[id] || `/${id}`;
+    // On the home page, prefer scrolling to sections if present.
+    if (isHome) {
+      scrollToSection(id);
+      return;
+    }
+
+    // On other pages always navigate to the page.
+    setIsMobileMenuOpen(false);
+    router.push(targetPath);
+  };
   
   const navLinks = [
     { id: 'services', label: t('nav.services', 'Services') },
@@ -71,10 +109,28 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
           {/* Logo */}
           <button
             onClick={() => {
+              // If a parent provided a custom handler, call it first.
+              // If it returns `false`, treat that as "prevent navigation".
               if (onNavigateHome) {
-                onNavigateHome();
-              } else {
+                try {
+                  const res = onNavigateHome();
+                  if (res === false) return;
+                } catch (e) {
+                  // ignore errors from provided handler
+                }
+              }
+
+              // If we're already on the homepage, just scroll to top.
+              if (typeof window !== 'undefined' && window.location.pathname === '/') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+              }
+
+              // Prefer SPA navigation, but fall back to a full reload if it fails.
+              try {
+                router.push('/');
+              } catch (e) {
+                window.location.href = '/';
               }
             }}
             className="group shrink-0 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:opacity-90"
@@ -112,7 +168,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleNavClick(link.id)}
                 className={`text-sm font-medium transition-colors duration-300 hover:text-brand-gold cursor-pointer ${
                   isSolid || isDark
                     ? 'text-foreground/90'
@@ -194,8 +250,8 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
               {navLinks.map((link) => (
                 <button
                   key={link.id}
-                  onClick={() => scrollToSection(link.id)}
-                  className="text-left px-4 py-2 text-muted-foreground hover:bg-secondary rounded-xl transition-colors duration-200 backdrop-blur-xl cursor-pointer"
+                  onClick={() => handleNavClick(link.id)}
+                  className="text-left px-4 py-2 text-foreground hover:bg-secondary rounded-xl transition-colors duration-200 backdrop-blur-xl cursor-pointer"
                 >
                   {link.label}
                 </button>

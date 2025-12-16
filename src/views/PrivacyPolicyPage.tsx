@@ -13,7 +13,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
   const schema = generateWebPageSchema({
     name: "Privacy Policy - Queen's Nails Hair & Skincare",
     description: "Privacy policy for Queen's Nails Hair & Skincare. Learn how we protect and handle your personal information.",
-    url: "https://queensnails.live/privacy"
+    url: "https://queensobnail.com/privacy"
   });
 
   return (
@@ -21,7 +21,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
       <SEO
         title="Privacy Policy"
         description="Privacy policy for Queen's Nails Hair & Skincare. Learn how we protect and handle your personal information."
-        canonical="https://queensnails.live/privacy"
+        canonical="https://queensobnail.com/privacy"
         noindex={true}
         schema={schema}
       />
@@ -31,7 +31,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
       <header className="sticky top-0 z-50 bg-background text-foreground shadow-lg border-b border-border">
         <div className="max-w-5xl mx-auto px-6 py-6">
           <h1 className="text-4xl font-bold">{t('privacy.title', 'Privacy Policy')}</h1>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-foreground mt-2">
             {t('privacy.effectiveDate', 'Effective Date')}: {t('privacy.date', 'December 12, 2025')}
           </p>
         </div>
@@ -223,7 +223,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
-                <p>Email: info@queensnails.live</p>
+                <p>Email: info@queensobnail.com</p>
               </div>
             </section>
           </div>

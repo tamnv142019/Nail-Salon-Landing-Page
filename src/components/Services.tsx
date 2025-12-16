@@ -528,7 +528,7 @@ export function Services() {
 
           {/* Quick Navigation Pills */}
           <div className="flex flex-wrap justify-center gap-3 mb-20 sticky top-20 z-40 bg-card/90 backdrop-blur-xl py-5 px-8 rounded-2xl shadow-xl border border-border transition-all duration-300">
-            <span className="hidden sm:inline-block text-muted-foreground font-medium mr-2">Quick Navigation:</span>
+            <span className="hidden sm:inline-block text-foreground font-medium mr-2">Quick Navigation:</span>
             {serviceCategories.map((category) => (
               <button
                 key={category.id}

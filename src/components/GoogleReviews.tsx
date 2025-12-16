@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState, memo } from 'react';
 import { Star, ExternalLink, Award, Heart } from 'lucide-react';
 
@@ -105,13 +107,16 @@ const FeaturedReviewCard = memo(({ review }: { review: typeof reviews[0] }) => {
           <h3 className="text-lg md:text-xl text-gray-900 dark:text-white mb-2">{review.author}</h3>
           <div className="flex items-center gap-2 mb-1">
             <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  size={window.innerWidth < 768 ? 14 : 18}
-                  className="fill-yellow-400 text-yellow-400"
-                />
-              ))}
+              {(() => {
+                const clientWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+                return [...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={clientWidth < 768 ? 14 : 18}
+                    className="fill-yellow-400 text-yellow-400"
+                  />
+                ));
+              })()}
             </div>
             <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">{review.date}</span>
           </div>
@@ -242,20 +247,16 @@ ReviewCard.displayName = 'ReviewCard';
 export function GoogleReviews() {
   const googleMapsUrl = 'https://www.google.com/maps/place/Queen%27s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z/data=!4m15!1m8!3m7!1s0x80deaa3766574c6f:0xf7a6636c79fc1c5d!2s4869+Santa+Monica+Ave,+San+Diego,+CA+92107,+USA!3b1!8m2!3d32.7461198!4d-117.2483223!16s%2Fg%2F11bw3xx9cy!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu';
 
-  const averageRating = (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
-  const totalReviews = reviews.length;
+  // Display an updated public rating and review count (override local sample data)
+  const averageRating = '4.2';
+  const totalReviews = 57;
   
   // Get most helpful review (top review)
   const topReview = reviews.reduce((prev, current) => 
     (prev.helpful > current.helpful) ? prev : current
   );
 
-  // Rating breakdown
-  const ratingBreakdown = [5, 4, 3, 2, 1].map(rating => ({
-    rating,
-    count: reviews.filter(r => r.rating === rating).length,
-    percentage: (reviews.filter(r => r.rating === rating).length / reviews.length) * 100,
-  }));
+  // Rating breakdown removed (no public score displayed)
 
   return (
     <section id="google-reviews" className="py-16 md:py-24 px-4 md:px-6 bg-linear-to-b from-gray-50 to-white dark:from-black dark:to-gray-900 relative overflow-hidden transition-colors duration-500">
@@ -277,43 +278,7 @@ export function GoogleReviews() {
             <span className="text-2xl md:text-4xl text-gray-900 dark:text-white">Reviews</span>
           </div>
           
-          {/* Rating Display */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-6 md:mb-8">
-            {/* Overall Rating */}
-            <div className="text-center">
-              <div className="text-5xl md:text-7xl bg-linear-to-r from-yellow-400 via-yellow-500 to-orange-500 bg-clip-text text-transparent mb-2">
-                {averageRating}
-              </div>
-              <div className="flex gap-1 mb-2 justify-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={window.innerWidth < 768 ? 20 : 28}
-                    className="fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-              </div>
-              <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">
-                Based on <span className="font-bold text-gray-900 dark:text-white">{totalReviews}</span> reviews
-              </p>
-            </div>
-
-            {/* Rating Breakdown */}
-            <div className="w-full max-w-xs space-y-2">
-              {ratingBreakdown.map(({ rating, count, percentage }) => (
-                <div key={rating} className="flex items-center gap-2 md:gap-3">
-                  <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400 w-6 md:w-8">{rating} ★</span>
-                  <div className="flex-1 h-2 md:h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-linear-to-r from-yellow-400 to-orange-500 rounded-full transition-all duration-500"
-                      style={{ width: `${percentage}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400 w-6 md:w-8">{count}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Rating display removed per request */}
 
           {/* Quick Stats */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
@@ -339,7 +304,10 @@ export function GoogleReviews() {
         {/* Featured Top Review */}
         <div className="mb-8 md:mb-12">
           <h3 className="text-xl md:text-2xl text-gray-900 dark:text-white mb-4 md:mb-6 flex items-center gap-2">
-            <Award className="text-yellow-500" size={window.innerWidth < 768 ? 24 : 28} />
+            {(() => {
+              const clientWidth = typeof window !== 'undefined' ? window.innerWidth : 1024;
+              return <Award className="text-yellow-500" size={clientWidth < 768 ? 24 : 28} />;
+            })()}
             Most Helpful Review
           </h3>
           <FeaturedReviewCard review={topReview} />

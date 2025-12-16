@@ -1,9 +1,14 @@
-import { Phone, Calendar, Star } from 'lucide-react';
+"use client";
+
+import { Phone, Calendar } from 'lucide-react';
 import { OptimizedImage } from '../components/OptimizedImage';
 import { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { SEO } from '../components/SEO/SEO';
 import { generateBreadcrumbSchema, generateServiceSchema } from '../utils/schema-generators';
-import { BookingModal } from '../components/BookingModal';
+import { Suspense, lazy } from 'react';
+
+// Lazy-load BookingModal to avoid adding it to the initial client bundle
+const BookingModal = lazy(() => import('../components/BookingModal').then((m) => ({ default: m.BookingModal })));
 import { Navigation } from '../components/home/Navigation';
 import { Footer } from '../components/Footer';
 import { ScrollToTopButton } from '../components/ScrollToTopButton';
@@ -156,8 +161,8 @@ function formatNote(note: string) {
 
 // Static SEO schemas (defined once to avoid recreating each render)
 const breadcrumbSchema = generateBreadcrumbSchema([
-  { name: 'Home', url: 'https://queensnails.live/' },
-  { name: 'Services', url: 'https://queensnails.live/services' },
+  { name: 'Home', url: 'https://queensobnail.com/' },
+  { name: 'Services', url: 'https://queensobnail.com/services' },
 ]);
 
 const serviceSchemas = [
@@ -236,9 +241,9 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
       <SEO
         title="Services & Pricing - Nail Salon in San Diego"
         description="Explore our nail services: manicures from $20, pedicures from $25, gel nails, dipping powder, nail art, and waxing. Premium quality, expert technicians. Book online!"
-        canonical="https://queensnails.live/services"
+        canonical="https://queensobnail.com/services"
         keywords="nail services San Diego, manicure prices, pedicure prices, gel nails cost, dipping powder, nail art pricing, waxing services"
-        ogImage="https://queensnails.live/og-services.jpg"
+        ogImage="https://queensobnail.com/og-services.jpg"
         schema={[breadcrumbSchema, ...serviceSchemas]}
       />
 
@@ -262,7 +267,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
             <h1 className="text-3xl md:text-5xl mb-4 font-bold bg-linear-to-r from-foreground via-brand-gold to-brand-gold-muted bg-clip-text text-transparent">
               {t('servicesPage.title', 'Services & Pricing')}
             </h1>
-            <p className="text-sm md:text-lg text-muted-foreground max-w-4xl leading-relaxed">
+            <p className="text-sm md:text-lg text-foreground max-w-4xl leading-relaxed">
               {t('servicesPage.subtitle', 'Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.')}
             </p>
           </motion.div>
@@ -309,14 +314,14 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                     {/* Title & Category */}
                     <div className="w-full max-w-2xl">
                       {waxingService.category && stripDiacritics(waxingService.category).toLowerCase() !== stripDiacritics(waxingService.title).toLowerCase() && (
-                        <div className="text-base md:text-lg text-muted-foreground uppercase tracking-wider mb-1">
+                        <div className="text-base md:text-lg text-foreground uppercase tracking-wider mb-1">
                           {waxingService.category}
                         </div>
                       )}
                       <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-1">
                         {waxingService.title}
                       </h2>
-                      <p className="text-base text-muted-foreground leading-relaxed">
+                      <p className="text-base text-foreground leading-relaxed">
                         {waxingService.description}
                       </p>
                     </div>
@@ -327,7 +332,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                 <div className="border-t border-border">
                   <div className="p-4 md:p-5 bg-background">
                     {/* Description */}
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <p className="text-foreground mb-6 leading-relaxed">
                       {waxingService.description}
                     </p>
 
@@ -349,14 +354,14 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                               </div>
                             </div>
                             {item.note && (
-                              <div className="text-[18px] md:text-[20px] text-muted-foreground mt-1 whitespace-normal wrap-break-word">
+                              <div className="text-[18px] md:text-[20px] text-foreground mt-1 whitespace-normal wrap-break-word">
                                 {formatNote(item.note)}
                               </div>
                             )}
                           </div>
                           <div className="text-[20px] md:text-[22px] font-bold whitespace-nowrap shrink-0">
                             <div style={{ color: 'oklch(.592 .249 .584)' }}>{item.price}</div>
-                            {item.duration && <div className="text-sm text-muted-foreground mt-0.5">{item.duration}</div>}
+                            {item.duration && <div className="text-sm text-foreground mt-0.5">{item.duration}</div>}
                           </div>
                         </div>
                       ))}
@@ -378,7 +383,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
               <h3 className="text-2xl md:text-4xl mb-4 text-foreground font-bold">
                 {t('servicesPage.questionsTitle', 'Questions About Our Services?')}
               </h3>
-              <p className="text-muted-foreground mb-8 text-base md:text-lg leading-relaxed">
+              <p className="text-foreground mb-8 text-base md:text-lg leading-relaxed">
                 {t('servicesPage.questionsDesc', 'Our experienced staff is ready to help you choose the perfect service for your needs. Call us or book online!')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -395,7 +400,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                     magicClick(e);
                     handleBookService('Consultation');
                   }}
-                    className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-card border-2 border-border hover:border-brand-gold-muted dark:hover:border-brand-gold text-btn-theme-foreground rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg shadow-lg text-lg font-semibold cursor-pointer relative overflow-hidden group dark:text-white"
+                    className="inline-flex items-center justify-center gap-3 px-8 py-4 group relative overflow-hidden rounded-full transition-all duration-300 hover:scale-105 shadow-2xl text-lg font-semibold cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-[color:var(--btn-sheen)] before:to-transparent before:-skew-x-12 before:translate-x-[-200%] before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[200%] hover:before:via-[color:var(--btn-sheen-hover)]"
                 >
                   <Calendar size={20} className="relative z-10" />
                   <span className="relative z-10">{t('contactSection.bookAppointment', 'Book Appointment')}</span>
@@ -411,11 +416,15 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
       <Footer />
 
       {/* Booking Modal */}
-      <BookingModal
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-        preSelectedService={selectedService}
-      />
+      {isBookingOpen && (
+        <Suspense fallback={null}>
+          <BookingModal
+            isOpen={isBookingOpen}
+            onClose={() => setIsBookingOpen(false)}
+            preSelectedService={selectedService}
+          />
+        </Suspense>
+      )}
 
       {/* Scroll to Top Button */}
       <ScrollToTopButton />
@@ -452,6 +461,7 @@ interface ServiceCardProps {
 
 const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: ServiceCardProps) {
   const accent = getServiceAccent(service.id);
+  const { t } = useLanguage();
 
   return (
     <motion.div
@@ -470,7 +480,7 @@ const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: Se
 
           <div className="flex-1 min-w-0">
             <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-1">{service.title}</h2>
-            <p className="text-base text-muted-foreground leading-relaxed">{service.description}</p>
+            <p className="text-base text-foreground leading-relaxed">{service.description}</p>
           </div>
         </div>
       </div>
@@ -488,17 +498,18 @@ const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: Se
                   <div className="flex items-center gap-2 flex-wrap">
                     <div className="text-[20px] md:text-[22px] font-semibold text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold transition-colors whitespace-normal wrap-break-word">{item.name}</div>
                     {item.bestSeller && (
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-btn-accent/90 text-btn-theme-foreground border border-brand-gold-muted/40 dark:border-brand-gold/30 shadow-sm ring-1 ring-inset ring-white/10 backdrop-blur-md transition-all duration-300 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-lg">
-                        <Star className="w-3.5 h-3.5" />
-                        <span className="text-outline">Best Seller</span>
-                      </span>
+                      <img
+                        src="/assets/badges/best-seller-badge.svg"
+                        alt={t('servicesPage.bestSellerTag', 'Best Seller')}
+                        className="w-9 h-9 object-contain"
+                      />
                     )}
                   </div>
-                  {item.note && <div className="text-[18px] md:text-[20px] text-muted-foreground mt-1 whitespace-normal wrap-break-word">{formatNote(item.note)}</div>}
+                  {item.note && <div className="text-[18px] md:text-[20px] text-foreground mt-1 whitespace-normal wrap-break-word">{formatNote(item.note)}</div>}
                 </div>
                 <div className="text-[20px] md:text-[22px] font-bold whitespace-nowrap shrink-0">
                   <div style={{ color: 'oklch(.592 .249 .584)' }}>{item.price}</div>
-                  {item.duration && <div className="text-sm text-muted-foreground mt-0.5">{item.duration}</div>}
+                  {item.duration && <div className="text-sm text-foreground mt-0.5">{item.duration}</div>}
                 </div>
               </div>
             ))}

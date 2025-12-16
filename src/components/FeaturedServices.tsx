@@ -94,7 +94,7 @@ export function FeaturedServices() {
             Premium Beauty Services
           </h2>
 
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-colors duration-500">
+          <p className="text-xl text-foreground max-w-2xl mx-auto leading-relaxed transition-colors duration-500">
             From expert nail care to luxurious skincare and professional hair services, we offer everything you need to look and feel your absolute best.
           </p>
         </div>
@@ -105,19 +105,19 @@ export function FeaturedServices() {
               <div className="text-4xl font-bold bg-linear-to-r from-brand-gold-soft to-brand-gold bg-clip-text text-transparent mb-2">
                 10+
               </div>
-              <p className="text-muted-foreground">Years of Experience</p>
+              <p className="text-foreground">Years of Experience</p>
             </div>
             <div className="animate-in fade-in slide-in-from-bottom-5 duration-700 delay-400">
               <div className="text-4xl font-bold bg-linear-to-r from-brand-gold-soft to-brand-gold bg-clip-text text-transparent mb-2">
                 5000+
               </div>
-              <p className="text-muted-foreground">Happy Customers</p>
+              <p className="text-foreground">Happy Customers</p>
             </div>
             <div className="animate-in fade-in slide-in-from-bottom-5 duration-700 delay-500">
               <div className="text-4xl font-bold bg-linear-to-r from-brand-gold-soft to-brand-gold bg-clip-text text-transparent mb-2">
                 100%
               </div>
-              <p className="text-muted-foreground">Satisfaction Guaranteed</p>
+              <p className="text-foreground">Satisfaction Guaranteed</p>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export function FeaturedServices() {
                     {service.title}
                   </h3>
 
-                  <p className="text-muted-foreground mb-6 leading-relaxed transition-colors duration-500">
+                  <p className="text-foreground mb-6 leading-relaxed transition-colors duration-500">
                     {service.description}
                   </p>
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useEffect } from 'react';
 
 export interface SEOMetadata {
@@ -30,10 +32,10 @@ export function SEOProvider({ children }: SEOProviderProps) {
       'Premium nail salon in San Diego offering professional nail care, hair services, and skincare treatments. Book your appointment today!',
     keywords:
       'nail salon, nail care, manicure, pedicure, hair salon, skincare, San Diego',
-    ogImage: 'https://queensnails.live/og-image.jpg',
-    ogUrl: 'https://queensnails.live',
+    ogImage: 'https://queensobnail.com/og-image.jpg',
+    ogUrl: 'https://queensobnail.com',
     ogType: 'website',
-    canonical: 'https://queensnails.live/',
+    canonical: 'https://queensobnail.com/',
   });
 
   const updateTitle = (title: string) => {

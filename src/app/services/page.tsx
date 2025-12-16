@@ -1,26 +1,9 @@
-'use client';
+export const dynamic = 'force-dynamic';
 
-import { Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { ServicesPage } from '../../views/ServicesPage';
 
-function ServicesPageInner() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const scrollToService = searchParams?.get('service') ?? undefined;
+export default function Page({ searchParams }: { searchParams?: { service?: string } }) {
+  const scrollToService = searchParams?.service ?? undefined;
 
-  return (
-    <ServicesPage
-      onNavigateHome={() => router.push('/')}
-      scrollToService={scrollToService}
-    />
-  );
-}
-
-export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <ServicesPageInner />
-    </Suspense>
-  );
+  return <ServicesPage scrollToService={scrollToService} />;
 }

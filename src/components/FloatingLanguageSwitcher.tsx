@@ -53,7 +53,7 @@ export function FloatingLanguageSwitcher() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'en'
                   ? 'bg-btn-accent text-btn-theme-foreground shadow-md'
-                  : 'text-muted-foreground hover:bg-secondary'
+                  : 'text-foreground hover:bg-secondary'
               }`}
               title="English"
             >
@@ -65,7 +65,7 @@ export function FloatingLanguageSwitcher() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'zh'
                   ? 'bg-btn-accent text-btn-theme-foreground shadow-md'
-                  : 'text-muted-foreground hover:bg-secondary'
+                  : 'text-foreground hover:bg-secondary'
               }`}
               title="中文"
             >
@@ -77,7 +77,7 @@ export function FloatingLanguageSwitcher() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'vi'
                   ? 'bg-btn-accent text-btn-theme-foreground shadow-md'
-                  : 'text-muted-foreground hover:bg-secondary'
+                  : 'text-foreground hover:bg-secondary'
               }`}
               title="Tiếng Việt"
             >
@@ -89,7 +89,7 @@ export function FloatingLanguageSwitcher() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'fr'
                   ? 'bg-btn-accent text-btn-theme-foreground shadow-md'
-                  : 'text-muted-foreground hover:bg-secondary'
+                  : 'text-foreground hover:bg-secondary'
               }`}
               title="Français"
             >
@@ -101,7 +101,7 @@ export function FloatingLanguageSwitcher() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer ${
                 language === 'es'
                   ? 'bg-btn-accent text-btn-theme-foreground shadow-md'
-                  : 'text-muted-foreground hover:bg-secondary'
+                  : 'text-foreground hover:bg-secondary'
               }`}
               title="Español"
             >

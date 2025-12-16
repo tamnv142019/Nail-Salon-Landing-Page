@@ -21,12 +21,12 @@ interface BusinessSchemaProps {
 export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
   const defaults = {
     name: "Queen's Nails Hair & Skincare",
-    description: "Premier nail salon, hair salon, and skincare services in San Diego",
-    url: "https://queensnails.live",
+    description: "Top-rated nail salon in Ocean Beach, San Diego — top manicures, pedicures, gel nails, and custom nail art.",
+    url: "https://queensobnail.com",
     telephone: "(619) 224-5050",
     address: {
       streetAddress: "4869 Santa Monica Ave",
-      addressLocality: "San Diego",
+      addressLocality: "Ocean Beach, San Diego",
       addressRegion: "CA",
       postalCode: "92107",
       addressCountry: "US"
@@ -35,7 +35,7 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
       latitude: 32.7157,
       longitude: -117.1611
     },
-    image: "https://queensnails.live/logo.png",
+    image: "https://queensobnail.com/logo.png",
     priceRange: "$$"
   };
 
@@ -48,7 +48,7 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
     "description": data.description,
     "url": data.url,
     "telephone": data.telephone,
-    "email": "info@queensnails.live",
+    "email": "info@queensobnail.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": data.address.streetAddress,
@@ -94,7 +94,7 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
     "sameAs": [
       "https://www.facebook.com/profile.php?id=100075740667723",
       "https://www.instagram.com/queensnailssandiego",
-      "https://www.yelp.com/biz/queens-nails-san-diego"
+      "https://www.yelp.com/biz/queen-s-nails-hair-and-skincare-san-diego-2"
     ]
   };
 }
@@ -125,7 +125,7 @@ export function generateServiceSchema(service: ServiceSchemaProps) {
       }
     },
     "description": service.description,
-    "url": service.url || "https://queensnails.live/services",
+    "url": service.url || "https://queensobnail.com/services",
     "areaServed": {
       "@type": "City",
       "name": "San Diego",
@@ -172,7 +172,7 @@ export function generateWebPageSchema(props: {
     "isPartOf": {
       "@type": "WebSite",
       "name": "Queen's Nails Hair & Skincare",
-      "url": "https://queensnails.live"
+      "url": "https://queensobnail.com"
     }
   };
 }

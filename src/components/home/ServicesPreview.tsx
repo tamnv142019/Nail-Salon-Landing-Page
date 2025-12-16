@@ -8,6 +8,21 @@ interface ServicesPreviewProps {
   onBookClick: () => void;
 }
 
+function BestSellerBadge({ label }: { label: string }) {
+  return (
+    <span className="ml-2 flex items-center" aria-hidden>
+      {/* Use public asset to ensure runtime availability in Next.js */}
+      <img
+        src="/assets/badges/best-seller-badge.svg"
+        alt={label}
+        width={84}
+        height={84}
+        className="w-20 h-20 object-contain drop-shadow-lg"
+      />
+    </span>
+  );
+}
+
 const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'manicure',
@@ -17,7 +32,7 @@ const getServices = (t: (key: string, fallback: string) => string) => [
     features: [
       `${t('servicesPage.regularManicure', 'Regular Manicure')} - $20`,
       `${t('servicesPage.europeanManicure', 'European Manicure')} - $25`,
-      `${t('servicesPage.deluxeManicure', 'Deluxe Manicure')} - $30`,
+      `${t('servicesPage.deluxeManicure', 'Deluxe Manicure')} - $30 ${t('servicesPage.bestSellerTag', '(Best Seller)')}`,
       `${t('servicesPage.signatureSpaManicure', 'Signature Spa Manicure')} - $35`,
     ],
   },
@@ -25,14 +40,16 @@ const getServices = (t: (key: string, fallback: string) => string) => [
     id: 'pedicure',
     title: t('servicesPage.pedicureCategory', 'Pedicure Services'),
     image: 'gallery/pedicure.jpg',
-    description: t('servicesPreview.pedicureDesc', 'Luxury spa treatments for your feet with premium products'),
+    description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
     features: [
-      `${t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure')} - $25`,
-      `${t('servicesPage.fullFace', 'Full Face')} - $40`,
-      `${t('servicesPage.bikini', 'Bikini')} - $35`,
-      `${t('servicesPage.chest', 'Chest')} - $35`,
-      `${t('servicesPage.fullArms', 'Full Arms')} - $45`,
-      `${t('servicesPage.halfLegs', 'Half Legs')} - $35`,
+      `${t('servicesPage.regularPedicure', 'Regular Pedicure')} - $25 ${t('servicesPage.bestSellerTag', '(Best Seller)')}`,
+      `${t('servicesPage.regularPedicureFrenchOrTips', 'Regular Pedicure & French or Nail Color Tips')} - $30`,
+      `${t('servicesPage.regularPedicureCallusRemover', 'Regular Pedicure & Callus Remover')} - $35`,
+      `${t('servicesPage.regularPedicureSugarScrub', 'Regular Pedicure & Sugar Scrub')} - $30`,
+      `${t('servicesPage.regularPedicureMask', 'Regular Pedicure & Mask')} - $30`,
+      `${t('servicesPage.regularPedicureParaffin', 'Regular Pedicure & Paraffin')} - $33`,
+      `${t('servicesPage.regularDeluxePedicure', 'Regular Deluxe Pedicure')} - $45`,
+      `${t('servicesPage.regularSignaturePedicure', 'Regular Signature Pedicure')} - $55`,
     ],
   },
   {
@@ -43,7 +60,7 @@ const getServices = (t: (key: string, fallback: string) => string) => [
     features: [
       `${t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder')} - $50`,
       `${t('servicesPage.frenchTipPowder', 'French Tip Powder')} - $55`,
-      `${t('servicesPage.dippingColor', 'Dipping Color')} - $45`,
+      `${t('servicesPage.dippingColor', 'Dipping Color')} - $45 ${t('servicesPage.bestSellerTag', '(Best Seller)')}`,
       `${t('servicesPage.hybridGel', 'Hybrid Gel')} - $60`,
       `${t('servicesPage.gelX', 'Gel X')} - $60`,
     ],
@@ -51,15 +68,17 @@ const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'waxing',
     title: t('servicesPage.waxingCategory', 'Waxing Services'),
-    image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YXhpbmclMjBzcGF8ZW58MXx8fHwxNzY1MjkyOTcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    description: t('servicesPreview.waxingDesc', 'Smooth & professional hair removal services'),
+    image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHdheGluZyUyMHNwYXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    description: t('servicesPage.waxingDesc', 'Smooth and professional hair removal services for your entire body.'),
     features: [
       `${t('servicesPage.fullLegs', 'Full Legs')} - $60`,
       `${t('servicesPage.fullBack', 'Full Back')} - $45`,
       `${t('servicesPage.brazilian', 'Brazilian')} - $60`,
       `${t('servicesPage.fullFace', 'Full Face')} - $40`,
+      `${t('servicesPage.bikini', 'Bikini')} - $35`,
+      `${t('servicesPage.chest', 'Chest')} - $35`,
       `${t('servicesPage.fullArms', 'Full Arms')} - $45`,
-      `${t('servicesPage.eyebrows', 'Eyebrows')} - $15`,
+      `${t('servicesPage.halfLegs', 'Half Legs')} - $35`,
     ],
   },
   {
@@ -115,7 +134,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
               <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
                 {t('services.heading', 'Our Services')}
               </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto">
                 {t('home.services.subtitle', 'Discover our premium beauty services designed to make you look and feel amazing')}
               </p>
             </motion.div>
@@ -203,7 +222,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
 
               {/* Content */}
               <div className="p-6 md:p-8">
-                <p className="text-muted-foreground mb-6 text-base md:text-lg leading-relaxed">
+                <p className="text-foreground mb-6 text-base md:text-lg leading-relaxed">
                   {selectedService.description}
                 </p>
 
@@ -213,12 +232,22 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                     {t('home.services.whatsIncluded', "What's Included:")}
                   </h4>
                   <div className="space-y-2">
-                    {selectedService.features.map((feature, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-brand-gold shrink-0"></div>
-                        <span className="text-foreground-secondary">{feature}</span>
-                      </div>
-                    ))}
+                    {selectedService.features.map((feature, index) => {
+                      const bsTag = t('servicesPage.bestSellerTag', '(Best Seller)');
+                      const hasBadge = feature.includes(bsTag);
+                      const text = hasBadge ? feature.replace(bsTag, '').trim() : feature;
+                      const bsLabel = bsTag.replace(/^[\(\[]+|[\)\]]+$/g, '').trim();
+
+                      return (
+                        <div key={index} className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-brand-gold shrink-0"></div>
+                          <div className="flex items-center gap-3">
+                            <span className="text-foreground-secondary">{text}</span>
+                            {hasBadge && <BestSellerBadge label={bsLabel} />}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -238,7 +267,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                       setSelectedService(null);
                       onBookClick();
                     }}
-                    className="flex-1 px-6 py-3 bg-card hover:bg-secondary dark:hover:bg-secondary text-foreground rounded-full transition-all duration-300 hover:scale-105 font-semibold cursor-pointer border border-border"
+                    className="flex-1 relative overflow-hidden px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg font-semibold cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-[color:var(--btn-sheen)] before:to-transparent before:-skew-x-12 before:translate-x-[-200%] before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[200%] hover:before:via-[color:var(--btn-sheen-hover)]"
                   >
                     {t('home.services.bookNow', 'Book Now')}
                   </button>

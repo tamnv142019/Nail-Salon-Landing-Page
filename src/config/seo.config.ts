@@ -36,13 +36,13 @@ export interface BusinessInfo {
 export const businessInfo: BusinessInfo = {
   name: "Queen's Nails Hair & Skincare",
   description:
-    'Premium nail salon, hair salon, and skincare services in San Diego',
-  url: 'https://queensnails.live',
-  email: 'info@queensnails.live',
+    'Top-rated nail salon in Ocean Beach, San Diego — best manicures, pedicures, gel nails, and nail art.',
+  url: 'https://queensobnail.com',
+  email: 'info@queensobnail.com',
   phone: '(619) 224-5050',
   address: {
     streetAddress: '4869 Santa Monica Ave',
-    addressLocality: 'San Diego',
+    addressLocality: 'Ocean Beach, San Diego',
     addressRegion: 'CA',
     postalCode: '92107',
     addressCountry: 'US',
@@ -52,10 +52,8 @@ export const businessInfo: BusinessInfo = {
     longitude: -117.1611,
   },
   social: {
-    facebook: 'https://www.facebook.com/queensnails',
-    instagram: 'https://www.instagram.com/queensnails',
-    yelp: 'https://www.yelp.com/biz/queens-nails',
-    twitter: 'https://twitter.com/queensnails',
+    facebook: 'https://www.facebook.com/profile.php?id=100075740667723',
+    yelp: 'https://www.yelp.com/biz/queen-s-nails-hair-and-skincare-san-diego-2',
   },
   openingHours: [
     {
@@ -95,22 +93,22 @@ export interface PageSEOConfig {
 
 export const pageConfigs: Record<string, PageSEOConfig> = {
   home: {
-    title: "Queen's Nails Hair & Skincare - Premium Nail Salon in San Diego",
+    title: "Best Nail Salon in Ocean Beach, San Diego — Queen's Nails Hair & Skincare",
     description:
-      "Premium nail salon in San Diego offering professional nail care, hair services, and skincare treatments. Book your appointment today!",
+      "Discover the best nail salon in Ocean Beach, San Diego — top-rated manicures, pedicures, gel nails, and bespoke nail art. Book with Queen's Nails Hair & Skincare today!",
     keywords: [
-      'nail salon',
-      'nail care',
+      'best nail salon',
+      'top nail salon',
+      'Ocean Beach nails',
+      'nail salon Ocean Beach',
+      'nails Ocean Beach CA',
+      'nail salon San Diego',
       'manicure',
       'pedicure',
-      'hair salon',
-      'skincare',
-      'San Diego',
-      'beauty salon',
-      'nail polish',
-      'gel manicure',
+      'gel nails',
+      'nail art',
     ],
-    canonical: 'https://queensnails.com/',
+    canonical: 'https://queensobnail.com/',
     ogType: 'website',
   },
   services: {
@@ -129,7 +127,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
       'nail art',
       'San Diego salon',
     ],
-    canonical: 'https://queensnails.com/services',
+    canonical: 'https://queensobnail.com/services',
     ogType: 'website',
   },
   about: {
@@ -143,7 +141,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
       'San Diego nail salon',
       'salon experience',
     ],
-    canonical: 'https://queensnails.com/about',
+    canonical: 'https://queensobnail.com/about',
     ogType: 'business.business',
   },
   contact: {
@@ -158,7 +156,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
       'salon phone',
       'salon location',
     ],
-    canonical: 'https://queensnails.com/contact',
+    canonical: 'https://queensobnail.com/contact',
     ogType: 'business.business',
   },
 };
@@ -295,7 +293,7 @@ export const seoKeywords = {
     'acne treatment',
     'facial cleanser',
   ],
-  location: ['San Diego', 'nail salon near me', 'beauty salon San Diego'],
+  location: ['Ocean Beach', 'Ocean Beach San Diego', 'San Diego', 'nail salon Ocean Beach', 'nail salon near me', 'beauty salon San Diego'],
   intent: [
     'book appointment',
     'schedule',
@@ -369,7 +367,7 @@ export function generateBusinessSchema() {
       latitude: businessInfo.geo.latitude,
       longitude: businessInfo.geo.longitude,
     },
-    image: 'https://queensnails.com/logo.png',
+    image: 'https://queensobnail.com/logo.png',
     priceRange: '$$',
     openingHoursSpecification: businessInfo.openingHours.map((hours) => ({
       '@type': 'OpeningHoursSpecification',

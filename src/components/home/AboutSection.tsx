@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from 'motion/react';
 import { Award, Heart, Users, Clock } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -42,7 +44,7 @@ export function AboutSection() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-foreground">10+</div>
-                  <div className="text-sm text-muted-foreground">{t('aboutStats.yearsOfExcellence', 'Years of Excellence')}</div>
+                  <div className="text-sm text-foreground">{t('aboutStats.yearsOfExcellence', 'Years of Excellence')}</div>
                 </div>
               </div>
             </div>
@@ -58,10 +60,10 @@ export function AboutSection() {
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 whitespace-nowrap">
               {t('home.about.title', 'About Us')}
             </h2>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-lg text-foreground mb-6 leading-relaxed">
               {t('home.about.text1', 'Since 2015, Queen\'s Nails Hair & Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.')}
             </p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-lg text-foreground mb-8 leading-relaxed">
               {t('home.about.text2', 'Our team of experienced professionals is dedicated to providing you with the highest quality treatments using premium products and the latest techniques. From classic manicures to intricate nail art, we ensure every visit leaves you feeling pampered and beautiful.')}
             </p>
 
@@ -75,7 +77,7 @@ export function AboutSection() {
                   <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-foreground">
                     {t(stat.labelKey, stat.labelKey)}
                   </div>
                 </div>
@@ -96,7 +98,7 @@ export function AboutSection() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <span className="text-muted-foreground">{t(featureKey, featureKey)}</span>
+                  <span className="text-foreground">{t(featureKey, featureKey)}</span>
                 </div>
               ))}
             </div>

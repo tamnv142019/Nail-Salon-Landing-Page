@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { X } from 'lucide-react';
@@ -29,6 +31,10 @@ const galleryImages = [
   '/gallery/o (10).jpg',
   '/gallery/o (11).jpg',
   '/gallery/o(12).jpg',
+  '/gallery/o(15).jpg',
+  '/gallery/o(16).jpg',
+  '/gallery/o(17).jpg',
+  '/gallery/o(18).jpg',
 ];
 
 export function GallerySection() {
@@ -60,7 +66,7 @@ export function GallerySection() {
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
               {t('gallerySection.title', 'Our Work')}
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto">
               {t('gallerySection.subtitle', 'Browse our gallery of beautiful nails and satisfied clients')}
             </p>
           </motion.div>

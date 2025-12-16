@@ -1,3 +1,5 @@
+'use client';
+
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, X, ExternalLink, Navigation, MessageCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { BookingModal } from './BookingModal';
@@ -163,7 +165,7 @@ export function Contact() {
             <h2 className="text-5xl md:text-6xl mb-6 bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
               Get in Touch
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-foreground max-w-2xl mx-auto">
               We'd love to hear from you. Visit us, call us, or send us a message.
             </p>
           </div>
@@ -185,7 +187,7 @@ export function Contact() {
                 </div>
                 <h3 className="text-xl text-foreground mb-2">{info.title}</h3>
                 <p className="text-foreground mb-1 font-medium">{info.content}</p>
-                <p className="text-sm text-muted-foreground mb-4">{info.subContent}</p>
+                <p className="text-sm text-foreground mb-4">{info.subContent}</p>
                 <a
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
@@ -212,7 +214,7 @@ export function Contact() {
                 <div className="space-y-2">
                   {businessHours.map((schedule, idx) => (
                     <div key={idx} className="flex items-center justify-between gap-8">
-                      <span className="text-muted-foreground">{schedule.day}</span>
+                      <span className="text-foreground">{schedule.day}</span>
                       <span className="text-foreground font-medium">{schedule.hours}</span>
                     </div>
                   ))}
@@ -222,7 +224,7 @@ export function Contact() {
                 <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full ${
                   isOpen 
                     ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' 
-                    : 'bg-secondary text-muted-foreground border border-border'
+                    : 'bg-secondary text-foreground border border-border'
                 } mb-4`}>
                   <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-muted-foreground'}`}></div>
                   <span className="font-semibold">{isOpen ? 'Open Now' : 'Closed Now'}</span>
@@ -260,7 +262,7 @@ export function Contact() {
                     <CheckCircle className="text-emerald-600 dark:text-emerald-400" size={40} />
                   </div>
                   <h4 className="text-2xl text-foreground mb-2">Message Sent!</h4>
-                  <p className="text-muted-foreground">
+                  <p className="text-foreground">
                     We'll get back to you within 24 hours.
                   </p>
                 </div>
@@ -268,7 +270,7 @@ export function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {/* Name */}
                   <div>
-                    <label className="block text-muted-foreground mb-2">
+                    <label className="block text-foreground mb-2">
                       Full Name *
                     </label>
                     <input
@@ -287,7 +289,7 @@ export function Contact() {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-muted-foreground mb-2">
+                    <label className="block text-foreground mb-2">
                       Email Address *
                     </label>
                     <input
@@ -306,7 +308,7 @@ export function Contact() {
 
                   {/* Phone */}
                   <div>
-                    <label className="block text-muted-foreground mb-2">
+                    <label className="block text-foreground mb-2">
                       Phone Number *
                     </label>
                     <input
@@ -325,7 +327,7 @@ export function Contact() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-muted-foreground mb-2">
+                    <label className="block text-foreground mb-2">
                       Message *
                     </label>
                     <textarea
@@ -380,7 +382,7 @@ export function Contact() {
                   </div>
                   <h3 className="text-2xl text-foreground">Find Us</h3>
                 </div>
-                <p className="text-muted-foreground mb-4">
+                <p className="text-foreground mb-4">
                   Located in the heart of Ocean Beach, San Diego
                 </p>
               </div>

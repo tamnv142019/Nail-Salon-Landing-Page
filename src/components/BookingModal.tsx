@@ -1,3 +1,5 @@
+"use client";
+
 import { X, Calendar, Clock, User, Phone, Check, Sparkles, Mail } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -136,16 +138,16 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                 <Check className="text-brand-emerald" size={40} />
               </div>
               <h3 className="text-2xl mb-4 text-foreground">{t('booking.successTitle', 'Booking Confirmed!')}</h3>
-              <p className="text-muted-foreground mb-2">
+              <p className="text-foreground mb-2">
                 {t('common.thankYou', 'Thank you')}, {formData.name}!
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-foreground">
                 {t('booking.successMessage', 'Your appointment has been successfully booked.')}
               </p>
               <p className="text-foreground mt-2">
                 {new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {selectedTime}
               </p>
-              <p className="text-sm text-muted-foreground mt-6">
+              <p className="text-sm text-foreground mt-6">
                 We'll call you at {formData.phone} to confirm
               </p>
             </div>
@@ -162,7 +164,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-muted-foreground transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300"
                   placeholder="Enter your name"
                 />
               </div>
@@ -178,7 +180,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-muted-foreground transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -194,7 +196,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-muted-foreground transition-all duration-300"
+                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300"
                   placeholder="(619) 224-5050"
                 />
               </div>
@@ -219,7 +221,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   <button
                     type="button"
                     aria-label={t('booking.openDatePicker', 'Open date picker')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-xl text-muted-foreground hover:bg-black/5 dark:text-brand-light/90 dark:hover:bg-white/10 transition"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-xl text-foreground hover:bg-black/5 dark:text-brand-light/90 dark:hover:bg-white/10 transition"
                     onClick={() => {
                       const input = dateInputRef.current;
                       if (!input) return;

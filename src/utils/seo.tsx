@@ -185,7 +185,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
             <a href={item.url} className="text-brand-gold-muted hover:text-brand-gold">
               {item.name}
             </a>
-            {index < items.length - 1 && <span className="text-muted-foreground">/</span>}
+            {index < items.length - 1 && <span className="text-foreground">/</span>}
           </div>
         ))}
       </nav>
@@ -389,9 +389,9 @@ export function ArticleSchema({
     publisher: {
       '@type': 'Organization',
       name: publisher,
-      logo: {
+        logo: {
         '@type': 'ImageObject',
-        url: 'https://queensnails.com/logo.png',
+        url: 'https://queensobnail.com/logo.png',
       },
     },
   };

@@ -1,4 +1,7 @@
+"use client";
+
 import { Helmet } from 'react-helmet-async';
+import { businessInfo } from '../../config/seo.config';
 
 interface SEOProps {
   title: string;
@@ -14,8 +17,8 @@ interface SEOProps {
 export function SEO({
   title,
   description,
-  canonical = 'https://queensnails.live/',
-  ogImage = 'https://queensnails.live/og-image.jpg',
+  canonical = businessInfo.url,
+  ogImage = `${businessInfo.url}/og-image.jpg`,
   ogType = 'website',
   keywords,
   schema,

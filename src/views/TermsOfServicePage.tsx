@@ -13,7 +13,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
   const schema = generateWebPageSchema({
     name: "Terms of Service - Queen's Nails Hair & Skincare",
     description: "Terms of service for Queen's Nails Hair & Skincare. Review our service terms, policies, and guidelines.",
-    url: "https://queensnails.live/terms"
+    url: "https://queensobnail.com/terms"
   });
 
   return (
@@ -21,7 +21,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
       <SEO
         title="Terms of Service"
         description="Terms of service for Queen's Nails Hair & Skincare. Review our service terms, policies, and guidelines."
-        canonical="https://queensnails.live/terms"
+        canonical="https://queensobnail.com/terms"
         noindex={true}
         schema={schema}
       />
@@ -31,7 +31,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
       <header className="sticky top-0 z-50 bg-background text-foreground shadow-lg border-b border-border">
         <div className="max-w-5xl mx-auto px-6 py-6">
           <h1 className="text-4xl font-bold">{t('terms.title', 'Terms of Service')}</h1>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-foreground mt-2">
             {t('terms.effectiveDate', 'Effective Date')}: {t('terms.date', 'December 12, 2025')}
           </p>
         </div>
@@ -70,7 +70,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
                 <li>{t('terms.services.item4', 'Skincare treatments')}</li>
                 <li>{t('terms.services.item5', 'Spa and relaxation services')}</li>
               </ul>
-              <p className="leading-relaxed text-muted-foreground">
+              <p className="leading-relaxed text-foreground">
                 {t('terms.services.disclaimer', 
                   'Services and pricing are subject to change. We reserve the right to modify, suspend, or discontinue any service at any time without prior notice.'
                 )}
@@ -271,7 +271,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
-                <p>Email: info@queensnails.com</p>
+                <p>Email: info@queensobnail.com</p>
               </div>
             </section>
 

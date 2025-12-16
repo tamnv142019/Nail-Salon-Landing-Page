@@ -114,7 +114,7 @@ export function Testimonials() {
             Client Love Stories
           </h2>
           
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed transition-colors duration-500">
+          <p className="text-xl text-foreground max-w-2xl mx-auto leading-relaxed transition-colors duration-500">
             Don{"'"}t just take our word for it - hear from our satisfied clients.
           </p>
         </div>
@@ -140,7 +140,7 @@ export function Testimonials() {
             </div>
             <div className="text-left">
               <p className="text-2xl text-foreground mb-1">500+ Happy Clients</p>
-              <p className="text-muted-foreground text-sm">Join them today!</p>
+              <p className="text-foreground text-sm">Join them today!</p>
             </div>
           </div>
         </div>

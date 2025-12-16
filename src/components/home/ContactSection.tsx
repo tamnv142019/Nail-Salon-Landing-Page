@@ -1,3 +1,4 @@
+'use client';
 import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, XCircle } from 'lucide-react';
 import { useMemo } from 'react';
@@ -73,7 +74,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
               {t('contactSection.title', 'Visit Us Today')}
             </h2>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-lg text-foreground mb-8 leading-relaxed">
               {t('contactSection.subtitle', 'We\'re conveniently located in Ocean Beach, San Diego. Walk-ins welcome, but appointments are recommended for your preferred time slot.')}
             </p>
 
@@ -88,7 +89,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <Phone className="text-current" size={20} />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">{t('contactSection.phone', 'Phone')}</div>
+                  <div className="text-sm text-foreground mb-1">{t('contactSection.phone', 'Phone')}</div>
                   <div className="text-lg font-semibold text-foreground">(619) 224-5050</div>
                 </div>
               </a>
@@ -102,7 +103,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <Mail className="text-current" size={20} />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">{t('contactSection.email', 'Email')}</div>
+                  <div className="text-sm text-foreground mb-1">{t('contactSection.email', 'Email')}</div>
                   <div className="text-lg font-semibold text-foreground">helenpham505@gmail.com</div>
                 </div>
               </a>
@@ -118,7 +119,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <MapPin className="text-current" size={20} />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">{t('contactSection.location', 'Address')}</div>
+                  <div className="text-sm text-foreground mb-1">{t('contactSection.location', 'Address')}</div>
                   <div className="text-lg font-semibold text-foreground">
                     4869 Santa Monica Ave<br />San Diego, CA 92107
                   </div>
@@ -166,7 +167,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                     whileHover={{ opacity: 1, x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <span className="text-muted-foreground">{t(item.dayKey, item.dayKey)}</span>
+                    <span className="text-foreground">{t(item.dayKey, item.dayKey)}</span>
                     <span className="font-semibold text-foreground">{item.hours}</span>
                   </motion.div>
                 ))}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://queensobnail.com/sitemap.xml
+
+# Block private paths
+Disallow: /api/

@@ -3,6 +3,8 @@
  * Custom React hook for managing SEO metadata and dynamic page titles
  */
 
+"use client";
+
 import { useEffect } from 'react';
 import { PageSEOConfig } from '../config/seo.config';
 

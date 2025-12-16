@@ -58,7 +58,7 @@ export function TestimonialsSection() {
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
               {t('testimonialsSection.title', 'What Our Clients Say')}
             </h2>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground max-w-3xl mx-auto">
               {t('testimonialsSection.subtitle', 'Don\'t just take our word for it - hear from our satisfied customers')}
             </p>
           </motion.div>
@@ -90,7 +90,7 @@ export function TestimonialsSection() {
               </div>
 
               {/* Text */}
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed italic">
+              <p className="text-xl md:text-2xl text-foreground mb-8 leading-relaxed italic">
                 "{testimonials[currentIndex].text}"
               </p>
 
@@ -99,7 +99,7 @@ export function TestimonialsSection() {
                 <div className="text-lg md:text-xl font-bold text-foreground mb-1">
                   {testimonials[currentIndex].name}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-foreground">
                   {testimonials[currentIndex].service}
                 </div>
               </div>
