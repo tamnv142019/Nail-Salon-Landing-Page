@@ -29,8 +29,8 @@ export function AboutSection() {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1595944024804-733665a112db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBuYWlsJTIwc2Fsb24lMjBpbnRlcmlvcnxlbnwxfHx8fDE3NjUyNzM3NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Queen's Nails Hair & Skincare Interior"
+                src="/background/2.jpg"
+                alt="Queens OB Nail salon interior"
                 className="w-full h-125 object-cover"
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"></div>
