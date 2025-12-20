@@ -99,15 +99,25 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
           </p>
 
           {/* Location */}
-          {/* Mobile phone (mobile-only, above address) */}
+          {/* Phone (visible on all screen sizes) with hover ring + pulse */}
           <a
             href={`tel:${'+1' + businessInfo.phone.replace(/[^0-9]/g, '')}`}
-            className="block md:hidden text-base mb-4 transition-colors duration-200 group"
+            className="block text-base mb-4 transition-colors duration-200 group"
             aria-label={`Call ${businessInfo.phone}`}
           >
             <span className="relative inline-flex items-center justify-center gap-2">
-              {/* Hover-activated pulsing ring */}
-              <span className="absolute inline-flex h-10 w-10 rounded-full bg-red-500/30 opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 group-hover:animate-ping" />
+              {/* Decorative ring outline that grows on hover */}
+              <span
+                aria-hidden="true"
+                className="absolute -inset-2 rounded-full border-2 border-red-500 opacity-0 scale-90 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-100"
+              />
+
+              {/* Pulsing background ring */}
+              <span
+                aria-hidden="true"
+                className="absolute inline-flex h-10 w-10 rounded-full bg-red-500/20 opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 group-hover:animate-ping"
+              />
+
               <span className="relative z-10 flex items-center gap-2 text-red-600 transition-colors duration-200 group-hover:text-red-700">
                 <Phone size={18} />
                 <span className="font-semibold">{businessInfo.phone}</span>
