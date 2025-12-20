@@ -11,20 +11,20 @@ export function FloatingCallButton() {
     <a
       href={`tel:${phoneDigits}`}
       aria-label={`Call ${businessInfo.phone}`}
-      className="fixed bottom-6 left-6 z-50 inline-flex items-center gap-3"
+      className="fixed bottom-6 left-6 z-50 inline-flex items-center gap-3 group"
     >
-      <div className="group relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl transition-transform duration-300 hover:scale-105 hover:bg-red-700 animate-sway">
+      <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl transition-transform duration-300 hover:scale-105 hover:bg-red-700 animate-sway group-hover:scale-105">
         <Phone size={20} className="relative z-10" />
 
         {/* Continuous ring (always visible) */}
-        <span className="absolute inset-0 rounded-full opacity-60 transform scale-100 border-2 border-red-400/40 animate-pulse" />
+        <span className="absolute inset-0 rounded-full opacity-60 transform scale-100 border-2 border-red-400/40 animate-pulse transition-opacity duration-300 group-hover:opacity-90" />
 
         {/* Subtle continuous ping behind the button */}
-        <span className="absolute -inset-3 rounded-full bg-red-600/16 opacity-30 animate-ping" />
+        <span className="absolute -inset-3 rounded-full bg-red-600/16 opacity-30 animate-ping transition-opacity duration-300 group-hover:opacity-60" />
       </div>
 
       {/* Phone number pill - visible on all sizes, responsive padding/text */}
-      <span className="inline-flex items-center px-2 py-1 rounded-lg bg-red-700 text-white text-sm font-semibold shadow-lg select-none md:px-3 md:py-2 md:text-base animate-sway">
+      <span className="inline-flex items-center px-2 py-1 rounded-lg bg-red-700 text-white text-sm font-semibold shadow-lg select-none md:px-3 md:py-2 md:text-base animate-sway-float transition-transform duration-300 ease-out transform group-hover:-translate-y-1 group-hover:scale-105 group-hover:bg-red-800">
         {businessInfo.phone}
       </span>
     </a>

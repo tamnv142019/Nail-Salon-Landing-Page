@@ -625,12 +625,27 @@ select option {
     animation: sway 2.6s ease-in-out infinite;
   }
 
+  .animate-float-up {
+    animation: float-up 3s ease-in-out infinite;
+  }
+
+  .animate-sway-float {
+    animation: sway 2.6s ease-in-out infinite, float-up 3s ease-in-out infinite;
+  }
+
   @keyframes sway {
     0% { transform: translateY(0) rotate(0deg); }
     25% { transform: translateY(-3px) rotate(-2deg); }
     50% { transform: translateY(0) rotate(0deg); }
     75% { transform: translateY(3px) rotate(2deg); }
     100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  @keyframes float-up {
+    0% { transform: translateY(0); }
+    45% { transform: translateY(-4px); }
+    55% { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
   }
 }
 
@@ -644,7 +659,9 @@ select option {
   .animate-fade-down,
   .animate-scale-in,
   .animate-float-soft,
-  .animate-sway {
+  .animate-sway,
+  .animate-float-up,
+  .animate-sway-float {
     animation: none !important;
   }
 }
