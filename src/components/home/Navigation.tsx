@@ -211,6 +211,14 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                 <span className="text-sm font-semibold">{t('servicesPage.bookNow', 'Book Now')}</span>
               </div>
             </button>
+            {/* Mobile menu toggle (hamburger) */}
+            <button
+              onClick={() => setIsMobileMenuOpen((s) => !s)}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              className="lg:hidden flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ease-out cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </div>
 
@@ -257,12 +265,6 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                   className="flex items-center justify-center w-11 h-11 bg-background/70 text-foreground rounded-xl backdrop-blur-xl border border-border/40 cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-                <button
-                  onClick={() => { setIsMobileMenuOpen(false); onBookClick(); }}
-                  className="ml-2 w-full inline-flex items-center justify-center px-4 py-3 rounded-xl bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] font-semibold shadow-sm animate-sway"
-                >
-                  {t('servicesPage.bookNow', 'Book Now')}
                 </button>
               </div>
             </div>

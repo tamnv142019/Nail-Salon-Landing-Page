@@ -34,22 +34,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gtagId = process.env.NEXT_PUBLIC_GTAG_ID || 'G-2E6K5EK8E1';
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-PLDJTM4B';
 
   return (
     <html lang="en" className={roboto.className}>
         <body className="antialiased" style={{ fontWeight: 'var(--font-weight-normal)' }}>
-        {gtagId ? (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}></script>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${gtagId}');`,
-              }}
-            />
-          </>
+        {gtmId ? (
+          <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
         ) : null}
+        {/* GA4 gtag removed — tracking now handled via Google Tag Manager */}
         <Providers>{children}</Providers>
         <TopCTAs />
         {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
