@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "convert-images": "node scripts/convert-images.js"
   },
   "dependencies": {
     "@next/third-parties": "^16.1.0",

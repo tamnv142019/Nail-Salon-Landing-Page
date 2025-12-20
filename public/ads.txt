@@ -1,0 +1,10 @@
+# ads.txt for queensobnail.com
+# Add authorized digital sellers below. Replace placeholder publisher IDs with your real IDs.
+# Example Google AdSense/Ad Manager seller (replace pub-0000000000000000):
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+
+# Example reseller entry (if applicable):
+# example.com, 123456, RESELLER
+
+# For more information: https://iabtechlab.com/ads-txt/
+# After updating, deploy or run your site and verify https://queensobnail.com/ads.txt serves this file.

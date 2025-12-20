@@ -35,8 +35,7 @@ export interface BusinessInfo {
 
 export const businessInfo: BusinessInfo = {
   name: "Queen's Nails Hair & Skincare",
-  description:
-    'Top-rated nail salon in Ocean Beach, San Diego — best manicures, pedicures, gel nails, and nail art.',
+  description: "Experience luxury nail care and beauty at Queen’s Nails Hair & Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
   url: 'https://queensobnail.com',
   email: 'info@queensobnail.com',
   phone: '(619) 224-5050',
@@ -95,7 +94,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
   home: {
     title: "Best Nail Salon in Ocean Beach, San Diego — Queen's Nails Hair & Skincare",
     description:
-      "Discover the best nail salon in Ocean Beach, San Diego — top-rated manicures, pedicures, gel nails, and bespoke nail art. Book with Queen's Nails Hair & Skincare today!",
+      "Experience luxury nail care and beauty at Queen’s Nails Hair & Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
     keywords: [
       'best nail salon',
       'top nail salon',
@@ -405,6 +404,51 @@ export function generateFAQSchema() {
         '@type': 'Answer',
         text: faq.answer,
       },
+    })),
+  };
+}
+
+/**
+ * Generate Service schemas for each service offered
+ */
+export function generateServiceSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': services.map((s) => ({
+      '@type': 'Service',
+      '@id': `${businessInfo.url}/#service-${s.id}`,
+      name: s.name,
+      description: s.description,
+      serviceType: s.category,
+      provider: {
+        '@type': 'BeautySalon',
+        name: businessInfo.name,
+        '@id': `${businessInfo.url}/#salon`,
+      },
+    })),
+  };
+}
+
+/**
+ * Generate a site-level BreadcrumbList. This is static site-wide; pages can extend it if needed.
+ */
+export function generateBreadcrumbSchema() {
+  const items = [
+    { position: 1, name: 'Home', item: businessInfo.url },
+    { position: 2, name: 'Services', item: `${businessInfo.url}/services` },
+    { position: 3, name: 'Gallery', item: `${businessInfo.url}/gallery` },
+    { position: 4, name: 'Book', item: `${businessInfo.url}/book` },
+    { position: 5, name: 'Contact', item: `${businessInfo.url}/contact` },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it) => ({
+      '@type': 'ListItem',
+      position: it.position,
+      name: it.name,
+      item: it.item,
     })),
   };
 }

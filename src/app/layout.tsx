@@ -6,7 +6,7 @@ import { TopCTAs } from '../components/ScrollToTopButton';
 import { FloatingCallButton } from '../components/FloatingCallButton';
 import { Roboto } from 'next/font/google';
 import { GoogleTagManager } from '@next/third-parties/google';
-import { seoConfig } from '../config/seo.config';
+import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from '../config/seo.config';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
 
@@ -28,6 +28,29 @@ export const metadata: Metadata = {
     ],
   },
   themeColor: seoConfig.metaTags?.themeColor || '#be123c',
+  openGraph: {
+    title: "Queen's Nails Hair & Skincare",
+    description:
+      "Premier nail salon in San Diego offering luxury manicures, pedicures, nail art, and spa services.",
+    url: businessInfo.url,
+    siteName: businessInfo.name,
+    images: [
+      {
+        url: 'https://queensobnail.com/logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: businessInfo.name,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Queen's Nails Hair & Skincare",
+    description:
+      "Premier nail salon in San Diego offering luxury manicures, pedicures, nail art, and spa services.",
+    images: ['https://queensobnail.com/logo.jpg'],
+  },
 };
 
 export default function RootLayout({
@@ -36,9 +59,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-PLDJTM4B';
+  // Build JSON-LD payloads based on configuration flags
+  const ld: Array<string> = [];
+  if (seoConfig.structuredData?.enableOrganizationSchema || seoConfig.structuredData?.enableLocalBusinessSchema) {
+    ld.push(JSON.stringify(generateBusinessSchema(), null, 2));
+  }
+
+  if (seoConfig.structuredData?.enableFAQSchema) {
+    ld.push(JSON.stringify(generateFAQSchema(), null, 2));
+  }
+
+  if (seoConfig.structuredData?.enableServiceSchema) {
+    ld.push(JSON.stringify(generateServiceSchema(), null, 2));
+  }
+
+  if (seoConfig.structuredData?.enableBreadcrumbSchema) {
+    ld.push(JSON.stringify(generateBreadcrumbSchema(), null, 2));
+  }
 
   return (
     <html lang="en" className={roboto.className}>
+      <head>
+        {ld.map((d, i) => (
+          <script
+            key={`ld-${i}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: d }}
+          />
+        ))}
+      </head>
         <body className="antialiased" style={{ fontWeight: 'var(--font-weight-normal)' }}>
         {gtmId ? (
           <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />

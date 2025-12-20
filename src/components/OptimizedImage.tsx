@@ -23,38 +23,60 @@ export function OptimizedImage({
   onClick,
   priority = false,
 }: OptimizedImageProps) {
-  // Convert Unsplash URLs to include format parameters
-  const getOptimizedUrl = (url: string, size: 'thumb' | 'medium' | 'large' = 'large') => {
+  // Determine if the URL is local (in /public) or external
+  const isLocal = (u: string) => u.startsWith('/') || !u.match(/^https?:\/\//);
+
+  const sizeMap = { thumb: 400, medium: 800, large: 1200 } as const;
+
+  const buildUrl = (url: string, size: keyof typeof sizeMap | null, fmt?: 'webp' | 'avif') => {
+    // Unsplash: use query params to request width and format
     if (url.includes('unsplash.com')) {
-      const sizeMap = { thumb: 400, medium: 800, large: 1200 };
-      const params = `&w=${sizeMap[size]}&q=85&fm=webp`;
-      
-      if (url.includes('?')) {
-        return url + params;
-      }
+      const w = size ? sizeMap[size] : sizeMap.large;
+      const params = `&w=${w}&q=85${fmt ? `&fm=${fmt}` : ''}`;
+      if (url.includes('?')) return url + params;
       return url + '?' + params.substring(1);
     }
+
+    // Local images in /public: expect generated variants like `image-400.avif` or `image-800.webp`.
+    if (isLocal(url)) {
+      const extMatch = url.match(/(\.[a-zA-Z0-9]+)(?:\?|$)/);
+      const ext = extMatch ? extMatch[1] : '';
+      const base = url.replace(/\.[^/.]+(\?.*)?$/, '');
+      if (size) {
+        const fmtExt = fmt ? `.${fmt}` : ext;
+        return `${base}-${sizeMap[size]}${fmtExt}`;
+      }
+      // no size requested: return the large fallback (1200)
+      const fallbackExt = fmt ? `.${fmt}` : ext;
+      return `${base}-${sizeMap.large}${fallbackExt}`;
+    }
+
+    // External non-Unsplash: append format param if requested
+    if (fmt) return url + (url.includes('?') ? `&fm=${fmt}` : `?fm=${fmt}`);
     return url;
   };
 
   const imageSizes = `(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw`;
 
+  const makeSrcSet = (fmt?: 'webp' | 'avif') => {
+    return [
+      `${buildUrl(src, 'thumb', fmt)} 400w`,
+      `${buildUrl(src, 'medium', fmt)} 800w`,
+      `${buildUrl(src, 'large', fmt)} 1200w`,
+    ].join(',\n          ');
+  };
+
   return (
     <picture>
-      {/* WebP format for modern browsers */}
-      <source
-        srcSet={`
-          ${getOptimizedUrl(src, 'thumb')} 400w,
-          ${getOptimizedUrl(src, 'medium')} 800w,
-          ${getOptimizedUrl(src, 'large')} 1200w
-        `}
-        type="image/webp"
-        sizes={imageSizes}
-      />
-      
-      {/* Fallback JPEG */}
+      {/* AVIF first for best compression */}
+      <source srcSet={makeSrcSet('avif')} type="image/avif" sizes={imageSizes} />
+
+      {/* WebP next */}
+      <source srcSet={makeSrcSet('webp')} type="image/webp" sizes={imageSizes} />
+
+      {/* Fallback image */}
       <img
-        src={getOptimizedUrl(src, 'large')}
+        src={buildUrl(src, 'large')}
         alt={alt}
         width={width}
         height={height}
@@ -62,11 +84,7 @@ export function OptimizedImage({
         loading={lazy && !priority ? 'lazy' : 'eager'}
         decoding={priority ? 'sync' : 'async'}
         onClick={onClick}
-        srcSet={`
-          ${getOptimizedUrl(src, 'thumb')} 400w,
-          ${getOptimizedUrl(src, 'medium')} 800w,
-          ${getOptimizedUrl(src, 'large')} 1200w
-        `}
+        srcSet={makeSrcSet()}
         sizes={imageSizes}
       />
     </picture>

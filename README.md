@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Image Optimization (AVIF / WebP)
+
+This project includes a small script to generate AVIF and WebP versions of images under `public/assets`.
+
+- Generate converted images:
+
+```bash
+npm run convert-images
+```
+
+- The script now generates resized variants for each source image at 400px, 800px and 1200px widths.
+- For each size it outputs: `-400.avif`, `-400.webp`, and `-400.jpg|.png` (matching original extension).
+- `components/OptimizedImage.tsx` will prefer AVIF, then WebP, then a sized fallback image and uses responsive `srcset`.
+
+If you add or change images in `public/assets`, re-run the conversion script to regenerate the variants.
