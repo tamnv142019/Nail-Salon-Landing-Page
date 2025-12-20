@@ -35,7 +35,7 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
       latitude: 32.7157,
       longitude: -117.1611
     },
-    image: "https://queensobnail.com/logo.png",
+    image: "https://queensobnail.com/logo.jpg",
     priceRange: "$$"
   };
 

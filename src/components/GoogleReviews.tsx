@@ -245,7 +245,7 @@ const ReviewCard = memo(({ review, index }: { review: typeof reviews[0]; index: 
 ReviewCard.displayName = 'ReviewCard';
 
 export function GoogleReviews() {
-  const googleMapsUrl = 'https://www.google.com/maps/place/Queen%27s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z/data=!4m15!1m8!3m7!1s0x80deaa3766574c6f:0xf7a6636c79fc1c5d!2s4869+Santa+Monica+Ave,+San+Diego,+CA+92107,+USA!3b1!8m2!3d32.7461198!4d-117.2483223!16s%2Fg%2F11bw3xx9cy!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu';
+  const googleMapsUrl = 'https://maps.app.goo.gl/Bc8jystzMK7y5Ct49';
 
   // Display an updated public rating and review count (override local sample data)
   const averageRating = '4.2';

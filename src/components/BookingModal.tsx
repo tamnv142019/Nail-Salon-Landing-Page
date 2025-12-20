@@ -106,7 +106,10 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
+    <div
+      onClick={() => handleClose()}
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300"
+    >
       <div 
         className="relative w-full max-w-lg bg-card/85 backdrop-blur-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-border/60 ring-1 ring-inset ring-white/10 dark:ring-white/5"
         onClick={(e) => e.stopPropagation()}
@@ -115,14 +118,30 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         <div className="relative bg-linear-to-r from-brand-gold-soft to-brand-gold-muted px-8 py-6">
           <button
             onClick={handleClose}
-            className="absolute top-6 right-6 w-10 h-10 bg-black/10 hover:bg-black/15 dark:bg-white/10 dark:hover:bg-white/15 backdrop-blur-xl rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-white/20"
+            aria-label="Close booking modal"
+            className="absolute top-6 right-6 w-10 h-10 bg-black/10 hover:bg-black/15 dark:bg-white/10 dark:hover:bg-white/15 backdrop-blur-xl rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-white/20 z-50 pointer-events-auto"
           >
-            <X className="text-brand-dark" size={20} />
+            <X className="text-foreground" size={20} />
           </button>
-          <div className="flex items-center gap-3 mb-2">
-            <Sparkles className="text-brand-dark" size={28} />
-            <h2 className="text-2xl text-brand-dark">{t('booking.title', 'Book Appointment')}</h2>
+
+          <div className="flex items-center gap-4 mb-2">
+            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 dark:bg-white/6 shadow-sm border border-white/10">
+              <Sparkles className="text-[color:var(--accent)]" size={20} />
+            </div>
+
+            <div className="text-left">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-brand-dark drop-shadow-sm">
+                {t('booking.title', 'Book Appointment')}
+              </h2>
+              <div className="mt-2">
+                <div className="h-1 w-16 rounded-full bg-gradient-to-r from-[color:var(--accent)] to-[color:var(--primary)] opacity-60" />
+              </div>
+              <p className="text-sm text-foreground mt-2 opacity-90">
+                {t('booking.subtitle', 'Choose a date and time. We will confirm via phone or email.')}
+              </p>
+            </div>
           </div>
+
           {preSelectedService && (
             <p className="text-brand-dark/90 mt-1 text-sm">
               {t('booking.selectService', 'Service')}: <span className="font-semibold">{preSelectedService}</span>
@@ -156,7 +175,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               {/* Name */}
               <div>
                 <label className="text-foreground mb-2 flex items-center gap-2">
-                  <User size={18} />
+                  <User className="text-[color:var(--primary)]" size={18} />
                   Full Name
                 </label>
                 <input
@@ -172,7 +191,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               {/* Email */}
               <div>
                 <label className="text-foreground mb-2 flex items-center gap-2">
-                  <Mail size={18} />
+                  <Mail className="text-[color:var(--accent)]" size={18} />
                   Email Address
                 </label>
                 <input
@@ -188,7 +207,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               {/* Phone */}
               <div>
                 <label className="text-foreground mb-2 flex items-center gap-2">
-                  <Phone size={18} />
+                  <Phone className="text-[color:var(--brand-emerald)]" size={18} />
                   Phone Number
                 </label>
                 <input
@@ -204,7 +223,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               {/* Date */}
               <div>
                 <label className="text-foreground mb-2 flex items-center gap-2">
-                  <Calendar size={18} />
+                  <Calendar className="text-[color:var(--brand-gold)]" size={18} />
                   Select Date
                 </label>
                 <div className="relative">
@@ -230,7 +249,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       input.focus();
                     }}
                   >
-                    <Calendar aria-hidden="true" size={18} />
+                    <Calendar className="text-[color:var(--brand-gold)]" aria-hidden="true" size={18} />
                   </button>
                 </div>
               </div>
@@ -238,7 +257,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               {/* Time */}
               <div>
                 <label className="text-foreground mb-2 flex items-center gap-2">
-                  <Clock size={18} />
+                  <Clock className="text-[color:var(--brand-ruby)]" size={18} />
                   Select Time
                 </label>
                 <div className="grid grid-cols-3 gap-3">  

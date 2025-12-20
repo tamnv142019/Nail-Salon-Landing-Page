@@ -6,7 +6,7 @@ import { Phone, Calendar, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../ThemeProvider';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { LanguageSwitcher } from '../LanguageSwitcher';
-import logoImage from '../../assets/9bec472ae90f90102b38538430cb42ea555b4e96.png';
+import logoImage from '../../assets/logo.jpg';
 
 interface NavigationProps {
   onBookClick: () => void;
@@ -198,47 +198,18 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-
-            {/* Phone Button - iOS Glass Style */}
-            <a
-              href="tel:6192245050"
-              className={`hidden md:flex items-center justify-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 cursor-pointer hover:cursor-pointer ${
-                isSolid || isDark
-                  ? 'bg-card/70 backdrop-blur-xl border border-border/40 text-foreground hover:border-brand-gold/40'
-                  : 'bg-[color:var(--glass-on-image-bg)] text-[color:var(--on-image-foreground)] backdrop-blur-xl border border-[color:var(--glass-on-image-border)] hover:border-brand-gold/40 hover:bg-[color:var(--glass-on-image-bg-hover)]'
-              }`}
-            >
-              <Phone
-                size={16}
-                className={isSolid || isDark ? 'text-brand-gold' : 'text-[color:var(--on-image-foreground)]'}
-              />
-              <span className="hidden xl:inline text-sm font-semibold">(619) 224-5050</span>
-            </a>
-
-            {/* Book Button - iOS Glass Style */}
+            {/* Book Button (in-nav) */}
             <button
               onClick={onBookClick}
               className="relative group cursor-pointer"
             >
               <span className="pointer-events-none absolute -inset-1 rounded-xl bg-[image:var(--gradient-primary-action)] opacity-80 animate-[pulse_0.9s_ease-in-out_infinite]"></span>
               <div
-                className="relative z-10 flex items-center justify-center gap-2 px-4 md:px-6 py-2 rounded-xl transition-all duration-200 ease-out cursor-pointer hover:cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 shadow-sm hover:shadow-md overflow-hidden before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-[color:var(--btn-sheen)] before:to-transparent before:-skew-x-12 before:translate-x-[-200%] before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[200%] hover:before:via-[color:var(--btn-sheen-hover)]"
+                className="relative z-10 flex items-center justify-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 ease-out cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 shadow-sm hover:shadow-md overflow-hidden animate-sway"
               >
                 <Calendar size={16} />
                 <span className="text-sm font-semibold">{t('servicesPage.bookNow', 'Book Now')}</span>
               </div>
-            </button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ease-out cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
-                isSolid || isDark
-                  ? 'text-foreground bg-background/70 backdrop-blur-xl border border-border/40'
-                  : 'text-[color:var(--on-image-foreground)] bg-[color:var(--glass-on-image-bg)] backdrop-blur-xl border border-[color:var(--glass-on-image-border)] hover:bg-[color:var(--glass-on-image-bg-hover)]'
-              }`}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -287,12 +258,31 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
+                <button
+                  onClick={() => { setIsMobileMenuOpen(false); onBookClick(); }}
+                  className="ml-2 w-full inline-flex items-center justify-center px-4 py-3 rounded-xl bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] font-semibold shadow-sm animate-sway"
+                >
+                  {t('servicesPage.bookNow', 'Book Now')}
+                </button>
               </div>
             </div>
           </div>
         )}
       </div>
       </div>
+
+      {/* Fixed CTAs (rendered from Navigation) */}
+      <button
+        type="button"
+        onClick={() => { window.location.href = 'tel:6192245050'; }}
+        aria-label="Call salon"
+        className="fixed bottom-6 left-6 z-60 inline-flex items-center px-4 py-2 rounded-full bg-[color:var(--destructive)] shadow-lg text-[color:var(--primary)] font-semibold animate-sway border border-white/20"
+      >
+        <Phone size={16} />
+        <span className="ml-2">(619) 224-5050</span>
+      </button>
+
+      {/* removed duplicate fixed Book Now; Book Now is now in-nav and in mobile menu */}
     </nav>
   );
 }

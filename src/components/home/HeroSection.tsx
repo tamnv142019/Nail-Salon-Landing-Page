@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -19,6 +19,7 @@ const backgroundImages = [
 export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { t } = useLanguage();
+  const magicRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,6 +28,23 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleMagicMouseMove = (e: React.MouseEvent) => {
+    const el = magicRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    el.style.setProperty('--x', `${x}%`);
+    el.style.setProperty('--y', `${y}%`);
+  };
+
+  const handleMagicMouseLeave = () => {
+    const el = magicRef.current;
+    if (!el) return;
+    el.style.setProperty('--x', `50%`);
+    el.style.setProperty('--y', `50%`);
+  };
 
 
   return (
@@ -60,19 +78,34 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
         >
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl text-[color:var(--on-image-foreground)] font-bold mb-4 md:mb-6 leading-tight transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-1">
-            {t('home.hero.title.line1', "Queen's")}<br />{t('home.hero.title.line2', 'Nails Hair & Skincare')}
+            <span
+              ref={magicRef}
+              onMouseMove={handleMagicMouseMove}
+              onMouseLeave={handleMagicMouseLeave}
+              className="magic-light-wrap inline-block"
+              style={{ ['--x' as any]: '50%', ['--y' as any]: '50%' } as React.CSSProperties}
+            >
+              <span className="magic-light-text">{t('home.hero.title.line1', "Queen's")}</span>
+              <br />
+              <span className="magic-light-text">{t('home.hero.title.line2', 'Nails Hair & Skincare')}</span>
+            </span>
           </h1>
 
           {/* Subheading */}
           <p className="text-lg md:text-2xl text-[color:var(--on-image-foreground-muted)] mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed transition-colors duration-300 motion-reduce:transition-none group-hover:text-[color:var(--on-image-foreground)]">
-            {t('home.hero.description', 'Premier Nail Salon & Spa in San Diego')}
+            {t('home.hero.description', 'Premier Nail Salon & Spa in Ocean Beach')}
           </p>
 
           {/* Location */}
-          <div className="flex items-center justify-center gap-2 text-[color:var(--on-image-foreground-muted)] mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-0.5">
+          <a
+            href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 text-[color:var(--on-image-foreground-muted)] mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-0.5 transform hover:scale-105 hover:text-brand-gold hover:underline"
+          >
             <MapPin size={20} />
             <span className="text-base md:text-lg transition-opacity duration-300 motion-reduce:transition-none group-hover:opacity-100">4869 Santa Monica Ave, San Diego, CA 92107</span>
-          </div>
+          </a>
 
           {/* CTA Button */}
           <button

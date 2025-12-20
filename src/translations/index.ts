@@ -16,7 +16,7 @@ export const translations = {
       hero: {
         title: 'Queen\'s Nails Hair',
         subtitle2: '& Skincare',
-        description: 'Premier Nail Salon & Spa in San Diego',
+        description: 'Premier Nail Salon & Spa in Ocean Beach',
         button: 'Find Out More',
       },
       about: {

@@ -2,7 +2,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { TopCTAs } from '../components/ScrollToTopButton';
 import { Roboto } from 'next/font/google';
+import { GoogleTagManager } from '@next/third-parties/google';
 import { seoConfig } from '../config/seo.config';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
@@ -32,10 +34,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gtagId = process.env.NEXT_PUBLIC_GTAG_ID || 'G-2E6K5EK8E1';
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-PLDJTM4B';
+
   return (
     <html lang="en" className={roboto.className}>
         <body className="antialiased" style={{ fontWeight: 'var(--font-weight-normal)' }}>
+        {gtagId ? (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}></script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${gtagId}');`,
+              }}
+            />
+          </>
+        ) : null}
         <Providers>{children}</Providers>
+        <TopCTAs />
+        {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ const contactInfo = [
     content: '4869 Santa Monica Ave',
     subContent: 'San Diego, CA 92107',
     gradient: 'from-brand-gold-soft to-brand-gold',
-    link: 'https://www.google.com/maps/place/Queen\'s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z/data=!4m15!1m8!3m7!1s0x80deaa3766574c6f:0xf7a6636c79fc1c5d!2s4869+Santa+Monica+Ave,+San+Diego,+CA+92107,+USA!3b1!8m2!3d32.7461198!4d-117.2483223!16s%2Fg%2F11bw3xx9cy!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D',
+    link: 'https://maps.app.goo.gl/Bc8jystzMK7y5Ct49',
     action: 'Get Directions',
   },
   {
@@ -400,7 +400,7 @@ export function Contact() {
               </div>
               <div className="p-6">
                 <a
-                  href="https://www.google.com/maps/place/Queen%27s+Nails+Hair+and+Skincare/@32.7461198,-117.2508972,17z"
+                  href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2 font-semibold bg-btn-accent hover:bg-btn-accent-hover active:bg-btn-accent-active text-btn-theme-foreground"

@@ -51,7 +51,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700">
             <div className="flex items-center gap-3 mb-6">
               <div className="relative">
-                <img src="/logo.png" alt="Queen's Nails Hair & Skincare Logo" className="h-8 w-auto transition-transform duration-500 hover:scale-110" />
+                <img src="/logo.jpg" alt="Queen's Nails Hair & Skincare Logo" className="h-8 w-auto transition-transform duration-500 hover:scale-110" />
               </div>
               <div className="text-2xl leading-tight bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
                 <span className="block">Queen's Nails Hair</span>
@@ -62,7 +62,14 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
               {t('footer.description', 'Experience luxury nail care with premium services and professional artistry.')}
             </p>
             <div className="flex gap-2">
-              <span className="text-foreground text-sm">📍 4869 Santa Monica Ave, San Diego</span>
+              <a
+                href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground text-sm inline-block transition-transform duration-200 transform hover:scale-105 hover:text-brand-gold hover:underline"
+              >
+                📍 4869 Santa Monica Ave, San Diego, CA 92107
+              </a>
             </div>
             <div className="flex gap-2 mt-2">
               <span className="text-foreground text-sm">📞 (619) 224-5050</span>
@@ -112,7 +119,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                   <YelpIcon size={18} />
                 </a>
                 <a
-                  href={"https://www.google.com/maps/place/Queen's+Nails+Hair+and+Skincare/@32.7461198,-117.2483223,17z/data=!4m9!1m2!10m1!1e1!3m5!1s0x80deaa3766bc71cd:0x58947b412e099a07!8m2!3d32.7462568!4d-117.2482123!16s%2Fg%2F1tjytxy4?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"}
+                  href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-brand-emerald hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"

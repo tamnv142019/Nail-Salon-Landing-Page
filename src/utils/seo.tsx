@@ -391,7 +391,7 @@ export function ArticleSchema({
       name: publisher,
         logo: {
         '@type': 'ImageObject',
-        url: 'https://queensobnail.com/logo.png',
+        url: 'https://queensobnail.com/logo.jpg',
       },
     },
   };

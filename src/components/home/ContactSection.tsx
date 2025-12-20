@@ -110,10 +110,10 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
 
               {/* Address */}
               <a
-                href="https://maps.google.com/?q=4869+Santa+Monica+Ave+San+Diego+CA+92107"
+                href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
+                className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-xl group"
               >
                 <div className="w-12 h-12 bg-btn-accent text-brand-dark dark:bg-brand-gold dark:text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <MapPin className="text-current" size={20} />

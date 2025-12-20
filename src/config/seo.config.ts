@@ -159,6 +159,13 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
     canonical: 'https://queensobnail.com/contact',
     ogType: 'business.business',
   },
+  book: {
+    title: "Book Appointment - Queen's Nails Hair & Skincare",
+    description: 'Schedule your appointment online for manicures, pedicures, hair, or skincare services at our Ocean Beach salon.',
+    keywords: ['book appointment', 'schedule appointment', 'book nails', 'book salon', 'nail appointment', 'san diego salon'],
+    canonical: 'https://queensobnail.com/book',
+    ogType: 'website',
+  },
 };
 
 /**
@@ -367,7 +374,7 @@ export function generateBusinessSchema() {
       latitude: businessInfo.geo.latitude,
       longitude: businessInfo.geo.longitude,
     },
-    image: 'https://queensobnail.com/logo.png',
+    image: 'https://queensobnail.com/logo.jpg',
     priceRange: '$$',
     openingHoursSpecification: businessInfo.openingHours.map((hours) => ({
       '@type': 'OpeningHoursSpecification',
