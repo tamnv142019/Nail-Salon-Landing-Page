@@ -106,6 +106,15 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
   const services = getServices(t);
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
 
+  const gradientMap: Record<string, string> = {
+    combo: 'from-rose-500 via-pink-500 to-fuchsia-500',
+    manicure: 'from-rose-500 to-pink-500',
+    pedicure: 'from-blue-500 to-purple-500',
+    powder: 'from-pink-500 to-orange-500',
+    waxing: 'from-purple-500 to-rose-500',
+    additional: 'from-cyan-500 to-blue-500',
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && selectedService) {
@@ -202,7 +211,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-2xl w-full bg-card rounded-3xl shadow-2xl overflow-hidden border border-border"
+              className="relative max-w-2xl w-full bg-card shadow-2xl overflow-hidden border border-border sm:rounded-3xl rounded-t-3xl h-[calc(100vh-3.5rem)] sm:h-auto flex flex-col"
             >
               {/* Close Button */}
               <button
@@ -213,7 +222,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
               </button>
 
               {/* Image Header */}
-              <div className="relative h-48 md:h-64">
+              <div className="flex-none relative h-40 md:h-64">
                 <img
                   src={selectedService.image}
                   alt={selectedService.title}
@@ -225,8 +234,8 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                 </h3>
               </div>
 
-              {/* Content */}
-              <div className="p-6 md:p-8">
+              {/* Content (scrollable) */}
+              <div className="p-6 md:p-8 flex-1 overflow-y-auto" style={{ WebkitOverflowScrolling: 'touch' as any }}>
                 <p className="text-foreground mb-6 text-base md:text-lg leading-relaxed">
                   {selectedService.description}
                 </p>
@@ -240,14 +249,39 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                     {selectedService.features.map((feature, index) => {
                       const bsTag = t('servicesPage.bestSellerTag', '(Best Seller)');
                       const hasBadge = feature.includes(bsTag);
-                      const text = hasBadge ? feature.replace(bsTag, '').trim() : feature;
+                      // remove badge text first so it doesn't interfere with note-splitting
+                      const featureNoBadge = hasBadge ? feature.replace(bsTag, '').trim() : feature;
+
+                      // For pedicure preview, strip trailing notes (after em-dash or semicolon)
+                      const displayTextRaw = selectedService.id === 'pedicure'
+                        ? featureNoBadge.split(/—|–|;/)[0].trim()
+                        : featureNoBadge;
+
+                      const gradient = gradientMap[selectedService.id] || 'from-rose-500 to-pink-500';
+
+                      // Extract price if present, e.g. "$25" or "$45.00"
+                      const priceMatch = displayTextRaw.match(/(\$\d+(?:\.\d+)?)/);
+                      let beforeText = displayTextRaw;
+                      let priceText: string | null = null;
+                      if (priceMatch) {
+                        priceText = priceMatch[0];
+                        beforeText = displayTextRaw.replace(priceText, '').replace(/[-–—]\s*$/, '').trim();
+                      }
+
                       const bsLabel = bsTag.replace(/^[\(\[]+|[\)\]]+$/g, '').trim();
 
                       return (
                         <div key={index} className="flex items-center gap-3">
                           <div className="w-2 h-2 rounded-full bg-brand-gold shrink-0"></div>
                           <div className="flex items-center gap-3">
-                            <span className="text-foreground-secondary">{text}</span>
+                            <span className="text-foreground-secondary">
+                              {beforeText}
+                              {priceText && (
+                                <span className="ml-2 font-semibold" style={{ color: 'oklch(0.592 0.249 0.584)' }}>
+                                  {priceText}
+                                </span>
+                              )}
+                            </span>
                             {hasBadge && <BestSellerBadge label={bsLabel} />}
                           </div>
                         </div>

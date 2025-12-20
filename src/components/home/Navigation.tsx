@@ -198,6 +198,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
+            {/* mobile call anchor removed (reverted) */}
             {/* Book Button (in-nav) */}
             <button
               onClick={onBookClick}

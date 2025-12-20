@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import { Phone } from 'lucide-react';
 import { businessInfo } from '../config/seo.config';
 
@@ -7,11 +8,33 @@ export function FloatingCallButton() {
   // Use explicit international format for clicking on the button
   const phoneDigits = '+1' + businessInfo.phone.replace(/[^0-9]/g, '');
 
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      try {
+        setVisible(window.scrollY > 150);
+      } catch (e) {
+        // server-side safety
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // run once to set initial state
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <a
       href={`tel:${phoneDigits}`}
       aria-label={`Call ${businessInfo.phone}`}
-      className="fixed bottom-6 left-6 z-50 inline-flex items-center gap-3 group"
+      aria-hidden={!visible}
+      className={`fixed bottom-6 left-6 z-30 inline-flex items-center gap-3 transform ${
+        visible
+          ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
+          : 'opacity-0 translate-y-6 scale-95 pointer-events-none'
+      } transition-opacity transition-transform duration-300 ease-out will-change-transform will-change-opacity`}
     >
       <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow-xl transition-transform duration-300 hover:scale-105 hover:bg-red-700 animate-sway group-hover:scale-105">
         <Phone size={20} className="relative z-10" />

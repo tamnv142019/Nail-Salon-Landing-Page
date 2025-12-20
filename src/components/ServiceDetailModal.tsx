@@ -49,12 +49,13 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
   return (
     <>
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300" onClick={onClose}>
-        <div 
-          className="relative w-full max-w-3xl bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 max-h-[90vh] overflow-y-auto"
-          onClick={(e) => e.stopPropagation()}
-        >
+          <div 
+            className="relative w-full max-w-3xl bg-white dark:bg-gray-800 shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 max-h-[90vh] overflow-y-auto h-[calc(100vh-3.5rem)] sm:h-auto sm:rounded-3xl rounded-t-3xl"
+            style={{ WebkitOverflowScrolling: 'touch' as any, touchAction: 'pan-y' }}
+            onClick={(e) => e.stopPropagation()}
+          >
           {/* Header with gradient */}
-          <div className={`relative bg-gradient-to-r ${service.gradient} px-8 py-12`}>
+          <div className={`relative bg-gradient-to-r ${service.gradient} px-6 py-8 md:px-8 md:py-12`}>
             <button
               onClick={onClose}
               className="absolute top-6 right-6 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-90"
