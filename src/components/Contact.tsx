@@ -209,8 +209,8 @@ export function Contact() {
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className={`inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r ${info.gradient} text-white rounded-lg hover:scale-105 transition-all duration-300 shadow-md text-sm font-medium`}
                 >
-                  <span>{info.action}</span>
-                  <ExternalLink size={16} />
+                  <span className="text-white">{info.action}</span>
+                  <ExternalLink className="text-white" size={16} />
                 </a>
               </div>
             ))}

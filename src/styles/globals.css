@@ -643,7 +643,8 @@ select option {
   .animate-fade-up,
   .animate-fade-down,
   .animate-scale-in,
-  .animate-float-soft {
+  .animate-float-soft,
+  .animate-sway {
     animation: none !important;
   }
 }

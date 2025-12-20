@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { TopCTAs } from '../components/ScrollToTopButton';
+import { FloatingCallButton } from '../components/FloatingCallButton';
 import { Roboto } from 'next/font/google';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { seoConfig } from '../config/seo.config';
@@ -44,6 +45,7 @@ export default function RootLayout({
         ) : null}
         {/* GA4 gtag removed — tracking now handled via Google Tag Manager */}
         <Providers>{children}</Providers>
+        <FloatingCallButton />
         <TopCTAs />
         {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
       </body>

@@ -476,7 +476,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
 const getServiceAccent = (serviceId: string) => {
   switch (serviceId) {
     case 'combo':
-      return { card: 'border-l-4 border-l-orange-500', header: 'bg-gradient-to-r from-orange-400/10 via-orange-300/10 to-amber-400/8' };
+      return { card: 'border-l-4 border-l-lime-500', header: 'bg-lime-500/10' };
     case 'manicure':
       return { card: 'border-l-4 border-l-rose-500', header: 'bg-rose-500/10' };
     case 'pedicure':

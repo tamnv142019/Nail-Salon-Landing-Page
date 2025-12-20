@@ -272,19 +272,6 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
         )}
       </div>
       </div>
-
-      {/* Fixed CTAs (rendered from Navigation) */}
-      <button
-        type="button"
-        onClick={() => { window.location.href = 'tel:6192245050'; }}
-        aria-label="Call salon"
-        className="fixed bottom-6 left-6 z-60 inline-flex items-center px-4 py-2 rounded-full bg-[color:var(--destructive)] shadow-lg text-[color:var(--primary)] font-semibold animate-sway border border-white/20"
-      >
-        <Phone size={16} />
-        <span className="ml-2">(619) 224-5050</span>
-      </button>
-
-      {/* removed duplicate fixed Book Now; Book Now is now in-nav and in mobile menu */}
     </nav>
   );
 }
