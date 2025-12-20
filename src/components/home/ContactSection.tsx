@@ -85,8 +85,8 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 href="tel:6192245050"
                 className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
               >
-                <div className="w-12 h-12 bg-[color:var(--brand-emerald)] text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Phone className="text-current" size={20} />
+                <div className="w-12 h-12 bg-card text-[color:var(--gold-champagne)] rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone className="text-[color:var(--gold-champagne)]" size={20} />
                 </div>
                 <div>
                   <div className="text-sm text-foreground mb-1">{t('contactSection.phone', 'Phone')}</div>
@@ -99,8 +99,8 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 href="mailto:helenpham505@gmail.com"
                 className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
               >
-                <div className="w-12 h-12 bg-[color:var(--brand-sapphire)] text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Mail className="text-current" size={20} />
+                <div className="w-12 h-12 bg-card text-[color:var(--gold-champagne)] rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail className="text-[color:var(--gold-champagne)]" size={20} />
                 </div>
                 <div>
                   <div className="text-sm text-foreground mb-1">{t('contactSection.email', 'Email')}</div>
@@ -115,8 +115,8 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 rel="noopener noreferrer"
                 className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-xl group"
               >
-                <div className="w-12 h-12 bg-[color:var(--destructive)] text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <MapPin className="text-current" size={20} />
+                <div className="w-12 h-12 bg-card text-[color:var(--gold-champagne)] rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <MapPin className="text-[color:var(--gold-champagne)]" size={20} />
                 </div>
                 <div>
                   <div className="text-sm text-foreground mb-1">{t('contactSection.location', 'Address')}</div>
@@ -140,7 +140,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <Clock className="text-current" size={20} />
+                    <Clock className="text-[color:var(--gold-champagne)]" size={20} />
                   </motion.div>
                   <h3 className="text-xl font-bold text-foreground">{t('contactSection.hours', 'Business Hours')}</h3>
                 </div>
