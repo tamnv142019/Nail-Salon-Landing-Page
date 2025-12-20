@@ -25,6 +25,15 @@ function BestSellerBadge({ label }: { label: string }) {
 
 const getServices = (t: (key: string, fallback: string) => string) => [
   {
+    id: 'combo',
+    title: t('servicesPage.comboCategory', 'Combo Specials'),
+    image: 'gallery/comboImage.jpg',
+    description: t('servicesPreview.comboDesc', 'Combo packages combining manicure and pedicure signature services'),
+    features: [
+      `${t('servicesPage.comboPedicureManicureSignature', 'Combo Pedicure + Manicure Signature')} - $85`,
+    ],
+  },
+  {
     id: 'manicure',
     title: t('servicesPage.manicureCategory', 'Manicure Services'),
     image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
@@ -42,14 +51,10 @@ const getServices = (t: (key: string, fallback: string) => string) => [
     image: 'gallery/pedicure.jpg',
     description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
     features: [
-      `${t('servicesPage.regularPedicure', 'Regular Pedicure')} - $25 ${t('servicesPage.bestSellerTag', '(Best Seller)')}`,
-      `${t('servicesPage.regularPedicureFrenchOrTips', 'Regular Pedicure & French or Nail Color Tips')} - $30`,
-      `${t('servicesPage.regularPedicureCallusRemover', 'Regular Pedicure & Callus Remover')} - $35`,
-      `${t('servicesPage.regularPedicureSugarScrub', 'Regular Pedicure & Sugar Scrub')} - $30`,
-      `${t('servicesPage.regularPedicureMask', 'Regular Pedicure & Mask')} - $30`,
-      `${t('servicesPage.regularPedicureParaffin', 'Regular Pedicure & Paraffin')} - $33`,
-      `${t('servicesPage.regularDeluxePedicure', 'Regular Deluxe Pedicure')} - $45`,
-      `${t('servicesPage.regularSignaturePedicure', 'Regular Signature Pedicure')} - $55`,
+      `${t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure')} - $25 — Includes a 6-minute foot massage ${t('servicesPage.bestSellerTag', '(Best Seller)')}`,
+      `${t('servicesPage.europeanSpaPedicure', 'European Spa Pedicure')} - $35 — Exfoliation – Callus Treatment or Sea Salt Glow; Includes a 6-minute foot massage`,
+      `${t('servicesPage.deluxeSpaPedicure', 'Deluxe Spa Pedicure')} - $45 — Callus Removal Treatment; Exfoliation – Sea Salt Glow; Rejuvenating Marine Mask; 10-minute foot massage; Hot Stone Massage`,
+      `${t('servicesPage.signatureSpaPedicure', 'Signature Spa Pedicure')} - $55 — Callus Removal Treatment; Exfoliation – Sea Salt Glow; Rejuvenating Marine Mask; Deep Penetration – Paraffin Wax; 10-minute foot massage with warming lotion; Hot Stone Massage`,
     ],
   },
   {

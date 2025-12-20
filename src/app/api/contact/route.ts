@@ -1,16 +1,14 @@
 import nodemailer from 'nodemailer';
-import { bookingConfirmationEmail } from '../../../emailTemplates/bookingConfirmation';
 import { sendSMTPMail } from '../../../lib/email';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: Request) {
   try {
-    debugger
     const data = await req.json();
-    const { name, email, phone, date, time, service } = data;
+    const { name, email, phone, message } = data || {};
 
-    if (!name || !email || !phone || !date || !time) {
+    if (!name || !email || !message) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 });
     }
 
@@ -26,43 +24,49 @@ export async function POST(req: Request) {
 
     const secure = (process.env.SMTP_SECURE || 'false') === 'true' || port === 465;
 
-    const formattedDate = new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const now = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
 
     const salonHtml = `
-      <h2>New Booking</h2>
+      <h2>Contact Message</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Date:</strong> ${formattedDate}</p>
-      <p><strong>Time:</strong> ${time}</p>
-      <p><strong>Service:</strong> ${service || 'N/A'}</p>
+      <p><strong>Phone:</strong> ${phone || '—'}</p>
+      <p><strong>Message:</strong></p>
+      <p>${(message || '').replace(/\n/g, '<br/>')}</p>
+      <p style="margin-top:12px;color:#6B7280;font-size:12px">Received: ${now}</p>
     `;
 
-    const userHtml = bookingConfirmationEmail({ name, date: formattedDate, time, service, phone });
-
-    // Send to salon/owner
+    // send to salon/owner
     await sendSMTPMail({
       from: user,
       to: receiver,
-      subject: `New booking from ${name}`,
-      text: `New booking: ${name} - ${email} - ${phone} - ${formattedDate} ${time} - Service: ${service || 'N/A'}`,
+      subject: `Contact message from ${name}`,
+      text: `Message from ${name} (${email}) - ${phone || '—'}: ${message}`,
       html: salonHtml,
     });
 
-    // Send confirmation to customer
+    // optional confirmation to user
+    const userHtml = `
+      <h2>We received your message</h2>
+      <p>Hi ${name},</p>
+      <p>Thanks for contacting Queen's Nails. We've received your message and will respond within 24 hours.</p>
+      <p><strong>Your message:</strong></p>
+      <p>${(message || '').replace(/\n/g, '<br/>')}</p>
+      <p style="margin-top:12px;color:#6B7280;font-size:12px">Received: ${now}</p>
+    `;
+
     await sendSMTPMail({
       from: user,
       to: email,
-      subject: 'Your booking confirmation',
-      text: `Hi ${name}, your booking is confirmed for ${formattedDate} at ${time}.`,
+      subject: 'We received your message',
+      text: `Thanks ${name}, we've received your message.`,
       html: userHtml,
     });
 
     return new Response(JSON.stringify({ ok: true }), { status: 200 });
   } catch (err) {
-    // Log for server-side debugging
     // eslint-disable-next-line no-console
-    console.error('Booking email error', err);
+    console.error('Contact email error', err);
     return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });
   }
 }

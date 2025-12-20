@@ -130,7 +130,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             </div>
 
             <div className="text-left">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-brand-dark drop-shadow-sm">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[color:var(--gold-champagne)] drop-shadow-sm">
                 {t('booking.title', 'Book Appointment')}
               </h2>
               <div className="mt-2">
@@ -174,7 +174,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
                   <User className="text-[color:var(--primary)]" size={18} />
                   Full Name
                 </label>
@@ -190,7 +190,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Email */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
                   <Mail className="text-[color:var(--accent)]" size={18} />
                   Email Address
                 </label>
@@ -206,7 +206,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Phone */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
                   <Phone className="text-[color:var(--brand-emerald)]" size={18} />
                   Phone Number
                 </label>
@@ -222,7 +222,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Date */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
                   <Calendar className="text-[color:var(--brand-gold)]" size={18} />
                   Select Date
                 </label>
@@ -256,25 +256,52 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
               {/* Time */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2">
+                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
                   <Clock className="text-[color:var(--brand-ruby)]" size={18} />
                   Select Time
                 </label>
-                <div className="grid grid-cols-3 gap-3">  
-                  {timeSlots.map((time) => (
-                    <button
-                      key={time}
-                      type="button"
-                      onClick={() => setSelectedTime(time)}
-                      className={`px-4 py-3 rounded-xl border-2 transition-all duration-300 text-sm backdrop-blur-xl cursor-pointer ${
-                        selectedTime === time
-                          ? 'border-brand-gold bg-btn-accent text-btn-theme-foreground shadow-sm'
-                          : 'border-border/60 bg-background/50 text-foreground hover:border-brand-gold/40 hover:bg-background/60'
-                      }`}
-                    >
-                      {time}
-                    </button>
-                  ))}
+                <div className="grid grid-cols-3 gap-3">
+                  {timeSlots.map((time) => {
+                    const isDisabled = (() => {
+                      if (!selectedDate) return false;
+                      try {
+                        const m = time.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+                        if (!m) return false;
+                        let hr = parseInt(m[1], 10);
+                        const min = parseInt(m[2], 10);
+                        const ampm = m[3].toUpperCase();
+                        if (ampm === 'PM' && hr !== 12) hr += 12;
+                        if (ampm === 'AM' && hr === 12) hr = 0;
+                        const parts = selectedDate.split('-').map(Number);
+                        if (parts.length !== 3) return false;
+                        const [y, mo, d] = parts;
+                        const slotDate = new Date(y, mo - 1, d, hr, min, 0, 0);
+                        const now = new Date();
+                        return slotDate <= now;
+                      } catch (e) {
+                        return false;
+                      }
+                    })();
+
+                    return (
+                      <button
+                        key={time}
+                        type="button"
+                        onClick={() => { if (!isDisabled) setSelectedTime(time); }}
+                        disabled={isDisabled}
+                        aria-disabled={isDisabled}
+                        className={`px-4 py-3 rounded-xl border-2 transition-all duration-300 text-sm backdrop-blur-xl ${
+                          isDisabled
+                            ? 'opacity-50 cursor-not-allowed border-border/40 bg-background/40 text-foreground'
+                            : selectedTime === time
+                            ? 'border-brand-gold bg-btn-accent text-btn-theme-foreground shadow-sm'
+                            : 'border-border/60 bg-background/50 text-foreground hover:border-brand-gold/40 hover:bg-background/60'
+                        }`}
+                      >
+                        {time}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 

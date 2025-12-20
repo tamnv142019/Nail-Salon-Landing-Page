@@ -15,6 +15,7 @@ import { ScrollToTopButton } from '../components/ScrollToTopButton';
 import { useMagicClickAnimation } from '../hooks/useMagicClickAnimation';
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion } from 'motion/react';
+import { NailPolishIcon } from '../components/NailPolishIcon';
 
 interface ServicesPageProps {
   onNavigateHome?: () => void;
@@ -43,6 +44,23 @@ interface ServiceCategory {
 
 const getServicesData = (t: (key: string, fallback: string) => string): ServiceCategory[] => [
   {
+    id: 'combo',
+    category: t('servicesPage.comboCategory', 'Combo Specials'),
+    title: t('servicesPage.comboTitle', 'COMBO SPECIALS'),
+    image: 'gallery/comboImage.jpg',
+    description: t('servicesPage.comboDesc', 'Special combo packages combining manicure and pedicure signature services.'),
+    popular: true,
+    sale: true,
+    services: [
+      {
+        name: t('servicesPage.comboPedicureManicureSignature', 'Combo Pedicure + Manicure Signature'),
+        price: '$85',
+        duration: '120 min',
+        note: t('servicesPage.comboPedicureNote', 'Full Signature pedicure and manicure package'),
+      },
+    ],
+  },
+  {
     id: 'manicure',
     category: t('servicesPage.manicureCategory', 'Manicure Services'),
     title: t('servicesPage.manicureTitle', 'MANICURE'),
@@ -50,10 +68,11 @@ const getServicesData = (t: (key: string, fallback: string) => string): ServiceC
     description: t('servicesPage.manicureDesc', 'Your satisfaction deserves our attention. Expert manicure services with premium products and skilled technicians.'),
     popular: true,
       services: [
-      { name: t('servicesPage.regularManicure', 'Regular Manicure'), price: '$20', duration: '30 min' },
-      { name: t('servicesPage.europeanManicure', 'European Manicure'), price: '$25', duration: '45 min', note: t('servicesPage.europeanManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion') },
-      { name: t('servicesPage.deluxeManicure', 'Deluxe Manicure'), price: '$30', duration: '60 min', note: t('servicesPage.deluxeManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion, Rejuvenate – Marine Mask'), bestSeller: true },
-      { name: t('servicesPage.signatureSpaManicure', 'Signature Spa Manicure'), price: '$35', duration: '75 min', note: t('servicesPage.signatureSpaManicureNote', 'Exfoliates – exfoliating crystal, Rejuvenate – Marine Mask, Deep moisturization – Special Lotion, Deep Penetration – Paraffin Wax, 10 Minutes Massage – Warming Lotion') },
+      { name: t('servicesPage.regularManicure', 'Regular Manicure'), price: '$20', duration: '20 min' },
+      { name: t('servicesPage.europeanManicure', 'European Manicure'), price: '$25', duration: '30 min', note: t('servicesPage.europeanManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion') },
+      { name: t('servicesPage.deluxeManicure', 'Deluxe Manicure'), price: '$30', duration: '35 min', note: t('servicesPage.deluxeManicureNote', 'Exfoliates – exfoliating crystal, Deep moisturization – Special Lotion, Rejuvenate – Marine Mask'), bestSeller: true },
+      { name: t('servicesPage.extraGel', 'Extra Gel'), price: '$15', duration: '15 min' },
+      { name: t('servicesPage.signatureSpaManicure', 'Signature Spa Manicure'), price: '$35', duration: '45 min', note: t('servicesPage.signatureSpaManicureNote', 'Exfoliates – exfoliating crystal, Rejuvenate – Marine Mask, Deep moisturization – Special Lotion, Deep Penetration – Paraffin Wax, 10 Minutes Massage – Warming Lotion') },
     ],
   },
   {
@@ -64,25 +83,32 @@ const getServicesData = (t: (key: string, fallback: string) => string): ServiceC
     description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
     popular: true,
       services: [
-      { name: t('servicesPage.regularPedicure', 'Regular Pedicure'), price: '$25', duration: '40 min', bestSeller: true },
-      { name: t('servicesPage.regularPedicureFrenchOrTips', 'Regular Pedicure & French or Nail Color Tips'), price: '$30', duration: '50 min' },
-      { name: t('servicesPage.regularPedicureCallusRemover', 'Regular Pedicure & Callus Remover'), price: '$35', duration: '60 min' },
-      { name: t('servicesPage.regularPedicureSugarScrub', 'Regular Pedicure & Sugar Scrub'), price: '$30', duration: '50 min' },
-      { name: t('servicesPage.regularPedicureMask', 'Regular Pedicure & Mask'), price: '$30', duration: '50 min' },
-      { name: t('servicesPage.regularPedicureParaffin', 'Regular Pedicure & Paraffin'), price: '$33', duration: '55 min' },
-      {
-        name: t('servicesPage.regularDeluxePedicure', 'Regular Deluxe Pedicure'),
-        price: '$45',
-        duration: '70 min',
-        note: t('servicesPage.includesAllAddOnServices', 'Includes all add-on services'),
-      },
-      {
-        name: t('servicesPage.regularSignaturePedicure', 'Regular Signature Pedicure'),
-        price: '$55',
-        duration: '80 min',
-        note: t('servicesPage.includesAllAddOnServices', 'Includes all add-on services'),
-      },
-    ],
+        {
+          name: t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure'),
+          price: '$25',
+          duration: '30 min',
+          bestSeller: true,
+          note: t('servicesPage.regularSpaPedicureNote', 'Includes a 6-minute foot massage'),
+        },
+        {
+          name: t('servicesPage.europeanSpaPedicure', 'European Spa Pedicure'),
+          price: '$35',
+          duration: '35 min',
+          note: t('servicesPage.europeanSpaPedicureNote', 'Exfoliation – Callus Treatment or Sea Salt Glow\nIncludes a 6-minute foot massage'),
+        },
+        {
+          name: t('servicesPage.deluxeSpaPedicure', 'Deluxe Spa Pedicure'),
+          price: '$45',
+          duration: '45 min',
+          note: t('servicesPage.deluxeSpaPedicureNote', 'Callus Removal Treatment\nExfoliation – Sea Salt Glow\nRejuvenating Marine Mask\n10-minute foot massage\nHot Stone Massage'),
+        },
+        {
+          name: t('servicesPage.signatureSpaPedicure', 'Signature Spa Pedicure'),
+          price: '$55',
+          duration: '60 min',
+          note: t('servicesPage.signatureSpaPedicureNote', 'Callus Removal Treatment\nExfoliation – Sea Salt Glow\nRejuvenating Marine Mask\nDeep Penetration – Paraffin Wax\n10-minute foot massage with warming lotion\nHot Stone Massage'),
+        },
+      ],
   },
   {
     id: 'powder',
@@ -156,7 +182,7 @@ function formatNote(note: string) {
   }
   return parts.map((p, i) => (
     <div key={i}>{stripDiacritics(p)}</div>
-  ));
+ ));
 }
 
 // Static SEO schemas (defined once to avoid recreating each render)
@@ -166,25 +192,31 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 const serviceSchemas = [
+  // Combo Manicure (removed)
+  generateServiceSchema({
+    name: 'Combo Pedicure + Manicure Signature',
+    description: 'Combo Pedicure + Manicure Signature package',
+    price: '85',
+  }),
   generateServiceSchema({
     name: 'Manicure Services',
     description: 'Professional manicure services including regular, European, deluxe, and signature spa manicures with premium products',
-    price: '20.00',
+    price: '20',
   }),
   generateServiceSchema({
     name: 'Pedicure Services',
     description: 'Luxury pedicure services featuring premium products, exfoliation, and relaxing massage',
-    price: '25.00',
+    price: '25',
   }),
   generateServiceSchema({
     name: 'Organic Nail Powder',
     description: 'Dipping powder collection with beautiful and long-lasting finishes including ombre and French tips',
-    price: '45.00',
+    price: '45',
   }),
   generateServiceSchema({
     name: 'Waxing Services',
     description: 'Professional hair removal services for smooth skin using premium waxing products',
-    price: '8.00',
+    price: '8',
   }),
 ];
 
@@ -196,7 +228,8 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
   
   const servicesData = useMemo(() => getServicesData(t), [t]);
   const waxingService = useMemo(() => servicesData.find((service) => service.id === 'waxing'), [servicesData]);
-  const nonWaxingServices = useMemo(() => servicesData.filter((service) => service.id !== 'waxing'), [servicesData]);
+  const comboService = useMemo(() => servicesData.find((service) => service.id === 'combo'), [servicesData]);
+  const nonComboNonWaxingServices = useMemo(() => servicesData.filter((service) => service.id !== 'waxing' && service.id !== 'combo'), [servicesData]);
 
   const handleBookService = useCallback((serviceName: string) => {
     setSelectedService(serviceName);
@@ -278,8 +311,15 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
       <div className="py-10 md:py-14 px-4 md:px-6 bg-background transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
           {/* Services List */}
+          {/* Combo Specials (prominent, full-width) */}
+          {comboService && (
+            <div className="mb-5">
+              <ServiceCard service={comboService} index={0} onBook={handleBookService} />
+            </div>
+          )}
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-            {nonWaxingServices.map((service, index) => (
+            {nonComboNonWaxingServices.map((service, index) => (
               <ServiceCard key={service.id} service={service} index={index} onBook={handleBookService} />
             ))}
           </div>
@@ -295,7 +335,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                 id={waxingService.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: nonWaxingServices.length * 0.1 }}
+                transition={{ duration: 0.5, delay: nonComboNonWaxingServices.length * 0.1 }}
                 className={`bg-card rounded-2xl shadow-lg border border-border overflow-hidden transition-all duration-300 hover:shadow-xl ${accent.card}`}
               >
                 {/* Service Header - Always Visible */}
@@ -435,6 +475,8 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
 
 const getServiceAccent = (serviceId: string) => {
   switch (serviceId) {
+    case 'combo':
+      return { card: 'border-l-4 border-l-orange-500', header: 'bg-gradient-to-r from-orange-400/10 via-orange-300/10 to-amber-400/8' };
     case 'manicure':
       return { card: 'border-l-4 border-l-rose-500', header: 'bg-rose-500/10' };
     case 'pedicure':
@@ -472,10 +514,19 @@ const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: Se
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`bg-card rounded-2xl shadow-lg border border-border overflow-hidden transition-all duration-300 hover:shadow-xl ${accent.card}`}
     >
-      <div className={`transition-colors duration-300 ${accent.header} hover:bg-secondary/60 dark:hover:bg-secondary/60`}>
+      <div className={`relative transition-colors duration-300 ${accent.header} hover:bg-secondary/60 dark:hover:bg-secondary/60`}>
+        {service.sale && (
+          <div className="absolute top-3 right-3 transform rotate-12">
+            <div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-semibold px-3 py-1 rounded shadow-lg animate-pulse">{t('servicesPage.saleTag', 'SALE')}</div>
+          </div>
+        )}
         <div className="relative flex items-center gap-4 md:gap-5 p-4 md:p-5">
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border-4 border-card shadow-lg hover:scale-110 transition-transform duration-300">
-            <OptimizedImage src={service.image} alt={service.title} className="w-full h-full object-cover" width={160} height={160} />
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border-4 border-card shadow-lg hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+            {service.id === 'combo' ? (
+              <NailPolishIcon size={36} className="text-brand-gold" />
+            ) : (
+              <OptimizedImage src={service.image} alt={service.title} className="w-full h-full object-cover" width={160} height={160} />
+            )}
           </div>
 
           <div className="flex-1 min-w-0">

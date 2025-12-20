@@ -85,7 +85,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 href="tel:6192245050"
                 className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
               >
-                <div className="w-12 h-12 bg-btn-accent text-brand-dark dark:bg-brand-gold dark:text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 bg-[color:var(--brand-emerald)] text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Phone className="text-current" size={20} />
                 </div>
                 <div>
@@ -99,7 +99,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 href="mailto:helenpham505@gmail.com"
                 className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
               >
-                <div className="w-12 h-12 bg-btn-accent text-brand-dark dark:bg-brand-gold dark:text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 bg-[color:var(--brand-sapphire)] text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <Mail className="text-current" size={20} />
                 </div>
                 <div>
@@ -115,7 +115,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 rel="noopener noreferrer"
                 className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-xl group"
               >
-                <div className="w-12 h-12 bg-btn-accent text-brand-dark dark:bg-brand-gold dark:text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 bg-[color:var(--destructive)] text-white rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <MapPin className="text-current" size={20} />
                 </div>
                 <div>
@@ -136,7 +136,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <motion.div 
-                    className="w-10 h-10 bg-btn-accent text-brand-dark dark:bg-brand-gold dark:text-white rounded-xl flex items-center justify-center"
+                    className="w-10 h-10 bg-linear-to-r from-brand-gold to-brand-gold-muted text-white rounded-xl flex items-center justify-center"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
@@ -147,13 +147,13 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 <div className="flex items-center gap-2">
                   {businessStatus.isOpen ? (
                     <>
-                      <CheckCircle className="text-green-500" size={20} />
-                      <span className="text-sm font-semibold text-green-600 dark:text-green-400">{t('contactSection.openNow', businessStatus.message)}</span>
+                      <CheckCircle className="text-[color:var(--brand-emerald)]" size={20} />
+                      <span className="text-sm font-semibold text-[color:var(--brand-emerald)] dark:text-[color:var(--brand-emerald)]">{t('contactSection.openNow', businessStatus.message)}</span>
                     </>
                   ) : (
                     <>
-                      <XCircle className="text-red-500" size={20} />
-                      <span className="text-sm font-semibold text-red-600 dark:text-red-400">{t('contactSection.closedNow', businessStatus.message)}</span>
+                      <XCircle className="text-[color:var(--destructive)]" size={20} />
+                      <span className="text-sm font-semibold text-[color:var(--destructive)] dark:text-[color:var(--destructive)]">{t('contactSection.closedNow', businessStatus.message)}</span>
                     </>
                   )}
                 </div>

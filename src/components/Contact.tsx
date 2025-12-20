@@ -10,7 +10,7 @@ const contactInfo = [
     title: 'Visit Us',
     content: '4869 Santa Monica Ave',
     subContent: 'San Diego, CA 92107',
-    gradient: 'from-brand-gold-soft to-brand-gold',
+    gradient: 'from-destructive to-destructive',
     link: 'https://maps.app.goo.gl/Bc8jystzMK7y5Ct49',
     action: 'Get Directions',
   },
@@ -19,7 +19,7 @@ const contactInfo = [
     title: 'Call Us',
     content: '(619) 224-5050',
     subContent: 'Available during business hours',
-    gradient: 'from-brand-sapphire to-brand-gold-soft',
+    gradient: 'from-brand-emerald to-brand-emerald',
     link: 'tel:6192245050',
     action: 'Call Now',
   },
@@ -28,7 +28,7 @@ const contactInfo = [
     title: 'Email Us',
     content: 'helenpham505@gmail.com',
     subContent: 'We respond within 24 hours',
-    gradient: 'from-brand-emerald to-brand-gold-soft',
+    gradient: 'from-brand-sapphire to-brand-sapphire',
     link: 'mailto:helenpham505@gmail.com',
     action: 'Send Email',
   },
@@ -120,24 +120,39 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || 'Failed to send message');
+      }
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Contact submission error', error);
+      alert('Could not send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
