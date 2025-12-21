@@ -59,6 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-PLDJTM4B';
+  const gtagId = process.env.NEXT_PUBLIC_GTAG_ID || 'AW-17818536782';
   // Build JSON-LD payloads based on configuration flags
   const ld: Array<string> = [];
   if (seoConfig.structuredData?.enableOrganizationSchema || seoConfig.structuredData?.enableLocalBusinessSchema) {
@@ -87,6 +88,20 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: d }}
           />
         ))}
+        {gtagId ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);} 
+gtag('js', new Date());
+gtag('config', '${gtagId}');`}
+            </Script>
+          </>
+        ) : null}
       </head>
         <body className="antialiased" style={{ fontWeight: 'var(--font-weight-normal)' }}>
         {gtmId ? (
