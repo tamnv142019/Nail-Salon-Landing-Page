@@ -196,38 +196,9 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
 /**
  * FAQ Schema for SEO
  */
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-interface FAQSchemaProps {
-  items: FAQItem[];
-}
-
-export function FAQSchema({ items }: FAQSchemaProps) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(schema),
-      }}
-    />
-  );
-}
+// FAQ schema is generated centrally in `src/config/seo.config.ts` via `generateFAQSchema()`
+// to avoid duplicate JSON-LD blocks on pages. Use that generator instead of
+// including another inline FAQ JSON-LD component here.
 
 /**
  * Review/Rating Schema
