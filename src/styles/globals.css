@@ -398,6 +398,9 @@
   }
 
   button,
+  .floating-control {
+    transition: opacity .18s ease, transform .18s ease;
+  }
   a,
   [role="button"],
   input[type="checkbox"],
@@ -486,6 +489,14 @@ html.theme-transition * {
       line-height: 1.5;
     }
 
+
+    @media (max-width: 768px) {
+      body[data-modal-open="true"] .floating-control {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: translateY(8px) !important;
+      }
+    }
     input {
       font-size: var(--text-base);
       font-weight: var(--font-weight-normal);

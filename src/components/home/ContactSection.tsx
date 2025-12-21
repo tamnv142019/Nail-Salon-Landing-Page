@@ -61,7 +61,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
   const { t } = useLanguage();
   
   return (
-    <section id="contact" className="py-20 md:py-32 bg-secondary dark:bg-background transition-colors duration-500">
+    <section id="contact" className="py-12 md:py-20 bg-secondary dark:bg-background transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Left Side - Contact Info */}
@@ -71,40 +71,40 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-4">
               {t('contactSection.title', 'Visit Us Today')}
             </h2>
-            <p className="text-lg text-foreground mb-8 leading-relaxed">
+            <p className="text-sm text-foreground mb-6 leading-relaxed">
               {t('contactSection.subtitle', 'We\'re conveniently located in Ocean Beach, San Diego. Walk-ins welcome, but appointments are recommended for your preferred time slot.')}
             </p>
 
             {/* Contact Cards */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-6">
               {/* Phone */}
               <a
                 href="tel:6192245050"
-                className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
+                className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg hover:border-brand-gold/40 transition-colors group"
               >
-                <div className="w-12 h-12 bg-card text-[color:var(--gold-champagne)] rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Phone className="text-[color:var(--gold-champagne)]" size={20} />
+                <div className="w-10 h-10 bg-card text-[color:var(--gold-champagne)] rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone className="text-[color:var(--gold-champagne)]" size={18} />
                 </div>
                 <div>
-                  <div className="text-sm text-foreground mb-1">{t('contactSection.phone', 'Phone')}</div>
-                  <div className="text-lg font-semibold text-foreground">(619) 224-5050</div>
+                  <div className="text-xs text-foreground mb-0.5">{t('contactSection.phone', 'Phone')}</div>
+                  <div className="text-base font-semibold text-foreground">(619) 224-5050</div>
                 </div>
               </a>
 
               {/* Email */}
               <a
                 href="mailto:helenpham505@gmail.com"
-                className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors group"
+                className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg hover:border-brand-gold/40 transition-colors group"
               >
-                <div className="w-12 h-12 bg-card text-[color:var(--gold-champagne)] rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <Mail className="text-[color:var(--gold-champagne)]" size={20} />
+                <div className="w-10 h-10 bg-card text-[color:var(--gold-champagne)] rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail className="text-[color:var(--gold-champagne)]" size={18} />
                 </div>
                 <div>
-                  <div className="text-sm text-foreground mb-1">{t('contactSection.email', 'Email')}</div>
-                  <div className="text-lg font-semibold text-foreground">helenpham505@gmail.com</div>
+                  <div className="text-xs text-foreground mb-0.5">{t('contactSection.email', 'Email')}</div>
+                  <div className="text-base font-semibold text-foreground">helenpham505@gmail.com</div>
                 </div>
               </a>
 
@@ -113,34 +113,32 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-4 p-4 bg-card border border-border rounded-xl hover:border-brand-gold/40 transition-colors transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-xl group"
+                className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg hover:border-brand-gold/40 transition-colors transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-xl group"
               >
-                <div className="w-12 h-12 bg-card text-[color:var(--gold-champagne)] rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                  <MapPin className="text-[color:var(--gold-champagne)]" size={20} />
+                <div className="w-10 h-10 bg-card text-[color:var(--gold-champagne)] rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <MapPin className="text-[color:var(--gold-champagne)]" size={18} />
                 </div>
                 <div>
-                  <div className="text-sm text-foreground mb-1">{t('contactSection.location', 'Address')}</div>
-                  <div className="text-lg font-semibold text-foreground">
-                    4869 Santa Monica Ave<br />San Diego, CA 92107
-                  </div>
+                  <div className="text-xs text-foreground mb-0.5">{t('contactSection.location', 'Address')}</div>
+                  <div className="text-base font-semibold text-foreground">4869 Santa Monica Ave, San Diego, CA 92107</div>
                 </div>
               </a>
             </div>
 
             {/* Business Hours */}
             <motion.div 
-              className="bg-card rounded-2xl p-6 border border-border group hover:shadow-xl transition-shadow duration-300"
+              className="bg-card rounded-2xl p-4 border border-border group hover:shadow-xl transition-shadow duration-300"
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300, damping: 10 }}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <motion.div 
-                    className="w-10 h-10 bg-linear-to-r from-brand-gold to-brand-gold-muted text-white rounded-xl flex items-center justify-center"
+                    className="w-9 h-9 bg-linear-to-r from-brand-gold to-brand-gold-muted text-white rounded-lg flex items-center justify-center"
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <Clock className="text-[color:var(--gold-champagne)]" size={20} />
+                    <Clock className="text-[color:var(--gold-champagne)]" size={18} />
                   </motion.div>
                   <h3 className="text-xl font-bold text-foreground">{t('contactSection.hours', 'Business Hours')}</h3>
                 </div>
@@ -158,7 +156,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   )}
                 </div>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {businessHours.map((item, index) => (
                   <motion.div 
                     key={index} 
@@ -167,8 +165,8 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                     whileHover={{ opacity: 1, x: 5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <span className="text-foreground">{t(item.dayKey, item.dayKey)}</span>
-                    <span className="font-semibold text-foreground">{item.hours}</span>
+                    <span className="text-sm text-foreground">{t(item.dayKey, item.dayKey)}</span>
+                    <span className="text-sm font-semibold text-foreground">{item.hours}</span>
                   </motion.div>
                 ))}
               </div>
@@ -181,7 +179,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative h-125 lg:h-full rounded-3xl overflow-hidden shadow-2xl"
+            className="relative h-60 sm:h-80 lg:h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.7789!2d-117.2508972!3d32.7461198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80deaa3766bc71cd%3A0x58947b412e099a07!2sQueen's%20Nails%20Hair%20and%20Skincare!5e0!3m2!1sen!2sus!4v1234567890"

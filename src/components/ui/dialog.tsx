@@ -6,10 +6,22 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "./utils";
 
-function Dialog({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />;
+function Dialog({ onOpenChange, ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
+  const handleOpenChange = (open: boolean) => {
+    try {
+      if (open) {
+        (document.body.dataset as any).modalOpen = 'true';
+      } else {
+        delete (document.body.dataset as any).modalOpen;
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    if (typeof onOpenChange === 'function') onOpenChange(open);
+  };
+
+  return <DialogPrimitive.Root data-slot="dialog" {...props} onOpenChange={handleOpenChange} />;
 }
 
 function DialogTrigger({

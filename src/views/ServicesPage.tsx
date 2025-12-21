@@ -114,7 +114,7 @@ const getServicesData = (t: (key: string, fallback: string) => string): ServiceC
     id: 'powder',
     category: t('servicesPage.powderCategory', 'Organic Nail Powder'),
     title: t('servicesPage.powderTitle', 'ORGANIC NAIL POWDER (DIPPING POWDER)'),
-    image: 'https://images.unsplash.com/photo-1535588986102-0e9c0c60cba2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwcG93ZGVyJTIwbmFpbHN8ZW58MXx8fHwxNzY1MjE2MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'gallery/organic.jpg',
     description: t('servicesPage.powderDesc', 'Dipping powder collection with beautiful and long-lasting finishes.'),
     services: [
       { name: t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder'), price: '$50', duration: '60 min' },

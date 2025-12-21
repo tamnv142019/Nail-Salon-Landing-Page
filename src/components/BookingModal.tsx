@@ -32,11 +32,24 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // mark booking modal open for other UI to react (e.g., floating buttons)
+      try {
+        (document.body.dataset as any).bookingOpen = 'true';
+        (document.body.dataset as any).modalOpen = 'true';
+      } catch (e) {}
     } else {
       document.body.style.overflow = 'unset';
+      try {
+        delete (document.body.dataset as any).bookingOpen;
+        delete (document.body.dataset as any).modalOpen;
+      } catch (e) {}
     }
     return () => {
       document.body.style.overflow = 'unset';
+      try {
+        delete (document.body.dataset as any).bookingOpen;
+        delete (document.body.dataset as any).modalOpen;
+      } catch (e) {}
     };
   }, [isOpen]);
 
@@ -111,11 +124,11 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
       className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300"
     >
       <div 
-        className="relative w-full max-w-lg bg-card/85 backdrop-blur-2xl rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-border/60 ring-1 ring-inset ring-white/10 dark:ring-white/5"
+        className="relative w-full max-w-md sm:max-w-lg bg-card/85 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-border/60 ring-1 ring-inset ring-white/10 dark:ring-white/5"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header - iOS Glass Style */}
-        <div className="relative bg-linear-to-r from-brand-gold-soft to-brand-gold-muted px-8 py-6">
+        <div className="relative bg-linear-to-r from-brand-gold-soft to-brand-gold-muted px-4 py-4 sm:px-8 sm:py-6">
           <button
             onClick={handleClose}
             aria-label="Close booking modal"
@@ -124,19 +137,16 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             <X className="text-foreground" size={20} />
           </button>
 
-          <div className="flex items-center gap-4 mb-2">
-            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-white/10 dark:bg-white/6 shadow-sm border border-white/10">
-              <Sparkles className="text-[color:var(--accent)]" size={20} />
+              <div className="flex items-center gap-3 mb-2">
+            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/10 dark:bg-white/6 shadow-sm border border-white/10">
+              <Sparkles className="text-rose-500 dark:text-rose-400" size={18} />
             </div>
 
             <div className="text-left">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-[color:var(--gold-champagne)] drop-shadow-sm">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-rose-500 dark:text-rose-400 drop-shadow-sm">
                 {t('booking.title', 'Book Appointment')}
               </h2>
-              <div className="mt-2">
-                <div className="h-1 w-16 rounded-full bg-gradient-to-r from-[color:var(--accent)] to-[color:var(--primary)] opacity-60" />
-              </div>
-              <p className="text-sm text-foreground mt-2 opacity-90">
+              <p className="text-xs sm:text-sm text-foreground mt-1 opacity-90 max-w-[20rem]">
                 {t('booking.subtitle', 'Choose a date and time. We will confirm via phone or email.')}
               </p>
             </div>
@@ -150,7 +160,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         </div>
 
         {/* Content */}
-        <div className="p-8 max-h-[70vh] overflow-y-auto">
+        <div className="p-4 sm:p-8 max-h-[80vh] sm:max-h-[70vh] overflow-y-auto">
           {isSubmitted ? (
             <div className="text-center py-12 animate-in fade-in zoom-in-95 duration-500">
               <div className="w-20 h-20 bg-brand-emerald/10 backdrop-blur-xl rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-emerald/20">
@@ -174,24 +184,24 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                  <User className="text-[color:var(--primary)]" size={18} />
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300"
-                  placeholder="Enter your name"
-                />
+                  <label className="text-foreground mb-1 flex items-center gap-2 font-medium text-sm">
+                    <User className="text-blue-500" size={16} />
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl sm:rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300 text-sm"
+                    placeholder="Enter your name"
+                  />
               </div>
 
               {/* Email */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                  <Mail className="text-[color:var(--accent)]" size={18} />
+                <label className="text-foreground mb-1 flex items-center gap-2 font-medium text-sm">
+                  <Mail className="text-teal-500" size={16} />
                   Email Address
                 </label>
                 <input
@@ -199,15 +209,15 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300"
+                  className="w-full px-4 py-3 rounded-xl sm:rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300 text-sm"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                  <Phone className="text-[color:var(--brand-emerald)]" size={18} />
+                <label className="text-foreground mb-1 flex items-center gap-2 font-medium text-sm">
+                  <Phone className="text-emerald-500" size={16} />
                   Phone Number
                 </label>
                 <input
@@ -215,7 +225,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300"
+                  className="w-full px-4 py-3 rounded-xl sm:rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300 text-sm"
                   placeholder="(619) 224-5050"
                 />
               </div>
@@ -235,12 +245,12 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                     onChange={(e) => setSelectedDate(e.target.value)}
                     ref={dateInputRef}
                     data-native-picker="date"
-                    className="w-full px-5 py-4 pr-12 rounded-2xl bg-background/60 hover:bg-background/70 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 focus:ring-2 focus:ring-brand-gold/20 text-foreground transition-all duration-300"
+                    className="w-full px-4 py-3 pr-10 rounded-xl sm:rounded-2xl bg-background/60 hover:bg-background/70 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 focus:ring-2 focus:ring-brand-gold/20 text-foreground transition-all duration-300 text-sm"
                   />
                   <button
                     type="button"
                     aria-label={t('booking.openDatePicker', 'Open date picker')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-xl text-foreground hover:bg-black/5 dark:text-brand-light/90 dark:hover:bg-white/10 transition"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg text-foreground hover:bg-black/5 dark:text-brand-light/90 dark:hover:bg-white/10 transition"
                     onClick={() => {
                       const input = dateInputRef.current;
                       if (!input) return;
@@ -249,7 +259,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       input.focus();
                     }}
                   >
-                    <Calendar className="text-[color:var(--brand-gold)]" aria-hidden="true" size={18} />
+                    <Calendar className="text-amber-500" aria-hidden="true" size={16} />
                   </button>
                 </div>
               </div>
@@ -260,7 +270,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   <Clock className="text-[color:var(--brand-ruby)]" size={18} />
                   Select Time
                 </label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-2">
                   {timeSlots.map((time) => {
                     const isDisabled = (() => {
                       if (!selectedDate) return false;
@@ -290,7 +300,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                         onClick={() => { if (!isDisabled) setSelectedTime(time); }}
                         disabled={isDisabled}
                         aria-disabled={isDisabled}
-                        className={`px-4 py-3 rounded-xl border-2 transition-all duration-300 text-sm backdrop-blur-xl ${
+                        className={`px-3 py-2 rounded-lg sm:rounded-xl border-2 transition-all duration-300 text-xs sm:text-sm backdrop-blur-xl ${
                           isDisabled
                             ? 'opacity-50 cursor-not-allowed border-border/40 bg-background/40 text-foreground'
                             : selectedTime === time
@@ -309,7 +319,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               <button
                 type="submit"
                 disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime || isSending}
-                className="w-full px-6 py-4 rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-xl cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:scale-102 active:brightness-95"
+                className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-lg sm:rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-xl cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:scale-102 active:brightness-95 text-sm"
               >
                 {isSending ? 'Sending...' : 'Confirm Booking'}
               </button>

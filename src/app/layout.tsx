@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { TopCTAs } from '../components/ScrollToTopButton';
 import { FloatingCallButton } from '../components/FloatingCallButton';
+import { FloatingFollowButtons } from '../components/FloatingFollowButtons';
 import { Roboto } from 'next/font/google';
 import Script from 'next/script';
 import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from '../config/seo.config';
@@ -81,6 +82,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={roboto.className}>
       <head>
+        {/* Favicons & manifest */}
+        <link rel="icon" href="/favicon/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <meta name="theme-color" content={seoConfig.metaTags?.themeColor || '#be123c'} />
         {ld.map((d, i) => (
           <script
             key={`ld-${i}`}
@@ -110,6 +118,7 @@ gtag('config', '${gtagId}');`}
         {/* GA4 gtag removed — tracking now handled via Google Tag Manager */}
         <Providers>{children}</Providers>
         <FloatingCallButton />
+        <FloatingFollowButtons />
         <TopCTAs />
         {gtmId ? (
           <Script id="gtm-script" strategy="afterInteractive">

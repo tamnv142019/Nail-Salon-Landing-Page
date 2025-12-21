@@ -5,10 +5,20 @@ import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "./utils";
 
-function Drawer({
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) {
-  return <DrawerPrimitive.Root data-slot="drawer" {...props} />;
+function Drawer({ onOpenChange, ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
+  const handleOpenChange = (open: boolean) => {
+    try {
+      if (open) {
+        (document.body.dataset as any).modalOpen = 'true';
+      } else {
+        delete (document.body.dataset as any).modalOpen;
+      }
+    } catch (e) {}
+
+    if (typeof onOpenChange === 'function') onOpenChange(open as any);
+  };
+
+  return <DrawerPrimitive.Root data-slot="drawer" {...props} onOpenChange={handleOpenChange as any} />;
 }
 
 function DrawerTrigger({

@@ -6,10 +6,20 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { cn } from "./utils";
 import { buttonVariants } from "./button";
 
-function AlertDialog({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
-  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
+function AlertDialog({ onOpenChange, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
+  const handleOpenChange = (open: boolean) => {
+    try {
+      if (open) {
+        (document.body.dataset as any).modalOpen = 'true';
+      } else {
+        delete (document.body.dataset as any).modalOpen;
+      }
+    } catch (e) {}
+
+    if (typeof onOpenChange === 'function') onOpenChange(open);
+  };
+
+  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} onOpenChange={handleOpenChange} />;
 }
 
 function AlertDialogTrigger({

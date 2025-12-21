@@ -6,8 +6,20 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "./utils";
 
-function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
-  return <SheetPrimitive.Root data-slot="sheet" {...props} />;
+function Sheet({ onOpenChange, ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
+  const handleOpenChange = (open: boolean) => {
+    try {
+      if (open) {
+        (document.body.dataset as any).modalOpen = 'true';
+      } else {
+        delete (document.body.dataset as any).modalOpen;
+      }
+    } catch (e) {}
+
+    if (typeof onOpenChange === 'function') onOpenChange(open);
+  };
+
+  return <SheetPrimitive.Root data-slot="sheet" {...props} onOpenChange={handleOpenChange} />;
 }
 
 function SheetTrigger({

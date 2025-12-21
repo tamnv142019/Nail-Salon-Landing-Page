@@ -32,11 +32,13 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
     if (isOpen) {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
+      try { (document.body.dataset as any).modalOpen = 'true'; } catch (e) {}
     }
     
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
+      try { delete (document.body.dataset as any).modalOpen; } catch (e) {}
     };
   }, [isOpen, onClose]);
 

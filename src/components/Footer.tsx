@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, Instagram, Facebook, MapPin, Heart, Send, Clock } from 'lucide-react';
+import { Star, MapPin, Heart, Send, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { businessInfo } from '../config/seo.config';
@@ -26,8 +26,10 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
     }
   };
 
-  // Simple inline Yelp icon (lightweight, avoids new dependencies)
-  const YelpIcon = ({ size = 18 }: { size?: number }) => (
+  
+
+  // Simple Apple Maps-like pin icon (generic, avoids using trademarked artwork)
+  const AppleMapsIcon = ({ size = 18 }: { size?: number }) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
@@ -36,9 +38,31 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
       fill="currentColor"
       aria-hidden="true"
     >
-      <path d="M12 2c1.1 0 2 .9 2 2v6.5l3.5 3.5c.6.6.6 1.6 0 2.2l-1.2 1.2c-.6.6-1.6.6-2.2 0L9.5 14H6c-1.1 0-2-.9-2-2V6c0-2.2 1.8-4 4-4h4z" />
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
     </svg>
   );
+
+  // Simple Google 'G' icon (multi-color)
+  const GoogleIcon = ({ size = 18 }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#4285F4" d="M12 11.5v2.9h4.7c-.2 1.3-1.5 3.8-4.7 3.8-2.8 0-5-2.3-5-5s2.2-5 5-5c1.6 0 2.7.7 3.3 1.3l2.6-2.6C16.4 5.3 14.5 4.3 12 4.3 7.3 4.3 3.7 7.9 3.7 12.6 3.7 17.2 7.3 20.8 12 20.8c4.6 0 8.1-3.4 8.1-8.1 0-.6-.1-1.1-.2-1.6H12z" />
+      <path fill="#34A853" d="M7.5 14.9c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9v0a5 5 0 015-3.1c1.3 0 2.3.4 3.1 1l-2.9 2.9H12v3.9c-.9 0-1.8-.3-2.5-.9z" opacity="0"/>
+      <path fill="#FBBC05" d="M12 4.3c1.6 0 2.7.7 3.3 1.3l2.6-2.6C16.4 2 14.6 1 12 1 7.3 1 3.7 4.6 3.7 9.3c0 .9.2 1.8.5 2.6l3.3-2.9C9.7 8 10.8 4.3 12 4.3z" opacity="0"/>
+      <path fill="#EA4335" d="M17.4 19.2A7.8 7.8 0 0012 20.8c-4.6 0-8.1-3.6-8.1-8.1 0-.9.2-1.8.5-2.6L9 12.4c.7.6 1.6.9 2.5.9v3.9c0 .5.1 1 .2 1.9z" opacity="0"/>
+    </svg>
+  );
+
+  const FacebookIcon = ({ size = 18 }: { size?: number }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="12" fill="#1877F2" />
+      <path
+        d="M15.1 8h-1.6c-.4 0-.9.2-.9.9V9.9h2.5l-.3 2.2H12.6V19h-2.6v-6.9H7.7V9.9h2.3V8.3C10 6.1 11.4 5 13.9 5h1.2v3z"
+        fill="#fff"
+      />
+    </svg>
+  );
+
+  
 
   return (
     <footer className="bg-secondary dark:bg-background border-t border-border text-foreground py-16 px-6 relative overflow-hidden transition-colors duration-500">
@@ -107,16 +131,26 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                   className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-brand-sapphire hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
                   aria-label="Visit our Facebook page"
                 >
-                  <Facebook size={18} />
+                  <FacebookIcon size={18} />
                 </a>
+                
                 <a
                   href={businessInfo.social.yelp || 'https://www.yelp.com/biz/queen-s-nails-hair-and-skincare-san-diego-2'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#d32323] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#b91c1c] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
                   aria-label="Visit our Yelp page"
                 >
-                  <YelpIcon size={18} />
+                  <img src="https://cdn.simpleicons.org/yelp/d32323" alt="Yelp" className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.google.com/search?sca_esv=33e8307878b681b3&authuser=0&hl=en&output=search&q=Queen%27s+Nails+Hair+and+Skincare&ludocid=6382862091766307335&lsig=AB86z5WX6M9quvqsaKYvOUbD8IQv&ved=1i%3A4%2Ct%3A109124%2Ce%3A3%2Cp%3Am45Hadm_F-Ln2roPzLfKuAM%3A66"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#4285F4] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  aria-label="Find us on Google Search"
+                >
+                  <GoogleIcon size={18} />
                 </a>
                 <a
                   href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
@@ -126,6 +160,15 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                   aria-label="Find us on Google Maps"
                 >
                   <MapPin size={18} />
+                </a>
+                <a
+                  href="https://maps.apple.com/place?place-id=IBD99B74E4A250AE4&address=4869+Santa+Monica+Ave%2C+Unit+A%2C+San+Diego%2C+CA++92107%2C+United+States&coordinate=32.7462649%2C-117.248207&name=Queen%E2%80%99s+Nails+Hair+and+Skincare&_provider=9902"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#111111] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  aria-label="Find us on Apple Maps"
+                >
+                  <AppleMapsIcon size={18} />
                 </a>
               </div>
             </div>

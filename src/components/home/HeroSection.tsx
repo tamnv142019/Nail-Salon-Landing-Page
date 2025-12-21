@@ -102,28 +102,57 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
           {/* Phone (visible on all screen sizes) with hover ring + pulse */}
           <a
             href={`tel:${'+1' + businessInfo.phone.replace(/[^0-9]/g, '')}`}
-            className="block text-base mb-4 transition-colors duration-200 group"
+            className="block text-base mb-4 call-ring-group"
             aria-label={`Call ${businessInfo.phone}`}
           >
-            <span className="relative inline-flex items-center justify-center gap-2">
-              {/* Decorative ring outline that grows on hover */}
+            <span className="relative inline-flex items-center justify-center">
+              {/* soft expanding ring (blurred) */}
               <span
                 aria-hidden="true"
-                className="absolute -inset-2 rounded-full border-2 border-red-500 opacity-0 scale-90 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-100"
+                className="absolute inline-flex rounded-full bg-white/10 opacity-70"
+                style={{ width: 64, height: 64, filter: 'blur(6px)', animation: 'none' }}
               />
 
-              {/* Pulsing background ring */}
+              {/* continuous animated ring (subtle pulse) */}
               <span
                 aria-hidden="true"
-                className="absolute inline-flex h-10 w-10 rounded-full bg-red-500/20 opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100 group-hover:animate-ping"
+                className="ring-animated"
+                style={{ width: 72, height: 72 }}
               />
 
-              <span className="relative z-10 flex items-center gap-2 text-red-600 transition-colors duration-200 group-hover:text-red-700">
+              {/* hover-triggered expanding ring */}
+              <span
+                aria-hidden="true"
+                className="ring-hover"
+                style={{ width: 72, height: 72 }}
+              />
+
+              {/* main glass button */}
+              <span className="relative z-10 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[color:var(--on-image-foreground)] shadow-md hover:bg-white/8 transition-all duration-200">
                 <Phone size={18} />
                 <span className="font-semibold">{businessInfo.phone}</span>
               </span>
             </span>
           </a>
+
+          {/* Inline styles for ring animations */}
+          <style>{`
+            .call-ring-group { display: inline-block; }
+            .call-ring-group .ring-animated { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); border-radius: 9999px; border: 1px solid rgba(255,255,255,0.16); opacity: 0.6; pointer-events: none; animation: ring 1800ms infinite ease-out; }
+            .call-ring-group .ring-hover { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.8); border-radius: 9999px; border: 1px solid rgba(255,255,255,0.14); opacity: 0; pointer-events: none; }
+            .call-ring-group:hover .ring-hover { animation: ringHover 900ms forwards ease-out; opacity: 1; }
+
+            @keyframes ring {
+              0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
+              60% { opacity: 0.18; }
+              100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+            }
+
+            @keyframes ringHover {
+              0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+              100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
+            }
+          `}</style>
           <a
             href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
             target="_blank"

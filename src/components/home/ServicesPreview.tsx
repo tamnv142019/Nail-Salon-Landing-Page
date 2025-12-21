@@ -60,7 +60,7 @@ const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'powder',
     title: t('servicesPage.powderCategory', 'Organic Nail Powder'),
-    image: 'https://images.unsplash.com/photo-1535588986102-0e9c0c60cba2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcmdhbmljJTIwcG93ZGVyJTIwbmFpbHN8ZW58MXx8fHwxNzY1MjE2MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: 'gallery/organic.jpg',
     description: t('servicesPreview.powderDesc', 'Dipping powder collection with beautiful finishes'),
     features: [
       `${t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder')} - $50`,
