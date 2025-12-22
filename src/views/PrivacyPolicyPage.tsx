@@ -223,7 +223,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
-                <p>Email: info@queensobnail.com</p>
+                <p>Email: support@queensobnail.com</p>
               </div>
             </section>
           </div>

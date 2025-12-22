@@ -34,10 +34,10 @@ export interface BusinessInfo {
 }
 
 export const businessInfo: BusinessInfo = {
-  name: "Queen's Nails Hair & Skincare",
+  name: "Queen's Nails Hair & Skincare - Best Nail Salon in Ocean Beach, San Diego",
   description: "Experience luxury nail care and beauty at Queen’s Nails Hair & Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
   url: 'https://queensobnail.com',
-  email: 'info@queensobnail.com',
+  email: 'support@queensobnail.com',
   phone: '(619) 224-5050',
   address: {
     streetAddress: '4869 Santa Monica Ave',

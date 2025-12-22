@@ -48,7 +48,7 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
     "description": data.description,
     "url": data.url,
     "telephone": data.telephone,
-    "email": "info@queensobnail.com",
+    "email": "support@queensobnail.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": data.address.streetAddress,
