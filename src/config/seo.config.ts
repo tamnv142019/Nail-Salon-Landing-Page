@@ -373,7 +373,7 @@ export function generateBusinessSchema() {
       latitude: businessInfo.geo.latitude,
       longitude: businessInfo.geo.longitude,
     },
-    image: 'https://queensobnail.com/logo.jpg',
+    image: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
     priceRange: '$$',
     openingHoursSpecification: businessInfo.openingHours.map((hours) => ({
       '@type': 'OpeningHoursSpecification',
