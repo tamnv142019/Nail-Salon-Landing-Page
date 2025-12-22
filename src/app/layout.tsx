@@ -12,9 +12,9 @@ import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, gen
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
 
 export const metadata: Metadata = {
-  title: "Queen's Nails Hair & Skincare",
+  title: "Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach, San Diego",
   description:
-    "Premier nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
+    "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
   icons: {
     icon: [
       { url: "/favicon/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Queen's Nails Hair & Skincare",
     description:
-      "Premier nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
+      "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
     url: businessInfo.url,
     siteName: businessInfo.name,
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Queen's Nails Hair & Skincare",
     description:
-      "Premier nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
+      "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
     images: ['https://queensobnail.com/logo.jpg'],
   },
 };

@@ -95,7 +95,7 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
 
           {/* Subheading */}
           <p className="text-lg md:text-2xl text-[color:var(--on-image-foreground-muted)] mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed transition-colors duration-300 motion-reduce:transition-none group-hover:text-[color:var(--on-image-foreground)]">
-            {t('home.hero.description', 'Premier Nail Salon & Spa in Ocean Beach')}
+            {t('home.hero.description', 'Best Nail Salon & Spa in Ocean Beach')}
           </p>
 
           {/* Location */}
