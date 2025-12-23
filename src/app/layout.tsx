@@ -7,6 +7,7 @@ import { FloatingCallButton } from '../components/FloatingCallButton';
 import { FloatingFollowButtons } from '../components/FloatingFollowButtons';
 import { Roboto } from 'next/font/google';
 import Script from 'next/script';
+import { GoogleTagManager } from '@next/third-parties/google';
 import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from '../config/seo.config';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
@@ -112,23 +113,12 @@ gtag('config', '${gtagId}');`}
         ) : null}
       </head>
         <body className="antialiased" style={{ fontWeight: 'var(--font-weight-normal)' }}>
-        {gtmId ? (
-          <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
-        ) : null}
+        {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
         {/* GA4 gtag removed — tracking now handled via Google Tag Manager */}
         <Providers>{children}</Providers>
         <FloatingCallButton />
         <FloatingFollowButtons />
         <TopCTAs />
-        {gtmId ? (
-          <Script id="gtm-script" strategy="afterInteractive">
-            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','` + gtmId + `');`}
-          </Script>
-        ) : null}
       </body>
     </html>
   );
