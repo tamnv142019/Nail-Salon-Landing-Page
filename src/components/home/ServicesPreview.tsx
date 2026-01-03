@@ -13,7 +13,7 @@ function BestSellerBadge({ label }: { label: string }) {
     <span className="ml-2 flex items-center" aria-hidden>
       {/* Use public asset to ensure runtime availability in Next.js */}
       <img
-        src="/assets/badges/best-seller-badge.svg"
+        src="/images/badges/best-seller-badge.svg"
         alt={label}
         width={84}
         height={84}
@@ -27,7 +27,7 @@ const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'combo',
     title: t('servicesPage.comboCategory', 'Combo Specials'),
-    image: 'gallery/comboImage.jpg',
+    image: '/images/gallery/service-combo.jpg',
     description: t('servicesPreview.comboDesc', 'Combo packages combining manicure and pedicure signature services'),
     features: [
       `${t('servicesPage.comboPedicureManicureSignature', 'Combo Pedicure + Manicure Signature')} - $85`,
@@ -48,7 +48,7 @@ const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'pedicure',
     title: t('servicesPage.pedicureCategory', 'Pedicure Services'),
-    image: 'gallery/pedicure.jpg',
+    image: '/images/gallery/service-pedicure.jpg',
     description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
     features: [
       `${t('servicesPage.regularSpaPedicure', 'Regular Spa Pedicure')} - $25 — Includes a 6-minute foot massage ${t('servicesPage.bestSellerTag', '(Best Seller)')}`,
@@ -60,7 +60,7 @@ const getServices = (t: (key: string, fallback: string) => string) => [
   {
     id: 'powder',
     title: t('servicesPage.powderCategory', 'Organic Nail Powder'),
-    image: 'gallery/organic.jpg',
+    image: '/images/gallery/service-organic.jpg',
     description: t('servicesPreview.powderDesc', 'Dipping powder collection with beautiful finishes'),
     features: [
       `${t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder')} - $50`,
@@ -154,8 +154,8 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
             </motion.div>
           </div>
 
-          {/* Services Grid - Circular Images */}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12 mb-12 place-items-center">
+          {/* Services Grid - Compact 3x2 (3 items per row on md+) */}
+          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 mb-12 place-items-center">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
@@ -167,7 +167,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                 className="flex flex-col items-center cursor-pointer group"
               >
                 {/* Circular Image */}
-                <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 overflow-hidden rounded-full border-4 border-border shadow-xl group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110">
+                <div className="relative w-28 h-28 md:w-36 md:h-36 mb-3 overflow-hidden rounded-full border-4 border-border shadow-xl group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110">
                   <img
                     src={service.image}
                     alt={service.title}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
 import { Phone } from 'lucide-react';
 import { businessInfo } from '../../config/seo.config';
@@ -11,17 +11,32 @@ interface HeroSectionProps {
 }
 
 const backgroundImages = [
-  '/background/1.jpg',
-  '/background/2.jpg',
-  '/background/3.jpg',
-  '/background/4.jpg',
+  '/images/backgrounds/salon-bg-01.jpg',
+  '/images/backgrounds/salon-bg-02.jpg',
+  '/images/backgrounds/salon-bg-03.jpg',
+  '/images/backgrounds/salon-bg-04.jpg',
   'https://images.unsplash.com/photo-1604654894610-df63bc536371?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
 ];
+
+function Hover3DText({ text }: { text: string }) {
+  return (
+    <span
+      className="inline-block perspective-[900px] cursor-default select-none"
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      <span
+        className="inline-block will-change-transform transition-[transform,filter] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none hover:transform-[translateY(-2px)_translateZ(18px)_rotateX(10deg)] hover:brightness-110 hover:filter-[drop-shadow(0_18px_28px_var(--scrim-60))]"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        {text}
+      </span>
+    </span>
+  );
+}
 
 export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { t } = useLanguage();
-  const magicRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,24 +45,6 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleMagicMouseMove = (e: React.MouseEvent) => {
-    const el = magicRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    el.style.setProperty('--x', `${x}%`);
-    el.style.setProperty('--y', `${y}%`);
-  };
-
-  const handleMagicMouseLeave = () => {
-    const el = magicRef.current;
-    if (!el) return;
-    el.style.setProperty('--x', `50%`);
-    el.style.setProperty('--y', `50%`);
-  };
-
 
   return (
     <section id="hero" className="relative h-screen min-h-150 flex items-center justify-center overflow-hidden">
@@ -68,99 +65,53 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
             />
           </div>
         ))}
-        <div className="absolute inset-0 bg-linear-to-br from-[color:var(--scrim-60)] via-[color:var(--scrim-50)] to-[color:var(--scrim-60)]"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-(--scrim-60) via-(--scrim-50) to-(--scrim-60)"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 text-center group">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl text-[color:var(--on-image-foreground)] font-bold mb-4 md:mb-6 leading-tight transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-1">
-            <span
-              ref={magicRef}
-              onMouseMove={handleMagicMouseMove}
-              onMouseLeave={handleMagicMouseLeave}
-              className="magic-light-wrap inline-block"
-              style={{ ['--x' as any]: '50%', ['--y' as any]: '50%' } as React.CSSProperties}
-            >
-              <span className="magic-light-text">{t('home.hero.title.line1', "Queen's")}</span>
-              <br />
-              <span className="magic-light-text">{t('home.hero.title.line2', 'Nails Hair & Skincare')}</span>
-            </span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl text-(--on-image-foreground) font-bold mb-4 md:mb-6 leading-tight">
+            <Hover3DText text={t('home.hero.title.line1', "Queen's")} />
+            <br />
+            <Hover3DText text={t('home.hero.title.line2', 'Nails Hair & Skincare')} />
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg md:text-2xl text-[color:var(--on-image-foreground-muted)] mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed transition-colors duration-300 motion-reduce:transition-none group-hover:text-[color:var(--on-image-foreground)]">
+          <p className="text-lg md:text-2xl text-(--on-image-foreground-muted) mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed">
             {t('home.hero.description', 'Best Nail Salon & Spa in Ocean Beach')}
           </p>
 
           {/* Location */}
-          {/* Phone (visible on all screen sizes) with hover ring + pulse */}
+          {/* Elegant Call Button with Glass Morphism */}
           <a
             href={`tel:${'+1' + businessInfo.phone.replace(/[^0-9]/g, '')}`}
-            className="block text-base mb-4 call-ring-group"
+            className="group relative inline-flex items-center justify-center gap-3 px-6 py-3 mb-4 rounded-full bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent outline-none shadow-lg hover:shadow-xl"
             aria-label={`Call ${businessInfo.phone}`}
           >
-            <span className="relative inline-flex items-center justify-center">
-              {/* soft expanding ring (blurred) */}
-              <span
-                aria-hidden="true"
-                className="absolute inline-flex rounded-full bg-white/10 opacity-70"
-                style={{ width: 64, height: 64, filter: 'blur(6px)', animation: 'none' }}
-              />
-
-              {/* continuous animated ring (subtle pulse) */}
-              <span
-                aria-hidden="true"
-                className="ring-animated"
-                style={{ width: 72, height: 72 }}
-              />
-
-              {/* hover-triggered expanding ring */}
-              <span
-                aria-hidden="true"
-                className="ring-hover"
-                style={{ width: 72, height: 72 }}
-              />
-
-              {/* main glass button */}
-              <span className="relative z-10 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-[color:var(--on-image-foreground)] shadow-md hover:bg-white/8 transition-all duration-200">
-                <Phone size={18} />
-                <span className="font-semibold">{businessInfo.phone}</span>
-              </span>
+            {/* Phone icon */}
+            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 group-hover:bg-white/20 transition-all duration-300 group-hover:rotate-12">
+              <Phone size={16} className="text-white" />
+            </span>
+            
+            {/* Phone number */}
+            <span className="font-medium text-base">
+              {businessInfo.phone}
             </span>
           </a>
-
-          {/* Inline styles for ring animations */}
-          <style>{`
-            .call-ring-group { display: inline-block; }
-            .call-ring-group .ring-animated { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); border-radius: 9999px; border: 1px solid rgba(255,255,255,0.16); opacity: 0.6; pointer-events: none; animation: ring 1800ms infinite ease-out; }
-            .call-ring-group .ring-hover { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(0.8); border-radius: 9999px; border: 1px solid rgba(255,255,255,0.14); opacity: 0; pointer-events: none; }
-            .call-ring-group:hover .ring-hover { animation: ringHover 900ms forwards ease-out; opacity: 1; }
-
-            @keyframes ring {
-              0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
-              60% { opacity: 0.18; }
-              100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
-            }
-
-            @keyframes ringHover {
-              0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
-              100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
-            }
-          `}</style>
           <a
             href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 text-[color:var(--on-image-foreground-muted)] mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none group-hover:-translate-y-0.5 transform hover:scale-105 hover:text-brand-gold hover:underline"
+            className="flex items-center justify-center gap-2 text-(--on-image-foreground-muted) mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none transform hover:scale-105 hover:text-brand-gold hover:underline"
           >
             <MapPin size={20} />
-            <span className="text-base md:text-lg transition-opacity duration-300 motion-reduce:transition-none group-hover:opacity-100">4869 Santa Monica Ave, San Diego, CA 92107</span>
+            <span className="text-base md:text-lg">4869 Santa Monica Ave, San Diego, CA 92107</span>
           </a>
 
           {/* CTA Button */}
@@ -194,7 +145,7 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
                 requestAnimationFrame(scroll);
               }
             }}
-            className="group relative overflow-hidden px-8 py-4 rounded-full transition-all duration-300 hover:scale-105 shadow-2xl text-lg font-semibold w-full sm:w-auto cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-[color:var(--btn-sheen)] before:to-transparent before:-skew-x-12 before:translate-x-[-200%] before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[200%] hover:before:via-[color:var(--btn-sheen-hover)]"
+            className="group relative overflow-hidden px-8 py-4 rounded-full text-lg font-semibold w-full sm:w-auto cursor-pointer bg-(image:--gradient-primary-action) text-(--gold-champagne) shadow-2xl transition-[transform,filter,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.03] hover:brightness-110 active:brightness-95 outline-none focus-visible:ring-[3px] focus-visible:ring-(--focus-ring) focus-visible:ring-offset-2 focus-visible:ring-offset-background before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-(--btn-sheen) before:to-transparent before:-skew-x-12 before:translate-x-[-200%] before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[200%] hover:before:via-(--btn-sheen-hover)"
           >
             <span className="flex items-center justify-center gap-2">
               <span className="transition-all duration-300 motion-reduce:transition-none group-hover:tracking-wide">
@@ -207,8 +158,8 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-[color:var(--on-image-foreground-muted)] rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-[color:var(--on-image-foreground-muted)] rounded-full"></div>
+        <div className="w-6 h-10 border-2 border-(--on-image-foreground-muted) rounded-full flex items-start justify-center p-2">
+          <div className="w-1 h-2 bg-(--on-image-foreground-muted) rounded-full"></div>
         </div>
       </div>
     </section>

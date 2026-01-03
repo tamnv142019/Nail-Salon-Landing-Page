@@ -1,0 +1,268 @@
+// ============================================================================
+// NEXT.JS PAGES ROUTER EXAMPLE (pages/_document.tsx)
+// ============================================================================
+// Sử dụng file này nếu bạn dùng Pages Router thay vì App Router
+// Hiện tại project đang dùng App Router (app/layout.tsx)
+// ============================================================================
+
+import { Html, Head, Main, NextScript } from 'next/document';
+
+export default function Document() {
+  // Business info
+  const businessInfo = {
+    name: "Queen's Nails Hair & Skincare",
+    url: 'https://queensobnail.com',
+    phone: '(619) 224-5050',
+    email: 'support@queensobnail.com',
+    address: {
+      streetAddress: '4869 Santa Monica Ave',
+      addressLocality: 'Ocean Beach, San Diego',
+      addressRegion: 'CA',
+      postalCode: '92107',
+      addressCountry: 'US',
+    },
+    geo: {
+      latitude: 32.7157,
+      longitude: -117.2500,
+    },
+  };
+
+  // WebSite Schema - QUAN TRỌNG cho Site name trong Google
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${businessInfo.url}/#website`,
+    name: businessInfo.name,
+    alternateName: 'Queens OB Nail',
+    url: businessInfo.url,
+    description:
+      'Experience luxury nail care and beauty at Queen\'s Nails Hair & Skincare in Ocean Beach',
+    publisher: {
+      '@type': 'BeautySalon',
+      '@id': `${businessInfo.url}/#organization`,
+      name: businessInfo.name,
+      url: businessInfo.url,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${businessInfo.url}/#logo`,
+        url: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
+        contentUrl: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
+        caption: 'Queen\'s Nails Hair & Skincare Logo',
+        width: 512,
+        height: 512,
+      },
+      image: {
+        '@id': `${businessInfo.url}/#logo`,
+      },
+      telephone: businessInfo.phone,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: businessInfo.address.streetAddress,
+        addressLocality: businessInfo.address.addressLocality,
+        addressRegion: businessInfo.address.addressRegion,
+        postalCode: businessInfo.address.postalCode,
+        addressCountry: businessInfo.address.addressCountry,
+      },
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${businessInfo.url}/?s={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+    inLanguage: 'en-US',
+  };
+
+  // Organization/BeautySalon Schema
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BeautySalon',
+    '@id': `${businessInfo.url}/#organization`,
+    name: businessInfo.name,
+    url: businessInfo.url,
+    telephone: businessInfo.phone,
+    email: businessInfo.email,
+    logo: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
+    image: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: businessInfo.address.streetAddress,
+      addressLocality: businessInfo.address.addressLocality,
+      addressRegion: businessInfo.address.addressRegion,
+      postalCode: businessInfo.address.postalCode,
+      addressCountry: businessInfo.address.addressCountry,
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: businessInfo.geo.latitude,
+      longitude: businessInfo.geo.longitude,
+    },
+    priceRange: '$$',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: '250',
+    },
+  };
+
+  return (
+    <Html lang="en">
+      <Head>
+        {/* ============================================ */}
+        {/* FAVICON - Chuẩn Google (>= 48x48px)         */}
+        {/* ============================================ */}
+        
+        {/* Legacy favicon.ico */}
+        <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+        
+        {/* PNG favicons - multiple sizes */}
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/favicon/android-chrome-512x512.png" />
+        
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+        
+        {/* Web App Manifest */}
+        <link rel="manifest" href="/favicon/site.webmanifest" />
+        
+        {/* Theme color */}
+        <meta name="theme-color" content="#be123c" />
+
+        {/* ============================================ */}
+        {/* SCHEMA MARKUP (JSON-LD)                     */}
+        {/* ============================================ */}
+        
+        {/* WebSite Schema - Site name trong Google */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema, null, 2),
+          }}
+        />
+        
+        {/* Organization Schema - Business info */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema, null, 2),
+          }}
+        />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+}
+
+// ============================================================================
+// NEXT.JS PAGES ROUTER EXAMPLE (pages/_app.tsx)
+// ============================================================================
+
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import '../styles/globals.css';
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Head>
+        {/* ============================================ */}
+        {/* SEO META TAGS                               */}
+        {/* ============================================ */}
+        
+        {/* Site name - Application name */}
+        <meta name="application-name" content="Queen's Nails Hair & Skincare" />
+        
+        {/* Primary Meta Tags */}
+        <title>Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach, San Diego</title>
+        <meta
+          name="title"
+          content="Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach, San Diego"
+        />
+        <meta
+          name="description"
+          content="Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services. Professional beauty salon serving San Diego."
+        />
+        <meta
+          name="keywords"
+          content="nail salon ocean beach, manicure san diego, pedicure ocean beach, nail art san diego, beauty salon"
+        />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://queensobnail.com" />
+        
+        {/* Author & Creator */}
+        <meta name="author" content="Queen's Nails Hair & Skincare" />
+        <meta name="creator" content="Queen's Nails Hair & Skincare" />
+        <meta name="publisher" content="Queen's Nails Hair & Skincare" />
+
+        {/* ============================================ */}
+        {/* OPEN GRAPH / FACEBOOK                       */}
+        {/* ============================================ */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://queensobnail.com" />
+        <meta property="og:site_name" content="Queen's Nails Hair & Skincare" />
+        <meta
+          property="og:title"
+          content="Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach"
+        />
+        <meta
+          property="og:description"
+          content="Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services."
+        />
+        <meta property="og:image" content="https://queensobnail.com/images/logos/logo.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Queen's Nails Hair & Skincare Logo" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* ============================================ */}
+        {/* TWITTER CARD                                */}
+        {/* ============================================ */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://queensobnail.com" />
+        <meta name="twitter:title" content="Queen's Nails Hair & Skincare" />
+        <meta
+          name="twitter:description"
+          content="Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services."
+        />
+        <meta name="twitter:image" content="https://queensobnail.com/images/logos/logo.jpg" />
+
+        {/* ============================================ */}
+        {/* ROBOTS                                      */}
+        {/* ============================================ */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+        {/* ============================================ */}
+        {/* VIEWPORT                                    */}
+        {/* ============================================ */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      
+      <Component {...pageProps} />
+    </>
+  );
+}
+
+// ============================================================================
+// NOTES
+// ============================================================================
+/*
+ * 1. Pages Router cần thêm meta tags thủ công trong <Head>
+ * 2. App Router (hiện tại) tự động xử lý qua Metadata API
+ * 3. WebSite Schema cần có trong cả 2 router
+ * 4. metadataBase không có trong Pages Router - phải dùng absolute URLs
+ * 
+ * Migration từ Pages → App Router:
+ * - _document.tsx → app/layout.tsx
+ * - _app.tsx → app/layout.tsx hoặc app/providers.tsx
+ * - Meta tags → export const metadata
+ * - JSON-LD có thể giữ nguyên hoặc dùng function
+ */

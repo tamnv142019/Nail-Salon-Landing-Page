@@ -47,7 +47,7 @@ const getServicesData = (t: (key: string, fallback: string) => string): ServiceC
     id: 'combo',
     category: t('servicesPage.comboCategory', 'Combo Specials'),
     title: t('servicesPage.comboTitle', 'COMBO SPECIALS'),
-    image: 'gallery/comboImage.jpg',
+    image: '/images/gallery/service-combo.jpg',
     description: t('servicesPage.comboDesc', 'Special combo packages combining manicure and pedicure signature services.'),
     popular: true,
     sale: true,
@@ -79,7 +79,7 @@ const getServicesData = (t: (key: string, fallback: string) => string): ServiceC
     id: 'pedicure',
     category: t('servicesPage.pedicureCategory', 'Pedicure Services'),
     title: t('servicesPage.pedicureTitle', 'PEDICURE SERVICES'),
-    image: 'gallery/pedicure.jpg',
+    image: '/images/gallery/service-pedicure.jpg',
     description: t('servicesPage.pedicureDesc', 'Your satisfaction deserves our attention. Indulge in our luxurious pedicure services featuring premium products and relaxing massage.'),
     popular: true,
       services: [
@@ -114,7 +114,7 @@ const getServicesData = (t: (key: string, fallback: string) => string): ServiceC
     id: 'powder',
     category: t('servicesPage.powderCategory', 'Organic Nail Powder'),
     title: t('servicesPage.powderTitle', 'ORGANIC NAIL POWDER (DIPPING POWDER)'),
-    image: 'gallery/organic.jpg',
+    image: '/images/gallery/service-organic.jpg',
     description: t('servicesPage.powderDesc', 'Dipping powder collection with beautiful and long-lasting finishes.'),
     services: [
       { name: t('servicesPage.ombre2ColorPowder', 'Ombre 2 Color Powder'), price: '$50', duration: '60 min' },
@@ -291,16 +291,16 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
           <div className="absolute -bottom-28 -left-24 h-96 w-96 rounded-full bg-brand-sapphire/10 blur-3xl" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto">
+        <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl md:text-5xl mb-4 font-bold bg-linear-to-r from-foreground via-brand-gold to-brand-gold-muted bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-5xl mb-4 font-bold text-black dark:text-white">
               {t('servicesPage.title', 'Services & Pricing')}
             </h1>
-            <p className="text-sm md:text-lg text-foreground max-w-4xl leading-relaxed">
+            <p className="text-sm md:text-lg text-foreground max-w-4xl mx-auto leading-relaxed">
               {t('servicesPage.subtitle', 'Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.')}
             </p>
           </motion.div>
@@ -550,7 +550,7 @@ const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: Se
                     <div className="text-[20px] md:text-[22px] font-semibold text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold transition-colors whitespace-normal wrap-break-word">{item.name}</div>
                     {item.bestSeller && (
                       <img
-                        src="/assets/badges/best-seller-badge.svg"
+                        src="/images/badges/best-seller-badge.svg"
                         alt={t('servicesPage.bestSellerTag', 'Best Seller')}
                         className="w-9 h-9 object-contain"
                       />

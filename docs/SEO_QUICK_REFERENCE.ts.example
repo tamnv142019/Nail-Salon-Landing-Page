@@ -1,0 +1,312 @@
+/**
+ * 🚀 QUICK START - Google Search SEO Setup
+ * 
+ * Cấu hình đã hoàn tất! Google sẽ hiển thị:
+ * ✅ Site name: Queen's Nails Hair & Skincare
+ * ✅ Favicon trong search results
+ * ✅ Rich snippets với structured data
+ */
+
+// ============================================================================
+// 1️⃣ KIỂM TRA CÁC FILE QUAN TRỌNG
+// ============================================================================
+
+/**
+ * ✅ src/app/layout.tsx
+ * - metadataBase: new URL('https://queensobnail.com')
+ * - applicationName: "Queen's Nails Hair & Skincare"
+ * - WebSite Schema được thêm vào
+ */
+
+/**
+ * ✅ src/config/seo.config.ts  
+ * - generateWebSiteSchema() function đã được thêm
+ * - enableWebSiteSchema: true
+ */
+
+/**
+ * ✅ Favicon files trong public/favicon/
+ * - favicon.ico ✅
+ * - favicon-16x16.png ✅
+ * - favicon-32x32.png ✅
+ * - android-chrome-192x192.png ✅ (Google search)
+ * - android-chrome-512x512.png ✅ (Google search)
+ * - apple-touch-icon.png ✅
+ */
+
+// ============================================================================
+// 2️⃣ VALIDATE SETUP
+// ============================================================================
+
+/**
+ * Bước 1: Test local
+ */
+// npm run dev
+// Mở: http://localhost:3000
+// View source → Tìm <script type="application/ld+json">
+// Kiểm tra có WebSite Schema không
+
+/**
+ * Bước 2: Test Rich Results
+ */
+// 1. Deploy lên production: https://queensobnail.com
+// 2. Truy cập: https://search.google.com/test/rich-results
+// 3. Nhập URL: https://queensobnail.com
+// 4. Chờ test hoàn tất
+// 5. Kiểm tra "WebSite" được detected
+
+/**
+ * Bước 3: Validate Schema
+ */
+// 1. View source: https://queensobnail.com
+// 2. Copy JSON-LD
+// 3. Paste vào: https://validator.schema.org
+// 4. Fix any errors
+
+// ============================================================================
+// 3️⃣ GOOGLE SEARCH CONSOLE SETUP
+// ============================================================================
+
+/**
+ * Bước 1: Xác minh ownership
+ */
+// 1. Truy cập: https://search.google.com/search-console
+// 2. Add property: https://queensobnail.com
+// 3. Chọn phương thức xác minh (HTML tag, DNS, ...)
+// 4. Verify
+
+/**
+ * Bước 2: Submit sitemap
+ */
+// 1. Trong Search Console → Sitemaps
+// 2. Submit: https://queensobnail.com/sitemap.xml
+// 3. Chờ Google crawl
+
+/**
+ * Bước 3: Request indexing
+ */
+// 1. URL Inspection → Nhập: https://queensobnail.com
+// 2. Click "Request indexing"
+// 3. Đợi 1-3 ngày
+
+// ============================================================================
+// 4️⃣ TIMELINE & EXPECTATIONS
+// ============================================================================
+
+/**
+ * Timeline:
+ * 
+ * Day 1-3:    Google crawl & index website
+ * Day 3-7:    Favicon xuất hiện trong search results
+ * Week 1-2:   Site name xuất hiện
+ * Week 2-4:   Sitelinks có thể xuất hiện (nếu đủ điều kiện)
+ * Month 1-3:  Rich results & enhanced search appearance
+ */
+
+/**
+ * Kỳ vọng trong Google Search:
+ * 
+ * ┌─────────────────────────────────────────┐
+ * │ [🌸] Queen's Nails Hair & Skincare      │ ← Site name + Favicon
+ * │ https://queensobnail.com                │
+ * │                                         │
+ * │ Best Nail Salon in Ocean Beach, San... │
+ * │ Best nail salon in Ocean Beach offering │
+ * │ luxury manicures, pedicures...          │
+ * │                                         │
+ * │ Services · Gallery · Book · Contact     │ ← Sitelinks (auto)
+ * └─────────────────────────────────────────┘
+ */
+
+// ============================================================================
+// 5️⃣ TROUBLESHOOTING
+// ============================================================================
+
+/**
+ * ❌ Problem: Favicon không hiển thị
+ * 
+ * Solutions:
+ * 1. Kiểm tra file: https://queensobnail.com/favicon/android-chrome-192x192.png
+ * 2. File phải >= 48x48px ✅
+ * 3. Format: .ico, .png ✅
+ * 4. Request re-indexing trong Search Console
+ * 5. Đợi 3-7 ngày
+ * 6. Clear browser cache
+ */
+
+/**
+ * ❌ Problem: Site name không hiển thị
+ * 
+ * Solutions:
+ * 1. Kiểm tra WebSite Schema có trong page source ✅
+ * 2. Kiểm tra metadataBase được set ✅
+ * 3. Kiểm tra applicationName trong metadata ✅
+ * 4. Test với Rich Results Test ✅
+ * 5. Đợi 1-2 tuần cho Google nhận diện
+ * 6. Site cần có một số authority/traffic
+ */
+
+/**
+ * ❌ Problem: Schema validation errors
+ * 
+ * Solutions:
+ * 1. View page source: https://queensobnail.com
+ * 2. Copy JSON-LD content
+ * 3. Validate tại: https://validator.schema.org
+ * 4. Fix errors trong src/config/seo.config.ts
+ * 5. Re-deploy
+ * 6. Request re-indexing
+ */
+
+// ============================================================================
+// 6️⃣ TESTING COMMANDS
+// ============================================================================
+
+/**
+ * Test Schema locally:
+ */
+// npm run dev
+// curl http://localhost:3000 | grep 'application/ld+json' -A 50
+
+/**
+ * Test Production Schema:
+ */
+// curl https://queensobnail.com | grep 'application/ld+json' -A 50
+
+/**
+ * Test Favicon:
+ */
+// curl -I https://queensobnail.com/favicon/favicon.ico
+// curl -I https://queensobnail.com/favicon/android-chrome-192x192.png
+
+/**
+ * Validate HTML:
+ */
+// https://validator.w3.org/nu/?doc=https://queensobnail.com
+
+// ============================================================================
+// 7️⃣ MONITORING
+// ============================================================================
+
+/**
+ * Google Search Console metrics to watch:
+ * 
+ * 1. Coverage:
+ *    - Total indexed pages
+ *    - Valid pages
+ *    - Errors
+ * 
+ * 2. Enhancements:
+ *    - Logo (from Organization schema)
+ *    - Sitelinks (auto-generated)
+ *    - Breadcrumbs (from Breadcrumb schema)
+ * 
+ * 3. Performance:
+ *    - Total clicks
+ *    - Total impressions
+ *    - Average CTR (Click-through rate)
+ *    - Average position
+ * 
+ * 4. Rich Results:
+ *    - FAQ snippets
+ *    - Service snippets
+ *    - Business info
+ */
+
+/**
+ * Weekly checklist:
+ * - [ ] Check Search Console errors
+ * - [ ] Monitor impressions & clicks
+ * - [ ] Verify schema is detected
+ * - [ ] Check mobile usability
+ * - [ ] Review Core Web Vitals
+ */
+
+// ============================================================================
+// 8️⃣ NEXT STEPS (OPTIONAL IMPROVEMENTS)
+// ============================================================================
+
+/**
+ * 1. Add Review Schema:
+ */
+// - Collect customer reviews
+// - Add Review schema markup
+// - Display star ratings in search results
+
+/**
+ * 2. Create OG Image:
+ */
+// - Design 1200x630px image
+// - Add to /public/images/og-image.jpg
+// - Update metadata
+
+/**
+ * 3. Multi-language:
+ */
+// - Add hreflang tags
+// - Vietnamese version
+// - Language switcher schema
+
+/**
+ * 4. Event Schema:
+ */
+// - Special promotions
+// - Holiday events
+// - Show events in Google Search
+
+/**
+ * 5. Video Schema:
+ */
+// - Add service videos
+// - Video schema markup
+// - YouTube integration
+
+/**
+ * 6. FAQ Schema (per page):
+ */
+// - Services page FAQs
+// - Gallery page FAQs
+// - Booking page FAQs
+
+// ============================================================================
+// 📚 RESOURCES
+// ============================================================================
+
+const resources = {
+  // Google Official
+  searchCentral: 'https://developers.google.com/search',
+  searchConsole: 'https://search.google.com/search-console',
+  richResultsTest: 'https://search.google.com/test/rich-results',
+  
+  // Schema.org
+  schemaOrg: 'https://schema.org',
+  schemaValidator: 'https://validator.schema.org',
+  
+  // Next.js
+  nextjsMetadata: 'https://nextjs.org/docs/app/api-reference/functions/generate-metadata',
+  nextjsSEO: 'https://nextjs.org/learn/seo/introduction-to-seo',
+  
+  // Tools
+  googlePageSpeed: 'https://pagespeed.web.dev',
+  mobileFriendly: 'https://search.google.com/test/mobile-friendly',
+  structuredDataLinter: 'https://search.google.com/structured-data/testing-tool',
+};
+
+// ============================================================================
+// ✅ READY TO GO!
+// ============================================================================
+
+/**
+ * Your setup is complete! 🎉
+ * 
+ * What happens next:
+ * 1. Deploy to production
+ * 2. Submit to Google Search Console
+ * 3. Wait 1-2 weeks for full indexing
+ * 4. Monitor results in Search Console
+ * 5. Enjoy improved search appearance!
+ * 
+ * Questions? Check docs/GOOGLE_SEARCH_SEO_GUIDE.md
+ */
+
+export {};

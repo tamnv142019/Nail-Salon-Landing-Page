@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://queensobnail.com/background/2.jpg",
+        url: "https://queensobnail.com/images/backgrounds/salon-bg-02.jpg",
         width: 1200,
         height: 630,
         alt: "Queens Nails Hair & Skincare — Salon interior and services",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "Queens Nails Hair & Skincare — Top‑Rated Nails Salon in Ocean Beach, San Diego",
     description:
       "Visit Queens Nails Hair & Skincare for premier nail, hair & skincare services in Ocean Beach. Book online or call to reserve your appointment.",
-    images: ["https://queensobnail.com/background/2.jpg"],
+    images: ["https://queensobnail.com/images/backgrounds/salon-bg-02.jpg"],
   },
   robots: {
     index: true,

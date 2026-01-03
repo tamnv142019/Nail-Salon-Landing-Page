@@ -238,6 +238,7 @@ export const seoConfig = {
 
   // Structured data
   structuredData: {
+    enableWebSiteSchema: true, // Schema quan trọng nhất cho Site name
     enableLocalBusinessSchema: true,
     enableOrganizationSchema: true,
     enableServiceSchema: true,
@@ -450,5 +451,58 @@ export function generateBreadcrumbSchema() {
       name: it.name,
       item: it.item,
     })),
+  };
+}
+
+/**
+ * Generate WebSite Schema - Giúp Google hiển thị Site name trong search results
+ * Đây là schema quan trọng nhất để Google nhận diện tên doanh nghiệp
+ */
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${businessInfo.url}/#website`,
+    name: 'Queen\'s Nails Hair & Skincare',
+    alternateName: 'Queens OB Nail',
+    url: businessInfo.url,
+    description: businessInfo.description,
+    publisher: {
+      '@type': 'BeautySalon',
+      '@id': `${businessInfo.url}/#organization`,
+      name: 'Queen\'s Nails Hair & Skincare',
+      url: businessInfo.url,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${businessInfo.url}/#logo`,
+        url: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
+        contentUrl: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
+        caption: 'Queen\'s Nails Hair & Skincare Logo',
+        inLanguage: 'en-US',
+        width: 512,
+        height: 512,
+      },
+      image: {
+        '@id': `${businessInfo.url}/#logo`,
+      },
+      telephone: businessInfo.phone,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: businessInfo.address.streetAddress,
+        addressLocality: businessInfo.address.addressLocality,
+        addressRegion: businessInfo.address.addressRegion,
+        postalCode: businessInfo.address.postalCode,
+        addressCountry: businessInfo.address.addressCountry,
+      },
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${businessInfo.url}/?s={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+    inLanguage: 'en-US',
   };
 }

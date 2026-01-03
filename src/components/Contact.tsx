@@ -1,8 +1,9 @@
 'use client';
 
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle, X, ExternalLink, Navigation, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, X, ExternalLink, Navigation, MessageCircle, Sparkles, Calendar } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { BookingModal } from './BookingModal';
+import { motion } from 'motion/react';
 
 const contactInfo = [
   {
@@ -10,7 +11,7 @@ const contactInfo = [
     title: 'Visit Us',
     content: '4869 Santa Monica Ave',
     subContent: 'San Diego, CA 92107',
-    gradient: 'from-destructive to-destructive',
+    gradient: 'from-rose-500 to-pink-500',
     link: 'https://maps.app.goo.gl/Bc8jystzMK7y5Ct49',
     action: 'Get Directions',
   },
@@ -19,7 +20,7 @@ const contactInfo = [
     title: 'Call Us',
     content: '(619) 224-5050',
     subContent: 'Available during business hours',
-    gradient: 'from-brand-emerald to-brand-emerald',
+    gradient: 'from-emerald-500 to-teal-500',
     link: 'tel:6192245050',
     action: 'Call Now',
   },
@@ -28,7 +29,7 @@ const contactInfo = [
     title: 'Email Us',
     content: 'helenpham505@gmail.com',
     subContent: 'We respond within 24 hours',
-    gradient: 'from-brand-sapphire to-brand-sapphire',
+    gradient: 'from-blue-500 to-cyan-500',
     link: 'mailto:helenpham505@gmail.com',
     action: 'Send Email',
   },
@@ -167,269 +168,315 @@ export function Contact() {
 
   return (
     <>
-      <section id="contact" className="py-24 px-6 bg-secondary dark:bg-background relative overflow-hidden transition-colors duration-500" ref={sectionRef}>
-        {/* Background effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-btn-accent/15 dark:bg-brand-gold/6 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-96 h-96 bg-brand-sapphire/10 dark:bg-brand-sapphire/6 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <section id="contact" className="py-16 md:py-20 px-4 md:px-6 bg-gradient-to-br from-secondary via-background to-secondary dark:from-background dark:via-secondary/20 dark:to-background relative overflow-hidden transition-colors duration-500" ref={sectionRef}>
+        {/* Animated Background Effects */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-rose-500/10 via-pink-500/10 to-transparent rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-transparent rounded-full blur-3xl animate-float-delayed"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/5 via-orange-500/5 to-transparent rounded-full blur-3xl animate-pulse"></div>
         </div>
         
-        <div className="max-w-7xl mx-auto relative z-10">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl mb-6 bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          {/* Header Section */}
+          <motion.div 
+            className="text-center mb-8 md:mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-5xl mb-4 font-bold text-black dark:text-white">
               Get in Touch
             </h2>
-            <p className="text-xl text-foreground max-w-2xl mx-auto">
-              We'd love to hear from you. Visit us, call us, or send us a message.
+            <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Experience exceptional nail care in Ocean Beach. We're here to make your beauty dreams come true.
             </p>
-          </div>
+          </motion.div>
 
           {/* Quick Contact Cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 md:mb-16">
             {contactInfo.map((info, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-card rounded-2xl p-6 shadow-lg border border-border hover:shadow-xl transition-all duration-300 hover:scale-105"
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: `translateY(${isVisible ? 0 : 40}px)`,
-                  transitionDelay: `${index * 100}ms`,
-                }}
+                className="group relative bg-card/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-border/50 hover:shadow-2xl hover:border-border transition-all duration-500 z-10"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.03, y: -5 }}
               >
-                <div className={`inline-flex items-center justify-center w-14 h-14 bg-linear-to-br ${info.gradient} rounded-2xl mb-4 shadow-lg`}>
+                {/* Gradient Background on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${info.gradient} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500 pointer-events-none`}></div>
+                
+                <div className={`relative inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${info.gradient} rounded-2xl mb-6 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-500 pointer-events-none`}>
                   <info.icon className="text-white" size={28} />
                 </div>
-                <h3 className="text-xl text-foreground mb-2">{info.title}</h3>
-                <p className="text-foreground mb-1 font-medium">{info.content}</p>
-                <p className="text-sm text-foreground mb-4">{info.subContent}</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">{info.title}</h3>
+                <p className="text-foreground/90 mb-1 font-semibold text-lg">{info.content}</p>
+                <p className="text-sm text-foreground/60 mb-6">{info.subContent}</p>
                 <a
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={`inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r ${info.gradient} text-white rounded-lg hover:scale-105 transition-all duration-300 shadow-md text-sm font-medium`}
+                  className={`relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r ${info.gradient} text-white rounded-xl hover:shadow-lg transition-all duration-300 text-sm font-semibold group-hover:gap-3 cursor-pointer z-20`}
                 >
-                  <span className="text-white">{info.action}</span>
-                  <ExternalLink className="text-white" size={16} />
+                  <span>{info.action}</span>
+                  <ExternalLink size={16} />
                 </a>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* Business Hours Card */}
-          <div className="bg-card rounded-3xl p-8 shadow-xl border border-border mb-16">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-brand-gold-soft to-brand-gold rounded-xl shadow-lg">
-                    <Clock className="text-white" size={24} />
+          {/* Main Content Grid */}
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-10">
+            {/* Left Column - Form (3 cols) */}
+            <motion.div
+              className="lg:col-span-3"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-xl border border-border/50">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg">
+                    <MessageCircle className="text-white" size={26} />
                   </div>
-                  <h3 className="text-2xl text-foreground">Business Hours</h3>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-foreground">Send a Message</h3>
+                    <p className="text-sm text-foreground/60">We'll respond within 24 hours</p>
+                  </div>
                 </div>
-                <div className="space-y-2">
+
+                {isSubmitted ? (
+                  <motion.div 
+                    className="text-center py-16"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full mb-6 shadow-xl">
+                      <CheckCircle className="text-white" size={48} />
+                    </div>
+                    <h4 className="text-3xl font-bold text-foreground mb-3">Message Sent!</h4>
+                    <p className="text-lg text-foreground/80">
+                      Thank you for reaching out. We'll get back to you soon.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Name */}
+                    <div>
+                      <label className="block text-sm font-semibold text-foreground mb-2">
+                        Full Name <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        className={`w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-sm border-2 ${
+                          formErrors.name ? 'border-rose-500' : 'border-border/40'
+                        } focus:outline-none focus:border-rose-500 text-foreground placeholder-foreground/40 transition-all duration-300`}
+                        placeholder="Enter your full name"
+                      />
+                      {formErrors.name && (
+                        <p className="mt-2 text-sm text-rose-500 flex items-center gap-1">
+                          <X size={14} /> {formErrors.name}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      {/* Email */}
+                      <div>
+                        <label className="block text-sm font-semibold text-foreground mb-2">
+                          Email Address <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          className={`w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-sm border-2 ${
+                            formErrors.email ? 'border-rose-500' : 'border-border/40'
+                          } focus:outline-none focus:border-blue-500 text-foreground placeholder-foreground/40 transition-all duration-300`}
+                          placeholder="your@email.com"
+                        />
+                        {formErrors.email && (
+                          <p className="mt-2 text-sm text-rose-500 flex items-center gap-1">
+                            <X size={14} /> {formErrors.email}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Phone */}
+                      <div>
+                        <label className="block text-sm font-semibold text-foreground mb-2">
+                          Phone Number <span className="text-rose-500">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                          className={`w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-sm border-2 ${
+                            formErrors.phone ? 'border-rose-500' : 'border-border/40'
+                          } focus:outline-none focus:border-emerald-500 text-foreground placeholder-foreground/40 transition-all duration-300`}
+                          placeholder="(619) 224-5050"
+                        />
+                        {formErrors.phone && (
+                          <p className="mt-2 text-sm text-rose-500 flex items-center gap-1">
+                            <X size={14} /> {formErrors.phone}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label className="block text-sm font-semibold text-foreground mb-2">
+                        Your Message <span className="text-rose-500">*</span>
+                      </label>
+                      <textarea
+                        value={formData.message}
+                        onChange={(e) => handleInputChange('message', e.target.value)}
+                        rows={6}
+                        className={`w-full px-5 py-4 rounded-2xl bg-background/60 backdrop-blur-sm border-2 ${
+                          formErrors.message ? 'border-rose-500' : 'border-border/40'
+                        } focus:outline-none focus:border-purple-500 text-foreground placeholder-foreground/40 transition-all duration-300 resize-none`}
+                        placeholder="Tell us about your nail care needs, preferred services, or any special requests..."
+                      ></textarea>
+                      {formErrors.message && (
+                        <p className="mt-2 text-sm text-rose-500 flex items-center gap-1">
+                          <X size={14} /> {formErrors.message}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full px-8 py-5 bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send size={22} />
+                          <span>Send Message</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Right Column - Hours & Map (2 cols) */}
+            <motion.div
+              className="lg:col-span-2 space-y-8"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Business Hours Card */}
+              <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-border/50">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl shadow-lg">
+                    <Clock className="text-white" size={26} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground">Business Hours</h3>
+                    <div className={`inline-flex items-center gap-2 mt-1 px-3 py-1 rounded-full text-sm font-semibold ${
+                      isOpen 
+                        ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' 
+                        : 'bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300'
+                    }`}>
+                      <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`}></div>
+                      <span>{isOpen ? 'Open Now' : 'Closed Now'}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-3">
                   {businessHours.map((schedule, idx) => (
-                    <div key={idx} className="flex items-center justify-between gap-8">
-                      <span className="text-foreground">{schedule.day}</span>
-                      <span className="text-foreground font-medium">{schedule.hours}</span>
+                    <div key={idx} className="flex items-center justify-between py-2 border-b border-border/30 last:border-0">
+                      <span className="text-foreground/80 font-medium">{schedule.day}</span>
+                      <span className="text-foreground font-semibold">{schedule.hours}</span>
                     </div>
                   ))}
                 </div>
-              </div>
-              <div className="text-center md:text-right">
-                <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full ${
-                  isOpen 
-                    ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' 
-                    : 'bg-secondary text-foreground border border-border'
-                } mb-4`}>
-                  <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-muted-foreground'}`}></div>
-                  <span className="font-semibold">{isOpen ? 'Open Now' : 'Closed Now'}</span>
-                </div>
                 <button
                   onClick={() => setIsBookingOpen(true)}
-                  className="w-full px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg font-semibold bg-btn-accent hover:bg-btn-accent-hover active:bg-btn-accent-active text-btn-theme-foreground"
+                  className="w-full mt-6 px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl font-bold transition-all duration-300 hover:shadow-xl hover:scale-[1.02] flex items-center justify-center gap-2"
                 >
-                  Book Appointment
+                  <Calendar size={20} />
+                  <span>Book Appointment</span>
                 </button>
               </div>
-            </div>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div
-              className="bg-card rounded-3xl p-8 shadow-xl border border-border"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: `translateX(${isVisible ? 0 : -40}px)`,
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-brand-gold-soft to-brand-gold rounded-xl shadow-lg">
-                  <MessageCircle className="text-white" size={24} />
+              {/* Map Card */}
+              <div className="bg-card/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl border border-border/50">
+                <div className="p-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-2xl shadow-lg">
+                      <Navigation className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground">Find Us</h3>
+                      <p className="text-sm text-foreground/60">Ocean Beach, San Diego</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl text-foreground">Send us a Message</h3>
-              </div>
-
-              {isSubmitted ? (
-                <div className="text-center py-12 animate-in fade-in zoom-in-95 duration-500">
-                  <div className="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full mb-6">
-                    <CheckCircle className="text-emerald-600 dark:text-emerald-400" size={40} />
-                  </div>
-                  <h4 className="text-2xl text-foreground mb-2">Message Sent!</h4>
-                  <p className="text-foreground">
-                    We'll get back to you within 24 hours.
-                  </p>
+                <div className="relative h-64">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.7789!2d-117.2508972!3d32.7461198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80deaa3766bc71cd%3A0x58947b412e099a07!2sQueen's%20Nails%20Hair%20and%20Skincare!5e0!3m2!1sen!2sus!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full"
+                  ></iframe>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {/* Name */}
-                  <div>
-                    <label className="block text-foreground mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
-                        formErrors.name ? 'border-red-500' : 'border-border'
-                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300`}
-                      placeholder="Your name"
-                    />
-                    {formErrors.name && (
-                      <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>
-                    )}
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label className="block text-foreground mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
-                        formErrors.email ? 'border-red-500' : 'border-border'
-                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300`}
-                      placeholder="your@email.com"
-                    />
-                    {formErrors.email && (
-                      <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>
-                    )}
-                  </div>
-
-                  {/* Phone */}
-                  <div>
-                    <label className="block text-foreground mb-2">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
-                        formErrors.phone ? 'border-red-500' : 'border-border'
-                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300`}
-                      placeholder="(619) 224-5050"
-                    />
-                    {formErrors.phone && (
-                      <p className="mt-1 text-sm text-red-500">{formErrors.phone}</p>
-                    )}
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label className="block text-foreground mb-2">
-                      Message *
-                    </label>
-                    <textarea
-                      value={formData.message}
-                      onChange={(e) => handleInputChange('message', e.target.value)}
-                      rows={5}
-                      className={`w-full px-4 py-3 rounded-xl bg-background border ${
-                        formErrors.message ? 'border-red-500' : 'border-border'
-                      } focus:outline-none focus:border-brand-gold-muted text-foreground placeholder-muted-foreground transition-colors duration-300 resize-none`}
-                      placeholder="Tell us about your nail care needs..."
-                    ></textarea>
-                    {formErrors.message && (
-                      <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>
-                    )}
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full px-6 py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed font-semibold bg-btn-accent hover:bg-btn-accent-hover active:bg-btn-accent-active text-btn-theme-foreground"
+                <div className="p-6">
+                  <a
+                    href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex items-center justify-center gap-2"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        <span>Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send size={20} />
-                        <span>Send Message</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* Google Maps */}
-            <div
-              className="bg-card rounded-3xl overflow-hidden shadow-xl border border-border"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: `translateX(${isVisible ? 0 : 40}px)`,
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-            >
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-brand-gold-soft to-brand-gold rounded-xl shadow-lg">
-                    <Navigation className="text-white" size={24} />
-                  </div>
-                  <h3 className="text-2xl text-foreground">Find Us</h3>
+                    <Navigation size={20} />
+                    <span>Open in Google Maps</span>
+                  </a>
                 </div>
-                <p className="text-foreground mb-4">
-                  Located in the heart of Ocean Beach, San Diego
-                </p>
               </div>
-              <div className="relative h-96">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.7789!2d-117.2508972!3d32.7461198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80deaa3766bc71cd%3A0x58947b412e099a07!2sQueen's%20Nails%20Hair%20and%20Skincare!5e0!3m2!1sen!2sus!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full"
-                ></iframe>
-              </div>
-              <div className="p-6">
-                <a
-                  href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2 font-semibold bg-btn-accent hover:bg-btn-accent-hover active:bg-btn-accent-active text-btn-theme-foreground"
-                >
-                  <Navigation size={20} />
-                  <span>Open in Google Maps</span>
-                </a>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(-20px) translateX(20px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(20px) translateX(-20px); }
+        }
+        .animate-float {
+          animation: float 8s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 10s ease-in-out infinite;
+          animation-delay: 2s;
+        }
+      `}</style>
     </>
   );
 }

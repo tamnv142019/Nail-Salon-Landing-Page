@@ -1,0 +1,395 @@
+# 🗺️ SEO Implementation Flow
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    🎯 GOOGLE SEARCH SEO                     │
+│              Queen's Nails Hair & Skincare                  │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│                    📁 PROJECT STRUCTURE                     │
+└─────────────────────────────────────────────────────────────┘
+
+src/
+├── app/
+│   └── layout.tsx ✅
+│       ├── metadataBase: new URL('https://queensobnail.com')
+│       ├── applicationName: "Queen's Nails Hair & Skincare"
+│       ├── title: { default, template }
+│       ├── description
+│       ├── icons: { icon[], apple[], other[] }
+│       └── openGraph, twitter, robots
+│
+└── config/
+    └── seo.config.ts ✅
+        ├── generateWebSiteSchema() ← QUAN TRỌNG NHẤT
+        ├── generateBusinessSchema()
+        ├── generateServiceSchema()
+        ├── generateFAQSchema()
+        └── generateBreadcrumbSchema()
+
+public/
+└── favicon/ ✅
+    ├── favicon.ico (legacy)
+    ├── favicon-16x16.png
+    ├── favicon-32x32.png
+    ├── android-chrome-192x192.png ← Google search
+    ├── android-chrome-512x512.png ← Google search
+    ├── apple-touch-icon.png
+    └── site.webmanifest
+
+docs/
+├── SEO_README.md ← Start here
+├── ACTION_CHECKLIST.md ← Follow this
+├── SEO_IMPLEMENTATION_SUMMARY.md
+├── GOOGLE_SEARCH_SEO_GUIDE.md
+├── PAGES_ROUTER_EXAMPLE.tsx.example
+├── SEO_QUICK_REFERENCE.ts.example
+└── COMMIT_MESSAGE.md
+
+┌─────────────────────────────────────────────────────────────┐
+│                    🔄 WORKFLOW                              │
+└─────────────────────────────────────────────────────────────┘
+
+1️⃣  CODE IMPLEMENTATION ✅
+    │
+    ├── WebSite Schema (JSON-LD)
+    │   └── name: "Queen's Nails Hair & Skincare"
+    │   └── url: https://queensobnail.com
+    │
+    ├── Next.js Metadata
+    │   └── metadataBase: queensobnail.com
+    │   └── applicationName: Site name
+    │
+    └── Favicon Configuration
+        └── All sizes >= 48x48px
+
+2️⃣  BUILD & DEPLOY
+    │
+    ├── npm run build ✅
+    ├── npm start or vercel --prod
+    └── https://queensobnail.com live
+
+3️⃣  VALIDATION (5-10 phút)
+    │
+    ├── Rich Results Test
+    │   └── https://search.google.com/test/rich-results
+    │   └── Check "WebSite" schema detected
+    │
+    ├── Schema Validator
+    │   └── https://validator.schema.org
+    │   └── No errors
+    │
+    └── Manual Check
+        └── View source → Find JSON-LD
+
+4️⃣  GOOGLE SEARCH CONSOLE (Day 1-3)
+    │
+    ├── Verify Ownership
+    │   └── HTML tag / DNS / GTM
+    │
+    ├── Submit Sitemap
+    │   └── https://queensobnail.com/sitemap.xml
+    │
+    └── Request Indexing
+        └── URL Inspection tool
+
+5️⃣  WAIT & MONITOR
+    │
+    ├── Day 1-3: Initial crawl
+    ├── Day 3-7: Favicon appears
+    ├── Week 1-2: Site name appears
+    ├── Week 2-4: Sitelinks may appear
+    └── Month 2-3: Full SEO benefits
+
+┌─────────────────────────────────────────────────────────────┐
+│              🎯 EXPECTED GOOGLE SEARCH RESULT               │
+└─────────────────────────────────────────────────────────────┘
+
+Before (Current):
+┌───────────────────────────────────┐
+│ queensobnail.com                  │
+│ https://queensobnail.com          │
+│                                   │
+│ Best Nail Salon in Ocean Beach... │
+└───────────────────────────────────┘
+
+After (1-2 weeks):
+┌─────────────────────────────────────────┐
+│ [🌸] Queen's Nails Hair & Skincare      │ ← NEW: Site name + Favicon
+│ https://queensobnail.com                │
+│                                         │
+│ Best Nail Salon in Ocean Beach, San... │
+│ Best nail salon in Ocean Beach offering │
+│ luxury manicures, pedicures, nail art...│
+│                                         │
+│ Services · Gallery · Book · Contact     │ ← NEW: Sitelinks (auto)
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│                    🔑 KEY COMPONENTS                        │
+└─────────────────────────────────────────────────────────────┘
+
+Component 1: WebSite Schema (JSON-LD)
+═══════════════════════════════════════
+Priority: ⭐⭐⭐⭐⭐ (Quan trọng nhất)
+Location: src/config/seo.config.ts
+Purpose: Google nhận diện Site name
+
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Queen's Nails Hair & Skincare",
+  "url": "https://queensobnail.com",
+  "publisher": {
+    "@type": "BeautySalon",
+    "logo": "...512x512.png"
+  }
+}
+
+Component 2: metadataBase
+═══════════════════════════════════════
+Priority: ⭐⭐⭐⭐⭐ (Bắt buộc)
+Location: src/app/layout.tsx
+Purpose: Google xác định domain
+
+metadataBase: new URL('https://queensobnail.com')
+
+Component 3: applicationName
+═══════════════════════════════════════
+Priority: ⭐⭐⭐⭐
+Location: src/app/layout.tsx
+Purpose: Site name trong metadata
+
+applicationName: "Queen's Nails Hair & Skincare"
+
+Component 4: Favicon
+═══════════════════════════════════════
+Priority: ⭐⭐⭐⭐⭐
+Location: public/favicon/
+Purpose: Icon trong search results
+Requirements:
+  ✅ >= 48x48px
+  ✅ Format: .ico or .png
+  ✅ Square (1:1 ratio)
+  ✅ Clear, recognizable
+
+Files:
+  - android-chrome-192x192.png (Primary)
+  - android-chrome-512x512.png (Primary)
+  - favicon.ico (Fallback)
+
+┌─────────────────────────────────────────────────────────────┐
+│                    📊 SCHEMA HIERARCHY                      │
+└─────────────────────────────────────────────────────────────┘
+
+WebSite Schema (Site level)
+    ├── name: Queen's Nails Hair & Skincare
+    ├── url: https://queensobnail.com
+    ├── publisher → BeautySalon
+    │   ├── name
+    │   ├── logo (512x512px)
+    │   └── address
+    └── potentialAction → SearchAction
+
+BeautySalon Schema (Business)
+    ├── name
+    ├── address
+    ├── phone
+    ├── geo
+    ├── openingHours
+    └── aggregateRating
+
+Service Schema (Services)
+    └── @graph[]
+        ├── Service 1: Nails
+        ├── Service 2: Hair
+        └── Service 3: Skincare
+
+FAQ Schema (FAQs)
+    └── mainEntity[]
+        ├── Question 1
+        ├── Question 2
+        └── Question 3
+
+Breadcrumb Schema (Navigation)
+    └── itemListElement[]
+        ├── Home
+        ├── Services
+        ├── Gallery
+        ├── Book
+        └── Contact
+
+┌─────────────────────────────────────────────────────────────┐
+│                    ⏱️ TIMELINE DETAIL                       │
+└─────────────────────────────────────────────────────────────┘
+
+Day 0 (Today):
+  ✅ Code implemented
+  ✅ Build successful
+  □ Deploy to production
+  □ Test Rich Results
+
+Day 1:
+  □ Setup Google Search Console
+  □ Verify ownership
+  □ Submit sitemap
+  □ Request indexing
+
+Day 2-3:
+  □ Google starts crawling
+  □ Check Search Console → Coverage
+  □ Monitor crawler activity
+
+Day 3-7:
+  □ Pages indexed
+  □ Favicon may appear
+  □ Check impressions in Performance
+
+Week 2:
+  □ Favicon should appear
+  □ Site name may appear
+  □ Monitor search results
+  □ Take screenshots
+
+Week 3-4:
+  □ Site name should appear
+  □ Sitelinks may start
+  □ Check CTR improving
+  □ Impressions increasing
+
+Month 2-3:
+  □ Full SEO benefits
+  □ Consistent organic traffic
+  □ Rich snippets working
+  □ Consider enhancements
+
+┌─────────────────────────────────────────────────────────────┐
+│                    🔍 VALIDATION TOOLS                      │
+└─────────────────────────────────────────────────────────────┘
+
+1. Rich Results Test ⭐⭐⭐⭐⭐
+   https://search.google.com/test/rich-results
+   Use: Check if schemas detected
+   When: After deploy, before Search Console
+
+2. Schema Validator ⭐⭐⭐⭐
+   https://validator.schema.org
+   Use: Validate JSON-LD syntax
+   When: If errors in Rich Results Test
+
+3. Google Search Console ⭐⭐⭐⭐⭐
+   https://search.google.com/search-console
+   Use: Monitor indexing, errors, performance
+   When: Daily/Weekly after setup
+
+4. PageSpeed Insights ⭐⭐⭐⭐
+   https://pagespeed.web.dev
+   Use: Check Core Web Vitals
+   When: Weekly
+
+5. Mobile-Friendly Test ⭐⭐⭐
+   https://search.google.com/test/mobile-friendly
+   Use: Ensure mobile works
+   When: After major changes
+
+┌─────────────────────────────────────────────────────────────┐
+│                    📈 SUCCESS METRICS                       │
+└─────────────────────────────────────────────────────────────┘
+
+Week 1:
+  □ Pages indexed: > 5
+  □ No critical errors
+  □ Schema detected: ✅
+  □ Impressions: > 0
+
+Week 2:
+  □ Favicon appears: ✅
+  □ Impressions: > 50
+  □ Clicks: > 1
+  □ Average position: < 50
+
+Week 3-4:
+  □ Site name appears: ✅
+  □ Impressions: > 100
+  □ Clicks: > 5
+  □ CTR: > 1%
+  □ Average position: < 30
+
+Month 2-3:
+  □ Sitelinks: ✅ (maybe)
+  □ Impressions: > 500
+  □ Clicks: > 20
+  □ CTR: > 2%
+  □ Average position: < 20
+
+┌─────────────────────────────────────────────────────────────┐
+│                    🚨 COMMON ISSUES                         │
+└─────────────────────────────────────────────────────────────┘
+
+Issue: Favicon not showing
+Cause: File too small, not indexed, cache
+Fix: Check >= 48px, wait 3-7 days, re-index
+
+Issue: Site name not showing
+Cause: No WebSite Schema, low authority
+Fix: Check schema ✅, wait 1-2 weeks, build traffic
+
+Issue: Not indexed
+Cause: No sitemap, robots.txt block
+Fix: Submit sitemap, check robots.txt, request index
+
+Issue: Schema errors
+Cause: Invalid JSON, missing required fields
+Fix: Use validator, fix syntax, re-deploy
+
+Issue: Low impressions
+Cause: New site, no authority, weak content
+Fix: Build backlinks, improve content, be patient
+
+┌─────────────────────────────────────────────────────────────┐
+│                    ✅ FINAL CHECKLIST                       │
+└─────────────────────────────────────────────────────────────┘
+
+Code:
+  ✅ WebSite Schema implemented
+  ✅ metadataBase configured
+  ✅ applicationName set
+  ✅ Favicon files present
+  ✅ Build successful
+  ✅ No errors
+
+Deployment:
+  □ Deploy to production
+  □ Test Rich Results
+  □ Validate schemas
+  □ Check favicon URLs
+
+Google:
+  □ Setup Search Console
+  □ Verify ownership
+  □ Submit sitemap
+  □ Request indexing
+
+Monitoring:
+  □ Check weekly
+  □ Track metrics
+  □ Fix errors
+  □ Be patient
+
+Documentation:
+  ✅ Complete guides created
+  ✅ Examples provided
+  ✅ Checklists ready
+  ✅ Troubleshooting covered
+
+┌─────────────────────────────────────────────────────────────┐
+│                    🎉 YOU'RE READY!                         │
+└─────────────────────────────────────────────────────────────┘
+
+Next Action: Deploy and follow ACTION_CHECKLIST.md
+
+Questions? Read GOOGLE_SEARCH_SEO_GUIDE.md
+
+Good luck! 🚀
+```

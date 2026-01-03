@@ -6,7 +6,6 @@ import { Phone, Calendar, Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../ThemeProvider';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { LanguageSwitcher } from '../LanguageSwitcher';
-import logoImage from '../../assets/logo.jpg';
 
 interface NavigationProps {
   onBookClick: () => void;
@@ -100,9 +99,9 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
       <div
         className={`relative overflow-visible border-b transition-all duration-500 ease-out ${
           isSolid
-            ? 'bg-background/60 backdrop-blur-2xl backdrop-saturate-200 border-border/60 shadow-lg ring-1 ring-inset ring-[color:var(--glass-ring)] before:opacity-70 after:opacity-100 after:animate-[glass-shine_3.8s_ease-in-out_infinite]'
+            ? 'bg-background/60 backdrop-blur-2xl backdrop-saturate-200 border-border/60 shadow-lg ring-1 ring-inset ring-(--glass-ring) before:opacity-70 after:opacity-100 after:animate-[glass-shine_3.8s_ease-in-out_infinite]'
             : 'bg-transparent border-transparent shadow-none before:opacity-0 after:opacity-0'
-        } before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-b before:from-[color:var(--glass-top-from)] before:via-[color:var(--glass-top-via)] before:to-transparent after:content-[''] after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-1/3 after:bg-linear-to-r after:from-transparent after:via-[color:var(--glass-sheen-via)] after:to-transparent`}
+        } before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-b before:from-(--glass-top-from) before:via-(--glass-top-via) before:to-transparent after:content-[''] after:pointer-events-none after:absolute after:inset-y-0 after:left-0 after:w-1/3 after:bg-linear-to-r after:from-transparent after:via-(--glass-sheen-via) after:to-transparent`}
       >
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-20">
@@ -135,19 +134,21 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             }}
             className="group shrink-0 flex items-center gap-3 cursor-pointer transition-all duration-300 hover:opacity-90"
           >
-            <span className="relative shrink-0 overflow-hidden rounded-md">
+            <span
+              className="relative shrink-0 overflow-hidden rounded-xl p-1 bg-transparent transition-[transform,box-shadow] duration-300 group-hover:-translate-y-0.5 group-hover:shadow-md"
+            >
               <img
-                src={logoImage.src}
+                src="/images/logos/logo.png"
                 alt="Queen's Nails Hair & Skincare Logo"
-                className="h-10 md:h-12 transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
               />
-              <span className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-[color:var(--glass-logo-sheen)] to-transparent opacity-30 mix-blend-overlay animate-[glass-shine_2.8s_ease-in-out_infinite] motion-reduce:animate-none" />
+              <span className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-(--glass-logo-sheen) to-transparent opacity-30 mix-blend-overlay animate-[glass-shine_2.8s_ease-in-out_infinite] motion-reduce:animate-none" />
             </span>
             <div className="hidden sm:flex flex-col">
               <div className={`relative text-xl md:text-2xl font-bold leading-tight transition-all duration-300 group-hover:-translate-y-0.5 group-hover:tracking-wide ${
                 isSolid || isDark
                   ? 'text-foreground group-hover:text-brand-gold'
-                  : 'text-[color:var(--on-image-foreground)] group-hover:text-[color:var(--on-image-foreground)]'
+                  : 'text-(--on-image-foreground) group-hover:text-(--on-image-foreground)'
               }`}>
                 <span className="block">Queen's</span>
                 <span className="block">Nails Hair & Skincare</span>
@@ -156,9 +157,8 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
               <span className={`text-[11px] md:text-xs font-medium tracking-wide ${
                 isSolid || isDark
                   ? 'text-foreground/70 group-hover:text-brand-gold/90'
-                  : 'text-[color:var(--on-image-foreground-muted)]'
+                  : 'text-(--on-image-foreground-muted)'
               }`}>
-                {t('nav.holidayGreeting', 'Merry Christmas & Happy New Year')}
               </span>
             </div>
           </button>
@@ -172,7 +172,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                 className={`text-sm font-medium transition-colors duration-300 hover:text-brand-gold cursor-pointer ${
                   isSolid || isDark
                     ? 'text-foreground/90'
-                    : 'text-[color:var(--on-image-foreground-muted)]'
+                    : 'text-(--on-image-foreground-muted)'
                 }`}
               >
                 {link.label}
@@ -190,10 +190,10 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             {/* Theme Toggle - iOS Glass Style */}
             <button
               onClick={toggleTheme}
-              className={`flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ease-out cursor-pointer hover:cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+              className={`flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ease-out cursor-pointer hover:cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-(--focus-ring) focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                 isSolid || isDark
                   ? 'bg-background/70 backdrop-blur-xl border border-border/40 text-foreground'
-                  : 'bg-[color:var(--glass-on-image-bg)] text-[color:var(--on-image-foreground)] backdrop-blur-xl border border-[color:var(--glass-on-image-border)] hover:bg-[color:var(--glass-on-image-bg-hover)]'
+                  : 'bg-(--glass-on-image-bg) text-(--on-image-foreground) backdrop-blur-xl border border-(--glass-on-image-border) hover:bg-(--glass-on-image-bg-hover)'
               }`}
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -204,9 +204,9 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
               onClick={onBookClick}
               className="relative group cursor-pointer"
             >
-              <span className="pointer-events-none absolute -inset-1 rounded-xl bg-[image:var(--gradient-primary-action)] opacity-80 animate-[pulse_0.9s_ease-in-out_infinite]"></span>
+              <span className="pointer-events-none absolute -inset-1 rounded-xl bg-(image:--gradient-primary-action) opacity-80 animate-[pulse_0.9s_ease-in-out_infinite]"></span>
               <div
-                className="relative z-10 flex items-center justify-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 ease-out cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 shadow-sm hover:shadow-md overflow-hidden animate-sway"
+                className="relative z-10 flex items-center justify-center gap-2 px-3 py-2 rounded-xl transition-all duration-200 ease-out cursor-pointer bg-(image:--gradient-primary-action) text-(--gold-champagne) hover:brightness-110 active:brightness-95 shadow-sm hover:shadow-md overflow-hidden animate-sway"
               >
                 <Calendar size={16} />
                 <span className="text-sm font-semibold">{t('servicesPage.bookNow', 'Book Now')}</span>
@@ -216,7 +216,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             <button
               onClick={() => setIsMobileMenuOpen((s) => !s)}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-              className="lg:hidden flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ease-out cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="lg:hidden flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 ease-out cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-(--focus-ring) focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -263,7 +263,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                 </div>
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center justify-center w-11 h-11 bg-background/70 text-foreground rounded-xl backdrop-blur-xl border border-border/40 cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="flex items-center justify-center w-11 h-11 bg-background/70 text-foreground rounded-xl backdrop-blur-xl border border-border/40 cursor-pointer outline-none focus-visible:ring-[3px] focus-visible:ring-(--focus-ring) focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   {isDark ? <Sun size={18} /> : <Moon size={18} />}
                 </button>

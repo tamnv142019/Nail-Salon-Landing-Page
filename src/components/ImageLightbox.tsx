@@ -44,7 +44,7 @@ export function ImageLightbox({
 
   return (
     <div 
-      className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 backdrop-blur-sm animate-in fade-in duration-300"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm animate-in fade-in duration-300"
       onClick={onClose}
     >
       {/* Close Button */}
@@ -66,9 +66,9 @@ export function ImageLightbox({
           e.stopPropagation();
           onPrevious();
         }}
-        className="absolute left-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+        className="absolute left-6 w-14 h-14 bg-white/10 hover:bg-brand-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 hover:rotate-[-6deg] z-10 border border-white/20 hover:border-brand-gold shadow-lg hover:shadow-2xl hover:shadow-brand-gold/50"
       >
-        <ChevronLeft className="text-white" size={28} />
+        <ChevronLeft className="text-white transition-transform duration-300 group-hover:translate-x-[-2px]" size={30} strokeWidth={2.5} />
       </button>
 
       {/* Next Button */}
@@ -77,9 +77,9 @@ export function ImageLightbox({
           e.stopPropagation();
           onNext();
         }}
-        className="absolute right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
+        className="absolute right-6 w-14 h-14 bg-white/10 hover:bg-brand-gold/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-500 hover:scale-110 hover:rotate-6 z-10 border border-white/20 hover:border-brand-gold shadow-lg hover:shadow-2xl hover:shadow-brand-gold/50"
       >
-        <ChevronRight className="text-white" size={28} />
+        <ChevronRight className="text-white transition-transform duration-300 group-hover:translate-x-[2px]" size={30} strokeWidth={2.5} />
       </button>
 
       {/* Image Container */}

@@ -6,6 +6,12 @@ const nextConfig = {
 		// lint problems and re-enable this for CI.
 		ignoreDuringBuilds: true,
 	},
+	async redirects() {
+		return [
+			{ source: '/logo.:ext', destination: '/images/logos/logo.:ext', permanent: true },
+			{ source: '/og-home.png', destination: '/images/misc/og-home.png', permanent: true },
+		];
+	},
 };
 
 module.exports = nextConfig;

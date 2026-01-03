@@ -43,12 +43,12 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
   );
 
   // Simple Google 'G' icon (multi-color)
-  const GoogleIcon = ({ size = 18 }: { size?: number }) => (
+  const GoogleIcon = ({ size = 18, hover = false }: { size?: number, hover?: boolean }) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="#4285F4" d="M12 11.5v2.9h4.7c-.2 1.3-1.5 3.8-4.7 3.8-2.8 0-5-2.3-5-5s2.2-5 5-5c1.6 0 2.7.7 3.3 1.3l2.6-2.6C16.4 5.3 14.5 4.3 12 4.3 7.3 4.3 3.7 7.9 3.7 12.6 3.7 17.2 7.3 20.8 12 20.8c4.6 0 8.1-3.4 8.1-8.1 0-.6-.1-1.1-.2-1.6H12z" />
-      <path fill="#34A853" d="M7.5 14.9c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9v0a5 5 0 015-3.1c1.3 0 2.3.4 3.1 1l-2.9 2.9H12v3.9c-.9 0-1.8-.3-2.5-.9z" opacity="0"/>
-      <path fill="#FBBC05" d="M12 4.3c1.6 0 2.7.7 3.3 1.3l2.6-2.6C16.4 2 14.6 1 12 1 7.3 1 3.7 4.6 3.7 9.3c0 .9.2 1.8.5 2.6l3.3-2.9C9.7 8 10.8 4.3 12 4.3z" opacity="0"/>
-      <path fill="#EA4335" d="M17.4 19.2A7.8 7.8 0 0012 20.8c-4.6 0-8.1-3.6-8.1-8.1 0-.9.2-1.8.5-2.6L9 12.4c.7.6 1.6.9 2.5.9v3.9c0 .5.1 1 .2 1.9z" opacity="0"/>
+      <path fill={hover ? "#fff" : "#4285F4"} d="M12 11.5v2.9h4.7c-.2 1.3-1.5 3.8-4.7 3.8-2.8 0-5-2.3-5-5s2.2-5 5-5c1.6 0 2.7.7 3.3 1.3l2.6-2.6C16.4 5.3 14.5 4.3 12 4.3 7.3 4.3 3.7 7.9 3.7 12.6 3.7 17.2 7.3 20.8 12 20.8c4.6 0 8.1-3.4 8.1-8.1 0-.6-.1-1.1-.2-1.6H12z" />
+      <path fill={hover ? "#fff" : "#34A853"} d="M7.5 14.9c-.2-.6-.3-1.2-.3-1.9s.1-1.3.3-1.9v0a5 5 0 015-3.1c1.3 0 2.3.4 3.1 1l-2.9 2.9H12v3.9c-.9 0-1.8-.3-2.5-.9z" opacity="0"/>
+      <path fill={hover ? "#fff" : "#FBBC05"} d="M12 4.3c1.6 0 2.7.7 3.3 1.3l2.6-2.6C16.4 2 14.6 1 12 1 7.3 1 3.7 4.6 3.7 9.3c0 .9.2 1.8.5 2.6l3.3-2.9C9.7 8 10.8 4.3 12 4.3z" opacity="0"/>
+      <path fill={hover ? "#fff" : "#EA4335"} d="M17.4 19.2A7.8 7.8 0 0012 20.8c-4.6 0-8.1-3.6-8.1-8.1 0-.9.2-1.8.5-2.6L9 12.4c.7.6 1.6.9 2.5.9v3.9c0 .5.1 1 .2 1.9z" opacity="0"/>
     </svg>
   );
 
@@ -75,7 +75,11 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700">
             <div className="flex items-center gap-3 mb-6">
               <div className="relative">
-                <img src="/logo.jpg" alt="Queen's Nails Hair & Skincare Logo" className="h-8 w-auto transition-transform duration-500 hover:scale-110" />
+                <img
+                  src="/images/logos/logo.png"
+                  alt="Queen's Nails Hair & Skincare Logo"
+                  className="h-12 md:h-14 w-auto transition-transform duration-500 hover:scale-110"
+                />
               </div>
               <div className="text-2xl leading-tight bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
                 <span className="block">Queen's Nails Hair</span>
@@ -128,7 +132,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                   href={businessInfo.social.facebook || 'https://www.facebook.com/profile.php?id=100075740667723'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-brand-sapphire hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2 transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   aria-label="Visit our Facebook page"
                 >
                   <FacebookIcon size={18} />
@@ -138,25 +142,27 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                   href={businessInfo.social.yelp || 'https://www.yelp.com/biz/queen-s-nails-hair-and-skincare-san-diego-2'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#b91c1c] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#D32323] hover:text-white hover:border-[#D32323] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D32323] focus-visible:ring-offset-2 transition-all duration-300 hover:scale-110 hover:shadow-lg group"
                   aria-label="Visit our Yelp page"
                 >
-                  <img src="https://cdn.simpleicons.org/yelp/d32323" alt="Yelp" className="w-5 h-5" />
+                  <img src="https://cdn.simpleicons.org/yelp/d32323" alt="Yelp" className="w-5 h-5 transition-all group-hover:hidden" />
+                  <img src="https://cdn.simpleicons.org/yelp/ffffff" alt="Yelp" className="w-5 h-5 transition-all hidden group-hover:block" />
                 </a>
                 <a
                   href="https://www.google.com/search?sca_esv=33e8307878b681b3&authuser=0&hl=en&output=search&q=Queen%27s+Nails+Hair+and+Skincare&ludocid=6382862091766307335&lsig=AB86z5WX6M9quvqsaKYvOUbD8IQv&ved=1i%3A4%2Ct%3A109124%2Ce%3A3%2Cp%3Am45Hadm_F-Ln2roPzLfKuAM%3A66"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#4285F4] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#4285F4] hover:text-white hover:border-[#4285F4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4285F4] focus-visible:ring-offset-2 transition-all duration-300 hover:scale-110 hover:shadow-lg group"
                   aria-label="Find us on Google Search"
                 >
-                  <GoogleIcon size={18} />
+                  <span className="group-hover:hidden"><GoogleIcon size={18} /></span>
+                  <span className="hidden group-hover:block"><GoogleIcon size={18} hover={true} /></span>
                 </a>
                 <a
                   href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-brand-emerald hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#34A853] hover:text-white hover:border-[#34A853] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#34A853] focus-visible:ring-offset-2 transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   aria-label="Find us on Google Maps"
                 >
                   <MapPin size={18} />
@@ -165,7 +171,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                   href="https://maps.apple.com/place?place-id=IBD99B74E4A250AE4&address=4869+Santa+Monica+Ave%2C+Unit+A%2C+San+Diego%2C+CA++92107%2C+United+States&coordinate=32.7462649%2C-117.248207&name=Queen%E2%80%99s+Nails+Hair+and+Skincare&_provider=9902"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#111111] hover:text-white hover:border-transparent transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 rounded-full bg-card border border-border text-foreground flex items-center justify-center hover:bg-[#000000] hover:text-white hover:border-[#000000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-600 focus-visible:ring-offset-2 transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   aria-label="Find us on Apple Maps"
                 >
                   <AppleMapsIcon size={18} />

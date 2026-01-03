@@ -40,7 +40,7 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
         description="Best nail salon in Ocean Beach offering luxury manicures, pedicures, gel nails, nail art, and spa services. Expert technicians, premium products. Book your appointment today!"
         canonical="https://queensobnail.com/"
         keywords="nail salon San Diego, manicure San Diego, pedicure San Diego, gel nails, nail art, spa services, Ocean Beach salon, nail salon near me"
-        ogImage="https://queensobnail.com/og-home.png"
+        ogImage="https://queensobnail.com/images/misc/og-home.png"
         schema={schemas}
       />
 

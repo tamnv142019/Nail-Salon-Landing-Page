@@ -402,11 +402,19 @@
     transition: opacity .18s ease, transform .18s ease;
   }
   a,
+  button,
   [role="button"],
+  label[for],
   input[type="checkbox"],
   input[type="radio"],
   select {
     cursor: pointer;
+  }
+
+  button:disabled,
+  button[aria-disabled="true"],
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
   }
 
   .dark input[type='date'],
@@ -642,6 +650,82 @@ select option {
 
   .animate-sway-float {
     animation: sway 2.6s ease-in-out infinite, float-up 3s ease-in-out infinite;
+  }
+
+  /* Call ring (Hero quick-action) */
+  .call-ring-group {
+    display: inline-block;
+  }
+
+  .call-ring-blur {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.10);
+    opacity: 0.7;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  .call-ring-animated {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 72px;
+    height: 72px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    opacity: 0.6;
+    pointer-events: none;
+    animation: call-ring 1800ms infinite ease-out;
+  }
+
+  .call-ring-hover {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 72px;
+    height: 72px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .call-ring-group:hover .call-ring-hover {
+    animation: call-ring-hover 900ms forwards ease-out;
+    opacity: 1;
+  }
+
+  @keyframes call-ring {
+    0% {
+      transform: translate(-50%, -50%) scale(0.95);
+      opacity: 0.6;
+    }
+    60% {
+      opacity: 0.18;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.6);
+      opacity: 0;
+    }
+  }
+
+  @keyframes call-ring-hover {
+    0% {
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2.2);
+      opacity: 0;
+    }
   }
 
   @keyframes sway {

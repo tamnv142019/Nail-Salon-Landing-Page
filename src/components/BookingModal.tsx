@@ -1,8 +1,16 @@
 "use client";
 
-import { X, Calendar, Clock, User, Phone, Check, Sparkles, Mail } from 'lucide-react';
+import { X, Calendar, Clock, User, Phone, Check, Sparkles, Mail, ChevronDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { bookingServices, findBookingServiceByName, formatBookingServiceLabel, estimateBookingServicesTotal } from '../config/booking-services';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Checkbox } from './ui/checkbox';
+import { ScrollArea } from './ui/scroll-area';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
+import { useIsMobile } from './ui/use-mobile';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -16,13 +24,27 @@ const timeSlots = [
   '5:00 PM', '6:00 PM',
 ];
 
+const getTodayDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 export function BookingModal({ isOpen, onClose, preSelectedService }: BookingModalProps) {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
   const dateInputRef = useRef<HTMLInputElement | null>(null);
+  const [servicesOpen, setServicesOpen] = useState(true);
+  const serviceSectionRef = useRef<HTMLDivElement | null>(null);
+  const serviceDropdownRef = useRef<HTMLDivElement | null>(null);
+  const contentScrollRef = useRef<HTMLDivElement | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,6 +54,11 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      setSelectedDate(getTodayDate());
+      setSelectedTime('');
+      const pre = findBookingServiceByName(preSelectedService);
+      const preName = (pre?.name || (preSelectedService || '')).trim();
+      setSelectedServices(preName ? [preName] : []);
       // mark booking modal open for other UI to react (e.g., floating buttons)
       try {
         (document.body.dataset as any).bookingOpen = 'true';
@@ -51,7 +78,76 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         delete (document.body.dataset as any).modalOpen;
       } catch (e) {}
     };
-  }, [isOpen]);
+  }, [isOpen, preSelectedService]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setServicesOpen(!isMobile);
+    }
+  }, [isOpen, isMobile]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    if (!servicesOpen) return;
+    if (!isMobile) return;
+
+    const triggerEl = serviceSectionRef.current;
+    const dropdownEl = serviceDropdownRef.current;
+    const container = contentScrollRef.current;
+    if (!triggerEl || !container) return;
+
+    // Wait for Radix collapsible animation to lay out, then scroll within modal content.
+    const raf1 = requestAnimationFrame(() => {
+      const raf2 = requestAnimationFrame(() => {
+        const containerRect = container.getBoundingClientRect();
+        const triggerRect = triggerEl.getBoundingClientRect();
+        const dropdownRect = dropdownEl?.getBoundingClientRect();
+
+        const paddingTop = 12;
+        const paddingBottom = 16;
+
+        const triggerTop = triggerRect.top - containerRect.top;
+        const triggerBottom = triggerRect.bottom - containerRect.top;
+        const dropdownBottom = dropdownRect ? dropdownRect.bottom - containerRect.top : triggerBottom;
+
+        // If the expanded dropdown goes below the visible area, scroll down just enough.
+        if (dropdownBottom > containerRect.height - paddingBottom) {
+          const delta = dropdownBottom - (containerRect.height - paddingBottom);
+          container.scrollTo({ top: container.scrollTop + delta, behavior: 'smooth' });
+          return;
+        }
+
+        // If the trigger is above the visible area, scroll up just enough.
+        if (triggerTop < paddingTop) {
+          const delta = paddingTop - triggerTop;
+          container.scrollTo({ top: Math.max(0, container.scrollTop - delta), behavior: 'smooth' });
+        }
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return raf2;
+    });
+
+    return () => cancelAnimationFrame(raf1);
+  }, [isOpen, servicesOpen, isMobile]);
+
+  const selectedServiceObjs = bookingServices.filter((s) => selectedServices.includes(s.name));
+  const total = estimateBookingServicesTotal(selectedServiceObjs);
+  const selectedSummary = (() => {
+    if (selectedServiceObjs.length === 0) return '';
+    const firstTwo = selectedServiceObjs.slice(0, 2).map((s) => s.name);
+    const remaining = selectedServiceObjs.length - firstTwo.length;
+    return remaining > 0 ? `${firstTwo.join(', ')} +${remaining}` : firstTwo.join(', ');
+  })();
+
+  const toggleService = (name: string, checked?: boolean) => {
+    setSelectedServices((prev) => {
+      const exists = prev.includes(name);
+      const shouldAdd = typeof checked === 'boolean' ? checked : !exists;
+      if (shouldAdd && !exists) return [...prev, name];
+      if (!shouldAdd && exists) return prev.filter((n) => n !== name);
+      return prev;
+    });
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -67,6 +163,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   const handleClose = () => {
     setSelectedDate('');
     setSelectedTime('');
+    setSelectedServices([]);
     setIsSubmitted(false);
     setFormData({ name: '', email: '', phone: '' });
     onClose();
@@ -86,7 +183,12 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
           phone: formData.phone,
           date: selectedDate,
           time: selectedTime,
-          service: preSelectedService || null,
+          // Backward-compatible single service (first selected)
+          service: selectedServiceObjs[0]?.name || null,
+          servicePrice: selectedServiceObjs[0]?.price || null,
+          // Preferred multi-service payload
+          services: selectedServiceObjs.map((s) => ({ name: s.name, price: s.price || null })),
+          servicesTotal: typeof total === 'number' ? total : null,
         }),
       });
 
@@ -108,62 +210,60 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     }
   };
 
-  const getTodayDate = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
-
   if (!isOpen) return null;
 
   return (
     <div
       onClick={() => handleClose()}
-      className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-10000 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/55 backdrop-blur-sm animate-in fade-in duration-200 overflow-hidden"
     >
       <div 
-        className="relative w-full max-w-md sm:max-w-lg bg-card/85 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-border/60 ring-1 ring-inset ring-white/10 dark:ring-white/5"
+        className="relative w-full max-w-6xl sm:w-[min(96vw,72rem)] bg-background/80 dark:bg-card/70 backdrop-blur-xl rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-border/40 ring-1 ring-inset ring-(--glass-ring) h-dvh supports-[height:100svh]:h-svh sm:h-[92vh] max-h-dvh sm:max-h-[98vh] flex flex-col min-h-0"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header - iOS Glass Style */}
-        <div className="relative bg-linear-to-r from-brand-gold-soft to-brand-gold-muted px-4 py-4 sm:px-8 sm:py-6">
-          <button
-            onClick={handleClose}
-            aria-label="Close booking modal"
-            className="absolute top-6 right-6 w-10 h-10 bg-black/10 hover:bg-black/15 dark:bg-white/10 dark:hover:bg-white/15 backdrop-blur-xl rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-white/20 z-50 pointer-events-auto"
-          >
-            <X className="text-foreground" size={20} />
-          </button>
+        {/* Header - Material / Clean */}
+        <div className="sticky top-0 z-20 border-b border-border/40 bg-background/70 dark:bg-card/60 backdrop-blur-xl">
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-(--glass-top-from) via-(--glass-top-via) to-transparent" />
+          <div className="relative flex items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-5">
+            <div className="min-w-0">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center size-9 sm:size-10 rounded-xl bg-background/60 dark:bg-card/40 backdrop-blur-xl border border-border/40 ring-1 ring-inset ring-(--glass-ring) shadow-sm shrink-0">
+                  <Sparkles size={18} className="text-foreground/90" />
+                </div>
+                <div className="min-w-0">
+                  <h2 className="text-xl sm:text-3xl font-semibold text-foreground leading-tight">
+                    {t('booking.title', 'Book Appointment')}
+                  </h2>
+                  <p className="text-sm sm:text-base text-foreground/70">
+                    {t('booking.subtitle', 'Choose a service, date, and time. We will confirm by phone or email.')}
+                  </p>
+                </div>
+              </div>
 
-              <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/10 dark:bg-white/6 shadow-sm border border-white/10">
-              <Sparkles className="text-rose-500 dark:text-rose-400" size={18} />
+              {(selectedServiceObjs.length > 0 || preSelectedService) && (
+                <p className="mt-2 hidden sm:block text-sm text-foreground/75">
+                  {t('booking.selectService', 'Service')}: <span className="font-medium text-foreground">{selectedServiceObjs.length > 0 ? selectedSummary : preSelectedService}</span>
+                </p>
+              )}
             </div>
 
-            <div className="text-left">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-rose-500 dark:text-rose-400 drop-shadow-sm">
-                {t('booking.title', 'Book Appointment')}
-              </h2>
-              <p className="text-xs sm:text-sm text-foreground mt-1 opacity-90 max-w-[20rem]">
-                {t('booking.subtitle', 'Choose a date and time. We will confirm via phone or email.')}
-              </p>
-            </div>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={handleClose}
+              aria-label={t('booking.close', 'Close')}
+              className="rounded-xl bg-background/40 dark:bg-card/30 backdrop-blur-xl border border-border/40 hover:bg-background/60 dark:hover:bg-card/45"
+            >
+              <X />
+            </Button>
           </div>
-
-          {preSelectedService && (
-            <p className="text-brand-dark/90 mt-1 text-sm">
-              {t('booking.selectService', 'Service')}: <span className="font-semibold">{preSelectedService}</span>
-            </p>
-          )}
         </div>
 
-        {/* Content */}
-        <div className="p-4 sm:p-8 max-h-[80vh] sm:max-h-[70vh] overflow-y-auto">
-          {isSubmitted ? (
+        {isSubmitted ? (
+          <div className="flex-1 min-h-0 overflow-y-auto bg-background/35 dark:bg-card/25 px-4 sm:px-6 py-4 sm:py-6">
             <div className="text-center py-12 animate-in fade-in zoom-in-95 duration-500">
-              <div className="w-20 h-20 bg-brand-emerald/10 backdrop-blur-xl rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-emerald/20">
+              <div className="w-20 h-20 bg-brand-emerald/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-emerald/20">
                 <Check className="text-brand-emerald" size={40} />
               </div>
               <h3 className="text-2xl mb-4 text-foreground">{t('booking.successTitle', 'Booking Confirmed!')}</h3>
@@ -176,156 +276,297 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               <p className="text-foreground mt-2">
                 {new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {selectedTime}
               </p>
+              {selectedServiceObjs.length > 0 && (
+                <p className="text-sm text-foreground mt-3">
+                  {t('booking.selectService', 'Service')}: {selectedServiceObjs.map((s) => formatBookingServiceLabel(s)).join(', ')}
+                </p>
+              )}
               <p className="text-sm text-foreground mt-6">
                 We'll call you at {formData.phone} to confirm
               </p>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name */}
-              <div>
-                  <label className="text-foreground mb-1 flex items-center gap-2 font-medium text-sm">
-                    <User className="text-blue-500" size={16} />
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl sm:rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300 text-sm"
-                    placeholder="Enter your name"
-                  />
-              </div>
+          </div>
+        ) : (
+          <form id="booking-form" onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col">
+            <div ref={contentScrollRef} className="flex-1 min-h-0 overflow-y-auto bg-background/35 dark:bg-card/25 px-5 sm:px-8 py-5 sm:py-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
+                <div className="rounded-2xl border border-border bg-background p-5 sm:p-7 space-y-5 shadow-sm">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">{t('booking.yourDetails', 'Your Details')}</h3>
 
-              {/* Email */}
-              <div>
-                <label className="text-foreground mb-1 flex items-center gap-2 font-medium text-sm">
-                  <Mail className="text-teal-500" size={16} />
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl sm:rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300 text-sm"
-                  placeholder="your.email@example.com"
-                />
-              </div>
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-foreground/85">
+                      <User className="text-blue-500" size={16} />
+                      {t('booking.yourName', 'Your Name')}
+                    </Label>
+                    <Input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="h-14 rounded-xl text-base"
+                      placeholder={t('booking.yourName', 'Your Name')}
+                    />
+                  </div>
 
-              {/* Phone */}
-              <div>
-                <label className="text-foreground mb-1 flex items-center gap-2 font-medium text-sm">
-                  <Phone className="text-emerald-500" size={16} />
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl sm:rounded-2xl bg-background/60 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 text-foreground placeholder:text-foreground transition-all duration-300 text-sm"
-                  placeholder="(619) 224-5050"
-                />
-              </div>
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-foreground/85">
+                      <Mail className="text-teal-500" size={16} />
+                      {t('booking.yourEmail', 'Your Email')}
+                    </Label>
+                    <Input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="h-14 rounded-xl text-base"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
 
-              {/* Date */}
-              <div>
-                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                  <Calendar className="text-[color:var(--brand-gold)]" size={18} />
-                  Select Date
-                </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    required
-                    min={getTodayDate()}
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    ref={dateInputRef}
-                    data-native-picker="date"
-                    className="w-full px-4 py-3 pr-10 rounded-xl sm:rounded-2xl bg-background/60 hover:bg-background/70 backdrop-blur-xl border border-border/60 focus:outline-none focus:border-brand-gold/60 focus:ring-2 focus:ring-brand-gold/20 text-foreground transition-all duration-300 text-sm"
-                  />
-                  <button
-                    type="button"
-                    aria-label={t('booking.openDatePicker', 'Open date picker')}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg text-foreground hover:bg-black/5 dark:text-brand-light/90 dark:hover:bg-white/10 transition"
-                    onClick={() => {
-                      const input = dateInputRef.current;
-                      if (!input) return;
-                      // Chrome/Edge support showPicker(); others will just focus.
-                      (input as any).showPicker?.();
-                      input.focus();
-                    }}
-                  >
-                    <Calendar className="text-amber-500" aria-hidden="true" size={16} />
-                  </button>
+                  {/* Phone */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-foreground/85">
+                      <Phone className="text-emerald-500" size={16} />
+                      {t('booking.yourPhone', 'Your Phone')}
+                    </Label>
+                    <Input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="h-14 rounded-xl text-base"
+                      placeholder="(619) 224-5050"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              {/* Time */}
-              <div>
-                <label className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                  <Clock className="text-[color:var(--brand-ruby)]" size={18} />
-                  Select Time
-                </label>
-                <div className="grid grid-cols-3 gap-2">
-                  {timeSlots.map((time) => {
-                    const isDisabled = (() => {
-                      if (!selectedDate) return false;
-                      try {
-                        const m = time.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
-                        if (!m) return false;
-                        let hr = parseInt(m[1], 10);
-                        const min = parseInt(m[2], 10);
-                        const ampm = m[3].toUpperCase();
-                        if (ampm === 'PM' && hr !== 12) hr += 12;
-                        if (ampm === 'AM' && hr === 12) hr = 0;
-                        const parts = selectedDate.split('-').map(Number);
-                        if (parts.length !== 3) return false;
-                        const [y, mo, d] = parts;
-                        const slotDate = new Date(y, mo - 1, d, hr, min, 0, 0);
-                        const now = new Date();
-                        return slotDate <= now;
-                      } catch (e) {
-                        return false;
-                      }
-                    })();
+                <div className="rounded-2xl border border-border bg-background p-5 sm:p-7 space-y-5 shadow-sm">
+                  <h3 className="text-base sm:text-lg font-semibold text-foreground">{t('booking.appointmentDetails', 'Appointment Details')}</h3>
 
-                    return (
+                  {/* Service */}
+                  <div className="space-y-2">
+                    <Collapsible open={servicesOpen} onOpenChange={setServicesOpen}>
+                      <div ref={serviceSectionRef} className="flex items-center justify-between gap-3 scroll-mt-24">
+                        <CollapsibleTrigger asChild>
+                          <button
+                            type="button"
+                            className="flex flex-1 items-center justify-between gap-3 rounded-lg px-2 py-2 hover:bg-accent transition-colors"
+                            aria-label={t('booking.selectService', 'Select Service')}
+                          >
+                            <span className="flex items-center gap-2 text-foreground/85 min-w-0">
+                              <Sparkles className="text-rose-500 dark:text-rose-400" size={16} />
+                              <span className="truncate">{t('booking.selectService', 'Select Service')}</span>
+                              {selectedServices.length > 0 ? (
+                                <span className="text-xs text-foreground/70 shrink-0">
+                                  ({selectedServices.length})
+                                </span>
+                              ) : null}
+                            </span>
+                            <ChevronDown
+                              className={`shrink-0 text-foreground/70 transition-transform ${servicesOpen ? 'rotate-180' : ''}`}
+                              size={18}
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </CollapsibleTrigger>
+
+                        {selectedServices.length > 0 ? (
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setSelectedServices([])}
+                            className="h-8 px-2"
+                          >
+                            {t('booking.clear', 'Clear')}
+                          </Button>
+                        ) : null}
+                      </div>
+
+                      <CollapsibleContent>
+                        <div ref={serviceDropdownRef} className="mt-2 rounded-xl border border-border bg-card">
+                          <ScrollArea className="h-60 sm:h-96 w-full">
+                            <div className="p-3 space-y-3">
+                              {(['Consultation', 'Manicure', 'Pedicure', 'Waxing', 'Powder', 'Add-ons'] as const).map((category) => {
+                                const items = bookingServices.filter((s) => s.category === category);
+                                if (items.length === 0) return null;
+
+                                return (
+                                  <div key={category} className="space-y-2">
+                                    <div className="text-xs font-semibold text-foreground/70 uppercase tracking-wide px-1">
+                                      {category}
+                                    </div>
+                                    <div className="space-y-1">
+                                      {items.map((service) => {
+                                        const id = `booking-service-${category}-${service.name}`.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                                        const checked = selectedServices.includes(service.name);
+                                        return (
+                                          <div
+                                            key={service.name}
+                                            className="flex items-center justify-between gap-3 rounded-lg px-2 py-2 hover:bg-accent transition-colors"
+                                          >
+                                            <div className="flex items-start gap-3 min-w-0">
+                                              <Checkbox
+                                                id={id}
+                                                checked={checked}
+                                                onCheckedChange={(v) => toggleService(service.name, v === true)}
+                                              />
+                                              <Label
+                                                htmlFor={id}
+                                                className="min-w-0 cursor-pointer text-base text-foreground"
+                                              >
+                                                <span className="block truncate">{service.name}</span>
+                                              </Label>
+                                            </div>
+                                            <div className="shrink-0 text-base text-foreground/70">
+                                              {service.price || ''}
+                                            </div>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </ScrollArea>
+                        </div>
+                      </CollapsibleContent>
+
+                      <div className="flex items-center justify-between text-xs text-foreground/75">
+                        <span>
+                          {t('booking.selected', 'Selected')}: <span className="font-medium text-foreground">{selectedServices.length}</span>
+                        </span>
+                        {typeof total === 'number' ? (
+                          <span>
+                            {t('booking.estimatedTotal', 'Estimated total')}: <span className="font-medium text-foreground">${total.toFixed(0)}</span>
+                          </span>
+                        ) : null}
+                      </div>
+                    </Collapsible>
+                  </div>
+
+                  {/* Date */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-foreground/85">
+                      <Calendar className="text-brand-gold" size={18} />
+                      {t('booking.selectDate', 'Select Date')}
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        type="date"
+                        required
+                        min={getTodayDate()}
+                        value={selectedDate}
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                        ref={dateInputRef}
+                        data-native-picker="date"
+                        className="h-14 rounded-xl pr-10 text-base"
+                      />
                       <button
-                        key={time}
                         type="button"
-                        onClick={() => { if (!isDisabled) setSelectedTime(time); }}
-                        disabled={isDisabled}
-                        aria-disabled={isDisabled}
-                        className={`px-3 py-2 rounded-lg sm:rounded-xl border-2 transition-all duration-300 text-xs sm:text-sm backdrop-blur-xl ${
-                          isDisabled
-                            ? 'opacity-50 cursor-not-allowed border-border/40 bg-background/40 text-foreground'
-                            : selectedTime === time
-                            ? 'border-brand-gold bg-btn-accent text-btn-theme-foreground shadow-sm'
-                            : 'border-border/60 bg-background/50 text-foreground hover:border-brand-gold/40 hover:bg-background/60'
-                        }`}
+                        aria-label={t('booking.openDatePicker', 'Open date picker')}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-accent transition"
+                        onClick={() => {
+                          const input = dateInputRef.current;
+                          if (!input) return;
+                          (input as any).showPicker?.();
+                          input.focus();
+                        }}
                       >
-                        {time}
+                        <Calendar className="text-foreground/80" aria-hidden="true" size={18} />
                       </button>
-                    );
-                  })}
+                    </div>
+                  </div>
+
+                  {/* Time */}
+                  <div className="space-y-2">
+                    <Label className="flex items-center gap-2 text-foreground/85">
+                      <Clock className="text-brand-ruby" size={18} />
+                      {t('booking.selectTime', 'Select Time')}
+                    </Label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {timeSlots.map((time) => {
+                        const isDisabled = (() => {
+                          if (!selectedDate) return false;
+                          try {
+                            const m = time.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+                            if (!m) return false;
+                            let hr = parseInt(m[1], 10);
+                            const min = parseInt(m[2], 10);
+                            const ampm = m[3].toUpperCase();
+                            if (ampm === 'PM' && hr !== 12) hr += 12;
+                            if (ampm === 'AM' && hr === 12) hr = 0;
+                            const parts = selectedDate.split('-').map(Number);
+                            if (parts.length !== 3) return false;
+                            const [y, mo, d] = parts;
+                            const slotDate = new Date(y, mo - 1, d, hr, min, 0, 0);
+                            const now = new Date();
+                            return slotDate <= now;
+                          } catch (e) {
+                            return false;
+                          }
+                        })();
+
+                        return (
+                          <button
+                            key={time}
+                            type="button"
+                            onClick={() => {
+                              if (!isDisabled) setSelectedTime(time);
+                            }}
+                            disabled={isDisabled}
+                            aria-disabled={isDisabled}
+                            className={`h-12 px-3 rounded-lg border transition-colors text-sm sm:text-base ${
+                              isDisabled
+                                ? 'opacity-50 cursor-not-allowed border-border bg-background text-foreground'
+                                : selectedTime === time
+                                  ? 'border-brand-gold bg-accent text-accent-foreground'
+                                  : 'border-border bg-background text-foreground hover:bg-accent'
+                            }`}
+                          >
+                            {time}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime || isSending}
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-lg sm:rounded-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl backdrop-blur-xl cursor-pointer bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:scale-102 active:brightness-95 text-sm"
-              >
-                {isSending ? 'Sending...' : 'Confirm Booking'}
-              </button>
-            </form>
-          )}
-        </div>
+            {/* Fixed footer (always visible) */}
+            <div className="shrink-0 border-t border-border/40 bg-background/70 dark:bg-card/60 backdrop-blur-xl px-5 sm:px-8 py-4 pb-[env(safe-area-inset-bottom)]">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                <div className="text-sm sm:text-base text-foreground/80">
+                  {selectedServiceObjs.length > 0 ? (
+                    <span>
+                      {selectedSummary}
+                      {selectedDate && selectedTime ? ` • ${selectedDate} • ${selectedTime}` : ''}
+                    </span>
+                  ) : (
+                    <span>{selectedDate && selectedTime ? `${selectedDate} • ${selectedTime}` : t('booking.chooseDetails', 'Choose service, date, and time')}</span>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-2 sm:justify-end">
+                  <Button type="button" variant="outline" onClick={handleClose} className="w-full sm:w-auto h-12 text-base">
+                    {t('booking.close', 'Close')}
+                  </Button>
+                  <Button
+                    type="submit"
+                    disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime || isSending}
+                    className="w-full sm:w-auto h-12 text-base"
+                  >
+                    {isSending ? t('booking.sending', 'Sending...') : t('booking.bookBtn', 'Confirm Booking')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

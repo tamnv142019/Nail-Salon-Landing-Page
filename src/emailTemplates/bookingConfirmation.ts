@@ -1,5 +1,53 @@
-export function bookingConfirmationEmail({ name, date, time, service, phone }: { name: string; date: string; time: string; service?: string | null; phone?: string }) {
-  const safeService = service || 'N/A';
+export function bookingConfirmationEmail({
+  name,
+  date,
+  time,
+  service,
+  servicePrice,
+  services,
+  servicesTotal,
+  phone,
+}: {
+  name: string;
+  date: string;
+  time: string;
+  service?: string | null;
+  servicePrice?: string | null;
+  services?: Array<{ name: string; price?: string | null }>;
+  servicesTotal?: number | null;
+  phone?: string;
+}) {
+  const escapeHtml = (value: string) =>
+    value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+  const normalizedServices = Array.isArray(services) ? services.filter((s) => s && typeof s.name === 'string' && s.name.trim().length > 0) : [];
+
+  const safeServiceText = (() => {
+    if (normalizedServices.length > 0) {
+      return normalizedServices.map((s) => (s.price ? `${s.name} (${s.price})` : s.name)).join(', ');
+    }
+    return service ? (servicePrice ? `${service} (${servicePrice})` : service) : 'N/A';
+  })();
+
+  const safeServiceHtml = (() => {
+    if (normalizedServices.length === 0) return escapeHtml(safeServiceText);
+    const items = normalizedServices
+      .map((s) => {
+        const nameHtml = escapeHtml(s.name);
+        const priceHtml = s.price ? ` <span style="color:#6B7280">(${escapeHtml(String(s.price))})</span>` : '';
+        return `<li style="margin:0 0 6px 0">${nameHtml}${priceHtml}</li>`;
+      })
+      .join('');
+    return `<ul style="margin:0;padding-left:18px">${items}</ul>`;
+  })();
+
+  const totalHtml = typeof servicesTotal === 'number' ? `<div style="margin-top:8px;color:#6B7280;font-size:13px">Estimated total: <strong style="color:#111827">$${servicesTotal}</strong></div>` : '';
+
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -32,7 +80,7 @@ export function bookingConfirmationEmail({ name, date, time, service, phone }: {
                   </tr>
                   <tr>
                     <td style="padding:8px 0;border-top:1px solid #F1F5F9;font-weight:600;color:#374151">Service</td>
-                    <td style="padding:8px 0;border-top:1px solid #F1F5F9;color:#111827">${safeService}</td>
+                    <td style="padding:8px 0;border-top:1px solid #F1F5F9;color:#111827">${safeServiceHtml}${totalHtml}</td>
                   </tr>
                   <tr>
                     <td style="padding:8px 0;border-top:1px solid #F1F5F9;font-weight:600;color:#374151">Phone</td>

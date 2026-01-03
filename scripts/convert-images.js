@@ -3,8 +3,9 @@ const path = require('path');
 const sharp = require('sharp');
 
 const publicDir = path.join(__dirname, '..', 'public');
-// Process the whole `public` directory so gallery images are also converted
-const assetsDir = publicDir;
+// Process only the images that are used with `OptimizedImage`.
+// (We intentionally do NOT generate variants for background/hero/gallery grid images.)
+const assetsDir = path.join(publicDir, 'images', 'gallery');
 
 const inputExtensions = ['.jpg', '.jpeg', '.png'];
 const sizes = [400, 800, 1200];
@@ -27,8 +28,15 @@ async function convert(file) {
   const ext = path.extname(file).toLowerCase();
   if (!inputExtensions.includes(ext)) return;
 
+  // Only generate variants for `service-*` images.
+  const rel = path.relative(publicDir, file).split(path.sep).join('/');
+  if (!rel.startsWith('images/gallery/service-')) return;
+
   const dir = path.dirname(file);
   const base = path.basename(file, ext);
+
+  // Avoid generating variants-of-variants (e.g. `photo-400-800.jpg`).
+  if (/-((400)|(800)|(1200))$/.test(base)) return;
 
   try {
     const image = sharp(file);

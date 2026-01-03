@@ -23,7 +23,7 @@ export default function Page() {
       {/* Navigation/Header */}
       <Navigation onBookClick={() => setIsBookingOpen(true)} />
 
-      <main className="max-w-4xl mx-auto py-12 px-4">
+      <main className="max-w-7xl mx-auto py-12 px-4">
         <Contact />
       </main>
 
