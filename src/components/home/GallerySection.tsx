@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
+import { useIsMobile } from '../ui/use-mobile';
 
 const galleryImages = [
   '/images/gallery/work-01.jpg',
@@ -41,8 +42,9 @@ export function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
 
-  const imagesPerPage = 5;
+  const imagesPerPage = isMobile ? 6 : 5;
   const totalPages = Math.max(1, Math.ceil(galleryImages.length / imagesPerPage));
 
   const pageImages = useMemo(() => {
@@ -104,7 +106,7 @@ export function GallerySection() {
 
         {/* Compact Carousel (5 images per page) */}
         <div className="relative">
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {pageImages.map((image, index) => (
               <motion.div
                 key={image}
@@ -113,14 +115,14 @@ export function GallerySection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
                 onClick={() => setSelectedImage(image)}
-                className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group"
+                className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group"
               >
                 <ImageWithFallback
                   src={image}
                   alt={`Gallery ${pageIndex * imagesPerPage + index + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-[color:var(--scrim-60)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-linear-to-t from-(--scrim-60) to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </motion.div>
             ))}
           </div>
@@ -150,14 +152,14 @@ export function GallerySection() {
       {/* Lightbox */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-[color:var(--overlay-backdrop-strong)] flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-(--overlay-backdrop-strong) flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 w-12 h-12 bg-[color:var(--glass-on-image-bg)] hover:bg-[color:var(--glass-on-image-bg-hover)] border border-[color:var(--glass-on-image-border)] rounded-full flex items-center justify-center transition-colors backdrop-blur-sm outline-none focus-visible:ring-[3px] focus-visible:ring-[color:var(--focus-ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="absolute top-4 right-4 w-12 h-12 bg-(--glass-on-image-bg) hover:bg-(--glass-on-image-bg-hover) border border-(--glass-on-image-border) rounded-full flex items-center justify-center transition-colors backdrop-blur-sm outline-none focus-visible:ring-[3px] focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            <X className="text-[color:var(--on-image-foreground)]" size={24} />
+            <X className="text-(--on-image-foreground)" size={24} />
           </button>
           <ImageWithFallback
             src={selectedImage}
