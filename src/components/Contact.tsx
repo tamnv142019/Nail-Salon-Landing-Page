@@ -1,9 +1,11 @@
 'use client';
 
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, X, ExternalLink, Navigation, MessageCircle, Sparkles, Calendar } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BookingModal } from './BookingModal';
 import { motion } from 'motion/react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { isBusinessOpenNow } from '../utils/business-hours';
 
 const contactInfo = [
   {
@@ -41,25 +43,8 @@ const businessHours = [
   { day: 'Sunday', hours: '10:00 AM - 5:00 PM', isToday: false },
 ];
 
-// Check if salon is currently open
-function isCurrentlyOpen(): boolean {
-  const now = new Date();
-  const day = now.getDay(); // 0 = Sunday, 6 = Saturday
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-  const timeInMinutes = hour * 60 + minute;
-
-  if (day >= 1 && day <= 5) { // Monday - Friday
-    return timeInMinutes >= 9 * 60 && timeInMinutes < 19 * 60;
-  } else if (day === 6) { // Saturday
-    return timeInMinutes >= 9 * 60 && timeInMinutes < 18 * 60;
-  } else if (day === 0) { // Sunday
-    return timeInMinutes >= 10 * 60 && timeInMinutes < 17 * 60;
-  }
-  return false;
-}
-
 export function Contact() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -164,7 +149,8 @@ export function Contact() {
     }
   };
 
-  const isOpen = isCurrentlyOpen();
+  // Keep consistent with the Home contact section: use San Diego timezone.
+  const isOpen = useMemo(() => isBusinessOpenNow(), []);
 
   return (
     <>
@@ -395,7 +381,11 @@ export function Contact() {
                         : 'bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300'
                     }`}>
                       <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`}></div>
-                      <span>{isOpen ? 'Open Now' : 'Closed Now'}</span>
+                      <span>
+                        {isOpen
+                          ? t('contactSection.openNow', 'Open Now')
+                          : t('contactSection.closedNow', 'Closed Now')}
+                      </span>
                     </div>
                   </div>
                 </div>

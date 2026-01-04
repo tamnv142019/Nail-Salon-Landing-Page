@@ -1,9 +1,10 @@
 "use client";
 
 import { Star, MapPin, Heart, Send, Clock } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { businessInfo } from '../config/seo.config';
+import { isBusinessOpenNow } from '../utils/business-hours';
 
 interface FooterProps {
   onNavigateToPrivacy?: () => void;
@@ -14,6 +15,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { t } = useLanguage();
+  const isOpen = useMemo(() => isBusinessOpenNow(), []);
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +84,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                 />
               </div>
               <div className="text-2xl leading-tight bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
-                <span className="block font-[var(--font-display)] font-normal text-3xl leading-none">
+                <span className="block font-(--font-display) text-3xl leading-none">
                   Queen's
                 </span>
                 <span className="block mt-1 text-xs font-semibold tracking-[0.22em] uppercase">
@@ -104,27 +106,56 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
               </a>
             </div>
             <div className="flex gap-2 mt-2">
-              <span className="text-foreground text-sm">📞 (619) 224-5050</span>
+              <a
+                href="tel:6192245050"
+                className="text-foreground text-sm inline-block transition-transform duration-200 transform hover:scale-105 hover:text-brand-gold hover:underline"
+                aria-label="Call (619) 224-5050"
+              >
+                📞 (619) 224-5050
+              </a>
+            </div>
+            <div className="flex gap-2 mt-2">
+              <a
+                href={`mailto:${businessInfo.email}`}
+                className="text-foreground text-sm inline-block transition-transform duration-200 transform hover:scale-105 hover:text-brand-gold hover:underline"
+                aria-label={`${t('contactSection.email', 'Email')}: ${businessInfo.email}`}
+              >
+                ✉️ {businessInfo.email}
+              </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="animate-in fade-in slide-in-from-bottom-5 duration-700" style={{ animationDelay: '100ms' }}>
-            <h4 className="mb-6 text-lg text-foreground transition-all duration-500">
-              {t('footer.hours', 'Hours')}
-            </h4>
+            <div className="mb-6">
+              <h4 className="text-lg text-foreground transition-all duration-500">
+                {t('footer.hours', 'Hours')}
+              </h4>
+              <span
+                className={`mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
+                  isOpen
+                    ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'
+                    : 'bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300'
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500' : 'bg-rose-500'}`} />
+                {isOpen
+                  ? t('contactSection.openNow', 'Open Now')
+                  : t('contactSection.closedNow', 'Closed Now')}
+              </span>
+            </div>
             <div className="space-y-2 text-foreground transition-colors duration-500">
               <div className="flex items-center gap-2">
                 <Clock size={16} className="text-brand-gold-muted dark:text-brand-gold-soft shrink-0" />
-                <span className="text-sm">Mon - Fri: 9AM - 7PM</span>
+                <span className="text-sm">{t('footer.monFri', 'Mon - Fri: 9AM - 7PM')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={16} className="text-brand-gold-muted dark:text-brand-gold-soft shrink-0" />
-                <span className="text-sm">Saturday: 9AM - 6PM</span>
+                <span className="text-sm">{t('footer.saturday', 'Saturday: 9AM - 6PM')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={16} className="text-brand-gold-muted dark:text-brand-gold-soft shrink-0" />
-                <span className="text-sm">Sunday: 10AM - 5PM</span>
+                <span className="text-sm">{t('footer.sunday', 'Sunday: 10AM - 5PM')}</span>
               </div>
             </div>
 

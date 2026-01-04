@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, XCircle } from 'lucide-react';
 import { useMemo } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { isBusinessOpenNow } from '../../utils/business-hours';
 
 interface ContactSectionProps {
   onBookClick: () => void;
@@ -15,49 +16,8 @@ const businessHours = [
   { dayKey: 'contactSection.sunday', hours: '10:00 AM - 5:00 PM', dayIndex: [0], startTime: 10, endTime: 17 },
 ];
 
-// Function to check if business is currently open (San Diego timezone: America/Los_Angeles)
-const isBusinessOpen = (): { isOpen: boolean; message: string } => {
-  const now = new Date();
-  
-  // Get the day of week (0 = Sunday, 1 = Monday, etc.) in San Diego timezone
-  const formatter = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'America/Los_Angeles',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'America/Los_Angeles',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-
-  const parts = formatter.formatToParts(now);
-  const hour = parseInt(parts.find(p => p.type === 'hour')?.value || '0');
-  const minute = parseInt(parts.find(p => p.type === 'minute')?.value || '0');
-  const currentTime = hour + minute / 60;
-
-  // Get day of week by creating a date string and using Date object
-  const dateParts = dateFormatter.formatToParts(now);
-  const dateStr = dateParts.map(p => p.value).join('');
-  const tempDate = new Date(dateStr);
-  const weekday = tempDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
-
-  for (const schedule of businessHours) {
-    if (schedule.dayIndex.includes(weekday)) {
-      if (currentTime >= schedule.startTime && currentTime < schedule.endTime) {
-        return { isOpen: true, message: 'Open Now' };
-      }
-    }
-  }
-
-  return { isOpen: false, message: 'Closed Now' };
-};
-
 export function ContactSection({ onBookClick, onNavigateToServices }: ContactSectionProps) {
-  const businessStatus = useMemo(() => isBusinessOpen(), []);
+  const isOpen = useMemo(() => isBusinessOpenNow(), []);
   const { t } = useLanguage();
   
   return (
@@ -143,15 +103,15 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                   <h3 className="text-xl font-bold text-foreground">{t('contactSection.hours', 'Business Hours')}</h3>
                 </div>
                 <div className="flex items-center gap-2">
-                  {businessStatus.isOpen ? (
+                  {isOpen ? (
                     <>
                       <CheckCircle className="text-[color:var(--brand-emerald)]" size={20} />
-                      <span className="text-sm font-semibold text-[color:var(--brand-emerald)] dark:text-[color:var(--brand-emerald)]">{t('contactSection.openNow', businessStatus.message)}</span>
+                      <span className="text-sm font-semibold text-[color:var(--brand-emerald)] dark:text-[color:var(--brand-emerald)]">{t('contactSection.openNow', 'Open Now')}</span>
                     </>
                   ) : (
                     <>
                       <XCircle className="text-[color:var(--destructive)]" size={20} />
-                      <span className="text-sm font-semibold text-[color:var(--destructive)] dark:text-[color:var(--destructive)]">{t('contactSection.closedNow', businessStatus.message)}</span>
+                      <span className="text-sm font-semibold text-[color:var(--destructive)] dark:text-[color:var(--destructive)]">{t('contactSection.closedNow', 'Closed Now')}</span>
                     </>
                   )}
                 </div>
