@@ -8,7 +8,17 @@ const nextConfig = {
 	},
 	async redirects() {
 		return [
-			{ source: '/logo.:ext', destination: '/images/logos/logo.:ext', permanent: true },
+			// Root favicon (many crawlers/Google look for this)
+			{ source: '/favicon.ico', destination: '/favicon/favicon.ico', permanent: true },
+			{ source: '/apple-touch-icon.png', destination: '/favicon/apple-touch-icon.png', permanent: true },
+			{ source: '/site.webmanifest', destination: '/favicon/site.webmanifest', permanent: true },
+
+			// Support legacy/logo-shortcut paths
+			{ source: '/logo', destination: '/images/logos/logo.png', permanent: true },
+			{ source: '/logo.png', destination: '/images/logos/logo.png', permanent: true },
+			{ source: '/logo.jpg', destination: '/images/logos/logo.png', permanent: true },
+			{ source: '/logo.jpeg', destination: '/images/logos/logo.png', permanent: true },
+			{ source: '/logo.webp', destination: '/images/logos/logo.png', permanent: true },
 			{ source: '/og-home.png', destination: '/images/misc/og-home.png', permanent: true },
 		];
 	},

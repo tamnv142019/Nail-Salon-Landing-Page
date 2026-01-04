@@ -53,6 +53,7 @@ export const metadata: Metadata = {
   icons: {
     // Favicon chính (Google yêu cầu >= 48x48px)
     icon: [
+      { url: "/favicon.ico", sizes: "any" }, // Root favicon (crawler-friendly)
       { url: "/favicon/favicon.ico", sizes: "any" }, // Hỗ trợ legacy browsers
       { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
       "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
     images: [
       {
-        url: '/images/logos/logo.jpg', // Sẽ tự động thêm metadataBase
+          url: '/images/logos/logo.png', // Sẽ tự động thêm metadataBase
         width: 1200,
         height: 630,
         alt: "Queen's Nails Hair & Skincare Logo",
@@ -97,7 +98,7 @@ export const metadata: Metadata = {
     title: "Queen's Nails Hair & Skincare",
     description:
       "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
-    images: ['/images/logos/logo.jpg'],
+      images: ['/images/logos/logo.png'],
   },
   
   // Robots
@@ -158,11 +159,13 @@ export default function RootLayout({
     <html lang="en" className={roboto.className}>
       <head>
         {/* Favicons & manifest */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="icon" href="/favicon/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         {ld.map((d, i) => (
           <script
             key={`ld-${i}`}

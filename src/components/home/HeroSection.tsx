@@ -91,26 +91,24 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
           {/* Elegant Call Button with Glass Morphism */}
           <a
             href={`tel:${'+1' + businessInfo.phone.replace(/[^0-9]/g, '')}`}
-            className="group relative inline-flex items-center justify-center gap-3 px-6 py-3 mb-4 rounded-full bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent outline-none shadow-lg hover:shadow-xl"
+            className="group relative inline-flex items-center justify-center gap-2 px-5 py-3 mb-4 rounded-full bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent outline-none shadow-lg hover:shadow-xl sm:gap-3 sm:px-6"
             aria-label={`Call ${businessInfo.phone}`}
           >
             {/* Phone icon */}
-            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 group-hover:bg-white/20 transition-all duration-300 group-hover:rotate-12">
-              <Phone size={16} className="text-white" />
+            <span className="flex items-center justify-center transition-transform duration-300 group-hover:rotate-12 shrink-0">
+              <Phone size={16} className="text-white shrink-0" />
             </span>
-            
+
             {/* Phone number */}
-            <span className="font-medium text-base">
-              {businessInfo.phone}
-            </span>
+            <span className="font-semibold text-base leading-none whitespace-nowrap">{businessInfo.phone}</span>
           </a>
           <a
             href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 text-(--on-image-foreground-muted) mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none transform hover:scale-105 hover:text-brand-gold hover:underline"
+            className="flex items-start justify-center gap-2 text-(--on-image-foreground-muted) mb-10 transition-transform duration-300 will-change-transform motion-reduce:transition-none transform hover:scale-105 hover:text-brand-gold hover:underline sm:items-center"
           >
-            <MapPin size={20} />
+            <MapPin size={20} className="mt-0.5 shrink-0 sm:mt-0" />
             <span className="text-base md:text-lg">4869 Santa Monica Ave, San Diego, CA 92107</span>
           </a>
 

@@ -18,6 +18,7 @@ export const translations = {
         subtitle2: '& Skincare',
         description: 'Best Nail Salon & Spa in Ocean Beach',
         button: 'Find Out More',
+        callNow: 'Call now',
       },
       about: {
         title: 'About Us',
@@ -1014,6 +1015,7 @@ export const translations = {
         subtitle2: '& Skincare',
         description: 'Salon Móng & Spa Hàng Đầu tại San Diego',
         button: 'Tìm Hiểu Thêm',
+        callNow: 'Gọi ngay',
       },
       about: {
         title: 'Về Chúng Tôi',

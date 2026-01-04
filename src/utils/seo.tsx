@@ -362,7 +362,7 @@ export function ArticleSchema({
       name: publisher,
         logo: {
         '@type': 'ImageObject',
-        url: 'https://queensobnail.com/images/logos/logo.jpg',
+        url: 'https://queensobnail.com/images/logos/logo.png',
       },
     },
   };

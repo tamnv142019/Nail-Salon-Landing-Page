@@ -45,6 +45,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   const serviceSectionRef = useRef<HTMLDivElement | null>(null);
   const serviceDropdownRef = useRef<HTMLDivElement | null>(null);
   const contentScrollRef = useRef<HTMLDivElement | null>(null);
+  const [mobileStep, setMobileStep] = useState<'details' | 'services'>('details');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -56,6 +57,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
       document.body.style.overflow = 'hidden';
       setSelectedDate(getTodayDate());
       setSelectedTime('');
+      setMobileStep('details');
       const pre = findBookingServiceByName(preSelectedService);
       const preName = (pre?.name || (preSelectedService || '')).trim();
       setSelectedServices(preName ? [preName] : []);
@@ -80,16 +82,28 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     };
   }, [isOpen, preSelectedService]);
 
+  const isDetailsComplete = Boolean(
+    formData.name &&
+      formData.email &&
+      formData.phone &&
+      selectedDate &&
+      selectedTime
+  );
+
   useEffect(() => {
-    if (isOpen) {
-      setServicesOpen(!isMobile);
+    if (!isOpen) return;
+    if (isMobile) {
+      setServicesOpen(mobileStep === 'services');
+      return;
     }
-  }, [isOpen, isMobile]);
+    setServicesOpen(true);
+  }, [isOpen, isMobile, mobileStep]);
 
   useEffect(() => {
     if (!isOpen) return;
     if (!servicesOpen) return;
     if (!isMobile) return;
+    if (mobileStep !== 'services') return;
 
     const triggerEl = serviceSectionRef.current;
     const dropdownEl = serviceDropdownRef.current;
@@ -97,8 +111,10 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     if (!triggerEl || !container) return;
 
     // Wait for Radix collapsible animation to lay out, then scroll within modal content.
-    const raf1 = requestAnimationFrame(() => {
-      const raf2 = requestAnimationFrame(() => {
+    let raf1 = 0;
+    let raf2 = 0;
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
         const containerRect = container.getBoundingClientRect();
         const triggerRect = triggerEl.getBoundingClientRect();
         const dropdownRect = dropdownEl?.getBoundingClientRect();
@@ -110,25 +126,25 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         const triggerBottom = triggerRect.bottom - containerRect.top;
         const dropdownBottom = dropdownRect ? dropdownRect.bottom - containerRect.top : triggerBottom;
 
-        // If the expanded dropdown goes below the visible area, scroll down just enough.
+        // Only adjust scroll when the expanded dropdown would be clipped.
         if (dropdownBottom > containerRect.height - paddingBottom) {
-          const delta = dropdownBottom - (containerRect.height - paddingBottom);
-          container.scrollTo({ top: container.scrollTop + delta, behavior: 'smooth' });
+          const deltaDown = dropdownBottom - (containerRect.height - paddingBottom);
+          container.scrollTo({ top: container.scrollTop + deltaDown, behavior: 'smooth' });
           return;
         }
 
-        // If the trigger is above the visible area, scroll up just enough.
         if (triggerTop < paddingTop) {
-          const delta = paddingTop - triggerTop;
-          container.scrollTo({ top: Math.max(0, container.scrollTop - delta), behavior: 'smooth' });
+          const deltaUp = paddingTop - triggerTop;
+          container.scrollTo({ top: Math.max(0, container.scrollTop - deltaUp), behavior: 'smooth' });
         }
       });
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return raf2;
     });
 
-    return () => cancelAnimationFrame(raf1);
-  }, [isOpen, servicesOpen, isMobile]);
+    return () => {
+      if (raf1) cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
+    };
+  }, [isOpen, servicesOpen, isMobile, mobileStep]);
 
   const selectedServiceObjs = bookingServices.filter((s) => selectedServices.includes(s.name));
   const total = estimateBookingServicesTotal(selectedServiceObjs);
@@ -224,17 +240,17 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         {/* Header - Material / Clean */}
         <div className="sticky top-0 z-20 border-b border-border/40 bg-background/70 dark:bg-card/60 backdrop-blur-xl">
           <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-(--glass-top-from) via-(--glass-top-via) to-transparent" />
-          <div className="relative flex items-start justify-between gap-3 px-4 sm:px-6 py-3.5 sm:py-5">
+          <div className="relative flex items-start justify-between gap-3 px-4 sm:px-6 py-3 sm:py-5">
             <div className="min-w-0">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center size-9 sm:size-10 rounded-xl bg-background/60 dark:bg-card/40 backdrop-blur-xl border border-border/40 ring-1 ring-inset ring-(--glass-ring) shadow-sm shrink-0">
                   <Sparkles size={18} className="text-foreground/90" />
                 </div>
                 <div className="min-w-0">
-                  <h2 className="text-xl sm:text-3xl font-semibold text-foreground leading-tight">
+                  <h2 className="text-lg sm:text-3xl font-semibold text-foreground leading-tight">
                     {t('booking.title', 'Book Appointment')}
                   </h2>
-                  <p className="text-sm sm:text-base text-foreground/70">
+                  <p className="hidden sm:block text-sm sm:text-base text-foreground/70">
                     {t('booking.subtitle', 'Choose a service, date, and time. We will confirm by phone or email.')}
                   </p>
                 </div>
@@ -261,7 +277,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         </div>
 
         {isSubmitted ? (
-          <div className="flex-1 min-h-0 overflow-y-auto bg-background/35 dark:bg-card/25 px-4 sm:px-6 py-4 sm:py-6">
+          <div className="flex-1 min-h-0 overflow-y-auto sm:bg-background/35 sm:dark:bg-card/25 px-4 sm:px-6 py-4 sm:py-6">
             <div className="text-center py-12 animate-in fade-in zoom-in-95 duration-500">
               <div className="w-20 h-20 bg-brand-emerald/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-emerald/20">
                 <Check className="text-brand-emerald" size={40} />
@@ -288,10 +304,10 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
           </div>
         ) : (
           <form id="booking-form" onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col">
-            <div ref={contentScrollRef} className="flex-1 min-h-0 overflow-y-auto bg-background/35 dark:bg-card/25 px-5 sm:px-8 py-5 sm:py-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
-                <div className="rounded-2xl border border-border bg-background p-5 sm:p-7 space-y-5 shadow-sm">
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground">{t('booking.yourDetails', 'Your Details')}</h3>
+            <div ref={contentScrollRef} className="flex-1 min-h-0 overflow-y-auto sm:bg-background/35 sm:dark:bg-card/25 px-4 sm:px-8 py-4 sm:py-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
+                <div className="rounded-xl sm:rounded-2xl border border-border bg-background p-4 sm:p-7 space-y-4 sm:space-y-5 shadow-sm">
+                  <h3 className="text-sm sm:text-lg font-semibold text-foreground">{t('booking.yourDetails', 'Your Details')}</h3>
 
                   {/* Name */}
                   <div className="space-y-2">
@@ -304,7 +320,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="h-14 rounded-xl text-base"
+                      className="h-12 sm:h-14 rounded-xl text-base"
                       placeholder={t('booking.yourName', 'Your Name')}
                     />
                   </div>
@@ -320,7 +336,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="h-14 rounded-xl text-base"
+                      className="h-12 sm:h-14 rounded-xl text-base"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -336,14 +352,14 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="h-14 rounded-xl text-base"
+                      className="h-12 sm:h-14 rounded-xl text-base"
                       placeholder="(619) 224-5050"
                     />
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-border bg-background p-5 sm:p-7 space-y-5 shadow-sm">
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground">{t('booking.appointmentDetails', 'Appointment Details')}</h3>
+                <div className="rounded-xl sm:rounded-2xl border border-border bg-background p-4 sm:p-7 space-y-4 sm:space-y-5 shadow-sm">
+                  <h3 className="text-sm sm:text-lg font-semibold text-foreground">{t('booking.appointmentDetails', 'Appointment Details')}</h3>
 
                   {/* Service */}
                   <div className="space-y-2">
@@ -387,7 +403,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
                       <CollapsibleContent>
                         <div ref={serviceDropdownRef} className="mt-2 rounded-xl border border-border bg-card">
-                          <ScrollArea className="h-60 sm:h-96 w-full">
+                          <ScrollArea className="h-56 sm:h-96 w-full">
                             <div className="p-3 space-y-3">
                               {(['Consultation', 'Manicure', 'Pedicure', 'Waxing', 'Powder', 'Add-ons'] as const).map((category) => {
                                 const items = bookingServices.filter((s) => s.category === category);
@@ -463,7 +479,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                         onChange={(e) => setSelectedDate(e.target.value)}
                         ref={dateInputRef}
                         data-native-picker="date"
-                        className="h-14 rounded-xl pr-10 text-base"
+                        className="h-12 sm:h-14 rounded-xl pr-10 text-base"
                       />
                       <button
                         type="button"
@@ -519,7 +535,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                             }}
                             disabled={isDisabled}
                             aria-disabled={isDisabled}
-                            className={`h-12 px-3 rounded-lg border transition-colors text-sm sm:text-base ${
+                            className={`h-11 sm:h-12 px-3 rounded-lg border transition-colors text-sm sm:text-base ${
                               isDisabled
                                 ? 'opacity-50 cursor-not-allowed border-border bg-background text-foreground'
                                 : selectedTime === time
@@ -538,9 +554,9 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             </div>
 
             {/* Fixed footer (always visible) */}
-            <div className="shrink-0 border-t border-border/40 bg-background/70 dark:bg-card/60 backdrop-blur-xl px-5 sm:px-8 py-4 pb-[env(safe-area-inset-bottom)]">
+            <div className="shrink-0 border-t border-border/40 bg-background/70 dark:bg-card/60 backdrop-blur-xl px-4 sm:px-8 py-3 sm:py-4 pb-[env(safe-area-inset-bottom)]">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
-                <div className="text-sm sm:text-base text-foreground/80">
+                <div className="text-xs sm:text-base text-foreground/80">
                   {selectedServiceObjs.length > 0 ? (
                     <span>
                       {selectedSummary}
@@ -552,13 +568,13 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-2 sm:justify-end">
-                  <Button type="button" variant="outline" onClick={handleClose} className="w-full sm:w-auto h-12 text-base">
+                  <Button type="button" variant="outline" onClick={handleClose} className="w-full sm:w-auto h-11 sm:h-12 text-base">
                     {t('booking.close', 'Close')}
                   </Button>
                   <Button
                     type="submit"
                     disabled={!formData.name || !formData.email || !formData.phone || !selectedDate || !selectedTime || isSending}
-                    className="w-full sm:w-auto h-12 text-base"
+                    className="w-full sm:w-auto h-11 sm:h-12 text-base"
                   >
                     {isSending ? t('booking.sending', 'Sending...') : t('booking.bookBtn', 'Confirm Booking')}
                   </Button>
