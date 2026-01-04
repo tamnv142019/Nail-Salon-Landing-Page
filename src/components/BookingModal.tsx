@@ -1,7 +1,7 @@
 "use client";
 
 import { X, Calendar, Clock, User, Phone, Check, Sparkles, Mail } from 'lucide-react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { bookingServices, findBookingServiceByName, formatBookingServiceLabel, estimateBookingServicesTotal } from '../config/booking-services';
 import { Button } from './ui/button';
@@ -184,7 +184,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelectedDate('');
     setSelectedTime('');
     setSelectedServices([]);
@@ -192,7 +192,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     setStep(1);
     setFormData({ name: '', email: '', phone: '' });
     onClose();
-  };
+  }, [onClose]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -223,9 +223,6 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
       }
 
       setIsSubmitted(true);
-      setTimeout(() => {
-        handleClose();
-      }, 3000);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Booking submission error', error);
@@ -240,10 +237,10 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   return (
     <div
       onClick={() => handleClose()}
-      className="fixed inset-0 z-10000 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/55 animate-in fade-in duration-200 overflow-hidden"
+      className="fixed inset-0 z-999999 flex items-stretch sm:items-center justify-center p-0 sm:p-4 bg-black/55 animate-in fade-in duration-200 overflow-hidden"
     >
       <div 
-        className="relative w-full max-w-6xl sm:w-[min(96vw,72rem)] bg-background/95 dark:bg-card/90 rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-border/40 ring-1 ring-inset ring-(--glass-ring) h-dvh supports-[height:100svh]:h-svh sm:h-[92vh] max-h-dvh sm:max-h-[98vh] flex flex-col min-h-0"
+        className="relative w-full max-w-none sm:max-w-6xl sm:w-[min(96vw,72rem)] bg-background/95 dark:bg-card/90 rounded-none sm:rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border-0 sm:border sm:border-border/40 ring-0 sm:ring-1 sm:ring-inset sm:ring-(--glass-ring) h-full sm:h-[92vh] max-h-full sm:max-h-[98vh] flex flex-col min-h-0"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header (green / wizard) */}
@@ -255,19 +252,19 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             />
             <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/0 via-black/10 to-black/35" />
 
-            <div className="relative px-4 sm:px-6 py-4 sm:py-6 text-(--on-image-foreground)">
+            <div className="relative px-4 sm:px-6 py-3 sm:py-6 text-(--on-image-foreground)">
               <div className="grid grid-cols-[auto_1fr_auto] items-start gap-3">
                 <div className="flex items-start">
-                  <div className="flex items-center justify-center size-9 sm:size-10 rounded-xl bg-(--glass-on-image-bg) backdrop-blur-xl border border-(--glass-on-image-border) ring-1 ring-inset ring-(--glass-ring) shadow-sm">
-                    <Sparkles size={18} className="text-(--on-image-foreground)" />
+                  <div className="flex items-center justify-center size-8 sm:size-10 rounded-xl bg-(--glass-on-image-bg) backdrop-blur-xl border border-(--glass-on-image-border) ring-1 ring-inset ring-(--glass-ring) shadow-sm">
+                    <Calendar size={16} className="text-(--on-image-foreground)" />
                   </div>
                 </div>
 
                 <div className="min-w-0 text-center">
-                  <h2 className="text-2xl sm:text-4xl font-semibold leading-tight tracking-tight">
+                  <h2 className="text-xl sm:text-4xl font-semibold leading-tight tracking-tight">
                     {t('booking.title', 'Book Your Appointment')}
                   </h2>
-                  <p className="mt-0.5 text-sm sm:text-base text-(--on-image-foreground-muted)">
+                  <p className="mt-0.5 hidden sm:block text-base text-(--on-image-foreground-muted)">
                     {t('booking.subtitle', 'Experience luxury nail care')}
                   </p>
                 </div>
@@ -285,7 +282,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               </div>
 
               {/* Stepper */}
-              <div className="mt-4 sm:mt-6 flex items-center gap-2 sm:gap-4 max-w-4xl mx-auto">
+              <div className="mt-3 sm:mt-6 flex items-center gap-2 sm:gap-4 max-w-4xl mx-auto">
                 {[1, 2, 3].map((n) => {
                   const isActive = step === n;
                   const isDone = step > n;
@@ -300,7 +297,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                     <div key={n} className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                       <div
                         className={
-                          `size-9 sm:size-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold border transition ` +
+                          `size-8 sm:size-10 rounded-full flex items-center justify-center text-xs sm:text-base font-semibold border transition ` +
                           (isActive
                             ? 'bg-brand-gold text-brand-dark border-transparent'
                             : isDone
@@ -359,7 +356,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
           </div>
         ) : (
           <form id="booking-form" onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col">
-            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain sm:bg-background/35 sm:dark:bg-card/25 px-4 sm:px-8 py-4 sm:py-8">
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain sm:bg-background/35 sm:dark:bg-card/25 px-4 sm:px-8 py-3 sm:py-8">
               {/* Step 1: Services */}
               {step === 1 ? (
                 <div className="rounded-xl sm:rounded-2xl border border-border bg-background p-4 sm:p-7 shadow-sm">
@@ -386,7 +383,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                     ) : null}
                   </div>
 
-                  <div className="mt-5 max-h-[min(60vh,36rem)] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable]">
+                  <div className="mt-4 max-h-[min(72vh,44rem)] sm:max-h-[min(60vh,36rem)] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable]">
                     {categories.map((category) => {
                       const items = bookingServices.filter((s) => s.category === category);
                       if (items.length === 0) return null;
@@ -412,7 +409,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                                   type="button"
                                   onClick={() => toggleService(service.name)}
                                   className={
-                                    `group w-full flex items-center justify-between gap-3 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-4 text-left border transition-all duration-200 ${accent.item} ` +
+                                    `group w-full flex items-center justify-between gap-2 sm:gap-3 rounded-xl sm:rounded-2xl px-3 sm:px-5 py-3 sm:py-4 text-left border transition-all duration-200 ${accent.item} ` +
                                     (checked
                                       ? `${accent.selected}`
                                       : 'bg-secondary/20 border-border/60 shadow-sm hover:bg-secondary/60 dark:hover:bg-secondary/60')
@@ -423,7 +420,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                                     <span className="flex items-center gap-2 flex-wrap min-w-0">
                                       <span
                                         className={
-                                          `text-base sm:text-lg font-semibold truncate transition-colors duration-200 ` +
+                                          `text-sm sm:text-lg font-semibold truncate transition-colors duration-200 ` +
                                           (checked
                                             ? 'text-foreground'
                                             : 'text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold')
@@ -436,7 +433,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                                         <img
                                           src="/images/badges/best-seller-badge.svg"
                                           alt={t('servicesPage.bestSellerTag', 'Best Seller')}
-                                          className="w-8 h-8 object-contain"
+                                          className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                                           loading="lazy"
                                         />
                                       ) : null}
@@ -448,20 +445,20 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                                       ) : null}
                                     </span>
                                   </span>
-                                  <span className="shrink-0 flex items-center gap-3">
+                                  <span className="shrink-0 flex items-center gap-2 sm:gap-3">
                                     <span className="text-right whitespace-nowrap shrink-0">
                                       {service.price ? (
-                                        <div className="text-base sm:text-lg font-bold" style={{ color: 'oklch(.592 .249 .584)' }}>
+                                        <div className="text-sm sm:text-lg font-bold" style={{ color: 'oklch(.592 .249 .584)' }}>
                                           {service.price}
                                         </div>
                                       ) : null}
                                       {service.duration ? (
-                                        <div className="text-xs sm:text-sm text-foreground mt-0.5">{service.duration}</div>
+                                        <div className="text-[11px] sm:text-sm text-foreground mt-0.5">{service.duration}</div>
                                       ) : null}
                                     </span>
                                     {checked ? (
-                                      <span className="inline-flex items-center justify-center size-6 rounded-full bg-btn-accent shadow-sm">
-                                        <Check size={16} className="text-btn-theme-foreground" />
+                                      <span className="inline-flex items-center justify-center size-5 sm:size-6 rounded-full bg-btn-accent shadow-sm">
+                                        <Check size={14} className="text-btn-theme-foreground" />
                                       </span>
                                     ) : null}
                                   </span>

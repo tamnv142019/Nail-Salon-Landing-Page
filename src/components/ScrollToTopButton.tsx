@@ -66,14 +66,5 @@ export function TopCTAs() {
 
   if (!visible) return null;
 
-  return (
-    <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-3">
-      <a href={`tel:${businessInfo.phone.replace(/[^0-9+]/g, '')}`} className="px-4 py-2 rounded-xl bg-white/90 text-[color:var(--brand-emerald)] font-semibold shadow-lg animate-sway">
-        Gọi: {businessInfo.phone}
-      </a>
-      <a href="/book" className="px-4 py-2 rounded-xl bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] font-semibold shadow-lg animate-sway">
-        Book Now
-      </a>
-    </div>
-  );
+  return;
 }
