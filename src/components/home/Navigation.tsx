@@ -29,6 +29,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
     gallery: '/gallery',
     testimonials: '/reviews',
     contact: '/contact',
+    blog: '/blog',
   };
 
   const isSolid = !transparentOnTop || isScrolled;
@@ -89,6 +90,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
     { id: 'about', label: t('nav.about', 'About') },
     { id: 'gallery', label: t('nav.gallery', 'Gallery') },
     { id: 'testimonials', label: t('nav.reviews', 'Reviews') },
+    { id: 'blog', label: t('nav.blog', 'Blog') },
     { id: 'contact', label: t('nav.contact', 'Contact') },
   ];
 
