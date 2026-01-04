@@ -110,11 +110,11 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
             <div className="flex items-center justify-between">
               <div className="text-gray-900 dark:text-white flex items-center gap-3 transition-colors duration-500">
                 <div className="relative">
-                  <div className="text-4xl bg-linear-to-r from-rose-500 via-purple-500 to-pink-500 bg-clip-text text-transparent tracking-tight italic">
-                    Queens
+                  <div className="text-4xl bg-linear-to-r from-(--primary) via-(--gold-champagne) to-(--primary-hover) bg-clip-text text-transparent tracking-tight font-[var(--font-display)] font-normal">
+                    Queen's
                   </div>
                 </div>
-                <span className="text-xl md:text-2xl bg-linear-to-r from-gray-900 to-rose-600 dark:from-white dark:to-rose-200 bg-clip-text text-transparent">
+                <span className="text-xs md:text-sm font-semibold tracking-[0.28em] uppercase text-gray-900 dark:text-gray-100">
                   Nails Hair & Skincare
                 </span>
               </div>

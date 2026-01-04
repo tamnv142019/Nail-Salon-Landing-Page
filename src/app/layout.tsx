@@ -4,12 +4,18 @@ import { Providers } from "./providers";
 import { TopCTAs } from '../components/ScrollToTopButton';
 import { FloatingCallButton } from '../components/FloatingCallButton';
 import { FloatingFollowButtons } from '../components/FloatingFollowButtons';
-import { Roboto } from 'next/font/google';
+import { Great_Vibes, Roboto } from 'next/font/google';
 import Script from 'next/script';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema, generateWebSiteSchema } from '../config/seo.config';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
+const displayFont = Great_Vibes({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-display',
+});
 
 /**
  * Metadata chuẩn Next.js cho SEO
@@ -156,7 +162,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className={roboto.className}>
+    <html lang="en" className={`${roboto.className} ${displayFont.variable}`}>
       <head>
         {/* Favicons & manifest */}
         <link rel="icon" href="/favicon.ico" />

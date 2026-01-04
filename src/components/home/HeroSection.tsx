@@ -18,14 +18,14 @@ const backgroundImages = [
   'https://images.unsplash.com/photo-1604654894610-df63bc536371?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
 ];
 
-function Hover3DText({ text }: { text: string }) {
+function Hover3DText({ text, className }: { text: string; className?: string }) {
   return (
     <span
       className="inline-block perspective-[900px] cursor-default select-none"
       style={{ transformStyle: 'preserve-3d' }}
     >
       <span
-        className="inline-block will-change-transform transition-[transform,filter] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none hover:transform-[translateY(-2px)_translateZ(18px)_rotateX(10deg)] hover:brightness-110 hover:filter-[drop-shadow(0_18px_28px_var(--scrim-60))]"
+        className={`inline-block will-change-transform transition-[transform,filter] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none hover:transform-[translateY(-2px)_translateZ(18px)_rotateX(10deg)] hover:brightness-110 hover:filter-[drop-shadow(0_18px_28px_var(--scrim-60))] ${className ?? ''}`}
         style={{ transformStyle: 'preserve-3d' }}
       >
         {text}
@@ -36,6 +36,21 @@ function Hover3DText({ text }: { text: string }) {
 
 export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [glitterParticles, setGlitterParticles] = useState<
+    Array<{
+      id: string;
+      x: number;
+      y: number;
+      sizePx: number;
+      floatDurS: number;
+      floatDelayS: number;
+      twinkleDurS: number;
+      twinkleDelayS: number;
+      glyph: '✦' | '✧' | '⋆';
+      colorVar: '--gold-champagne' | '--primary';
+      opacity: number;
+    }>
+  >([]);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -44,6 +59,29 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
     }, 5000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const glyphs: Array<'✦' | '✧' | '⋆'> = ['✦', '✧', '⋆'];
+    const particles = Array.from({ length: 12 }, (_, index) => {
+      const isBlue = index % 5 === 0;
+      const colorVar: '--gold-champagne' | '--primary' = isBlue ? '--primary' : '--gold-champagne';
+      return {
+        id: `glitter-${index}`,
+        x: 6 + Math.random() * 88,
+        y: 8 + Math.random() * 84,
+        sizePx: 6 + Math.random() * 6,
+        floatDurS: 4.8 + Math.random() * 3.2,
+        floatDelayS: Math.random() * 1.8,
+        twinkleDurS: 1.4 + Math.random() * 1.8,
+        twinkleDelayS: Math.random() * 1.6,
+        glyph: glyphs[Math.floor(Math.random() * glyphs.length)],
+        colorVar,
+        opacity: isBlue ? 0.55 : 0.75,
+      };
+    });
+
+    setGlitterParticles(particles);
   }, []);
 
   return (
@@ -76,10 +114,66 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
           transition={{ duration: 0.8 }}
         >
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl text-(--on-image-foreground) font-bold mb-4 md:mb-6 leading-tight">
-            <Hover3DText text={t('home.hero.title.line1', "Queen's")} />
-            <br />
-            <Hover3DText text={t('home.hero.title.line2', 'Nails Hair & Skincare')} />
+          <h1 className="text-5xl md:text-7xl lg:text-8xl text-(--on-image-foreground) font-bold mb-4 md:mb-6 leading-tight">
+            <span className="relative inline-block leading-none">
+              {/* Subtle glossy reflection sweep */}
+              <span
+                className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-transparent via-(--on-image-foreground) to-transparent opacity-[0.12] mix-blend-overlay -skew-x-12 animate-[glass-shine_4.8s_ease-in-out_infinite] motion-reduce:hidden"
+                aria-hidden="true"
+              />
+
+              {/* Elegant glitter particles (small count, non-noisy) */}
+              {glitterParticles.length > 0 && (
+                <span
+                  className="pointer-events-none absolute -inset-10 md:-inset-14"
+                  aria-hidden="true"
+                >
+                  {glitterParticles.map((p) => (
+                    <span
+                      key={p.id}
+                      className="absolute animate-float-soft motion-reduce:animate-none"
+                      style={{
+                        left: `${p.x}%`,
+                        top: `${p.y}%`,
+                        animationDuration: `${p.floatDurS}s`,
+                        animationDelay: `${p.floatDelayS}s`,
+                      }}
+                    >
+                      <span
+                        className="animate-glitter"
+                        style={{
+                          fontSize: `${p.sizePx}px`,
+                          opacity: p.opacity,
+                          color: `var(${p.colorVar})`,
+                          animationDelay: `${p.twinkleDelayS}s`,
+                          ['--glitter-dur' as any]: `${p.twinkleDurS}s`,
+                        }}
+                      >
+                        {p.glyph}
+                      </span>
+                    </span>
+                  ))}
+                </span>
+              )}
+
+              <Hover3DText
+                text={t('home.hero.title.line1', "Queen's")}
+                className="block font-[var(--font-display)] leading-none pr-28 md:pr-40 queens-glitter"
+              />
+
+              {/* Magic Queen: crown + sparkles */}
+              <span
+                className="pointer-events-none absolute -top-2 right-28 md:right-40 text-(--gold-champagne) text-[10px] md:text-[12px] animate-bling motion-reduce:animate-none"
+                style={{ animationDelay: '0.15s' }}
+                aria-hidden="true"
+              >
+                ✦
+              </span>
+
+              <span className="absolute right-0 bottom-0 text-[11px] md:text-xs lg:text-sm font-semibold tracking-[0.28em] uppercase bg-linear-to-r from-(--primary) via-(--gold-champagne) to-(--primary-hover) bg-clip-text text-transparent">
+                {t('home.hero.title.line2', 'Nails Hair & Skincare')}
+              </span>
+            </span>
           </h1>
 
           {/* Subheading */}
@@ -94,13 +188,17 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
             className="group relative inline-flex items-center justify-center gap-2 px-5 py-3 mb-4 rounded-full bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent outline-none shadow-lg hover:shadow-xl sm:gap-3 sm:px-6"
             aria-label={`Call ${businessInfo.phone}`}
           >
+            <span className="call-ring-blur motion-reduce:hidden" aria-hidden="true" />
+            <span className="call-ring-animated motion-reduce:hidden" aria-hidden="true" />
+            <span className="call-ring-hover motion-reduce:hidden" aria-hidden="true" />
+
             {/* Phone icon */}
-            <span className="flex items-center justify-center transition-transform duration-300 group-hover:rotate-12 shrink-0">
+            <span className="relative z-10 flex items-center justify-center transition-transform duration-300 group-hover:rotate-12 group-hover:animate-sway shrink-0">
               <Phone size={16} className="text-white shrink-0" />
             </span>
 
             {/* Phone number */}
-            <span className="font-semibold text-base leading-none whitespace-nowrap">{businessInfo.phone}</span>
+            <span className="relative z-10 font-semibold text-base leading-none whitespace-nowrap">{businessInfo.phone}</span>
           </a>
           <a
             href="https://maps.app.goo.gl/Bc8jystzMK7y5Ct49"

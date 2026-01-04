@@ -69,9 +69,14 @@ export function Hero() {
                   <Star className="fill-rose-500 text-rose-500 dark:fill-rose-400 dark:text-rose-400 transition-colors duration-500" size={32} />
                   <Sparkles className="absolute -top-1 -right-1 text-rose-400 dark:text-rose-300 transition-colors duration-500" size={16} />
                 </div>
-                <span className="text-2xl bg-gradient-to-r from-gray-900 to-rose-600 dark:from-white dark:to-rose-200 bg-clip-text text-transparent">
-                  Luxe Nails
-                </span>
+                <div className="leading-tight">
+                  <div className="text-3xl font-[var(--font-display)] font-normal bg-linear-to-r from-(--primary) via-(--gold-champagne) to-(--primary-hover) bg-clip-text text-transparent">
+                    Queen's
+                  </div>
+                  <div className="text-[11px] font-semibold tracking-[0.28em] uppercase text-gray-700 dark:text-gray-200">
+                    Nails Hair & Skincare
+                  </div>
+                </div>
               </div>
               <div className="hidden md:flex gap-8 text-gray-900 dark:text-white items-center transition-colors duration-500">
                 <a href="#services" className="hover:text-rose-500 dark:hover:text-rose-300 transition-all duration-300 relative group">

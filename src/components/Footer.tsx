@@ -82,8 +82,12 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
                 />
               </div>
               <div className="text-2xl leading-tight bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
-                <span className="block">Queen's Nails Hair</span>
-                <span className="block">& Skincare</span>
+                <span className="block font-[var(--font-display)] font-normal text-3xl leading-none">
+                  Queen's
+                </span>
+                <span className="block mt-1 text-xs font-semibold tracking-[0.22em] uppercase">
+                  Nails Hair & Skincare
+                </span>
               </div>
             </div>
             <p className="text-foreground mb-6 max-w-xs transition-colors duration-500">

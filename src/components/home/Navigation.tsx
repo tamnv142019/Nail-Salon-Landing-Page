@@ -145,13 +145,19 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
               <span className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-(--glass-logo-sheen) to-transparent opacity-30 mix-blend-overlay animate-[glass-shine_2.8s_ease-in-out_infinite] motion-reduce:animate-none" />
             </span>
             <div className="hidden sm:flex flex-col">
-              <div className={`relative text-xl md:text-2xl font-bold leading-tight transition-all duration-300 group-hover:-translate-y-0.5 group-hover:tracking-wide ${
-                isSolid || isDark
-                  ? 'text-foreground group-hover:text-brand-gold'
-                  : 'text-(--on-image-foreground) group-hover:text-(--on-image-foreground)'
-              }`}>
-                <span className="block">Queen's</span>
-                <span className="block">Nails Hair & Skincare</span>
+              <div className="relative leading-tight transition-all duration-300 group-hover:-translate-y-0.5">
+                <div className="relative inline-block leading-none">
+                  <span className="block font-[var(--font-display)] font-normal text-4xl md:text-5xl leading-none pr-20 queens-glitter">
+                    Queen's
+                  </span>
+                  <span
+                    className={`absolute right-0 bottom-0 text-[10px] md:text-[11px] font-semibold tracking-[0.28em] uppercase bg-clip-text text-transparent bg-linear-to-r from-(--primary) via-(--gold-champagne) to-(--primary-hover) ${
+                      isSolid || isDark ? '' : 'opacity-95'
+                    }`}
+                  >
+                    Nails Hair & Skincare
+                  </span>
+                </div>
                 <span className="pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-transparent via-brand-gold/70 to-transparent transition-transform duration-300 group-hover:scale-x-100" />
               </div>
               <span className={`text-[11px] md:text-xs font-medium tracking-wide ${
