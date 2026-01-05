@@ -65,7 +65,7 @@ export function TermsOfServiceModal({ isOpen, onClose }: TermsOfServiceModalProp
               </h3>
               <p className="leading-relaxed">
                 {t('terms.introduction.content', 
-                  'By accessing or using Queen\'s Nails Hair & Skincare\'s website and services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services. These terms apply to all visitors, users, and others who access or use our services.'
+                  'By accessing or using Queen\'s Nails Hair and Skincare\'s website and services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services. These terms apply to all visitors, users, and others who access or use our services.'
                 )}
               </p>
             </section>
@@ -77,7 +77,7 @@ export function TermsOfServiceModal({ isOpen, onClose }: TermsOfServiceModalProp
               </h3>
               <p className="leading-relaxed mb-2">
                 {t('terms.services.content', 
-                  'Queen\'s Nails Hair & Skincare provides professional beauty and wellness services, including but not limited to:'
+                  'Queen\'s Nails Hair and Skincare provides professional beauty and wellness services, including but not limited to:'
                 )}
               </p>
               <ul className="list-disc pl-6 space-y-1">
@@ -183,7 +183,7 @@ export function TermsOfServiceModal({ isOpen, onClose }: TermsOfServiceModalProp
               </h3>
               <p className="leading-relaxed mb-2">
                 {t('terms.liability.content', 
-                  'While we strive to provide excellent services, Queen\'s Nails Hair & Skincare shall not be liable for:'
+                  'While we strive to provide excellent services, Queen\'s Nails Hair and Skincare shall not be liable for:'
                 )}
               </p>
               <ul className="list-disc pl-6 space-y-1">
@@ -202,7 +202,7 @@ export function TermsOfServiceModal({ isOpen, onClose }: TermsOfServiceModalProp
               </h3>
               <p className="leading-relaxed">
                 {t('terms.intellectual.content', 
-                  'All content on our website, including text, graphics, logos, images, and designs, is the property of Queen\'s Nails Hair & Skincare or its content suppliers and is protected by copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.'
+                  'All content on our website, including text, graphics, logos, images, and designs, is the property of Queen\'s Nails Hair and Skincare or its content suppliers and is protected by copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.'
                 )}
               </p>
             </section>
@@ -285,7 +285,7 @@ export function TermsOfServiceModal({ isOpen, onClose }: TermsOfServiceModalProp
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-1">
                 <p>
                   <strong className="inline-block transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
-                    Queen's Nails Hair & Skincare
+                    Queen's Nails Hair and Skincare
                   </strong>
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>

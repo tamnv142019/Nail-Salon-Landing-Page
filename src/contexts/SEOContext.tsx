@@ -27,7 +27,7 @@ interface SEOProviderProps {
 
 export function SEOProvider({ children }: SEOProviderProps) {
   const [metadata, setMetadata] = React.useState<SEOMetadata>({
-    title: "Queen's Nails Hair & Skincare - Best Nail Salon, Ocean Beach",
+    title: "Queen's Nails Hair and Skincare - Best Nail Salon, Ocean Beach",
     description:
       'Best nail salon in Ocean Beach, San Diego offering professional nail care, hair services, and skincare treatments. Book your appointment today!',
     keywords:

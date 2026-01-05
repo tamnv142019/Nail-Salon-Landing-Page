@@ -27,7 +27,7 @@ export function SEO({
 }: SEOProps) {
   const fullTitle = title.includes('Queen\'s Nails') 
     ? title 
-    : `${title} | Queen's Nails Hair & Skincare`;
+    : `${title} | Queen's Nails Hair and Skincare`;
 
   useEffect(() => {
     // Ensure document title is set (Next metadata can override on hydration)
@@ -92,7 +92,7 @@ export function SEO({
       <meta itemProp="name" content={fullTitle} />
       <meta itemProp="description" content={description} />
       <meta itemProp="image" content={ogImage} />
-      <meta property="og:site_name" content="Queen's Nails Hair & Skincare" />
+      <meta property="og:site_name" content="Queen's Nails Hair and Skincare" />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter */}

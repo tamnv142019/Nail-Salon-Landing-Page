@@ -34,8 +34,8 @@ export interface BusinessInfo {
 }
 
 export const businessInfo: BusinessInfo = {
-  name: "Queen's Nails Hair & Skincare - Best Nail Salon in Ocean Beach, San Diego",
-  description: "Experience luxury nail care and beauty at Queen’s Nails Hair & Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
+  name: "Queen's Nails Hair and Skincare - Best Nail Salon in Ocean Beach, San Diego",
+  description: "Experience luxury nail care and beauty at Queen’s Nails Hair and Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
   url: 'https://queensobnail.com',
   email: 'support@queensobnail.com',
   phone: '(619) 224-5050',
@@ -92,9 +92,9 @@ export interface PageSEOConfig {
 
 export const pageConfigs: Record<string, PageSEOConfig> = {
   home: {
-    title: "Best Nail Salon in Ocean Beach, San Diego — Queen's Nails Hair & Skincare",
+    title: "Best Nail Salon in Ocean Beach, San Diego — Queen's Nails Hair and Skincare",
     description:
-      "Experience luxury nail care and beauty at Queen’s Nails Hair & Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
+      "Experience luxury nail care and beauty at Queen’s Nails Hair and Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
     keywords: [
       'best nail salon',
       'top nail salon',
@@ -112,7 +112,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
   },
   services: {
     title:
-      "Our Services - Queen's Nails Hair & Skincare | Nail Salon San Diego",
+      "Our Services - Queen's Nails Hair and Skincare | Nail Salon San Diego",
     description:
       'Explore our full range of professional services including manicures, pedicures, hair styling, and skincare treatments at our San Diego salon.',
     keywords: [
@@ -130,7 +130,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
     ogType: 'website',
   },
   about: {
-    title: "About Queen's Nails Hair & Skincare | San Diego Nail Salon",
+    title: "About Queen's Nails Hair and Skincare | San Diego Nail Salon",
     description:
       'Learn about our salon, our mission, and our team of experienced professionals dedicated to providing exceptional beauty services.',
     keywords: [
@@ -145,7 +145,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
   },
   contact: {
     title:
-      "Contact Queen's Nails Hair & Skincare | San Diego Nail Salon",
+      "Contact Queen's Nails Hair and Skincare | San Diego Nail Salon",
     description:
       'Get in touch with us for appointments, inquiries, or special requests. Visit our San Diego location or call us today.',
     keywords: [
@@ -159,7 +159,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
     ogType: 'business.business',
   },
   book: {
-    title: "Book Appointment - Queen's Nails Hair & Skincare",
+    title: "Book Appointment - Queen's Nails Hair and Skincare",
     description: 'Schedule your appointment online for manicures, pedicures, hair, or skincare services at our Ocean Beach salon.',
     keywords: ['book appointment', 'schedule appointment', 'book nails', 'book salon', 'nail appointment', 'san diego salon'],
     canonical: 'https://queensobnail.com/book',
@@ -463,21 +463,21 @@ export function generateWebSiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${businessInfo.url}/#website`,
-    name: 'Queen\'s Nails Hair & Skincare',
+    name: 'Queen\'s Nails Hair and Skincare',
     alternateName: 'Queens OB Nail',
     url: businessInfo.url,
     description: businessInfo.description,
     publisher: {
       '@type': 'BeautySalon',
       '@id': `${businessInfo.url}/#organization`,
-      name: 'Queen\'s Nails Hair & Skincare',
+      name: 'Queen\'s Nails Hair and Skincare',
       url: businessInfo.url,
       logo: {
         '@type': 'ImageObject',
         '@id': `${businessInfo.url}/#logo`,
         url: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
         contentUrl: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
-        caption: 'Queen\'s Nails Hair & Skincare Logo',
+        caption: 'Queen\'s Nails Hair and Skincare Logo',
         inLanguage: 'en-US',
         width: 512,
         height: 512,

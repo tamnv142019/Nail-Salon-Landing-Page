@@ -115,7 +115,7 @@ export function StoryHero({ onNavigateToServices }: { onNavigateToServices?: () 
                   </div>
                 </div>
                 <span className="text-xs md:text-sm font-semibold tracking-[0.28em] uppercase text-gray-900 dark:text-gray-100">
-                  Nails Hair & Skincare
+                  Nails Hair and Skincare
                 </span>
               </div>
               <div className="hidden md:flex gap-8 text-gray-900 dark:text-white items-center transition-colors duration-500">

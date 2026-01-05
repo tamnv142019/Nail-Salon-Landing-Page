@@ -74,7 +74,7 @@ export function AboutSection() {
               {t('home.about.title', 'About Us')}
             </h2>
             <p className="text-lg text-foreground mb-6 leading-relaxed">
-              {t('home.about.text1', 'Since 2015, Queen\'s Nails Hair & Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.')}
+              {t('home.about.text1', 'Since 2015, Queen\'s Nails Hair and Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.')}
             </p>
             <p className="text-lg text-foreground mb-8 leading-relaxed">
               {t('home.about.text2', 'Our team of experienced professionals is dedicated to providing you with the highest quality treatments using premium products and the latest techniques. From classic manicures to intricate nail art, we ensure every visit leaves you feeling pampered and beautiful.')}

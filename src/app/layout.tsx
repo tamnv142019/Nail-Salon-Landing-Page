@@ -27,12 +27,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://queensobnail.com'),
   
   // applicationName: Tên doanh nghiệp xuất hiện trong Google Search
-  applicationName: "Queen's Nails Hair & Skincare",
+  applicationName: "Queen's Nails Hair and Skincare",
   
   // Title & Description
   title: {
-    default: "Queen's Nails Hair & Skincare | Ocean Beach Nail Salon", // 58 characters (optimal for SEO)
-    template: "%s | Queen's Nails Hair & Skincare",
+    default: "Queen's Nails Hair and Skincare | Ocean Beach Nail Salon", // 58 characters (optimal for SEO)
+    template: "%s | Queen's Nails Hair and Skincare",
   },
   description:
     "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services. Professional beauty salon serving San Diego with premium nail care and skincare treatments.",
@@ -49,11 +49,11 @@ export const metadata: Metadata = {
   ],
   
   // Authors
-  authors: [{ name: "Queen's Nails Hair & Skincare" }],
+  authors: [{ name: "Queen's Nails Hair and Skincare" }],
   
   // Creator
-  creator: "Queen's Nails Hair & Skincare",
-  publisher: "Queen's Nails Hair & Skincare",
+  creator: "Queen's Nails Hair and Skincare",
+  publisher: "Queen's Nails Hair and Skincare",
   
   // Favicon - Cấu hình đầy đủ cho Google Search
   icons: {
@@ -84,8 +84,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: businessInfo.url,
-    siteName: "Queen's Nails Hair & Skincare",
-    title: "Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach",
+    siteName: "Queen's Nails Hair and Skincare",
+    title: "Queen's Nails Hair and Skincare | Best Nail Salon in Ocean Beach",
     description:
       "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
     images: [
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
           url: '/images/logos/logo.png', // Sẽ tự động thêm metadataBase
         width: 1200,
         height: 630,
-        alt: "Queen's Nails Hair & Skincare Logo",
+        alt: "Queen's Nails Hair and Skincare Logo",
       },
     ],
   },
@@ -101,7 +101,7 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: 'summary_large_image',
-    title: "Queen's Nails Hair & Skincare",
+    title: "Queen's Nails Hair and Skincare",
     description:
       "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
       images: ['/images/logos/logo.png'],

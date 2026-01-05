@@ -11,8 +11,8 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
   const { t } = useLanguage();
 
   const schema = generateWebPageSchema({
-    name: "Privacy Policy - Queen's Nails Hair & Skincare",
-    description: "Privacy policy for Queen's Nails Hair & Skincare. Learn how we protect and handle your personal information.",
+    name: "Privacy Policy - Queen's Nails Hair and Skincare",
+    description: "Privacy policy for Queen's Nails Hair and Skincare. Learn how we protect and handle your personal information.",
     url: "https://queensobnail.com/privacy"
   });
 
@@ -20,7 +20,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
     <>
       <SEO
         title="Privacy Policy"
-        description="Privacy policy for Queen's Nails Hair & Skincare. Learn how we protect and handle your personal information."
+        description="Privacy policy for Queen's Nails Hair and Skincare. Learn how we protect and handle your personal information."
         canonical="https://queensobnail.com/privacy"
         noindex={true}
         schema={schema}
@@ -48,7 +48,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
               </h2>
               <p className="leading-relaxed text-lg">
                 {t('privacy.introduction.content', 
-                  'Welcome to Queen\'s Nails Hair & Skincare ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.'
+                  'Welcome to Queen\'s Nails Hair and Skincare ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.'
                 )}
               </p>
             </section>
@@ -219,7 +219,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
               </p>
               <div className="bg-secondary dark:bg-secondary p-6 rounded-lg space-y-2 transition-colors duration-500 border border-border">
                 <p className="inline-block font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
-                  Queen's Nails Hair & Skincare
+                  Queen's Nails Hair and Skincare
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>

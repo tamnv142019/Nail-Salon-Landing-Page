@@ -11,8 +11,8 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
   const { t } = useLanguage();
 
   const schema = generateWebPageSchema({
-    name: "Terms of Service - Queen's Nails Hair & Skincare",
-    description: "Terms of service for Queen's Nails Hair & Skincare. Review our service terms, policies, and guidelines.",
+    name: "Terms of Service - Queen's Nails Hair and Skincare",
+    description: "Terms of service for Queen's Nails Hair and Skincare. Review our service terms, policies, and guidelines.",
     url: "https://queensobnail.com/terms"
   });
 
@@ -20,7 +20,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
     <>
       <SEO
         title="Terms of Service"
-        description="Terms of service for Queen's Nails Hair & Skincare. Review our service terms, policies, and guidelines."
+        description="Terms of service for Queen's Nails Hair and Skincare. Review our service terms, policies, and guidelines."
         canonical="https://queensobnail.com/terms"
         noindex={true}
         schema={schema}
@@ -48,7 +48,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
               </h2>
               <p className="leading-relaxed text-lg">
                 {t('terms.introduction.content', 
-                  'By accessing or using Queen\'s Nails Hair & Skincare\'s website and services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services. These terms apply to all visitors, users, and others who access or use our services.'
+                  'By accessing or using Queen\'s Nails Hair and Skincare\'s website and services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services. These terms apply to all visitors, users, and others who access or use our services.'
                 )}
               </p>
             </section>
@@ -60,7 +60,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
               </h2>
               <p className="leading-relaxed mb-2">
                 {t('terms.services.content', 
-                  'Queen\'s Nails Hair & Skincare provides professional beauty and wellness services, including but not limited to:'
+                  'Queen\'s Nails Hair and Skincare provides professional beauty and wellness services, including but not limited to:'
                 )}
               </p>
               <ul className="list-disc pl-6 space-y-2 text-lg mb-4">
@@ -166,7 +166,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
               </h2>
               <p className="leading-relaxed mb-2">
                 {t('terms.liability.content', 
-                  'While we strive to provide excellent services, Queen\'s Nails Hair & Skincare shall not be liable for:'
+                  'While we strive to provide excellent services, Queen\'s Nails Hair and Skincare shall not be liable for:'
                 )}
               </p>
               <ul className="list-disc pl-6 space-y-2 text-lg">
@@ -185,7 +185,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
               </h2>
               <p className="leading-relaxed">
                 {t('terms.intellectual.content', 
-                  'All content on our website, including text, graphics, logos, images, and designs, is the property of Queen\'s Nails Hair & Skincare or its content suppliers and is protected by copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.'
+                  'All content on our website, including text, graphics, logos, images, and designs, is the property of Queen\'s Nails Hair and Skincare or its content suppliers and is protected by copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.'
                 )}
               </p>
             </section>
@@ -267,7 +267,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
               </p>
               <div className="bg-secondary dark:bg-secondary p-6 rounded-lg space-y-2 transition-colors duration-500 border border-border">
                 <p className="inline-block font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
-                  Queen's Nails Hair & Skincare
+                  Queen's Nails Hair and Skincare
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>

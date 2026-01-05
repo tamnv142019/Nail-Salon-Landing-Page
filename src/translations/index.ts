@@ -23,7 +23,7 @@ export const translations = {
       },
       about: {
         title: 'About Us',
-        text1: 'Since 2015, Queen\'s Nails Hair & Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.',
+        text1: 'Since 2015, Queen\'s Nails Hair and Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.',
         text2: 'Our team of experienced professionals is dedicated to providing you with the highest quality treatments using premium products and the latest techniques. From classic manicures to intricate nail art, we ensure every visit leaves you feeling pampered and beautiful.',
       },
       services: {
@@ -219,7 +219,7 @@ export const translations = {
 
     // Footer
     footer: {
-      company: 'Queen\'s Nails Hair & Skincare',
+      company: 'Queen\'s Nails Hair and Skincare',
       description: 'Experience luxury nail care with premium services and professional artistry.',
       quickLinks: 'Quick Links',
       aboutUs: 'About Us',
@@ -234,7 +234,7 @@ export const translations = {
       subscribeSuccess: 'Subscribed successfully!',
       privacyPolicy: 'Privacy Policy',
       termsOfService: 'Terms of Service',
-      copyright: '© 2024 Queen\'s Nails Hair & Skincare. All rights reserved.',
+      copyright: '© 2024 Queen\'s Nails Hair and Skincare. All rights reserved.',
       monFri: 'Mon - Fri: 9AM - 7PM',
       saturday: 'Saturday: 9AM - 6PM',
       sunday: 'Sunday: 10AM - 5PM',
@@ -248,7 +248,7 @@ export const translations = {
       close: 'Close',
       introduction: {
         title: '1. Introduction',
-        content: 'Welcome to Queen\'s Nails Hair & Skincare ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.',
+        content: 'Welcome to Queen\'s Nails Hair and Skincare ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.',
       },
       collection: {
         title: '2. Information We Collect',
@@ -327,11 +327,11 @@ export const translations = {
       close: 'Close',
       introduction: {
         title: '1. Agreement to Terms',
-        content: 'By accessing or using Queen\'s Nails Hair & Skincare\'s website and services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services. These terms apply to all visitors, users, and others who access or use our services.',
+        content: 'By accessing or using Queen\'s Nails Hair and Skincare\'s website and services, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, you may not access our services. These terms apply to all visitors, users, and others who access or use our services.',
       },
       services: {
         title: '2. Services Description',
-        content: 'Queen\'s Nails Hair & Skincare provides professional beauty and wellness services, including but not limited to:',
+        content: 'Queen\'s Nails Hair and Skincare provides professional beauty and wellness services, including but not limited to:',
         item1: 'Manicure and pedicure services',
         item2: 'Nail art and design',
         item3: 'Hair care and styling',
@@ -371,7 +371,7 @@ export const translations = {
       },
       liability: {
         title: '6. Limitation of Liability',
-        content: 'While we strive to provide excellent services, Queen\'s Nails Hair & Skincare shall not be liable for:',
+        content: 'While we strive to provide excellent services, Queen\'s Nails Hair and Skincare shall not be liable for:',
         item1: 'Allergic reactions to products when proper disclosure was not made',
         item2: 'Damage to nails or skin resulting from pre-existing conditions',
         item3: 'Dissatisfaction with color or design choices made by the client',
@@ -380,7 +380,7 @@ export const translations = {
       },
       intellectual: {
         title: '7. Intellectual Property',
-        content: 'All content on our website, including text, graphics, logos, images, and designs, is the property of Queen\'s Nails Hair & Skincare or its content suppliers and is protected by copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.',
+        content: 'All content on our website, including text, graphics, logos, images, and designs, is the property of Queen\'s Nails Hair and Skincare or its content suppliers and is protected by copyright and trademark laws. You may not reproduce, distribute, or use any content without our written permission.',
       },
       conduct: {
         title: '8. User Conduct',
@@ -1022,7 +1022,7 @@ export const translations = {
       },
       about: {
         title: 'Về Chúng Tôi',
-        text1: 'Từ năm 2015, Queen\'s Nails Hair & Skincare đã trở thành địa điểm ưa thích cho dịch vụ chăm sóc móng và làm đẹp cao cấp tại San Diego. Tọa lạc tại trung tâm Ocean Beach, chúng tôi tự hào mang đến dịch vụ đặc biệt trong môi trường thư giãn và sang trọng.',
+        text1: 'Từ năm 2015, Queen\'s Nails Hair and Skincare đã trở thành địa điểm ưa thích cho dịch vụ chăm sóc móng và làm đẹp cao cấp tại San Diego. Tọa lạc tại trung tâm Ocean Beach, chúng tôi tự hào mang đến dịch vụ đặc biệt trong môi trường thư giãn và sang trọng.',
         text2: 'Đội ngũ chuyên gia giàu kinh nghiệm của chúng tôi cam kết cung cấp dịch vụ chất lượng cao nhất với sản phẩm cao cấp và kỹ thuật tiên tiến nhất. Từ làm móng cổ điển đến nghệ thuật móng phức tạp, chúng tôi đảm bảo mỗi lần ghé thăm đều khiến bạn cảm thấy được chăm sóc và xinh đẹp.',
       },
       services: {
@@ -1218,7 +1218,7 @@ export const translations = {
 
     // Footer
     footer: {
-      company: 'Queen\'s Nails Hair & Skincare',
+      company: 'Queen\'s Nails Hair and Skincare',
       description: 'Trải nghiệm chăm sóc móng cao cấp với dịch vụ cao cấp và nghệ thuật chuyên nghiệp.',
       quickLinks: 'Liên Kết Nhanh',
       aboutUs: 'Giới Thiệu',
@@ -1233,7 +1233,7 @@ export const translations = {
       subscribeSuccess: 'Đăng ký thành công!',
       privacyPolicy: 'Chính Sách Bảo Mật',
       termsOfService: 'Điều Khoản Dịch Vụ',
-      copyright: '© 2024 Queen\'s Nails Hair & Skincare. Bảo lưu mọi quyền.',
+      copyright: '© 2024 Queen\'s Nails Hair and Skincare. Bảo lưu mọi quyền.',
       monFri: 'Thứ Hai - Thứ Sáu: 9 giờ sáng - 7 giờ tối',
       saturday: 'Thứ Bảy: 9 giờ sáng - 6 giờ tối',
       sunday: 'Chủ Nhật: 10 giờ sáng - 5 giờ chiều',
@@ -1244,7 +1244,7 @@ export const translations = {
       effectiveDate: 'Ngày Hiệu Lực',
       date: '12 Tháng 12, 2025',
       close: 'Đóng',
-      introduction: { title: '1. Giới Thiệu', content: 'Chào mừng đến với Queen\'s Nails Hair & Skincare. Chúng tôi cam kết bảo vệ thông tin cá nhân và quyền riêng tư của bạn. Chính sách bảo mật này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn.' },
+      introduction: { title: '1. Giới Thiệu', content: 'Chào mừng đến với Queen\'s Nails Hair and Skincare. Chúng tôi cam kết bảo vệ thông tin cá nhân và quyền riêng tư của bạn. Chính sách bảo mật này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn.' },
       collection: { title: '2. Thông Tin Chúng Tôi Thu Thập', personal: { title: 'Thông Tin Cá Nhân', content: 'Chúng tôi thu thập thông tin cá nhân mà bạn tự nguyện cung cấp khi bạn:', item1: 'Đặt lịch hẹn', item2: 'Đăng ký nhận bản tin', item3: 'Liên hệ để hỏi đáp', item4: 'Tạo tài khoản', types: 'Điều này có thể bao gồm: tên, địa chỉ email, số điện thoại, thông tin thanh toán và sở thích dịch vụ.' }, automatic: { title: 'Thông Tin Tự Động Thu Thập', content: 'Khi bạn truy cập trang web của chúng tôi, chúng tôi tự động thu thập một số thông tin về thiết bị của bạn, bao gồm địa chỉ IP, loại trình duyệt, hệ điều hành, thời gian truy cập và các trang đã xem.' } },
       usage: { title: '3. Cách Chúng Tôi Sử Dụng Thông Tin', content: 'Chúng tôi sử dụng thông tin của bạn để:', item1: 'Xử lý và quản lý lịch hẹn', item2: 'Gửi xác nhận, nhắc nhở và cập nhật dịch vụ', item3: 'Xử lý thanh toán và ngăn chặn gian lận', item4: 'Trả lời thắc mắc và hỗ trợ khách hàng', item5: 'Gửi email khuyến mãi và ưu đãi đặc biệt', item6: 'Cải thiện trang web và dịch vụ', item7: 'Tuân thủ nghĩa vụ pháp lý' },
       sharing: { title: '4. Chia Sẻ Thông Tin', content: 'Chúng tôi không bán thông tin cá nhân của bạn. Chúng tôi có thể chia sẻ thông tin với:', item1: 'Nhà cung cấp dịch vụ hỗ trợ vận hành', item2: 'Cơ quan thực thi pháp luật khi được yêu cầu', item3: 'Đối tác kinh doanh với sự đồng ý của bạn' },
@@ -1262,13 +1262,13 @@ export const translations = {
       effectiveDate: 'Ngày Hiệu Lực',
       date: '12 Tháng 12, 2025',
       close: 'Đóng',
-      introduction: { title: '1. Đồng Ý Với Điều Khoản', content: 'Bằng cách truy cập hoặc sử dụng trang web và dịch vụ của Queen\'s Nails Hair & Skincare, bạn đồng ý bị ràng buộc bởi các Điều khoản dịch vụ này.' },
-      services: { title: '2. Mô Tả Dịch Vụ', content: 'Queen\'s Nails Hair & Skincare cung cấp các dịch vụ làm đẹp chuyên nghiệp bao gồm:', item1: 'Dịch vụ làm móng tay và chân', item2: 'Nghệ thuật và thiết kế móng', item3: 'Chăm sóc và tạo kiểu tóc', item4: 'Điều trị chăm sóc da', item5: 'Dịch vụ spa và thư giãn', disclaimer: 'Dịch vụ và giá có thể thay đổi.' },
+      introduction: { title: '1. Đồng Ý Với Điều Khoản', content: 'Bằng cách truy cập hoặc sử dụng trang web và dịch vụ của Queen\'s Nails Hair and Skincare, bạn đồng ý bị ràng buộc bởi các Điều khoản dịch vụ này.' },
+      services: { title: '2. Mô Tả Dịch Vụ', content: 'Queen\'s Nails Hair and Skincare cung cấp các dịch vụ làm đẹp chuyên nghiệp bao gồm:', item1: 'Dịch vụ làm móng tay và chân', item2: 'Nghệ thuật và thiết kế móng', item3: 'Chăm sóc và tạo kiểu tóc', item4: 'Điều trị chăm sóc da', item5: 'Dịch vụ spa và thư giãn', disclaimer: 'Dịch vụ và giá có thể thay đổi.' },
       appointments: { title: '3. Đặt Lịch Hẹn', booking: { title: 'Đặt Lịch', content: 'Lịch hẹn có thể được đặt qua trang web, điện thoại hoặc trực tiếp.' }, cancellation: { title: 'Chính Sách Hủy', content: 'Chúng tôi yêu cầu thông báo trước ít nhất 24 giờ để hủy hoặc đổi lịch.' }, lateness: { title: 'Đến Muộn', content: 'Nếu bạn đến muộn hơn 15 phút, chúng tôi có thể cần đổi lịch hẹn của bạn.' } },
       payment: { title: '4. Điều Khoản Thanh Toán', content: 'Điều khoản và điều kiện thanh toán:', item1: 'Thanh toán khi sử dụng dịch vụ', item2: 'Chấp nhận tiền mặt, thẻ tín dụng và thẻ ghi nợ', item3: 'Tất cả giá bằng USD và có thuế', item4: 'Tiền boa không bao gồm trong giá dịch vụ', item5: 'Ưu đãi khuyến mãi không thể kết hợp' },
       health: { title: '5. Sức Khỏe và An Toàn', disclosure: 'Bạn phải tiết lộ bất kỳ tình trạng y tế, dị ứng hoặc nhạy cảm nào có thể ảnh hưởng đến dịch vụ.', sanitation: 'Chúng tôi duy trì các quy trình vệ sinh và khử trùng nghiêm ngặt.', refusal: 'Chúng tôi có quyền từ chối dịch vụ nếu chúng tôi tin rằng việc cung cấp dịch vụ có thể gây nguy hiểm cho sức khỏe.' },
-      liability: { title: '6. Giới Hạn Trách Nhiệm', content: 'Queen\'s Nails Hair & Skincare sẽ không chịu trách nhiệm về:', item1: 'Phản ứng dị ứng với sản phẩm', item2: 'Tổn thương móng hoặc da do tình trạng có sẵn', item3: 'Không hài lòng với lựa chọn màu sắc hoặc thiết kế', item4: 'Mất hoặc hư hại đồ dùng cá nhân', item5: 'Thiệt hại gián tiếp hoặc hậu quả' },
-      intellectual: { title: '7. Sở Hữu Trí Tuệ', content: 'Tất cả nội dung trên trang web của chúng tôi là tài sản của Queen\'s Nails Hair & Skincare và được bảo vệ bởi luật bản quyền và thương hiệu.' },
+      liability: { title: '6. Giới Hạn Trách Nhiệm', content: 'Queen\'s Nails Hair and Skincare sẽ không chịu trách nhiệm về:', item1: 'Phản ứng dị ứng với sản phẩm', item2: 'Tổn thương móng hoặc da do tình trạng có sẵn', item3: 'Không hài lòng với lựa chọn màu sắc hoặc thiết kế', item4: 'Mất hoặc hư hại đồ dùng cá nhân', item5: 'Thiệt hại gián tiếp hoặc hậu quả' },
+      intellectual: { title: '7. Sở Hữu Trí Tuệ', content: 'Tất cả nội dung trên trang web của chúng tôi là tài sản của Queen\'s Nails Hair and Skincare và được bảo vệ bởi luật bản quyền và thương hiệu.' },
       conduct: { title: '8. Hành Vi Người Dùng', content: 'Khi sử dụng dịch vụ của chúng tôi, bạn đồng ý không:', item1: 'Tham gia hành vi phá hoại, lạm dụng hoặc quấy rối', item2: 'Làm hư hại hoặc phá hoại tài sản', item3: 'Sử dụng dịch vụ cho mục đích bất hợp pháp', item4: 'Can thiệp vào việc khách hàng khác tận hưởng dịch vụ', item5: 'Ghi âm hoặc chụp ảnh nhân viên hoặc khách hàng khác' },
       privacy: { title: '9. Quyền Riêng Tư', content: 'Việc bạn sử dụng dịch vụ của chúng tôi cũng được điều chỉnh bởi Chính sách bảo mật của chúng tôi.' },
       modifications: { title: '10. Sửa Đổi Điều Khoản', content: 'Chúng tôi có quyền sửa đổi các Điều khoản dịch vụ này bất cứ lúc nào.' },
@@ -1386,7 +1386,7 @@ export const translations = {
       },
       about: {
         title: 'À Propos de Nous',
-        text1: 'Depuis 2015, Queen\'s Nails Hair & Skincare est la destination de choix à San Diego pour les soins des ongles de luxe et les services de beauté. Situé au cœur d\'Ocean Beach, nous sommes fiers d\'offrir un service exceptionnel dans un environnement relaxant et haut de gamme.',
+        text1: 'Depuis 2015, Queen\'s Nails Hair and Skincare est la destination de choix à San Diego pour les soins des ongles de luxe et les services de beauté. Situé au cœur d\'Ocean Beach, nous sommes fiers d\'offrir un service exceptionnel dans un environnement relaxant et haut de gamme.',
         text2: 'Notre équipe de professionnels expérimentés se consacre à vous fournir des traitements de la plus haute qualité en utilisant des produits premium et les dernières techniques. Des manucures classiques aux nail art complexes, nous veillons à ce que chaque visite vous laisse vous sentir choyé et belle.',
       },
       services: {
@@ -1582,7 +1582,7 @@ export const translations = {
 
     // Footer
     footer: {
-      company: 'Queen\'s Nails Hair & Skincare',
+      company: 'Queen\'s Nails Hair and Skincare',
       description: 'Découvrez des soins des ongles de luxe avec des services premium et un art professionnel.',
       quickLinks: 'Liens Rapides',
       aboutUs: 'À Propos',
@@ -1597,7 +1597,7 @@ export const translations = {
       subscribeSuccess: 'Abonné avec succès!',
       privacyPolicy: 'Politique de Confidentialité',
       termsOfService: 'Conditions d\'Utilisation',
-      copyright: '© 2024 Queen\'s Nails Hair & Skincare. Tous droits réservés.',
+      copyright: '© 2024 Queen\'s Nails Hair and Skincare. Tous droits réservés.',
       monFri: 'Lun - Ven: 9h - 19h',
       saturday: 'Samedi: 9h - 18h',
       sunday: 'Dimanche: 10h - 17h',
@@ -1608,7 +1608,7 @@ export const translations = {
       effectiveDate: 'Date d\'Effet',
       date: '12 Décembre 2025',
       close: 'Fermer',
-      introduction: { title: '1. Introduction', content: 'Bienvenue chez Queen\'s Nails Hair & Skincare. Nous nous engageons à protéger vos informations personnelles et votre droit à la vie privée.' },
+      introduction: { title: '1. Introduction', content: 'Bienvenue chez Queen\'s Nails Hair and Skincare. Nous nous engageons à protéger vos informations personnelles et votre droit à la vie privée.' },
       collection: { title: '2. Informations Collectées', personal: { title: 'Informations Personnelles', content: 'Nous collectons les informations personnelles que vous nous fournissez volontairement lorsque vous:', item1: 'Prenez rendez-vous', item2: 'Vous abonnez à notre newsletter', item3: 'Nous contactez pour des renseignements', item4: 'Créez un compte', types: 'Cela peut inclure: nom, adresse e-mail, numéro de téléphone, informations de paiement et préférences de service.' }, automatic: { title: 'Informations Collectées Automatiquement', content: 'Lorsque vous visitez notre site Web, nous collectons automatiquement certaines informations sur votre appareil.' } },
       usage: { title: '3. Utilisation de Vos Informations', content: 'Nous utilisons vos informations pour:', item1: 'Traiter et gérer vos rendez-vous', item2: 'Envoyer des confirmations, rappels et mises à jour', item3: 'Traiter les paiements et prévenir la fraude', item4: 'Répondre à vos demandes', item5: 'Envoyer des e-mails promotionnels', item6: 'Améliorer nos services', item7: 'Respecter les obligations légales' },
       sharing: { title: '4. Partage d\'Informations', content: 'Nous ne vendons pas vos informations personnelles. Nous pouvons partager vos informations avec:', item1: 'Fournisseurs de services qui nous aident', item2: 'Autorités légales si requis', item3: 'Partenaires commerciaux avec votre consentement' },
@@ -1626,13 +1626,13 @@ export const translations = {
       effectiveDate: 'Date d\'Effet',
       date: '12 Décembre 2025',
       close: 'Fermer',
-      introduction: { title: '1. Accord', content: 'En accédant ou en utilisant le site Web et les services de Queen\'s Nails Hair & Skincare, vous acceptez d\'être lié par ces conditions d\'utilisation.' },
-      services: { title: '2. Description des Services', content: 'Queen\'s Nails Hair & Skincare fournit des services de beauté professionnels, notamment:', item1: 'Services de manucure et pédicure', item2: 'Art et design des ongles', item3: 'Soins capillaires et coiffure', item4: 'Traitements de soins de la peau', item5: 'Services de spa et de relaxation', disclaimer: 'Les services et les prix sont sujets à changement.' },
+      introduction: { title: '1. Accord', content: 'En accédant ou en utilisant le site Web et les services de Queen\'s Nails Hair and Skincare, vous acceptez d\'être lié par ces conditions d\'utilisation.' },
+      services: { title: '2. Description des Services', content: 'Queen\'s Nails Hair and Skincare fournit des services de beauté professionnels, notamment:', item1: 'Services de manucure et pédicure', item2: 'Art et design des ongles', item3: 'Soins capillaires et coiffure', item4: 'Traitements de soins de la peau', item5: 'Services de spa et de relaxation', disclaimer: 'Les services et les prix sont sujets à changement.' },
       appointments: { title: '3. Rendez-vous', booking: { title: 'Réservation', content: 'Les rendez-vous peuvent être pris via notre site Web, par téléphone ou en personne.' }, cancellation: { title: 'Politique d\'Annulation', content: 'Nous exigeons un préavis d\'au moins 24 heures pour les annulations ou les reports.' }, lateness: { title: 'Retards', content: 'Si vous arrivez avec plus de 15 minutes de retard, nous devrons peut-être reprogrammer votre rendez-vous.' } },
       payment: { title: '4. Conditions de Paiement', content: 'Conditions de paiement:', item1: 'Le paiement est dû au moment du service', item2: 'Nous acceptons les espèces et les cartes', item3: 'Tous les prix sont en USD', item4: 'Le pourboire n\'est pas inclus', item5: 'Les offres promotionnelles ne peuvent être combinées' },
       health: { title: '5. Santé et Sécurité', disclosure: 'Vous devez divulguer toute condition médicale, allergie ou sensibilité.', sanitation: 'Nous maintenons des protocoles stricts d\'hygiène et de stérilisation.', refusal: 'Nous nous réservons le droit de refuser le service.' },
-      liability: { title: '6. Limitation de Responsabilité', content: 'Queen\'s Nails Hair & Skincare ne sera pas responsable de:', item1: 'Réactions allergiques aux produits', item2: 'Dommages aux ongles ou à la peau', item3: 'Insatisfaction quant aux choix de couleur', item4: 'Perte ou dommage aux effets personnels', item5: 'Dommages indirects ou consécutifs' },
-      intellectual: { title: '7. Propriété Intellectuelle', content: 'Tout le contenu de notre site Web est la propriété de Queen\'s Nails Hair & Skincare.' },
+      liability: { title: '6. Limitation de Responsabilité', content: 'Queen\'s Nails Hair and Skincare ne sera pas responsable de:', item1: 'Réactions allergiques aux produits', item2: 'Dommages aux ongles ou à la peau', item3: 'Insatisfaction quant aux choix de couleur', item4: 'Perte ou dommage aux effets personnels', item5: 'Dommages indirects ou consécutifs' },
+      intellectual: { title: '7. Propriété Intellectuelle', content: 'Tout le contenu de notre site Web est la propriété de Queen\'s Nails Hair and Skincare.' },
       conduct: { title: '8. Conduite des Utilisateurs', content: 'Lors de l\'utilisation de nos services, vous acceptez de ne pas:', item1: 'Adopter un comportement perturbateur ou abusif', item2: 'Endommager notre propriété', item3: 'Utiliser nos services à des fins illégales', item4: 'Interférer avec les autres clients', item5: 'Enregistrer ou photographier sans consentement' },
       privacy: { title: '9. Confidentialité', content: 'Votre utilisation de nos services est également régie par notre politique de confidentialité.' },
       modifications: { title: '10. Modifications', content: 'Nous nous réservons le droit de modifier ces conditions d\'utilisation à tout moment.' },
@@ -1750,7 +1750,7 @@ export const translations = {
       },
       about: {
         title: 'Sobre Nosotros',
-        text1: 'Desde 2015, Queen\'s Nails Hair & Skincare ha sido el destino principal de San Diego para cuidado de uñas de lujo y servicios de belleza. Ubicado en el corazón de Ocean Beach, nos enorgullecemos de brindar un servicio excepcional en un ambiente relajante y exclusivo.',
+        text1: 'Desde 2015, Queen\'s Nails Hair and Skincare ha sido el destino principal de San Diego para cuidado de uñas de lujo y servicios de belleza. Ubicado en el corazón de Ocean Beach, nos enorgullecemos de brindar un servicio excepcional en un ambiente relajante y exclusivo.',
         text2: 'Nuestro equipo de profesionales experimentados se dedica a brindarle tratamientos de la más alta calidad utilizando productos premium y las técnicas más recientes. Desde manicuras clásicas hasta arte de uñas intrincado, aseguramos que cada visita lo deje sintiéndose mimado y hermoso.',
       },
       services: {
@@ -1946,7 +1946,7 @@ export const translations = {
 
     // Footer
     footer: {
-      company: 'Queen\'s Nails Hair & Skincare',
+      company: 'Queen\'s Nails Hair and Skincare',
       description: 'Experimente el cuidado de uñas de lujo con servicios premium y arte profesional.',
       quickLinks: 'Enlaces Rápidos',
       aboutUs: 'Acerca de Nosotros',
@@ -1961,7 +1961,7 @@ export const translations = {
       subscribeSuccess: '¡Suscrito con éxito!',
       privacyPolicy: 'Política de Privacidad',
       termsOfService: 'Términos de Servicio',
-      copyright: '© 2024 Queen\'s Nails Hair & Skincare. Todos los derechos reservados.',
+      copyright: '© 2024 Queen\'s Nails Hair and Skincare. Todos los derechos reservados.',
       monFri: 'Lun - Vie: 9AM - 7PM',
       saturday: 'Sábado: 9AM - 6PM',
       sunday: 'Domingo: 10AM - 5PM',
@@ -1972,7 +1972,7 @@ export const translations = {
       effectiveDate: 'Fecha de Vigencia',
       date: '12 de Diciembre de 2025',
       close: 'Cerrar',
-      introduction: { title: '1. Introducción', content: 'Bienvenido a Queen\'s Nails Hair & Skincare. Nos comprometemos a proteger su información personal y su derecho a la privacidad.' },
+      introduction: { title: '1. Introducción', content: 'Bienvenido a Queen\'s Nails Hair and Skincare. Nos comprometemos a proteger su información personal y su derecho a la privacidad.' },
       collection: { title: '2. Información que Recopilamos', personal: { title: 'Información Personal', content: 'Recopilamos información personal que usted nos proporciona voluntariamente cuando:', item1: 'Reserva una cita', item2: 'Se suscribe a nuestro boletín', item3: 'Nos contacta para consultas', item4: 'Crea una cuenta', types: 'Esto puede incluir: nombre, dirección de correo electrónico, número de teléfono, información de pago y preferencias de servicio.' }, automatic: { title: 'Información Recopilada Automáticamente', content: 'Cuando visita nuestro sitio web, recopilamos automáticamente cierta información sobre su dispositivo.' } },
       usage: { title: '3. Cómo Usamos Su Información', content: 'Usamos su información para:', item1: 'Procesar y administrar sus citas', item2: 'Enviar confirmaciones, recordatorios y actualizaciones', item3: 'Procesar pagos y prevenir fraudes', item4: 'Responder a sus consultas', item5: 'Enviar correos electrónicos promocionales', item6: 'Mejorar nuestros servicios', item7: 'Cumplir con obligaciones legales' },
       sharing: { title: '4. Compartir Información', content: 'No vendemos su información personal. Podemos compartir su información con:', item1: 'Proveedores de servicios que nos ayudan', item2: 'Autoridades legales si es requerido', item3: 'Socios comerciales con su consentimiento' },
@@ -1990,13 +1990,13 @@ export const translations = {
       effectiveDate: 'Fecha de Vigencia',
       date: '12 de Diciembre de 2025',
       close: 'Cerrar',
-      introduction: { title: '1. Acuerdo', content: 'Al acceder o usar el sitio web y los servicios de Queen\'s Nails Hair & Skincare, acepta estar sujeto a estos Términos de Servicio.' },
-      services: { title: '2. Descripción de Servicios', content: 'Queen\'s Nails Hair & Skincare proporciona servicios de belleza profesional, incluyendo:', item1: 'Servicios de manicura y pedicura', item2: 'Arte y diseño de uñas', item3: 'Cuidado y peinado del cabello', item4: 'Tratamientos de cuidado de la piel', item5: 'Servicios de spa y relajación', disclaimer: 'Los servicios y precios están sujetos a cambios.' },
+      introduction: { title: '1. Acuerdo', content: 'Al acceder o usar el sitio web y los servicios de Queen\'s Nails Hair and Skincare, acepta estar sujeto a estos Términos de Servicio.' },
+      services: { title: '2. Descripción de Servicios', content: 'Queen\'s Nails Hair and Skincare proporciona servicios de belleza profesional, incluyendo:', item1: 'Servicios de manicura y pedicura', item2: 'Arte y diseño de uñas', item3: 'Cuidado y peinado del cabello', item4: 'Tratamientos de cuidado de la piel', item5: 'Servicios de spa y relajación', disclaimer: 'Los servicios y precios están sujetos a cambios.' },
       appointments: { title: '3. Citas', booking: { title: 'Reserva', content: 'Las citas se pueden hacer a través de nuestro sitio web, teléfono o en persona.' }, cancellation: { title: 'Política de Cancelación', content: 'Requerimos al menos 24 horas de aviso para cancelaciones o reprogramaciones.' }, lateness: { title: 'Llegadas Tarde', content: 'Si llega más de 15 minutos tarde, es posible que necesitemos reprogramar su cita.' } },
       payment: { title: '4. Términos de Pago', content: 'Términos y condiciones de pago:', item1: 'El pago vence al momento del servicio', item2: 'Aceptamos efectivo y tarjetas', item3: 'Todos los precios están en USD', item4: 'La propina no está incluida', item5: 'Las ofertas promocionales no se pueden combinar' },
       health: { title: '5. Salud y Seguridad', disclosure: 'Debe divulgar cualquier condición médica, alergia o sensibilidad.', sanitation: 'Mantenemos protocolos estrictos de saneamiento y esterilización.', refusal: 'Nos reservamos el derecho de rechazar el servicio.' },
-      liability: { title: '6. Limitación de Responsabilidad', content: 'Queen\'s Nails Hair & Skincare no será responsable de:', item1: 'Reacciones alérgicas a productos', item2: 'Daño a uñas o piel', item3: 'Insatisfacción con elecciones de color', item4: 'Pérdida o daño a pertenencias personales', item5: 'Daños indirectos o consecuentes' },
-      intellectual: { title: '7. Propiedad Intelectual', content: 'Todo el contenido en nuestro sitio web es propiedad de Queen\'s Nails Hair & Skincare.' },
+      liability: { title: '6. Limitación de Responsabilidad', content: 'Queen\'s Nails Hair and Skincare no será responsable de:', item1: 'Reacciones alérgicas a productos', item2: 'Daño a uñas o piel', item3: 'Insatisfacción con elecciones de color', item4: 'Pérdida o daño a pertenencias personales', item5: 'Daños indirectos o consecuentes' },
+      intellectual: { title: '7. Propiedad Intelectual', content: 'Todo el contenido en nuestro sitio web es propiedad de Queen\'s Nails Hair and Skincare.' },
       conduct: { title: '8. Conducta del Usuario', content: 'Al usar nuestros servicios, acepta no:', item1: 'Participar en comportamiento disruptivo o abusivo', item2: 'Dañar nuestra propiedad', item3: 'Usar nuestros servicios para fines ilegales', item4: 'Interferir con otros clientes', item5: 'Grabar o fotografiar sin consentimiento' },
       privacy: { title: '9. Privacidad', content: 'Su uso de nuestros servicios también se rige por nuestra Política de Privacidad.' },
       modifications: { title: '10. Modificaciones', content: 'Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento.' },

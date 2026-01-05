@@ -74,7 +74,7 @@ export function Hero() {
                     Queen's
                   </div>
                   <div className="text-[11px] font-semibold tracking-[0.28em] uppercase text-gray-700 dark:text-gray-200">
-                    Nails Hair & Skincare
+                    Nails Hair and Skincare
                   </div>
                 </div>
               </div>

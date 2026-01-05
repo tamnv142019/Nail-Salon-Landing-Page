@@ -9,7 +9,7 @@ export function generateWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Queen\'s Nails Hair & Skincare',
+    name: 'Queen\'s Nails Hair and Skincare',
     url: 'https://queensobnail.com',
     // ... logo, publisher, search action
   };
@@ -25,7 +25,7 @@ export function generateWebSiteSchema() {
 // File: src/app/layout.tsx
 export const metadata: Metadata = {
   metadataBase: new URL('https://queensobnail.com'),
-  applicationName: "Queen's Nails Hair & Skincare",
+  applicationName: "Queen's Nails Hair and Skincare",
   title: { ... },
   description: "...",
   // ...
@@ -78,7 +78,7 @@ public/favicon/
 
 ```
 ┌─────────────────────────────────────────┐
-│ [🌸] Queen's Nails Hair & Skincare      │ ← Site name + Favicon
+│ [🌸] Queen's Nails Hair and Skincare      │ ← Site name + Favicon
 │ https://queensobnail.com                │
 │                                         │
 │ Best Nail Salon in Ocean Beach, San... │ ← Title

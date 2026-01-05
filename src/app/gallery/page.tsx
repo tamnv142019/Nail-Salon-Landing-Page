@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <SEO
-        title={"Gallery - Queen's Nails Hair & Skincare"}
+        title={"Gallery - Queen's Nails Hair and Skincare"}
         description={"Browse our gallery of nail art, manicures, pedicures and salon transformations in San Diego."}
         canonical={`${cfg.canonical.replace(/\/$/, '')}/gallery`}
         keywords={"nail gallery, nail art San Diego, manicure gallery, pedicure gallery"}

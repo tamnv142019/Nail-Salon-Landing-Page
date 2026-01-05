@@ -20,7 +20,7 @@ interface BusinessSchemaProps {
 
 export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
   const defaults = {
-    name: "Queen's Nails Hair & Skincare",
+    name: "Queen's Nails Hair and Skincare",
     description: "Top-rated nail salon in Ocean Beach, San Diego — top manicures, pedicures, gel nails, and custom nail art.",
     url: "https://queensobnail.com",
     telephone: "(619) 224-5050",
@@ -113,7 +113,7 @@ export function generateServiceSchema(service: ServiceSchemaProps) {
     "serviceType": service.name,
     "provider": {
       "@type": "BeautySalon",
-      "name": "Queen's Nails Hair & Skincare",
+      "name": "Queen's Nails Hair and Skincare",
       "telephone": "(619) 224-5050",
       "address": {
         "@type": "PostalAddress",
@@ -171,7 +171,7 @@ export function generateWebPageSchema(props: {
     "inLanguage": "en-US",
     "isPartOf": {
       "@type": "WebSite",
-      "name": "Queen's Nails Hair & Skincare",
+      "name": "Queen's Nails Hair and Skincare",
       "url": "https://queensobnail.com"
     }
   };

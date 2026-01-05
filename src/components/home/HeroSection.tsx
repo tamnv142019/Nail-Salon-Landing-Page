@@ -171,7 +171,7 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
               </span>
 
               <span className="absolute right-0 bottom-0 text-[11px] md:text-xs lg:text-sm font-semibold tracking-[0.28em] uppercase bg-linear-to-r from-(--primary) via-(--gold-champagne) to-(--primary-hover) bg-clip-text text-transparent">
-                {t('home.hero.title.line2', 'Nails Hair & Skincare')}
+                {t('home.hero.title.line2', 'Nails Hair and Skincare')}
               </span>
             </span>
           </h1>

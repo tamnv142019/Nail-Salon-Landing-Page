@@ -342,8 +342,8 @@ export function ArticleSchema({
   image,
   datePublished,
   dateModified,
-  author = "Queen's Nails Hair & Skincare",
-  publisher = "Queen's Nails Hair & Skincare",
+  author = "Queen's Nails Hair and Skincare",
+  publisher = "Queen's Nails Hair and Skincare",
 }: ArticleSchemaProps) {
   const schema = {
     '@context': 'https://schema.org',

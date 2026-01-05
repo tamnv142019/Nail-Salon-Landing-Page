@@ -141,7 +141,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             >
               <img
                 src="/images/logos/logo.png"
-                alt="Queen's Nails Hair & Skincare Logo"
+                alt="Queen's Nails Hair and Skincare Logo"
                 className="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <span className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-(--glass-logo-sheen) to-transparent opacity-30 mix-blend-overlay animate-[glass-shine_2.8s_ease-in-out_infinite] motion-reduce:animate-none" />
@@ -157,7 +157,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
                       isSolid || isDark ? '' : 'opacity-95'
                     }`}
                   >
-                    Nails Hair & Skincare
+                    Nails Hair and Skincare
                   </span>
                 </div>
                 <span className="pointer-events-none absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-transparent via-brand-gold/70 to-transparent transition-transform duration-300 group-hover:scale-x-100" />

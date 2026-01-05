@@ -149,7 +149,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Queen's Nails Hair & Skincare Location"
+              title="Queen's Nails Hair and Skincare Location"
             ></iframe>
           </motion.div>
         </div>

@@ -2,7 +2,7 @@
  * 🚀 QUICK START - Google Search SEO Setup
  * 
  * Cấu hình đã hoàn tất! Google sẽ hiển thị:
- * ✅ Site name: Queen's Nails Hair & Skincare
+ * ✅ Site name: Queen's Nails Hair and Skincare
  * ✅ Favicon trong search results
  * ✅ Rich snippets với structured data
  */
@@ -14,7 +14,7 @@
 /**
  * ✅ src/app/layout.tsx
  * - metadataBase: new URL('https://queensobnail.com')
- * - applicationName: "Queen's Nails Hair & Skincare"
+ * - applicationName: "Queen's Nails Hair and Skincare"
  * - WebSite Schema được thêm vào
  */
 
@@ -107,7 +107,7 @@
  * Kỳ vọng trong Google Search:
  * 
  * ┌─────────────────────────────────────────┐
- * │ [🌸] Queen's Nails Hair & Skincare      │ ← Site name + Favicon
+ * │ [🌸] Queen's Nails Hair and Skincare    │ ← Site name + Favicon
  * │ https://queensobnail.com                │
  * │                                         │
  * │ Best Nail Salon in Ocean Beach, San... │

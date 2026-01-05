@@ -28,7 +28,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     },
     publisher: {
       '@type': 'Organization',
-      name: "Queen's Nails Hair & Skincare",
+      name: "Queen's Nails Hair and Skincare",
       logo: {
         '@type': 'ImageObject',
         url: `${businessInfo.url}/images/logos/logo.png`,
@@ -47,7 +47,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   const schema = [
     generateWebPageSchema({
-      name: `${post.title} - Queen's Nails Hair & Skincare`,
+      name: `${post.title} - Queen's Nails Hair and Skincare`,
       description: post.description,
       url: canonical,
     }),

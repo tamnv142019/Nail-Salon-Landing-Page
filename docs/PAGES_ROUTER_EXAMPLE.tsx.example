@@ -10,7 +10,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 export default function Document() {
   // Business info
   const businessInfo = {
-    name: "Queen's Nails Hair & Skincare",
+    name: "Queen's Nails Hair and Skincare",
     url: 'https://queensobnail.com',
     phone: '(619) 224-5050',
     email: 'support@queensobnail.com',
@@ -36,7 +36,7 @@ export default function Document() {
     alternateName: 'Queens OB Nail',
     url: businessInfo.url,
     description:
-      'Experience luxury nail care and beauty at Queen\'s Nails Hair & Skincare in Ocean Beach',
+      'Experience luxury nail care and beauty at Queen\'s Nails Hair and Skincare in Ocean Beach',
     publisher: {
       '@type': 'BeautySalon',
       '@id': `${businessInfo.url}/#organization`,
@@ -47,7 +47,7 @@ export default function Document() {
         '@id': `${businessInfo.url}/#logo`,
         url: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
         contentUrl: `${businessInfo.url}/favicon/android-chrome-512x512.png`,
-        caption: 'Queen\'s Nails Hair & Skincare Logo',
+        caption: 'Queen\'s Nails Hair and Skincare Logo',
         width: 512,
         height: 512,
       },
@@ -177,13 +177,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         {/* ============================================ */}
         
         {/* Site name - Application name */}
-        <meta name="application-name" content="Queen's Nails Hair & Skincare" />
+        <meta name="application-name" content="Queen's Nails Hair and Skincare" />
         
         {/* Primary Meta Tags */}
-        <title>Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach, San Diego</title>
+        <title>Queen's Nails Hair and Skincare | Best Nail Salon in Ocean Beach, San Diego</title>
         <meta
           name="title"
-          content="Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach, San Diego"
+          content="Queen's Nails Hair and Skincare | Best Nail Salon in Ocean Beach, San Diego"
         />
         <meta
           name="description"
@@ -198,19 +198,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel="canonical" href="https://queensobnail.com" />
         
         {/* Author & Creator */}
-        <meta name="author" content="Queen's Nails Hair & Skincare" />
-        <meta name="creator" content="Queen's Nails Hair & Skincare" />
-        <meta name="publisher" content="Queen's Nails Hair & Skincare" />
+        <meta name="author" content="Queen's Nails Hair and Skincare" />
+        <meta name="creator" content="Queen's Nails Hair and Skincare" />
+        <meta name="publisher" content="Queen's Nails Hair and Skincare" />
 
         {/* ============================================ */}
         {/* OPEN GRAPH / FACEBOOK                       */}
         {/* ============================================ */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://queensobnail.com" />
-        <meta property="og:site_name" content="Queen's Nails Hair & Skincare" />
+        <meta property="og:site_name" content="Queen's Nails Hair and Skincare" />
         <meta
           property="og:title"
-          content="Queen's Nails Hair & Skincare | Best Nail Salon in Ocean Beach"
+          content="Queen's Nails Hair and Skincare | Best Nail Salon in Ocean Beach"
         />
         <meta
           property="og:description"
@@ -219,7 +219,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:image" content="https://queensobnail.com/images/logos/logo.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Queen's Nails Hair & Skincare Logo" />
+        <meta property="og:image:alt" content="Queen's Nails Hair and Skincare Logo" />
         <meta property="og:locale" content="en_US" />
 
         {/* ============================================ */}
@@ -227,7 +227,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         {/* ============================================ */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://queensobnail.com" />
-        <meta name="twitter:title" content="Queen's Nails Hair & Skincare" />
+        <meta name="twitter:title" content="Queen's Nails Hair and Skincare" />
         <meta
           name="twitter:description"
           content="Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services."

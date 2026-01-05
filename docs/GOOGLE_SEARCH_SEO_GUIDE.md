@@ -10,7 +10,7 @@ export function generateWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Queen\'s Nails Hair & Skincare',
+    name: 'Queen\'s Nails Hair and Skincare',
     url: 'https://queensobnail.com',
     // ... thông tin khác
   };
@@ -28,10 +28,10 @@ export function generateWebSiteSchema() {
 // Trong src/app/layout.tsx
 export const metadata: Metadata = {
   metadataBase: new URL('https://queensobnail.com'), // BẮT BUỘC
-  applicationName: "Queen's Nails Hair & Skincare",   // Site name
+  applicationName: "Queen's Nails Hair and Skincare",   // Site name
   title: {
-    default: "Queen's Nails Hair & Skincare | Best Nail Salon...",
-    template: "%s | Queen's Nails Hair & Skincare",
+    default: "Queen's Nails Hair and Skincare | Best Nail Salon...",
+    template: "%s | Queen's Nails Hair and Skincare",
   },
   // ...
 };
@@ -119,7 +119,7 @@ export const metadata: Metadata = {
 
 ```
 ┌─────────────────────────────────────────┐
-│ [FAVICON] Queen's Nails Hair & Skincare │ ← Site name
+│ [FAVICON] Queen's Nails Hair and Skincare │ ← Site name
 │ https://queensobnail.com                │
 │                                         │
 │ Best Nail Salon in Ocean Beach, San... │ ← Title

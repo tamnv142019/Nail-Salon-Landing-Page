@@ -11,7 +11,7 @@
 ### Files Modified
 1. **src/app/layout.tsx**
    - Added `metadataBase: new URL('https://queensobnail.com')`
-   - Added `applicationName: "Queen's Nails Hair & Skincare"`
+   - Added `applicationName: "Queen's Nails Hair and Skincare"`
    - Imported and integrated `generateWebSiteSchema()`
    - Enhanced metadata with title template, keywords, robots config
    - Improved favicon configuration with all required sizes
@@ -47,7 +47,7 @@
 ### Google Search Results Will Display:
 ```
 ┌─────────────────────────────────────────┐
-│ [🌸] Queen's Nails Hair & Skincare      │ ← Site name + Favicon
+│ [🌸] Queen's Nails Hair and Skincare      │ ← Site name + Favicon
 │ https://queensobnail.com                │
 │                                         │
 │ Best Nail Salon in Ocean Beach, San... │ ← Title

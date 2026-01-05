@@ -3,7 +3,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    🎯 GOOGLE SEARCH SEO                     │
-│              Queen's Nails Hair & Skincare                  │
+│              Queen's Nails Hair and Skincare                  │
 └─────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -14,7 +14,7 @@ src/
 ├── app/
 │   └── layout.tsx ✅
 │       ├── metadataBase: new URL('https://queensobnail.com')
-│       ├── applicationName: "Queen's Nails Hair & Skincare"
+│       ├── applicationName: "Queen's Nails Hair and Skincare"
 │       ├── title: { default, template }
 │       ├── description
 │       ├── icons: { icon[], apple[], other[] }
@@ -54,7 +54,7 @@ docs/
 1️⃣  CODE IMPLEMENTATION ✅
     │
     ├── WebSite Schema (JSON-LD)
-    │   └── name: "Queen's Nails Hair & Skincare"
+    │   └── name: "Queen's Nails Hair and Skincare"
     │   └── url: https://queensobnail.com
     │
     ├── Next.js Metadata
@@ -116,7 +116,7 @@ Before (Current):
 
 After (1-2 weeks):
 ┌─────────────────────────────────────────┐
-│ [🌸] Queen's Nails Hair & Skincare      │ ← NEW: Site name + Favicon
+│ [🌸] Queen's Nails Hair and Skincare      │ ← NEW: Site name + Favicon
 │ https://queensobnail.com                │
 │                                         │
 │ Best Nail Salon in Ocean Beach, San... │
@@ -139,7 +139,7 @@ Purpose: Google nhận diện Site name
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Queen's Nails Hair & Skincare",
+  "name": "Queen's Nails Hair and Skincare",
   "url": "https://queensobnail.com",
   "publisher": {
     "@type": "BeautySalon",
@@ -161,7 +161,7 @@ Priority: ⭐⭐⭐⭐
 Location: src/app/layout.tsx
 Purpose: Site name trong metadata
 
-applicationName: "Queen's Nails Hair & Skincare"
+applicationName: "Queen's Nails Hair and Skincare"
 
 Component 4: Favicon
 ═══════════════════════════════════════
@@ -184,7 +184,7 @@ Files:
 └─────────────────────────────────────────────────────────────┘
 
 WebSite Schema (Site level)
-    ├── name: Queen's Nails Hair & Skincare
+    ├── name: Queen's Nails Hair and Skincare
     ├── url: https://queensobnail.com
     ├── publisher → BeautySalon
     │   ├── name

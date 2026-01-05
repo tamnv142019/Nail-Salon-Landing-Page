@@ -65,7 +65,7 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
               </h3>
               <p className="leading-relaxed">
                 {t('privacy.introduction.content', 
-                  'Welcome to Queen\'s Nails Hair & Skincare ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.'
+                  'Welcome to Queen\'s Nails Hair and Skincare ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.'
                 )}
               </p>
             </section>
@@ -237,7 +237,7 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-1">
                 <p>
                   <strong className="inline-block transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
-                    Queen's Nails Hair & Skincare
+                    Queen's Nails Hair and Skincare
                   </strong>
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
