@@ -34,8 +34,9 @@ export interface BusinessInfo {
 }
 
 export const businessInfo: BusinessInfo = {
-  name: "Queen's Nails Hair and Skincare - Best Nail Salon in Ocean Beach, San Diego",
-  description: "Experience luxury nail care and beauty at Queen’s Nails Hair and Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
+  name: 'Queen’s Nails Hair and Skincare',
+  description:
+    "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
   url: 'https://queensobnail.com',
   email: 'support@queensobnail.com',
   phone: '(619) 224-5050',
@@ -57,17 +58,17 @@ export const businessInfo: BusinessInfo = {
   openingHours: [
     {
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '10:00',
+      opens: '09:00',
       closes: '19:00',
     },
     {
       dayOfWeek: ['Saturday'],
-      opens: '10:00',
+      opens: '09:00',
       closes: '18:00',
     },
     {
       dayOfWeek: ['Sunday'],
-      opens: '12:00',
+      opens: '10:00',
       closes: '17:00',
     },
   ],
@@ -92,14 +93,18 @@ export interface PageSEOConfig {
 
 export const pageConfigs: Record<string, PageSEOConfig> = {
   home: {
-    title: "Best Nail Salon in Ocean Beach, San Diego — Queen's Nails Hair and Skincare",
+    title: 'Queen’s Nails Hair and Skincare – Nail Salon in Ocean Beach, San Diego',
     description:
-      "Experience luxury nail care and beauty at Queen’s Nails Hair and Skincare in Ocean Beach — premium manicures, pedicures, spa services, and custom nail art in a relaxing, professional setting.",
+      "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
     keywords: [
       'best nail salon',
       'top nail salon',
       'Ocean Beach nails',
       'nail salon Ocean Beach',
+      'nail salon in Ocean Beach',
+      'gel nails Ocean Beach',
+      'pedicure Ocean Beach',
+      'Queen’s Nails Hair and Skincare San Diego',
       'nails Ocean Beach CA',
       'nail salon San Diego',
       'manicure',
@@ -112,7 +117,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
   },
   services: {
     title:
-      "Our Services - Queen's Nails Hair and Skincare | Nail Salon San Diego",
+      'Our Services - Queen’s Nails Hair and Skincare | Nail Salon San Diego',
     description:
       'Explore our full range of professional services including manicures, pedicures, hair styling, and skincare treatments at our San Diego salon.',
     keywords: [
@@ -130,7 +135,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
     ogType: 'website',
   },
   about: {
-    title: "About Queen's Nails Hair and Skincare | San Diego Nail Salon",
+    title: 'About Queen’s Nails Hair and Skincare | San Diego Nail Salon',
     description:
       'Learn about our salon, our mission, and our team of experienced professionals dedicated to providing exceptional beauty services.',
     keywords: [
@@ -145,7 +150,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
   },
   contact: {
     title:
-      "Contact Queen's Nails Hair and Skincare | San Diego Nail Salon",
+      'Contact Queen’s Nails Hair and Skincare | San Diego Nail Salon',
     description:
       'Get in touch with us for appointments, inquiries, or special requests. Visit our San Diego location or call us today.',
     keywords: [
@@ -159,7 +164,7 @@ export const pageConfigs: Record<string, PageSEOConfig> = {
     ogType: 'business.business',
   },
   book: {
-    title: "Book Appointment - Queen's Nails Hair and Skincare",
+    title: 'Book Appointment - Queen’s Nails Hair and Skincare',
     description: 'Schedule your appointment online for manicures, pedicures, hair, or skincare services at our Ocean Beach salon.',
     keywords: ['book appointment', 'schedule appointment', 'book nails', 'book salon', 'nail appointment', 'san diego salon'],
     canonical: 'https://queensobnail.com/book',
@@ -318,7 +323,7 @@ export const faqs = [
   {
     question: 'What are your salon hours?',
     answer:
-      'We are open Monday-Friday 10am-7pm, Saturday 10am-6pm, and Sunday 12pm-5pm.',
+      'We are open Monday-Friday 9am-7pm, Saturday 9am-6pm, and Sunday 10am-5pm.',
   },
   {
     question: 'Do you accept walk-ins?',

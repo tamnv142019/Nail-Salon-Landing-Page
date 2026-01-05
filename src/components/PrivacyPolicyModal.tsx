@@ -237,7 +237,7 @@ export function PrivacyPolicyModal({ isOpen, onClose }: PrivacyPolicyModalProps)
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg space-y-1">
                 <p>
                   <strong className="inline-block transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
-                    Queen's Nails Hair and Skincare
+                    Queen’s Nails Hair and Skincare
                   </strong>
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>

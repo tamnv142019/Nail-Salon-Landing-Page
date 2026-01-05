@@ -20,6 +20,17 @@ const timeSlots = [
   '5:00 PM', '6:00 PM',
 ];
 
+const getBusinessWindowMinutes = (weekday: number): { start: number; end: number } | null => {
+  // Business hours (San Diego):
+  // - Mon–Fri: 09:00–19:00
+  // - Sat:     09:00–18:00
+  // - Sun:     10:00–17:00
+  if (weekday >= 1 && weekday <= 5) return { start: 9 * 60, end: 19 * 60 };
+  if (weekday === 6) return { start: 9 * 60, end: 18 * 60 };
+  if (weekday === 0) return { start: 10 * 60, end: 17 * 60 };
+  return null;
+};
+
 const getTodayDate = () => {
   const today = new Date();
   const year = today.getFullYear();
@@ -290,7 +301,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                     n === 1
                       ? t('booking.step1', 'Select Service')
                       : n === 2
-                        ? t('booking.step2', 'Choose Date & Time')
+                        ? t('booking.step2', 'Choose Date and Time')
                         : t('booking.step3', 'Your Information');
 
                   return (
@@ -484,12 +495,12 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                 </div>
               ) : null}
 
-              {/* Step 2: Date & Time */}
+              {/* Step 2: Date and Time */}
               {step === 2 ? (
                 <div className="rounded-xl sm:rounded-2xl border border-border bg-background p-4 sm:p-7 shadow-sm space-y-6">
                   <div>
                     <h3 className="text-base sm:text-xl font-semibold text-foreground">
-                      {t('booking.chooseDateTime', 'Choose Date & Time')}
+                      {t('booking.chooseDateTime', 'Choose Date and Time')}
                     </h3>
                     {selectedServiceObjs.length > 0 ? (
                       <p className="mt-1 text-sm text-foreground/70">
@@ -550,6 +561,14 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                             const parts = selectedDate.split('-').map(Number);
                             if (parts.length !== 3) return false;
                             const [y, mo, d] = parts;
+
+                            const weekday = new Date(y, mo - 1, d).getDay();
+                            const window = getBusinessWindowMinutes(weekday);
+                            if (window) {
+                              const timeInMinutes = hr * 60 + min;
+                              if (timeInMinutes < window.start || timeInMinutes >= window.end) return true;
+                            }
+
                             const slotDate = new Date(y, mo - 1, d, hr, min, 0, 0);
                             const now = new Date();
                             return slotDate <= now;

@@ -11,8 +11,9 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
   const { t } = useLanguage();
 
   const schema = generateWebPageSchema({
-    name: "Terms of Service - Queen's Nails Hair and Skincare",
-    description: "Terms of service for Queen's Nails Hair and Skincare. Review our service terms, policies, and guidelines.",
+    name: 'Terms of Service - Queen’s Nails Hair and Skincare',
+    description:
+      'Terms of service for Queen’s Nails Hair and Skincare. Review our service terms, policies, and guidelines.',
     url: "https://queensobnail.com/terms"
   });
 
@@ -20,7 +21,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
     <>
       <SEO
         title="Terms of Service"
-        description="Terms of service for Queen's Nails Hair and Skincare. Review our service terms, policies, and guidelines."
+        description="Terms of service for Queen’s Nails Hair and Skincare. Review our service terms, policies, and guidelines."
         canonical="https://queensobnail.com/terms"
         noindex={true}
         schema={schema}
@@ -267,7 +268,7 @@ export function TermsOfServicePage({ onNavigateBack }: TermsOfServicePageProps) 
               </p>
               <div className="bg-secondary dark:bg-secondary p-6 rounded-lg space-y-2 transition-colors duration-500 border border-border">
                 <p className="inline-block font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:tracking-wide hover:text-brand-gold">
-                  Queen's Nails Hair and Skincare
+                  Queen’s Nails Hair and Skincare
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>

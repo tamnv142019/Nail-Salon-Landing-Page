@@ -11,8 +11,8 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Visit Us',
-    content: '4869 Santa Monica Ave',
-    subContent: 'San Diego, CA 92107',
+    content: '4869 Santa Monica Ave, San Diego, CA 92107',
+    subContent: '',
     gradient: 'from-rose-500 to-pink-500',
     link: 'https://maps.app.goo.gl/Bc8jystzMK7y5Ct49',
     action: 'Get Directions',
@@ -176,6 +176,13 @@ export function Contact() {
             <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Experience exceptional nail care in Ocean Beach. We're here to make your beauty dreams come true.
             </p>
+            <p className="mt-4 text-sm md:text-base text-foreground/80">
+              <span className="font-semibold">Queen’s Nails Hair and Skincare</span>
+              <span className="mx-2">•</span>
+              <span>4869 Santa Monica Ave, San Diego, CA 92107</span>
+              <span className="mx-2">•</span>
+              <span>(619) 224-5050</span>
+            </p>
           </motion.div>
 
           {/* Quick Contact Cards */}
@@ -198,7 +205,11 @@ export function Contact() {
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">{info.title}</h3>
                 <p className="text-foreground/90 mb-1 font-semibold text-lg">{info.content}</p>
-                <p className="text-sm text-foreground/60 mb-6">{info.subContent}</p>
+                {info.subContent ? (
+                  <p className="text-sm text-foreground/60 mb-6">{info.subContent}</p>
+                ) : (
+                  <div className="mb-6" />
+                )}
                 <a
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
@@ -359,7 +370,7 @@ export function Contact() {
               </div>
             </motion.div>
 
-            {/* Right Column - Hours & Map (2 cols) */}
+            {/* Right Column - Hours and Map (2 cols) */}
             <motion.div
               className="lg:col-span-2 space-y-8"
               initial={{ opacity: 0, x: 30 }}

@@ -9,21 +9,21 @@ export const translations = {
       reviews: 'Reviews',
       blog: 'Blog',
       contact: 'Contact',
-      holidayGreeting: 'Merry Christmas & Happy New Year',
+      holidayGreeting: 'Merry Christmas and Happy New Year',
     },
 
     // Home Page
     home: {
       hero: {
-        title: 'Queen\'s Nails Hair',
-        subtitle2: '& Skincare',
-        description: 'Best Nail Salon & Spa in Ocean Beach',
+        title: 'Queen’s Nails Hair',
+        subtitle2: 'and Skincare',
+        description: 'Queen’s Nails Hair and Skincare San Diego is a nail salon in Ocean Beach for gel nails, manicures, pedicures, nail art, hair, and skincare.',
         button: 'Find Out More',
         callNow: 'Call now',
       },
       about: {
         title: 'About Us',
-        text1: 'Since 2015, Queen\'s Nails Hair and Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.',
+        text1: 'Since 2015, Queen’s Nails Hair and Skincare has been San Diego\'s premier destination for luxury nail care and beauty services. Located in the heart of Ocean Beach, we pride ourselves on delivering exceptional service in a relaxing, upscale environment.',
         text2: 'Our team of experienced professionals is dedicated to providing you with the highest quality treatments using premium products and the latest techniques. From classic manicures to intricate nail art, we ensure every visit leaves you feeling pampered and beautiful.',
       },
       services: {
@@ -56,7 +56,7 @@ export const translations = {
       manicureDesc: 'Expert nail care and design with attention to every detail',
       pedicureDesc: 'Luxury spa treatments for your feet with premium products',
       powderDesc: 'Dipping powder collection with beautiful finishes',
-      waxingDesc: 'Smooth & professional hair removal services',
+      waxingDesc: 'Smooth and professional hair removal services',
       additionalDesc: 'Enhance your beauty experience with add-on services',
     },
 
@@ -178,9 +178,9 @@ export const translations = {
     },
 
     aboutFeatures: {
-      feature1: 'Licensed & Experienced Professionals',
+      feature1: 'Licensed and Experienced Professionals',
       feature2: 'Premium Quality Products',
-      feature3: 'Sanitized Equipment & Tools',
+      feature3: 'Sanitized Equipment and Tools',
       feature4: 'Relaxing Spa Atmosphere',
     },
 
@@ -211,7 +211,7 @@ export const translations = {
       closedNow: 'Closed Now',
       bookAppointment: 'Book Appointment',
       viewServices: 'View All Services',
-      viewAllServicesAndPrices: 'View All Services & Prices',
+      viewAllServicesAndPrices: 'View All Services and Prices',
       mondayFriday: 'Monday - Friday',
       saturday: 'Saturday',
       sunday: 'Sunday',
@@ -219,7 +219,7 @@ export const translations = {
 
     // Footer
     footer: {
-      company: 'Queen\'s Nails Hair and Skincare',
+      company: 'Queen’s Nails Hair and Skincare',
       description: 'Experience luxury nail care with premium services and professional artistry.',
       quickLinks: 'Quick Links',
       aboutUs: 'About Us',
@@ -416,7 +416,7 @@ export const translations = {
 
     // Services Page
     servicesPage: {
-      title: 'Services & Pricing',
+      title: 'Services and Pricing',
       subtitle: 'Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.',
       popular: 'Popular',
       bestSeller: 'Best Seller',
@@ -515,14 +515,14 @@ export const translations = {
     // Home Page
     home: {
       hero: {
-        title: 'Queen\'s美甲美发',
-        subtitle2: '& 护肤中心',
+        title: 'Queen’s美甲美发',
+        subtitle2: '和护肤中心',
         description: '圣地亚哥顶级美甲沙龙与水疗中心',
         button: '了解更多',
       },
       about: {
         title: '关于我们',
-        text1: '自2015年以来，Queen\'s美甲美发&护肤中心一直是圣地亚哥豪华美甲护理和美容服务的首选目的地。我们位于海洋海滩的中心地带，以在轻松、高档的环境中提供卓越的服务而自豪。',
+        text1: '自2015年以来，Queen’s美甲美发和护肤中心一直是圣地亚哥豪华美甲护理和美容服务的首选目的地。我们位于海洋海滩的中心地带，以在轻松、高档的环境中提供卓越的服务而自豪。',
         text2: '我们经验丰富的专业团队致力于使用优质产品和最新技术为您提供最高质量的护理。从经典美甲到精致的指甲艺术，我们确保每次光临都让您感到被宠爱和美丽。',
       },
       services: {
@@ -718,7 +718,7 @@ export const translations = {
 
     // Footer
     footer: {
-      company: 'Queen\'s美甲美发 & 护肤中心',
+      company: 'Queen’s美甲美发和护肤中心',
       description: '体验豪华美甲护理，享受优质服务和专业艺术。',
       quickLinks: '快速链接',
       aboutUs: '关于我们',
@@ -733,9 +733,9 @@ export const translations = {
       subscribeSuccess: '订阅成功！',
       privacyPolicy: '隐私政策',
       termsOfService: '服务条款',
-      copyright: '© 2024 Queen\'s美甲美发 & 护肤中心。版权所有。',
-      monFri: '周一 - 周五: 上午10点 - 下午7点',
-      saturday: '周六: 上午10点 - 下午6点',
+      copyright: '© 2024 Queen’s美甲美发和护肤中心。版权所有。',
+      monFri: '周一 - 周五: 上午9点 - 下午7点',
+      saturday: '周六: 上午9点 - 下午6点',
       sunday: '周日: 上午10点 - 下午5点',
     },
 
@@ -747,7 +747,7 @@ export const translations = {
       close: '关闭',
       introduction: {
         title: '1. 简介',
-        content: '欢迎来到Queen\'s美甲美发&护肤中心（"我们"、"我们的"或"我们"）。我们致力于保护您的个人信息和您的隐私权。本隐私政策解释了我们如何收集、使用、披露和保护您在访问我们的网站或使用我们的服务时的信息。',
+        content: '欢迎来到Queen’s美甲美发和护肤中心（"我们"、"我们的"或"我们"）。我们致力于保护您的个人信息和您的隐私权。本隐私政策解释了我们如何收集、使用、披露和保护您在访问我们的网站或使用我们的服务时的信息。',
       },
       collection: {
         title: '2. 我们收集的信息',
@@ -826,11 +826,11 @@ export const translations = {
       close: '关闭',
       introduction: {
         title: '1. 同意条款',
-        content: '通过访问或使用Queen\'s美甲美发&护肤中心的网站和服务，您同意受这些服务条款的约束。如果您不同意这些条款的任何部分，您不得访问我们的服务。这些条款适用于所有访问或使用我们服务的访客、用户和其他人。',
+        content: '通过访问或使用Queen’s美甲美发和护肤中心的网站和服务，您同意受这些服务条款的约束。如果您不同意这些条款的任何部分，您不得访问我们的服务。这些条款适用于所有访问或使用我们服务的访客、用户和其他人。',
       },
       services: {
         title: '2. 服务描述',
-        content: 'Queen\'s美甲美发&护肤中心提供专业的美容和健康服务，包括但不限于：',
+        content: 'Queen’s美甲美发和护肤中心提供专业的美容和健康服务，包括但不限于：',
         item1: '美甲和足疗服务',
         item2: '美甲艺术和设计',
         item3: '头发护理和造型',
@@ -870,7 +870,7 @@ export const translations = {
       },
       liability: {
         title: '6. 责任限制',
-        content: '虽然我们努力提供优质服务，但Queen\'s美甲美发&护肤中心对以下情况不承担责任：',
+        content: '虽然我们努力提供优质服务，但Queen’s美甲美发和护肤中心对以下情况不承担责任：',
         item1: '在未适当披露的情况下对产品的过敏反应',
         item2: '由于预先存在的状况导致的指甲或皮肤损伤',
         item3: '对客户做出的颜色或设计选择不满意',
@@ -879,7 +879,7 @@ export const translations = {
       },
       intellectual: {
         title: '7. 知识产权',
-        content: '我们网站上的所有内容，包括文本、图形、徽标、图像和设计，均为Queen\'s美甲美发&护肤中心或其内容供应商的财产，并受版权和商标法保护。未经我们书面许可，您不得复制、分发或使用任何内容。',
+        content: '我们网站上的所有内容，包括文本、图形、徽标、图像和设计，均为Queen’s美甲美发和护肤中心或其内容供应商的财产，并受版权和商标法保护。未经我们书面许可，您不得复制、分发或使用任何内容。',
       },
       conduct: {
         title: '8. 用户行为',
@@ -1008,15 +1008,15 @@ export const translations = {
       reviews: 'Đánh Giá',
       blog: 'Blog',
       contact: 'Liên Hệ',
-      holidayGreeting: 'Chúc Mừng Giáng Sinh & Năm Mới',
+      holidayGreeting: 'Chúc Mừng Giáng Sinh và Năm Mới',
     },
 
     // Home Page
     home: {
       hero: {
         title: 'Queen\'s Nails Hair',
-        subtitle2: '& Skincare',
-        description: 'Salon Móng & Spa Hàng Đầu tại San Diego',
+        subtitle2: 'and Skincare',
+        description: 'Salon Móng và Spa Hàng Đầu tại San Diego',
         button: 'Tìm Hiểu Thêm',
         callNow: 'Gọi ngay',
       },
@@ -1177,9 +1177,9 @@ export const translations = {
     },
 
     aboutFeatures: {
-      feature1: 'Chuyên Gia Có Giấy Phép & Kinh Nghiệm',
+      feature1: 'Chuyên Gia Có Giấy Phép và Kinh Nghiệm',
       feature2: 'Sản Phẩm Chất Lượng Cao',
-      feature3: 'Thiết Bị & Dụng Cụ Vệ Sinh',
+      feature3: 'Thiết Bị và Dụng Cụ Vệ Sinh',
       feature4: 'Không Gian Spa Thư Giãn',
     },
 
@@ -1210,7 +1210,7 @@ export const translations = {
       closedNow: 'Đã Đóng Cửa',
       bookAppointment: 'Đặt Lịch Hẹn',
       viewServices: 'Xem Tất Cả Dịch Vụ',
-      viewAllServicesAndPrices: 'Xem Tất Cả Dịch Vụ & Giá Cả',
+      viewAllServicesAndPrices: 'Xem Tất Cả Dịch Vụ và Giá Cả',
       mondayFriday: 'Thứ Hai - Thứ Sáu',
       saturday: 'Thứ Bảy',
       sunday: 'Chủ Nhật',
@@ -1280,7 +1280,7 @@ export const translations = {
 
     // Services Page
     servicesPage: {
-      title: 'Dịch Vụ & Giá Cả',
+      title: 'Dịch Vụ và Giá Cả',
       subtitle: 'Khám phá thực đơn đầy đủ các dịch vụ làm đẹp cao cấp của chúng tôi. Tất cả giá là giá khởi điểm và có thể thay đổi tùy theo độ dài, thiết kế và độ phức tạp.',
       popular: 'Phổ Biến',
       bestSeller: 'Bán Chạy',
@@ -1380,8 +1380,8 @@ export const translations = {
     home: {
       hero: {
         title: 'Queen\'s Nails Hair',
-        subtitle2: '& Skincare',
-        description: 'Salon de Manucure & Spa Premier à San Diego',
+        subtitle2: 'and Skincare',
+        description: 'Salon de Manucure et Spa Premier à San Diego',
         button: 'En Savoir Plus',
       },
       about: {
@@ -1574,7 +1574,7 @@ export const translations = {
       closedNow: 'Fermé Maintenant',
       bookAppointment: 'Réserver un Rendez-vous',
       viewServices: 'Voir Tous les Services',
-      viewAllServicesAndPrices: 'Voir Tous les Services & Tarifs',
+      viewAllServicesAndPrices: 'Voir Tous les Services et Tarifs',
       mondayFriday: 'Lundi - Vendredi',
       saturday: 'Samedi',
       sunday: 'Dimanche',
@@ -1598,9 +1598,9 @@ export const translations = {
       privacyPolicy: 'Politique de Confidentialité',
       termsOfService: 'Conditions d\'Utilisation',
       copyright: '© 2024 Queen\'s Nails Hair and Skincare. Tous droits réservés.',
-      monFri: 'Lun - Ven: 9h - 19h',
-      saturday: 'Samedi: 9h - 18h',
-      sunday: 'Dimanche: 10h - 17h',
+      monFri: 'Lun - Ven: 10h - 19h',
+      saturday: 'Samedi: 10h - 18h',
+      sunday: 'Dimanche: 12h - 17h',
     },
 
     privacy: {
@@ -1644,7 +1644,7 @@ export const translations = {
 
     // Services Page
     servicesPage: {
-      title: 'Services & Tarifs',
+      title: 'Services et Tarifs',
       subtitle: 'Explorez notre menu complet de services de beauté premium. Tous les prix sont des prix de départ et peuvent varier selon la longueur, le design et la complexité.',
       popular: 'Populaire',
       bestSeller: 'Meilleure Vente',
@@ -1744,7 +1744,7 @@ export const translations = {
     home: {
       hero: {
         title: 'Queen\'s Nails Hair',
-        subtitle2: '& Skincare',
+        subtitle2: 'and Skincare',
         description: 'Salón de Uñas y Spa Premier en San Diego',
         button: 'Más Información',
       },

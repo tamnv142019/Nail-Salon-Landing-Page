@@ -27,11 +27,11 @@ interface SEOProviderProps {
 
 export function SEOProvider({ children }: SEOProviderProps) {
   const [metadata, setMetadata] = React.useState<SEOMetadata>({
-    title: "Queen's Nails Hair and Skincare - Best Nail Salon, Ocean Beach",
+    title: 'Queen’s Nails Hair and Skincare – Nail Salon in Ocean Beach, San Diego',
     description:
-      'Best nail salon in Ocean Beach, San Diego offering professional nail care, hair services, and skincare treatments. Book your appointment today!',
+      "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
     keywords:
-      'nail salon, nail salon near me, nail care, manicure, pedicure, hair salon, skincare, Ocean Beach, San Diego, beauty services',
+      'nail salon in Ocean Beach, gel nails Ocean Beach, pedicure Ocean Beach, Queen’s Nails Hair and Skincare San Diego, manicure Ocean Beach, nail art Ocean Beach',
     ogImage: 'https://queensobnail.com/favicon/android-chrome-512x512.png',
     ogUrl: 'https://queensobnail.com',
     ogType: 'website',

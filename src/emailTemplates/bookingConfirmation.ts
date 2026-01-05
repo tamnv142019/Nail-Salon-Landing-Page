@@ -93,7 +93,7 @@ export function bookingConfirmationEmail({
             </tr>
             <tr>
               <td style="background:#F9FAFB;padding:16px 32px;color:#6B7280;font-size:13px;text-align:center;">
-                <div>Queens Nails Hair & Skin care — Thank you</div>
+                <div>Queen’s Nails Hair and Skincare — Thank you</div>
                 <div style="margin-top:6px;color:#9CA3AF;font-size:12px">If this wasn't you, please contact us immediately. Call (619) 224-5050 </div>
               </td>
             </tr>

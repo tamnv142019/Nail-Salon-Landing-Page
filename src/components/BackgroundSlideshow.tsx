@@ -18,7 +18,7 @@ export function BackgroundSlideshow({ autoplay = true, interval = 5000, onNaviga
       id: 1,
       image: 'https://images.pexels.com/photos/3629547/pexels-photo-3629547.jpeg?auto=compress&cs=tinysrgb&w=1200',
       title: 'Luxury Nail Salon',
-      description: 'Premium manicure & pedicure services',
+      description: 'Premium manicure and pedicure services',
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ export function BackgroundSlideshow({ autoplay = true, interval = 5000, onNaviga
       id: 4,
       image: 'https://images.pexels.com/photos/3622622/pexels-photo-3622622.jpeg?auto=compress&cs=tinysrgb&w=1200',
       title: 'Beauty Salon',
-      description: 'Complete beauty & skincare treatments',
+      description: 'Complete beauty and skincare treatments',
     },
   ];
 

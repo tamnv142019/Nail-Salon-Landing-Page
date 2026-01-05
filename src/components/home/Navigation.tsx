@@ -141,7 +141,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
             >
               <img
                 src="/images/logos/logo.png"
-                alt="Queen's Nails Hair and Skincare Logo"
+                alt="Queen’s Nails Hair and Skincare Logo"
                 className="h-12 md:h-14 w-auto transition-transform duration-300 group-hover:scale-[1.03]"
               />
               <span className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-(--glass-logo-sheen) to-transparent opacity-30 mix-blend-overlay animate-[glass-shine_2.8s_ease-in-out_infinite] motion-reduce:animate-none" />
@@ -150,7 +150,7 @@ export function Navigation({ onBookClick, onNavigateHome, transparentOnTop = fal
               <div className="relative leading-tight transition-all duration-300 group-hover:-translate-y-0.5">
                 <div className="relative inline-block leading-none">
                   <span className="block font-[var(--font-display)] font-normal text-4xl md:text-5xl leading-none pr-20 queens-glitter">
-                    Queen's
+                    Queen’s
                   </span>
                   <span
                     className={`absolute right-0 bottom-0 text-[10px] md:text-[11px] font-semibold tracking-[0.28em] uppercase bg-clip-text text-transparent bg-linear-to-r from-(--primary) via-(--gold-champagne) to-(--primary-hover) ${

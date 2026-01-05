@@ -170,7 +170,7 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
                 <div className="relative w-28 h-28 md:w-36 md:h-36 mb-3 overflow-hidden rounded-full border-4 border-border shadow-xl group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110">
                   <img
                     src={service.image}
-                    alt={service.title}
+                    alt={`${service.title} in Ocean Beach at Queen’s Nails Hair and Skincare`}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-[color:var(--scrim-40)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -188,10 +188,10 @@ export function ServicesPreview({ onViewAll, onBookClick }: ServicesPreviewProps
           <div className="text-center">
             <button
               onClick={() => onViewAll()}
-              aria-label={t('contactSection.viewAllServicesAndPrices', 'View All Services & Prices')}
+              aria-label={t('contactSection.viewAllServicesAndPrices', 'View All Services and Prices')}
               className="inline-flex relative overflow-hidden items-center gap-1.5 px-5 py-3 rounded-full transition-all duration-300 hover:scale-105 shadow-lg text-base font-semibold bg-[image:var(--gradient-primary-action)] text-[color:var(--gold-champagne)] hover:brightness-110 active:brightness-95 sm:gap-2 sm:px-8 sm:py-4 sm:text-lg before:content-[''] before:pointer-events-none before:absolute before:inset-0 before:bg-linear-to-r before:from-transparent before:via-[color:var(--btn-sheen)] before:to-transparent before:-skew-x-12 before:translate-x-[-200%] before:transition-transform before:duration-700 before:ease-out hover:before:translate-x-[200%] hover:before:via-[color:var(--btn-sheen-hover)]"
             >
-              <span className="cursor-pointer hover:opacity-90 transition-opacity">{t('contactSection.viewAllServicesAndPrices', 'View All Services & Prices')}</span>
+              <span className="cursor-pointer hover:opacity-90 transition-opacity">{t('contactSection.viewAllServicesAndPrices', 'View All Services and Prices')}</span>
               <ArrowRight size={20} />
             </button>
           </div>

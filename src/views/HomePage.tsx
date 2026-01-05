@@ -27,8 +27,9 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
   const schemas = [
     generateLocalBusinessSchema(),
     generateWebPageSchema({
-      name: "Home - Queen's Nails Hair and Skincare",
-      description: "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services. Expert technicians, premium products, beautiful results.",
+      name: 'Home - Queen’s Nails Hair and Skincare',
+      description:
+        "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
       url: "https://queensobnail.com/"
     })
   ];
@@ -36,10 +37,10 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
   return (
     <>
       <SEO
-        title="Queen's Nails Hair and Skincare - Best Nail Salon in Ocean Beach"
-        description="Best nail salon in Ocean Beach offering luxury manicures, pedicures, gel nails, nail art, and spa services. Expert technicians, premium products. Book your appointment today!"
+        title="Queen’s Nails Hair and Skincare – Nail Salon in Ocean Beach, San Diego"
+        description="Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today."
         canonical="https://queensobnail.com/"
-        keywords="nail salon San Diego, manicure San Diego, pedicure San Diego, gel nails, nail art, spa services, Ocean Beach salon, nail salon near me"
+        keywords="nail salon in Ocean Beach, gel nails Ocean Beach, pedicure Ocean Beach, Queen’s Nails Hair and Skincare San Diego, manicure Ocean Beach, nail art Ocean Beach"
         ogImage="https://queensobnail.com/images/misc/og-home.png"
         schema={schemas}
       />

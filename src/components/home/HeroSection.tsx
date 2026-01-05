@@ -11,10 +11,10 @@ interface HeroSectionProps {
 }
 
 const backgroundImages = [
-  '/images/backgrounds/salon-bg-01.jpg',
-  '/images/backgrounds/salon-bg-02.jpg',
-  '/images/backgrounds/salon-bg-03.jpg',
-  '/images/backgrounds/salon-bg-04.jpg',
+  '/images/backgrounds/queens-nails-hair-skincare-ocean-beach-salon-01.jpg',
+  '/images/backgrounds/queens-nails-hair-skincare-ocean-beach-salon-02.jpg',
+  '/images/backgrounds/queens-nails-hair-skincare-ocean-beach-salon-03.jpg',
+  '/images/backgrounds/queens-nails-hair-skincare-ocean-beach-salon-04.jpg',
   'https://images.unsplash.com/photo-1604654894610-df63bc536371?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW5pY3VyZXxlbnwxfHx8fDE3NjUyOTI5NzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
 ];
 
@@ -98,7 +98,7 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
           >
             <img
               src={image}
-              alt="Nail Salon"
+              alt="Queen’s Nails Hair and Skincare nail salon in Ocean Beach, San Diego"
               className="w-full h-full object-cover"
             />
           </div>
@@ -157,7 +157,7 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
               )}
 
               <Hover3DText
-                text={t('home.hero.title.line1', "Queen's")}
+                text={t('home.hero.title.line1', 'Queen’s')}
                 className="block font-[var(--font-display)] leading-none pr-28 md:pr-40 queens-glitter"
               />
 
@@ -178,7 +178,10 @@ export function HeroSection({ onBookClick, onNavigateToServices }: HeroSectionPr
 
           {/* Subheading */}
           <p className="text-lg md:text-2xl text-(--on-image-foreground-muted) mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed">
-            {t('home.hero.description', 'Best Nail Salon & Spa in Ocean Beach')}
+            {t(
+              'home.hero.description',
+              'Queen’s Nails Hair and Skincare San Diego is a nail salon in Ocean Beach for gel nails, manicures, pedicures, nail art, hair, and skincare.'
+            )}
           </p>
 
           {/* Location */}

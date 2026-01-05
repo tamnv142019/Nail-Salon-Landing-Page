@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { businessInfo } from '../../config/seo.config';
 
+const BRAND_NAME = 'Queen’s Nails Hair and Skincare';
+
 interface SEOProps {
   title: string;
   description: string;
@@ -25,9 +27,9 @@ export function SEO({
   schema,
   noindex = false,
 }: SEOProps) {
-  const fullTitle = title.includes('Queen\'s Nails') 
-    ? title 
-    : `${title} | Queen's Nails Hair and Skincare`;
+  const hasBrandName =
+    title.includes(BRAND_NAME) || title.includes("Queen's Nails Hair and Skincare");
+  const fullTitle = hasBrandName ? title : `${title} | ${BRAND_NAME}`;
 
   useEffect(() => {
     // Ensure document title is set (Next metadata can override on hydration)
@@ -92,7 +94,7 @@ export function SEO({
       <meta itemProp="name" content={fullTitle} />
       <meta itemProp="description" content={description} />
       <meta itemProp="image" content={ogImage} />
-      <meta property="og:site_name" content="Queen's Nails Hair and Skincare" />
+      <meta property="og:site_name" content={BRAND_NAME} />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter */}

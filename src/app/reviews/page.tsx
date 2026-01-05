@@ -16,10 +16,10 @@ export default function Page() {
   return (
     <>
       <SEO
-        title={"Reviews - Queen's Nails Hair and Skincare"}
+        title={"Reviews - Queen’s Nails Hair and Skincare"}
         description={"See what our clients say — real Google reviews and testimonials for our San Diego salon."}
         canonical={`${cfg.canonical.replace(/\/$/, '')}/reviews`}
-        keywords={"nail salon reviews, queen's nails reviews, san diego reviews"}
+        keywords={"nail salon reviews, queen’s nails reviews, san diego reviews"}
       />
 
       {/* Navigation/Header (client) */}

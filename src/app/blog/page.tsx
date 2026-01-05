@@ -81,8 +81,8 @@ export default function Page() {
 
   const schema = [
     generateWebPageSchema({
-      name: `Blog - Queen's Nails Hair and Skincare`,
-      description: 'Beauty tips, nail care guides, and salon updates from Queen\'s Nails Hair and Skincare in Ocean Beach, San Diego.',
+      name: 'Blog - Queen’s Nails Hair and Skincare',
+      description: 'Beauty tips, nail care guides, and salon updates from Queen’s Nails Hair and Skincare in Ocean Beach, San Diego.',
       url: canonical,
     }),
     generateBreadcrumbSchema([
@@ -94,8 +94,8 @@ export default function Page() {
   return (
     <>
       <SEO
-        title={'Blog - Queen\'s Nails Hair and Skincare'}
-        description={'Beauty tips, nail care guides, and salon updates from Queen\'s Nails Hair and Skincare in Ocean Beach, San Diego.'}
+        title={'Blog - Queen’s Nails Hair and Skincare'}
+        description={'Beauty tips, nail care guides, and salon updates from Queen’s Nails Hair and Skincare in Ocean Beach, San Diego.'}
         canonical={canonical}
         keywords={'nail care tips, gel nails care, dip powder aftercare, acrylic nails maintenance, nail salon Ocean Beach San Diego'}
         schema={schema}

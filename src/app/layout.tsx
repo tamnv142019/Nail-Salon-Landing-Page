@@ -27,15 +27,15 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://queensobnail.com'),
   
   // applicationName: Tên doanh nghiệp xuất hiện trong Google Search
-  applicationName: "Queen's Nails Hair and Skincare",
+  applicationName: 'Queen’s Nails Hair and Skincare',
   
-  // Title & Description
+  // Title and Description
   title: {
-    default: "Queen's Nails Hair and Skincare | Ocean Beach Nail Salon", // 58 characters (optimal for SEO)
-    template: "%s | Queen's Nails Hair and Skincare",
+    default: 'Queen’s Nails Hair and Skincare | Ocean Beach Nail Salon', // 58 characters (optimal for SEO)
+    template: '%s | Queen’s Nails Hair and Skincare',
   },
   description:
-    "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services. Professional beauty salon serving San Diego with premium nail care and skincare treatments.",
+    "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
   
   // Keywords (optional, nhưng tốt cho SEO)
   keywords: [
@@ -45,15 +45,16 @@ export const metadata: Metadata = {
     "nail art san diego",
     "beauty salon ocean beach",
     "spa services san diego",
-    "queens nails",
+    "gel nails ocean beach",
+    "queen’s nails hair and skincare san diego",
   ],
   
   // Authors
-  authors: [{ name: "Queen's Nails Hair and Skincare" }],
+  authors: [{ name: 'Queen’s Nails Hair and Skincare' }],
   
   // Creator
-  creator: "Queen's Nails Hair and Skincare",
-  publisher: "Queen's Nails Hair and Skincare",
+  creator: 'Queen’s Nails Hair and Skincare',
+  publisher: 'Queen’s Nails Hair and Skincare',
   
   // Favicon - Cấu hình đầy đủ cho Google Search
   icons: {
@@ -84,16 +85,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: businessInfo.url,
-    siteName: "Queen's Nails Hair and Skincare",
-    title: "Queen's Nails Hair and Skincare | Best Nail Salon in Ocean Beach",
+    siteName: 'Queen’s Nails Hair and Skincare',
+    title: 'Queen’s Nails Hair and Skincare – Nail Salon in Ocean Beach, San Diego',
     description:
-      "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
+      "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
     images: [
       {
           url: '/images/logos/logo.png', // Sẽ tự động thêm metadataBase
         width: 1200,
         height: 630,
-        alt: "Queen's Nails Hair and Skincare Logo",
+        alt: 'Queen’s Nails Hair and Skincare Logo',
       },
     ],
   },
@@ -101,9 +102,9 @@ export const metadata: Metadata = {
   // Twitter Card
   twitter: {
     card: 'summary_large_image',
-    title: "Queen's Nails Hair and Skincare",
+    title: 'Queen’s Nails Hair and Skincare',
     description:
-      "Best nail salon in Ocean Beach offering luxury manicures, pedicures, nail art, and spa services.",
+      "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
       images: ['/images/logos/logo.png'],
   },
   
@@ -164,7 +165,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${roboto.className} ${displayFont.variable}`}>
       <head>
-        {/* Favicons & manifest */}
+        {/* Favicons and manifest */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="icon" href="/favicon/favicon.ico" />

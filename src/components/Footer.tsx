@@ -79,13 +79,13 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
               <div className="relative">
                 <img
                   src="/images/logos/logo.png"
-                  alt="Queen's Nails Hair and Skincare Logo"
+                  alt="Queen’s Nails Hair and Skincare Logo"
                   className="h-12 md:h-14 w-auto transition-transform duration-500 hover:scale-110"
                 />
               </div>
               <div className="text-2xl leading-tight bg-linear-to-r from-foreground via-brand-gold-muted to-foreground bg-clip-text text-transparent">
                 <span className="block font-(--font-display) text-3xl leading-none">
-                  Queen's
+                  Queen’s
                 </span>
                 <span className="block mt-1 text-xs font-semibold tracking-[0.22em] uppercase">
                   Nails Hair and Skincare
@@ -270,7 +270,7 @@ export function Footer({ onNavigateToPrivacy, onNavigateToTerms }: FooterProps =
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-600 transition-colors">
           <p className="text-foreground text-sm transition-colors duration-500">
-            © {new Date().getFullYear()} Queen's Nails Hair and Skincare. All rights reserved.
+            © {new Date().getFullYear()} Queen’s Nails Hair and Skincare. All rights reserved.
           </p>
           <div className="flex gap-6 text-foreground text-sm transition-colors duration-500">
             <button

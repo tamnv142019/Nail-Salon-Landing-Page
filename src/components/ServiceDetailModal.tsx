@@ -79,7 +79,7 @@ export function ServiceDetailModal({ isOpen, onClose, service }: ServiceDetailMo
 
           {/* Content */}
           <div className="p-8">
-            {/* Price & Duration */}
+            {/* Price and Duration */}
             <div className="flex gap-6 mb-8">
               <div className="flex-1 bg-gray-100 dark:bg-gray-700 rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center gap-3 mb-2">

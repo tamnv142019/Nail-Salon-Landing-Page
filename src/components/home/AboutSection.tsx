@@ -42,22 +42,21 @@ export function AboutSection() {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="/images/backgrounds/salon-bg-02.jpg"
+                src="/images/logos/logo.png"
                 alt="Queens OB Nail salon interior"
-                className="w-full h-130 md:h-140 object-cover"
+                className="w-full h-130 md:h-140 object-cover"  
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent"></div>
             </div>
             
             {/* Floating Stats Card */}
-            <div className="absolute -bottom-6 -right-6 bg-background/70 dark:bg-card/70 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-border/40">
+            <div className="absolute -bottom-6 -right-6 bg-background/95 dark:bg-card/85 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-border/70">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-background/60 dark:bg-card/60 backdrop-blur-xl border border-border/40 shadow-sm ring-1 ring-inset ring-(--glass-ring) text-amber-500 flex items-center justify-center transition-[transform,background-color,box-shadow] duration-200 ease-out hover:bg-background/75 dark:hover:bg-card/75 hover:-translate-y-0.5 hover:shadow-md">
+                <div className="w-12 h-12 rounded-2xl bg-background/90 dark:bg-card/70 backdrop-blur-xl border border-border/60 shadow-sm ring-1 ring-inset ring-(--glass-ring) text-amber-600 flex items-center justify-center transition-[transform,background-color,box-shadow] duration-200 ease-out hover:bg-background/95 dark:hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-md">
                   <Award className="text-current" size={22} />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-foreground">10+</div>
-                  <div className="text-sm text-foreground">{t('aboutStats.yearsOfExcellence', 'Years of Excellence')}</div>
+                  <div className="text-2xl font-bold text-foreground leading-tight">10+</div>
+                  <div className="text-sm text-muted-foreground leading-tight">{t('aboutStats.yearsOfExcellence', 'Years of Excellence')}</div>
                 </div>
               </div>
             </div>

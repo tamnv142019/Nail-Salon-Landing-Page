@@ -1,3 +1,5 @@
+import { businessInfo } from '../config/seo.config';
+
 interface BusinessSchemaProps {
   name?: string;
   description?: string;
@@ -18,22 +20,46 @@ interface BusinessSchemaProps {
   priceRange?: string;
 }
 
+const BRAND_NAME = 'Queen’s Nails Hair and Skincare';
+const GOOGLE_MAPS_URL = 'https://maps.app.goo.gl/Bc8jystzMK7y5Ct49';
+
+function toOpeningHoursStrings(hours: Array<{ dayOfWeek: string[]; opens: string; closes: string }>) {
+  const dayToAbbrev: Record<string, string> = {
+    Monday: 'Mo',
+    Tuesday: 'Tu',
+    Wednesday: 'We',
+    Thursday: 'Th',
+    Friday: 'Fr',
+    Saturday: 'Sa',
+    Sunday: 'Su',
+  };
+
+  return hours.map(({ dayOfWeek, opens, closes }) => {
+    const abbrevs = dayOfWeek.map((d) => dayToAbbrev[d] ?? d);
+    const dayPart =
+      abbrevs.length >= 2 && abbrevs[0] === 'Mo' && abbrevs[abbrevs.length - 1] === 'Fr'
+        ? 'Mo-Fr'
+        : abbrevs.join(',');
+    return `${dayPart} ${opens}-${closes}`;
+  });
+}
+
 export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
   const defaults = {
-    name: "Queen's Nails Hair and Skincare",
-    description: "Top-rated nail salon in Ocean Beach, San Diego — top manicures, pedicures, gel nails, and custom nail art.",
-    url: "https://queensobnail.com",
-    telephone: "(619) 224-5050",
+    name: BRAND_NAME,
+    description: businessInfo.description,
+    url: businessInfo.url,
+    telephone: businessInfo.phone,
     address: {
-      streetAddress: "4869 Santa Monica Ave",
-      addressLocality: "Ocean Beach, San Diego",
-      addressRegion: "CA",
-      postalCode: "92107",
-      addressCountry: "US"
+      streetAddress: businessInfo.address.streetAddress,
+      addressLocality: 'San Diego',
+      addressRegion: businessInfo.address.addressRegion,
+      postalCode: businessInfo.address.postalCode,
+      addressCountry: 'US'
     },
     geo: {
-      latitude: 32.7157,
-      longitude: -117.1611
+      latitude: businessInfo.geo.latitude,
+      longitude: businessInfo.geo.longitude
     },
     image: "https://queensobnail.com/images/logos/logo.png",
     priceRange: "$$"
@@ -43,12 +69,13 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
 
   return {
     "@context": "https://schema.org",
-    "@type": "BeautySalon",
+    "@type": "NailSalon",
     "name": data.name,
     "description": data.description,
     "url": data.url,
     "telephone": data.telephone,
     "email": "support@queensobnail.com",
+    "areaServed": "Ocean Beach, San Diego",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": data.address.streetAddress,
@@ -64,26 +91,13 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
     },
     "image": data.image,
     "priceRange": data.priceRange,
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "19:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "10:00",
-        "closes": "17:00"
-      }
-    ],
+    "openingHours": toOpeningHoursStrings(businessInfo.openingHours),
+    "openingHoursSpecification": businessInfo.openingHours.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": h.dayOfWeek,
+      "opens": h.opens,
+      "closes": h.closes,
+    })),
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",
@@ -91,11 +105,17 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
       "bestRating": "5",
       "worstRating": "1"
     },
-    "sameAs": [
-      "https://www.facebook.com/profile.php?id=100075740667723",
-      "https://www.instagram.com/queensnailssandiego",
-      "https://www.yelp.com/biz/queen-s-nails-hair-and-skincare-san-diego-2"
-    ]
+    "sameAs": Array.from(
+      new Set(
+        [
+          GOOGLE_MAPS_URL,
+          businessInfo.social?.facebook,
+          businessInfo.social?.yelp,
+          businessInfo.social?.instagram,
+          businessInfo.social?.twitter,
+        ].filter(Boolean) as string[]
+      )
+    )
   };
 }
 
@@ -112,16 +132,16 @@ export function generateServiceSchema(service: ServiceSchemaProps) {
     "@type": "Service",
     "serviceType": service.name,
     "provider": {
-      "@type": "BeautySalon",
-      "name": "Queen's Nails Hair and Skincare",
-      "telephone": "(619) 224-5050",
+      "@type": "NailSalon",
+      "name": BRAND_NAME,
+      "telephone": businessInfo.phone,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "4869 Santa Monica Ave",
-        "addressLocality": "San Diego",
-        "addressRegion": "CA",
-        "postalCode": "92107",
-        "addressCountry": "US"
+        "streetAddress": businessInfo.address.streetAddress,
+        "addressLocality": 'San Diego',
+        "addressRegion": businessInfo.address.addressRegion,
+        "postalCode": businessInfo.address.postalCode,
+        "addressCountry": businessInfo.address.addressCountry
       }
     },
     "description": service.description,
@@ -171,8 +191,8 @@ export function generateWebPageSchema(props: {
     "inLanguage": "en-US",
     "isPartOf": {
       "@type": "WebSite",
-      "name": "Queen's Nails Hair and Skincare",
-      "url": "https://queensobnail.com"
+      "name": BRAND_NAME,
+      "url": businessInfo.url
     }
   };
 }

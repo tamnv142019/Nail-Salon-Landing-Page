@@ -272,10 +272,10 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
   return (
     <>
       <SEO
-        title="Services & Pricing - Nail Salon in San Diego"
-        description="Explore our nail services: manicures from $20, pedicures from $25, gel nails, dipping powder, nail art, and waxing. Premium quality, expert technicians. Book online!"
+        title="Services and Pricing – Queen’s Nails Hair and Skincare (Ocean Beach, San Diego)"
+        description="Explore our services at Queen’s Nails Hair and Skincare, a nail salon in Ocean Beach, San Diego: manicures, pedicures, gel nails, dipping powder, nail art, and waxing. Book online today."
         canonical="https://queensobnail.com/services"
-        keywords="nail services San Diego, manicure prices, pedicure prices, gel nails cost, dipping powder, nail art pricing, waxing services"
+        keywords="nail salon in Ocean Beach, gel nails Ocean Beach, pedicure Ocean Beach, manicure Ocean Beach, nail art Ocean Beach, San Diego nail salon"
         ogImage="https://queensobnail.com/og-services.jpg"
         schema={[breadcrumbSchema, ...serviceSchemas]}
       />
@@ -298,7 +298,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-3xl md:text-5xl mb-4 font-bold text-black dark:text-white">
-              {t('servicesPage.title', 'Services & Pricing')}
+              {t('servicesPage.title', 'Services and Pricing')}
             </h1>
             <p className="text-sm md:text-lg text-foreground max-w-4xl mx-auto leading-relaxed">
               {t('servicesPage.subtitle', 'Explore our comprehensive menu of premium beauty services. All prices are starting prices and may vary based on length, design, and complexity.')}
@@ -344,14 +344,14 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden shrink-0 border-4 border-card shadow-lg hover:scale-110 transition-transform duration-300">
                       <OptimizedImage
                         src={waxingService.image}
-                        alt={waxingService.title}
+                        alt={`${waxingService.title} in Ocean Beach at Queen’s Nails Hair and Skincare`}
                         className="w-full h-full object-cover"
                         width={160}
                         height={160}
                       />
                     </div>
 
-                    {/* Title & Category */}
+                    {/* Title and Category */}
                     <div className="w-full max-w-2xl">
                       {waxingService.category && stripDiacritics(waxingService.category).toLowerCase() !== stripDiacritics(waxingService.title).toLowerCase() && (
                         <div className="text-base md:text-lg text-foreground uppercase tracking-wider mb-1">
@@ -525,7 +525,13 @@ const ServiceCard = memo(function ServiceCard({ service, index = 0, onBook }: Se
             {service.id === 'combo' ? (
               <NailPolishIcon size={36} className="text-brand-gold" />
             ) : (
-              <OptimizedImage src={service.image} alt={service.title} className="w-full h-full object-cover" width={160} height={160} />
+              <OptimizedImage
+                src={service.image}
+                alt={`${service.title} in Ocean Beach at Queen’s Nails Hair and Skincare`}
+                className="w-full h-full object-cover"
+                width={160}
+                height={160}
+              />
             )}
           </div>
 
