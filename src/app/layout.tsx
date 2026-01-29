@@ -136,7 +136,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-PLDJTM4B';
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GT-NCGSXH43';
   const gtagId = process.env.NEXT_PUBLIC_GTAG_ID || 'AW-17818536782';
   // Build JSON-LD payloads based on configuration flags
   const ld: Array<string> = [];
