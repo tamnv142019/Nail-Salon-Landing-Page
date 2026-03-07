@@ -6,7 +6,7 @@ import { FloatingCallButton } from '../components/FloatingCallButton';
 import { FloatingFollowButtons } from '../components/FloatingFollowButtons';
 import { Great_Vibes, Roboto } from 'next/font/google';
 import Script from 'next/script';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleTagManager, Analytics } from '@next/third-parties/google';
 import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema, generateWebSiteSchema } from '../config/seo.config';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
@@ -138,6 +138,7 @@ export default function RootLayout({
 }>) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GT-NCGSXH43';
   const gtagId = process.env.NEXT_PUBLIC_GTAG_ID || 'AW-17818536782';
+  const gaId = process.env.NEXT_PUBLIC_GA_ID; // GA4 Measurement ID
   // Build JSON-LD payloads based on configuration flags
   const ld: Array<string> = [];
   
@@ -197,6 +198,7 @@ gtag('config', '${gtagId}');`}
       </head>
         <body className="antialiased" style={{ fontWeight: 'var(--font-weight-normal)' }}>
         {gtmId ? <GoogleTagManager gtmId={gtmId} /> : null}
+        {gaId ? <Analytics gaId={gaId} /> : null}
         {/* GA4 gtag removed — tracking now handled via Google Tag Manager */}
         <Providers>{children}</Providers>
         <FloatingCallButton />
