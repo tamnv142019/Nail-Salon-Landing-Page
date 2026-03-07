@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Phone } from 'lucide-react';
 import { businessInfo } from '../config/seo.config';
+import { trackPhoneCallClick } from '../utils/gtag';
 
 export function FloatingCallButton() {
   // Use explicit international format for clicking on the button
@@ -84,6 +85,7 @@ export function FloatingCallButton() {
   return (
     <a
       href={`tel:${phoneDigits}`}
+      onClick={() => trackPhoneCallClick('floating_button')}
       aria-label={`Call ${businessInfo.phone}`}
       aria-hidden={!visible}
       className={`fixed bottom-6 left-6 ${isModalOpenFlag ? 'z-20' : 'z-[9999]'} inline-flex items-center gap-1 transform floating-control ${

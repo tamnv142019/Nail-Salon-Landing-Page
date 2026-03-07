@@ -6,6 +6,7 @@ import { BookingModal } from './BookingModal';
 import { motion } from 'motion/react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { isBusinessOpenNow } from '../utils/business-hours';
+import { trackContactFormConversion, trackDirectionsClick, trackPhoneCallClick } from '../utils/gtag';
 
 const contactInfo = [
   {
@@ -125,6 +126,15 @@ export function Contact() {
         throw new Error(err?.error || 'Failed to send message');
       }
 
+      // Track contact form conversion
+      trackContactFormConversion({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        source: 'contact_page',
+      });
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
 
@@ -212,6 +222,13 @@ export function Contact() {
                 )}
                 <a
                   href={info.link}
+                  onClick={() => {
+                    if (info.title === 'Call Us') {
+                      trackPhoneCallClick('contact_card');
+                    } else if (info.title === 'Visit Us') {
+                      trackDirectionsClick();
+                    }
+                  }}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className={`relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r ${info.gradient} text-white rounded-xl hover:shadow-lg transition-all duration-300 text-sm font-semibold group-hover:gap-3 cursor-pointer z-20`}

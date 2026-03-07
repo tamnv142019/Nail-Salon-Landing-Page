@@ -5,6 +5,7 @@ import { Sparkles } from 'lucide-react';
 import { ImageLightbox } from './ImageLightbox';
 import { useMagicClickAnimation } from '../hooks/useMagicClickAnimation';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import { trackGalleryImageClick } from '../utils/gtag';
 
 const galleryImages = [
   { url: '/images/gallery/work-01.jpg', title: 'Short Gel Manicure — Soft Pink Finish', category: 'Manicure' },
@@ -69,7 +70,10 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
   return (
     <div
       ref={imageRef}
-      onClick={onClick}
+      onClick={() => {
+        trackGalleryImageClick(index);
+        onClick();
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer bg-card border border-border hover:border-brand-gold/50 transition-all duration-500 will-change-transform hover:shadow-xl hover:shadow-brand-gold/10"

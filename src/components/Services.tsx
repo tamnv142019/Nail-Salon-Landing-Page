@@ -2,6 +2,7 @@ import { Scissors, Droplet, Sparkles, Gem, Hand, Check, Calendar, Flame, Star, B
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { BookingModal } from './BookingModal';
+import { trackServiceDetailOpen } from '../utils/gtag';
 
 const serviceCategories = [
   {
@@ -278,7 +279,10 @@ function ServiceTier({ tier, gradient, index, onBook }: { tier: any; gradient: s
       </ul>
 
       <button
-        onClick={() => onBook(tier.name)}
+        onClick={() => {
+          trackServiceDetailOpen(tier.name);
+          onBook(tier.name);
+        }}
         className={`w-full py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn cursor-pointer font-semibold uppercase tracking-wider ${
           tier.featured || tier.popular
             ? `bg-gradient-to-r ${gradient} text-white hover:shadow-2xl hover:scale-105 transform`
@@ -328,7 +332,10 @@ function SimpleServiceCard({ service, gradient, index, onBook }: { service: any;
         transform: `translateY(${isVisible ? 0 : 20}px)`,
         transitionDelay: `${index * 50}ms`,
       }}
-      onClick={() => onBook(service.name)}
+      onClick={() => {
+        trackServiceDetailOpen(service.name);
+        onBook(service.name);
+      }}
     >
       <div className="w-full">
         <div className="flex items-start justify-between gap-4 mb-2">
@@ -346,6 +353,7 @@ function SimpleServiceCard({ service, gradient, index, onBook }: { service: any;
           <button
             onClick={(e) => {
               e.stopPropagation();
+              trackServiceDetailOpen(service.name);
               onBook(service.name);
             }}
             className={`p-3 bg-gradient-to-r ${gradient} text-white rounded-lg hover:scale-110 transition-all duration-300 shadow-md hover:shadow-lg`}

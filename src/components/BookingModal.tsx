@@ -7,6 +7,7 @@ import { bookingServices, findBookingServiceByName, formatBookingServiceLabel, e
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { trackBookingModalOpen, trackBookingConversion } from '../utils/gtag';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -135,6 +136,8 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         (document.body.dataset as any).bookingOpen = 'true';
         (document.body.dataset as any).modalOpen = 'true';
       } catch (e) {}
+      // Track booking modal open
+      trackBookingModalOpen(preSelectedService ? 'service_cta' : 'main_cta');
     } else {
       document.body.style.overflow = 'unset';
       try {
@@ -232,6 +235,16 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         const err = await res.json().catch(() => ({}));
         throw new Error(err?.error || 'Failed to send booking');
       }
+
+      // Track booking conversion
+      trackBookingConversion({
+        services: selectedServiceObjs.map((s) => s.name),
+        date: selectedDate,
+        time: selectedTime,
+        customerName: formData.name,
+        customerEmail: formData.email,
+        customerPhone: formData.phone,
+      });
 
       setIsSubmitted(true);
     } catch (error) {
