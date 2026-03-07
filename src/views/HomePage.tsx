@@ -13,6 +13,7 @@ import { ContactSection } from '../components/home/ContactSection';
 import { Footer } from '../components/Footer';
 import { BookingModal } from '../components/BookingModal';
 import { ScrollToTopButton } from '../components/ScrollToTopButton';
+import { NewClientPromoPopup } from '../components/NewClientPromoPopup';
 
 interface HomePageProps {
   onNavigateToServices: (serviceId?: string) => void;
@@ -81,6 +82,9 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
 
       {/* Booking Modal */}
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+
+      {/* New Client Promo Popup */}
+      <NewClientPromoPopup />
       </main>
     </>
   );

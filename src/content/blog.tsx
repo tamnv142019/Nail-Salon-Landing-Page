@@ -466,9 +466,9 @@ export const blogPosts: BlogPost[] = [
 
   {
     slug: 'nail-trends-san-diego-2026',
-    title: 'Nail Trends in San Diego: What's Hot Right Now',
+    title: 'Nail Trends in San Diego: What\'s Hot Right Now',
     description:
-      'San Diego nail trends for 2026: minimalist chrome, tropical-inspired designs, sustainable nail art, and the rise of "quiet luxury" nails. Here's what our clients are asking for.',
+      'San Diego nail trends for 2026: minimalist chrome, tropical-inspired designs, sustainable nail art, and the rise of "quiet luxury" nails. Here\'s what our clients are asking for.',
     datePublished: '2026-03-08',
     dateModified: '2026-03-08',
     author: { name: 'Helen Pham' },
@@ -584,7 +584,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'best-nail-designs-2026',
     title: 'Best Nail Designs 2026: Creative Ideas for Every Occasion',
     description:
-      'From minimalist chic to bold statement designs, explore the best nail art ideas for 2026. We've curated trending designs for work, dates, and special events.',
+      'From minimalist chic to bold statement designs, explore the best nail art ideas for 2026. We\'ve curated trending designs for work, dates, and special events.',
     datePublished: '2026-03-08',
     dateModified: '2026-03-08',
     author: { name: 'Helen Pham' },

@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
-import { X, Gift, Sparkles } from 'lucide-react';
+import { X, Gift, Sparkles, Phone } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export function NewClientPromoPopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasSeenPopup, setHasSeenPopup] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
     // Check if user has already seen the popup
-    const hasSeenBefore = localStorage.getItem('newClientPopupSeen');
+    const hasSeenBefore = localStorage.getItem('newClientPromoSeen');
     if (!hasSeenBefore) {
       // Show popup after 2 seconds
       const timer = setTimeout(() => {
         setIsOpen(true);
-        setHasSeenPopup(true);
       }, 2000);
       return () => clearTimeout(timer);
-    } else {
-      setHasSeenPopup(true);
     }
   }, []);
 
@@ -42,10 +38,10 @@ export function NewClientPromoPopup() {
 
   const handleClose = () => {
     setIsOpen(false);
-    localStorage.setItem('newClientPopupSeen', 'true');
+    localStorage.setItem('newClientPromoSeen', 'true');
   };
 
-  if (!isOpen || hasSeenPopup) {
+  if (!isOpen) {
     return null;
   }
 
@@ -101,10 +97,10 @@ export function NewClientPromoPopup() {
           <div className="p-8">
             <div className="text-center mb-6">
               <div className="inline-block bg-gradient-to-r from-red-500 to-yellow-500 text-white px-6 py-3 rounded-full font-bold text-2xl mb-4 shadow-lg">
-                20% OFF
+                10% OFF
               </div>
               <p className="text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
-                Your First Service
+                Your First Visit
               </p>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Enjoy a special discount on any of our premium nail, hair, or skincare services
@@ -130,16 +126,20 @@ export function NewClientPromoPopup() {
             {/* Promo Code */}
             <div className="bg-gradient-to-r from-red-100 to-yellow-100 dark:from-red-900/30 dark:to-yellow-900/30 p-3 rounded-lg mb-6 text-center border-2 border-red-200 dark:border-red-700">
               <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Use code:</p>
-              <p className="text-2xl font-bold text-red-600 dark:text-red-400 font-mono">WELCOME20</p>
+              <p className="text-2xl font-bold text-red-600 dark:text-red-400 font-mono">WELCOME10</p>
             </div>
 
             {/* CTA Buttons */}
             <div className="space-y-3">
               <button
-                onClick={handleClose}
-                className="w-full bg-gradient-to-r from-red-500 to-green-500 hover:from-red-600 hover:to-green-600 text-white font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
+                onClick={() => {
+                  handleClose();
+                  window.location.href = 'tel:(619)2245050';
+                }}
+                className="w-full bg-gradient-to-r from-red-500 to-green-500 hover:from-red-600 hover:to-green-600 text-white font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
               >
-                Book Your Appointment
+                <Phone size={20} />
+                Call Now
               </button>
               <button
                 onClick={handleClose}
@@ -151,7 +151,7 @@ export function NewClientPromoPopup() {
 
             {/* Footer */}
             <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-4">
-              Offer valid for first-time customers only. Valid through December 31, 2025.
+              Offer valid for first-time customers only. Valid through April 30, 2026.
             </p>
           </div>
         </div>
