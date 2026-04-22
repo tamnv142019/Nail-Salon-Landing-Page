@@ -14,6 +14,7 @@ import { Footer } from '../components/Footer';
 import { BookingModal } from '../components/BookingModal';
 import { ScrollToTopButton } from '../components/ScrollToTopButton';
 import { NewClientPromoPopup } from '../components/NewClientPromoPopup';
+import { Analytics } from "@vercel/analytics/next"
 
 interface HomePageProps {
   onNavigateToServices: (serviceId?: string) => void;
@@ -85,6 +86,9 @@ export function HomePage({ onNavigateToServices, onNavigateToPrivacy, onNavigate
 
       {/* New Client Promo Popup */}
       <NewClientPromoPopup />
+      
+      {/*Analytics - placed at the end of the main content to ensure it loads after critical content for better performance*/}
+       <Analytics />
       </main>
     </>
   );
