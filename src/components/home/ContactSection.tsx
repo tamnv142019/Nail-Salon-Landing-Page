@@ -56,7 +56,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
 
               {/* Email */}
               <a
-                href="mailto:helenpham505@gmail.com"
+                href="mailto:evanesciatt@gmail.com"
                 className="flex items-center gap-3 p-3 bg-card border border-border rounded-lg hover:border-brand-gold/40 transition-colors group"
               >
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -64,7 +64,7 @@ export function ContactSection({ onBookClick, onNavigateToServices }: ContactSec
                 </div>
                 <div>
                   <div className="text-xs text-foreground mb-0.5">{t('contactSection.email', 'Email')}</div>
-                  <div className="text-base font-semibold text-foreground">helenpham505@gmail.com</div>
+                  <div className="text-base font-semibold text-foreground">evanesciatt@gmail.com</div>
                 </div>
               </a>
 

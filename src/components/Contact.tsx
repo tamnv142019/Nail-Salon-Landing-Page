@@ -30,10 +30,10 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    content: 'helenpham505@gmail.com',
+    content: 'evanesciatt@gmail.com',
     subContent: 'We respond within 24 hours',
     gradient: 'from-blue-500 to-cyan-500',
-    link: 'mailto:helenpham505@gmail.com',
+    link: 'mailto:evanesciatt@gmail.com',
     action: 'Send Email',
   },
 ];
