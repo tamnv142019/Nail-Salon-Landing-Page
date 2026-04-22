@@ -7,6 +7,7 @@ import { FloatingFollowButtons } from '../components/FloatingFollowButtons';
 import { Great_Vibes, Roboto } from 'next/font/google';
 import Script from 'next/script';
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/next';
 import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema, generateWebSiteSchema } from '../config/seo.config';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
@@ -204,6 +205,7 @@ gtag('config', '${gtagId}');`}
         <FloatingCallButton />
         <FloatingFollowButtons />
         <TopCTAs />
+        <Analytics />
       </body>
     </html>
   );
