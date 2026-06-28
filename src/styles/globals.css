@@ -530,11 +530,6 @@ html {
   }
 }
 
-/* Add scroll delay for slower animation */
-html {
-  animation-duration: 2s;
-}
-
 /* Fix dropdown select appearance in dark mode */
 select option {
   background-color: var(--popover);
