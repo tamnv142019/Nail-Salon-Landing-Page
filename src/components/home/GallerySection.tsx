@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Pause, Play } from 'lucide-react';
+import { useCarouselAutoplay } from '../../hooks/useCarouselAutoplay';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { useIsMobile } from '../ui/use-mobile';
@@ -41,6 +42,11 @@ const galleryImages = [
 export function GallerySection() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [explicitlyPlaying, setExplicitlyPlaying] = useState(false);
+  const [interacting, setInteracting] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const galleryRegion = useRef<HTMLElement>(null);
   const { t } = useLanguage();
   const isMobile = useIsMobile();
 
@@ -59,6 +65,8 @@ export function GallerySection() {
   const goBack = useCallback(() => {
     setPageIndex((current) => (current - 1 + totalPages) % totalPages);
   }, [totalPages]);
+  const playing = useCarouselAutoplay(goNext, paused || interacting || focused || !!selectedImage, galleryRegion, 7000, explicitlyPlaying);
+  const playbackRequested = !paused && playing;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -77,7 +85,9 @@ export function GallerySection() {
   }, [pageIndex, totalPages]);
 
   return (
-    <section id="gallery" className="py-12 md:py-16 bg-secondary dark:bg-background transition-colors duration-500">
+    <section id="gallery" ref={galleryRegion} aria-label="Our work gallery" className="py-12 md:py-16 bg-secondary dark:bg-background transition-colors duration-500"
+      onMouseEnter={() => setInteracting(true)} onMouseLeave={() => setInteracting(false)}
+      onFocusCapture={() => setFocused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Section Header */}
         <div className="text-center mb-10">
@@ -128,7 +138,7 @@ export function GallerySection() {
           <div className="mt-5 flex items-center justify-center gap-3">
             <button
               type="button"
-              onClick={goBack}
+              onClick={() => { setPaused(true); goBack(); }}
               aria-label={t('gallerySection.back', 'Back')}
               className="w-12 h-12 bg-accent hover:bg-accent-hover active:bg-accent-active text-accent-foreground rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
             >
@@ -136,12 +146,16 @@ export function GallerySection() {
             </button>
             <button
               type="button"
-              onClick={goNext}
+              onClick={() => { setPaused(true); goNext(); }}
               aria-label={t('gallerySection.next', 'Next')}
               className="w-12 h-12 bg-accent hover:bg-accent-hover active:bg-accent-active text-accent-foreground rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
             >
               <ChevronRight className="text-current" size={24} />
             </button>
+            <button type="button" className="salon-gallery-play" onClick={() => { setPaused(playbackRequested); setExplicitlyPlaying(!playbackRequested); }} aria-label={playbackRequested ? 'Pause gallery slideshow' : 'Play gallery slideshow'}>
+              {playbackRequested ? <Pause size={18} /> : <Play size={18} />}<span>{playbackRequested ? 'Pause' : 'Play'}</span>
+            </button>
+            <span className="salon-gallery-page">{pageIndex + 1} / {totalPages}</span>
           </div>
         </div>
       </div>
