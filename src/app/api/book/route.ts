@@ -1,6 +1,6 @@
-import nodemailer from 'nodemailer';
 import { bookingConfirmationEmail } from '../../../emailTemplates/bookingConfirmation';
 import { sendSMTPMail } from '../../../lib/email';
+import { sendBookingTelegram } from '../../../lib/booking-telegram';
 
 export const runtime = 'nodejs';
 
@@ -81,6 +81,15 @@ export async function POST(req: Request) {
       text: `New booking: ${name} - ${email} - ${phone} - ${formattedDate} ${time} - Services: ${serviceLine}${totalLine ? ` - Total: ${totalLine}` : ''}`,
       html: salonHtml,
     });
+
+    // Notification failure must not turn an emailed booking into a failed submission.
+    try {
+      await sendBookingTelegram(
+        `New booking: ${String(name).slice(0, 80)}\n${date} ${time}\nServices: ${serviceLine.slice(0, 200)}\nPhone: ${String(phone).slice(0, 30)}`,
+      );
+    } catch (error) {
+      console.error('Booking Telegram notification failed', error instanceof Error ? error.message : 'Unknown error');
+    }
 
     // Send confirmation to customer
     await sendSMTPMail({

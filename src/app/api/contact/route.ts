@@ -1,4 +1,3 @@
-import nodemailer from 'nodemailer';
 import { sendSMTPMail } from '../../../lib/email';
 
 export const runtime = 'nodejs';
