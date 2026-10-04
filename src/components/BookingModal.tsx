@@ -48,6 +48,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService, inline = fal
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [search, setSearch] = useState('');
+  const [serviceCategory, setServiceCategory] = useState('All');
   const [submitError, setSubmitError] = useState('');
   const { t } = useLanguage();
   const dateInputRef = useRef<HTMLInputElement | null>(null);
@@ -412,9 +413,15 @@ export function BookingModal({ isOpen, onClose, preSelectedService, inline = fal
                   </div>
 
                   <Input type="search" aria-label="Search services" placeholder="Search services…" value={search} onChange={(event) => setSearch(event.target.value)} className="mt-4 h-12" />
-                  {search && !bookingServices.some(service => service.name.toLowerCase().includes(search.toLowerCase())) && <p className="mt-4 text-sm" role="status">No matching services. Try another search.</p>}
-                  <div className="mt-4 max-h-[min(72vh,44rem)] sm:max-h-[min(60vh,36rem)] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable]">
+                  <label className="block mt-4" htmlFor="booking-service-category">Service type</label>
+                  <select id="booking-service-category" value={serviceCategory} onChange={(event) => setServiceCategory(event.target.value)} className="w-full mt-2 rounded-xl border border-border bg-background px-4 py-3 text-foreground">
+                    <option value="All">All services</option>
+                    {categories.map(category => <option key={category} value={category}>{category}</option>)}
+                  </select>
+                  {search && !bookingServices.some(service => (serviceCategory === 'All' || service.category === serviceCategory) && service.name.toLowerCase().includes(search.toLowerCase())) && <p className="mt-4 text-sm" role="status">No matching services. Try another search or choose a different service type.</p>}
+                  <div className="booking-service-list mt-4 max-h-[min(72vh,44rem)] sm:max-h-[min(60vh,36rem)] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable]">
                     {categories.map((category) => {
+                      if (serviceCategory !== 'All' && serviceCategory !== category) return null;
                       const items = bookingServices.filter((s) => s.category === category && s.name.toLowerCase().includes(search.toLowerCase()));
                       if (items.length === 0) return null;
 
@@ -450,7 +457,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService, inline = fal
                                     <span className="flex items-center gap-2 flex-wrap min-w-0">
                                       <span
                                         className={
-                                          `text-sm sm:text-lg font-semibold truncate transition-colors duration-200 ` +
+                                          `text-base sm:text-lg font-semibold transition-colors duration-200 ` +
                                           (checked
                                             ? 'text-foreground'
                                             : 'text-foreground group-hover:text-brand-gold-muted dark:group-hover:text-brand-gold')
@@ -726,7 +733,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService, inline = fal
                       size="lg"
                       className="w-full sm:w-auto h-11 sm:h-12 text-base rounded-full shadow-lg hover:shadow-2xl ring-1 ring-inset ring-(--glass-ring) transition-[transform,filter,box-shadow] duration-300 ease-out hover:-translate-y-0.5"
                     >
-                      {t('booking.next', 'Next')}
+                      {step === 1 ? 'Continue to date & time' : 'Continue to your details'}
                     </Button>
                   ) : (
                     <Button
