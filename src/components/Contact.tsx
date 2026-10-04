@@ -30,10 +30,10 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    content: 'evanesciatt@gmail.com',
+    content: 'queennailhairandskincare@gmail.com',
     subContent: 'We respond within 24 hours',
     gradient: 'from-blue-500 to-cyan-500',
-    link: 'mailto:evanesciatt@gmail.com',
+    link: 'mailto:queennailhairandskincare@gmail.com',
     action: 'Send Email',
   },
 ];

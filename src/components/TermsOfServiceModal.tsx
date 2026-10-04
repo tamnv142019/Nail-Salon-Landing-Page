@@ -290,7 +290,7 @@ export function TermsOfServiceModal({ isOpen, onClose }: TermsOfServiceModalProp
                 </p>
                 <p>4869 Santa Monica Ave, San Diego, CA 92107</p>
                 <p>Phone: (619) 224-5050</p>
-                <p>Email: info@queensnails.com</p>
+                <p>Email: queennailhairandskincare@gmail.com</p>
               </div>
             </section>
 
