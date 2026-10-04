@@ -7,10 +7,8 @@ export function NewClientPromoPopup() {
   const { t } = useLanguage();
 
   useEffect(() => {
-    // Check if user has already seen the popup
     const hasSeenBefore = localStorage.getItem('newClientPromoSeen');
     if (!hasSeenBefore) {
-      // Show popup after 2 seconds
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 2000);
@@ -29,7 +27,7 @@ export function NewClientPromoPopup() {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
     }
-    
+
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
@@ -55,20 +53,20 @@ export function NewClientPromoPopup() {
 
       {/* Popup */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div className="bg-gradient-to-br from-red-50 via-white to-yellow-50 dark:from-red-900/20 dark:via-slate-900 dark:to-yellow-900/20 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border-2 border-red-200 dark:border-red-700 animate-in scale-in-95 duration-300">
-          {/* Header */}
-          <div className="relative bg-gradient-to-r from-red-500 via-green-500 to-yellow-500 p-6 text-white overflow-hidden">
-            {/* Animated background elements */}
+        <div className="bg-card rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border-2 transition-all duration-300 relative">
+          {/* Header with animated sparkles */}
+          <div className="relative bg-gradient-to-r from-rose-600 via-primary-600 to-amber-500 p-6 text-white overflow-hidden">
+            {/* Background sparkles */}
             <div className="absolute inset-0 opacity-20">
               {[...Array(5)].map((_, i) => (
                 <Sparkles
                   key={i}
                   className="absolute animate-pulse"
-                  size={20 + Math.random() * 20}
+                  size={20 + (i % 3) * 10}
                   style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${i * 0.2}s`,
+                    left: `${20 + (i * 15) % 60}%`,
+                    top: `${15 + (i * 20) % 50}%`,
+                    animationDelay: `${i * 0.3}s`,
                   }}
                 />
               ))}
@@ -77,56 +75,52 @@ export function NewClientPromoPopup() {
             {/* Close button */}
             <button
               onClick={handleClose}
-              className="absolute top-4 right-4 p-1 hover:bg-white/20 rounded-full transition-colors z-10"
+              className="absolute top-3 right-3 p-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white cursor-pointer hover:bg-white/30 hover:scale-110 transition-all duration-200 shadow-sm z-10"
               aria-label="Close"
+              title="Close"
             >
               <X size={24} />
             </button>
 
             {/* Title */}
-            <div className="relative z-10">
-              <div className="flex items-center gap-2 mb-2">
+            <div className="relative z-10 pt-4">
+              <div className="flex items-center justify-center gap-2 mb-1">
                 <Gift size={28} />
-                <h2 className="text-2xl font-bold">Special Welcome!</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold">Special Offer</h2>
               </div>
-              <p className="text-sm opacity-90">Exclusive offer for new clients</p>
+              <p className="text-sm text-white/80 text-center">Exclusive welcome offer for new clients</p>
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-8">
+          <div className="p-6 sm:p-8">
+            {/* Discount badge */}
             <div className="text-center mb-6">
-              <div className="inline-block bg-gradient-to-r from-red-500 to-yellow-500 text-white px-6 py-3 rounded-full font-bold text-2xl mb-4 shadow-lg">
+              <div className="inline-block bg-gradient-to-r from-rose-500 to-amber-500 text-white px-6 py-3 rounded-full font-bold text-3xl sm:text-4xl mb-3 shadow-lg">
                 10% OFF
               </div>
-              <p className="text-gray-700 dark:text-gray-300 text-lg font-semibold mb-2">
-                Your First Visit
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Enjoy a special discount on any of our premium nail, hair, or skincare services
+              <p className="text-foreground text-lg font-bold">Your First Visit</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                On any of our premium nail, hair, or skincare services
               </p>
             </div>
 
             {/* Benefits */}
-            <div className="space-y-3 mb-6 bg-white/50 dark:bg-white/5 p-4 rounded-lg">
-              <div className="flex items-start gap-3">
-                <span className="text-green-500 text-xl">✓</span>
-                <span className="text-sm text-gray-700 dark:text-gray-300">Valid for all services</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-green-500 text-xl">✓</span>
-                <span className="text-sm text-gray-700 dark:text-gray-300">No coupon code needed</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-green-500 text-xl">✓</span>
-                <span className="text-sm text-gray-700 dark:text-gray-300">First-time customers only</span>
-              </div>
+            <div className="space-y-3 mb-6 bg-secondary/50 dark:bg-secondary p-4 rounded-xl">
+              {['Valid for all services', 'No coupon code needed', 'First-time customers only'].map(
+                (item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="text-green-500 font-bold text-lg shrink-0">✓</span>
+                    <span className="text-sm text-foreground">{item}</span>
+                  </div>
+                )
+              )}
             </div>
 
             {/* Promo Code */}
-            <div className="bg-gradient-to-r from-red-100 to-yellow-100 dark:from-red-900/30 dark:to-yellow-900/30 p-3 rounded-lg mb-6 text-center border-2 border-red-200 dark:border-red-700">
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">Use code:</p>
-              <p className="text-2xl font-bold text-red-600 dark:text-red-400 font-mono">WELCOME10</p>
+            <div className="bg-rose-50 dark:bg-rose-900/30 border-2 border-rose-200 dark:border-rose-700 p-4 rounded-xl mb-6 text-center">
+              <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wide font-medium">Use code</p>
+              <p className="text-2xl font-bold text-rose-600 dark:text-rose-400 font-mono tracking-wider">WELCOME10</p>
             </div>
 
             {/* CTA Buttons */}
@@ -136,21 +130,21 @@ export function NewClientPromoPopup() {
                   handleClose();
                   window.location.href = 'tel:(619)2245050';
                 }}
-                className="w-full bg-gradient-to-r from-red-500 to-green-500 hover:from-red-600 hover:to-green-600 text-white font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
               >
                 <Phone size={20} />
-                Call Now
+                Call Now to Book
               </button>
               <button
                 onClick={handleClose}
-                className="w-full bg-white dark:bg-slate-800 text-gray-900 dark:text-white border-2 border-red-200 dark:border-red-700 font-semibold py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+                className="w-full bg-white dark:bg-primary-foreground text-foreground dark:text-foreground border-2 border-border font-semibold py-2 rounded-lg hover:bg-secondary dark:hover:bg-secondary transition-colors"
               >
                 Maybe Later
               </button>
             </div>
 
             {/* Footer */}
-            <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-4">
+            <p className="text-center text-xs text-muted-foreground mt-4">
               Offer valid for first-time customers only. Valid through April 30, 2026.
             </p>
           </div>

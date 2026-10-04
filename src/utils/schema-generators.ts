@@ -74,7 +74,7 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
     "description": data.description,
     "url": data.url,
     "telephone": data.telephone,
-    "email": "support@queensobnail.com",
+    "email": "queennailhairandskincare@gmail.com",
     "areaServed": "Ocean Beach, San Diego",
     "address": {
       "@type": "PostalAddress",

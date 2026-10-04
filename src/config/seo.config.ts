@@ -38,7 +38,7 @@ export const businessInfo: BusinessInfo = {
   description:
     "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
   url: 'https://queensobnail.com',
-  email: 'support@queensobnail.com',
+  email: 'queennailhairandskincare@gmail.com',
   phone: '(619) 224-5050',
   address: {
     streetAddress: '4869 Santa Monica Ave',

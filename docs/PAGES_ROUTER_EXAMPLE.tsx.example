@@ -13,7 +13,7 @@ export default function Document() {
     name: "Queen's Nails Hair and Skincare",
     url: 'https://queensobnail.com',
     phone: '(619) 224-5050',
-    email: 'support@queensobnail.com',
+    email: 'queennailhairandskincare@gmail.com',
     address: {
       streetAddress: '4869 Santa Monica Ave',
       addressLocality: 'Ocean Beach, San Diego',
