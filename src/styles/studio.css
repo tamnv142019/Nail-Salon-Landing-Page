@@ -1,4 +1,4 @@
-/* Calm salon design with legible type, clear actions and ordinary scrolling. */
+/* Warm glass surfaces with legible type, clear actions and ordinary scrolling. */
 :root {
   --background: #fffdfb; --background-secondary: #f7f0ea; --background-card: #fff;
   --foreground: #302a27; --foreground-secondary: #625751;
@@ -184,4 +184,128 @@ body[data-modal-open="true"] .studio-mobile-dock { display: none; }
   .studio-menu-toggle svg { flex-shrink: 0; }
   .studio-nav { gap: 6px; }
   .studio-button-small { padding-inline: 12px; }
+}
+
+/* Glass material: an opaque fallback first, translucency when supported. */
+:root {
+  --glass-surface: #fff8f5;
+  --glass-tint: rgba(255, 252, 250, .76);
+  --glass-border: rgba(255, 255, 255, .9);
+  --glass-shadow: 0 14px 40px rgba(112, 62, 55, .08), inset 0 1px 0 rgba(255, 255, 255, .95);
+  --border: #e1cfc9;
+  --background-card: #fff8f5;
+  --radius: 1.5rem;
+}
+.dark {
+  --glass-surface: #342b29;
+  --glass-tint: rgba(48, 39, 37, .84);
+  --glass-border: rgba(255, 229, 218, .19);
+  --glass-shadow: 0 14px 40px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .1);
+}
+body {
+  background-color: var(--background);
+  background-image: radial-gradient(ellipse at 5% 5%, #f4d3ca 0, transparent 48%), radial-gradient(ellipse at 98% 45%, #e6dcec 0, transparent 46%), radial-gradient(ellipse at 40% 100%, #f9e5ce 0, transparent 50%);
+  background-size: 100% 1100px;
+  background-repeat: repeat-y;
+}
+.dark body {
+  background-image: radial-gradient(ellipse at 5% 5%, #49302e 0, transparent 48%), radial-gradient(ellipse at 98% 45%, #342d42 0, transparent 46%);
+}
+.studio-header {
+  inset: 12px 16px auto;
+  max-width: 1400px;
+  margin-inline: auto;
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  background: var(--glass-surface);
+  box-shadow: var(--glass-shadow);
+}
+body:has(.studio-header) { padding-top: 112px; }
+.studio-nav { height: 82px; }
+.studio-mobile-menu { border-radius: 0 0 28px 28px; background: transparent; }
+.studio-button {
+  border-radius: 999px;
+  background: linear-gradient(155deg, #a66354, #824436 65%);
+  border: 1px solid #874a3d;
+  box-shadow: inset 0 1px 0 #ffffff50, 0 6px 16px #82443625;
+}
+.studio-button:hover { background: linear-gradient(155deg, #945445, #68372c); }
+.salon-button-outline,.studio-icon,.studio-gallery-filters button { border-radius: 999px; }
+.salon-button-outline,.salon-service-card,.salon-steps li,.salon-photo-label,.studio-mobile-dock,
+.studio-booking .booking-surface,main .bg-card {
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+.salon-hero { padding-top: 46px; }
+.salon-hero-content { padding: 14px 0; }
+.salon-hero-photo,.salon-about-photo {
+  border-radius: 36px;
+  border: 5px solid var(--glass-border);
+  box-shadow: 0 24px 60px #8244361c;
+}
+.salon-photo-label { border-radius: 22px; color: var(--foreground); }
+.salon-hero-benefits span {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+}
+.salon-hero-benefits { gap: 10px; }
+.salon-visit-strip {
+  max-width: 1280px;
+  margin: 8px auto 0;
+  padding: 26px 30px;
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  background: var(--glass-surface);
+  box-shadow: var(--glass-shadow);
+}
+.salon-service-card { border-radius: 28px; }
+.salon-service-title span { background: #f5e0d8; border-radius: 999px; color: #713b30; }
+.salon-steps li { border-radius: 28px; }
+.salon-booking-guide,main #contact,main .bg-secondary,.studio-services-intro { background: transparent !important; }
+.studio-footer { background: var(--glass-surface); border-color: var(--glass-border); }
+.studio-gallery-filters button { background: var(--glass-surface); }
+.studio-gallery-filters button[aria-pressed="true"] { background: #824436; }
+.studio-booking .booking-surface { border-radius: 28px; overflow: hidden; }
+.studio-booking .booking-surface input,.studio-booking .booking-surface textarea,.studio-booking .booking-surface select {
+  background: var(--input-background); border-color: var(--border); border-radius: 14px;
+}
+.studio-booking .booking-surface form > div:last-child { background: var(--glass-surface); }
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .studio-header,.salon-button-outline,.salon-photo-label,.salon-visit-strip,.salon-service-card,
+  .salon-steps li,.studio-mobile-dock,.studio-footer,.studio-gallery-filters button,main .bg-card,
+  .studio-booking .booking-surface,.studio-booking .booking-surface form > div:last-child {
+    background: var(--glass-tint);
+    -webkit-backdrop-filter: blur(20px) saturate(125%);
+    backdrop-filter: blur(20px) saturate(125%);
+  }
+  .studio-gallery-filters button[aria-pressed="true"] { background: #824436; }
+}
+@media (max-width: 850px) {
+  .salon-visit-strip { margin-inline: 24px; }
+}
+@media (max-width: 640px) {
+  body:has(.studio-header) { padding-top: 96px; }
+  .studio-header { inset: 8px 8px auto; border-radius: 24px; }
+  .studio-nav { height: 76px; padding-inline: 12px; }
+  .studio-mobile-menu { border-radius: 0 0 24px 24px; }
+  .studio-mobile-dock { border-radius: 999px; }
+  .salon-hero { padding-top: 28px; }
+  .salon-hero-photo,.salon-about-photo { border-width: 3px; border-radius: 28px; }
+  .salon-hero-benefits { align-items: flex-start; }
+  .salon-visit-strip { padding: 24px; }
+  .booking-progress { align-items: flex-start; }
+  .booking-progress > div { flex-direction: column; text-align: center; gap: 8px; }
+  .booking-progress > div > div:first-child { flex-shrink: 0; }
+  .booking-progress > div > div:last-child { overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .studio-header,.salon-button-outline,.salon-photo-label,.salon-visit-strip,.salon-service-card,
+  .salon-steps li,.studio-mobile-dock,.studio-footer,.studio-gallery-filters button,main .bg-card,
+  .studio-booking .booking-surface,.studio-booking .booking-surface form > div:last-child {
+    background: var(--glass-surface); -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .studio-gallery-filters button[aria-pressed="true"] { background: #824436; }
 }

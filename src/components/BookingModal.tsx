@@ -311,7 +311,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService, inline = fal
               </div>
 
               {/* Stepper */}
-              <div className="mt-3 sm:mt-6 flex items-center gap-2 sm:gap-4 max-w-4xl mx-auto">
+              <div className="booking-progress mt-3 sm:mt-6 flex items-center gap-2 sm:gap-4 max-w-4xl mx-auto">
                 {[1, 2, 3].map((n) => {
                   const isActive = step === n;
                   const isDone = step > n;
