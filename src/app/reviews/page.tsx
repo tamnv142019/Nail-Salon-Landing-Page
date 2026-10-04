@@ -3,6 +3,7 @@ import { SEO } from '../../components/SEO/SEO';
 import { getPageSEOConfig } from '../../config/seo.config';
 import { ClientHeader } from '../../components/ClientHeader';
 import { Footer } from '../../components/Footer';
+import { PageIntro } from '../../components/PageIntro';
 
 // Dynamically load the client-only GoogleReviews component on the client (no SSR)
 const GoogleReviewsClient = dynamic(
@@ -26,6 +27,7 @@ export default function Page() {
       <ClientHeader />
 
       <main>
+        <PageIntro eyebrow="YOUR WORDS, OUR INSPIRATION" title="Good visits. Lasting impressions." description="Discover client experiences at Queen’s Nails Hair and Skincare and explore our Google reviews." />
         <GoogleReviewsClient />
       </main>
 

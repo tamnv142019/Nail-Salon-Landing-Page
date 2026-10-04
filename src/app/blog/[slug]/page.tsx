@@ -1,4 +1,13 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { pageMetadata } from '../../../lib/page-metadata';
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const post = getBlogPostBySlug(params.slug);
+  if (!post) return { title: 'Article not found', robots: { index: false } };
+  const metadata = pageMetadata(post.title, post.description, `/blog/${post.slug}`);
+  return { ...metadata, openGraph: { ...metadata.openGraph, type: 'article', publishedTime: post.datePublished, modifiedTime: post.dateModified } };
+}
 
 import { SEO } from '../../../components/SEO/SEO';
 import { getPageSEOConfig, businessInfo } from '../../../config/seo.config';

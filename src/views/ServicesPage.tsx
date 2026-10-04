@@ -232,8 +232,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
   const nonComboNonWaxingServices = useMemo(() => servicesData.filter((service) => service.id !== 'waxing' && service.id !== 'combo'), [servicesData]);
 
   const handleBookService = useCallback((serviceName: string) => {
-    setSelectedService(serviceName);
-    setIsBookingOpen(true);
+    window.location.assign('/book?service=' + encodeURIComponent(serviceName));
   }, []);
 
   useEffect(() => {
@@ -285,7 +284,7 @@ export function ServicesPage({ onNavigateHome, scrollToService }: ServicesPagePr
         <Navigation onBookClick={() => setIsBookingOpen(true)} onNavigateHome={onNavigateHome} />
 
         {/* Header */}
-        <div className="relative pt-24 pb-10 md:pb-12 px-4 md:px-6 bg-secondary dark:bg-secondary border-b border-border overflow-hidden transition-colors duration-500">
+        <div className="studio-services-intro relative pt-14 pb-10 md:pb-12 px-4 md:px-6 bg-secondary dark:bg-secondary border-b border-border overflow-hidden transition-colors duration-500">
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-btn-accent/35 dark:bg-brand-gold/10 blur-3xl" />
             <div className="absolute -bottom-28 -left-24 h-96 w-96 rounded-full bg-brand-sapphire/10 blur-3xl" />

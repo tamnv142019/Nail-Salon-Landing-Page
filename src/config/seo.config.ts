@@ -388,11 +388,6 @@ export function generateBusinessSchema() {
       closes: hours.closes,
     })),
     sameAs: Object.values(businessInfo.social).filter(Boolean),
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '250',
-    },
   };
 }
 

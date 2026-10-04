@@ -29,7 +29,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
       <div className="min-h-screen bg-secondary dark:bg-background transition-colors duration-500">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background text-foreground shadow-lg border-b border-border">
+      <header className="relative bg-background text-foreground shadow-lg border-b border-border">
         <div className="max-w-5xl mx-auto px-6 py-6">
           <h1 className="text-4xl font-bold">{t('privacy.title', 'Privacy Policy')}</h1>
           <p className="text-foreground mt-2">
@@ -40,7 +40,7 @@ export function PrivacyPolicyPage({ onNavigateBack }: PrivacyPolicyPageProps) {
 
       {/* Content */}
       <main className="max-w-5xl mx-auto px-6 py-12">
-        <div className="bg-card rounded-2xl shadow-xl p-8 md:p-12 text-foreground transition-colors duration-500 border border-border">
+        <div className="bg-card rounded-2xl p-6 md:p-12 text-foreground transition-colors duration-500 border border-border">
           <div className="space-y-8">
             {/* Introduction */}
             <section>

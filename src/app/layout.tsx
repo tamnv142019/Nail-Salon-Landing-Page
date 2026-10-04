@@ -1,21 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "../styles/studio.css";
+import { StudioUtilities } from '../components/StudioUtilities';
 import { Providers } from "./providers";
-import { TopCTAs } from '../components/ScrollToTopButton';
-import { FloatingCallButton } from '../components/FloatingCallButton';
-import { FloatingFollowButtons } from '../components/FloatingFollowButtons';
-import { Great_Vibes, Roboto } from 'next/font/google';
+
 import Script from 'next/script';
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
-import { seoConfig, businessInfo, generateBusinessSchema, generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema, generateWebSiteSchema } from '../config/seo.config';
-
-const roboto = Roboto({ subsets: ['latin'], weight: ['300', '400', '500', '700'], display: 'swap' });
-const displayFont = Great_Vibes({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-  variable: '--font-display',
-});
+import { seoConfig, businessInfo, generateBusinessSchema, generateWebSiteSchema } from '../config/seo.config';
 
 /**
  * Metadata chuẩn Next.js cho SEO
@@ -25,18 +16,19 @@ const displayFont = Great_Vibes({
 export const metadata: Metadata = {
   // metadataBase: URL gốc của website (bắt buộc)
   metadataBase: new URL('https://queensobnail.com'),
-  
+
   // applicationName: Tên doanh nghiệp xuất hiện trong Google Search
   applicationName: 'Queen’s Nails Hair and Skincare',
-  
+
   // Title and Description
   title: {
     default: 'Queen’s Nails Hair and Skincare | Ocean Beach Nail Salon', // 58 characters (optimal for SEO)
     template: '%s | Queen’s Nails Hair and Skincare',
   },
+  alternates: { canonical: businessInfo.url },
   description:
     "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
-  
+
   // Keywords (optional, nhưng tốt cho SEO)
   keywords: [
     "nail salon ocean beach",
@@ -48,14 +40,14 @@ export const metadata: Metadata = {
     "gel nails ocean beach",
     "queen’s nails hair and skincare san diego",
   ],
-  
+
   // Authors
   authors: [{ name: 'Queen’s Nails Hair and Skincare' }],
-  
+
   // Creator
   creator: 'Queen’s Nails Hair and Skincare',
   publisher: 'Queen’s Nails Hair and Skincare',
-  
+
   // Favicon - Cấu hình đầy đủ cho Google Search
   icons: {
     // Favicon chính (Google yêu cầu >= 48x48px)
@@ -76,10 +68,10 @@ export const metadata: Metadata = {
       { rel: "manifest", url: "/favicon/site.webmanifest" },
     ],
   },
-  
+
   // Manifest
   manifest: "/favicon/site.webmanifest",
-  
+
   // OpenGraph (Facebook, LinkedIn)
   openGraph: {
     type: 'website',
@@ -98,7 +90,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+
   // Twitter Card
   twitter: {
     card: 'summary_large_image',
@@ -107,7 +99,7 @@ export const metadata: Metadata = {
       "Queen’s Nails Hair and Skincare in Ocean Beach, San Diego offers professional manicures, pedicures, gel nails, nail art, hair and skincare services. Book your appointment today.",
       images: ['/images/logos/logo.png'],
   },
-  
+
   // Robots
   robots: {
     index: true,
@@ -120,7 +112,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  
+
   // Verification (nếu bạn có Google Search Console)
   // verification: {
   //   google: 'your-google-verification-code',
@@ -141,30 +133,18 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID; // GA4 Measurement ID
   // Build JSON-LD payloads based on configuration flags
   const ld: Array<string> = [];
-  
+
   // WebSite Schema - QUAN TRỌNG NHẤT cho Site name trong Google Search
   if (seoConfig.structuredData?.enableWebSiteSchema) {
     ld.push(JSON.stringify(generateWebSiteSchema(), null, 2));
   }
-  
+
   if (seoConfig.structuredData?.enableOrganizationSchema || seoConfig.structuredData?.enableLocalBusinessSchema) {
     ld.push(JSON.stringify(generateBusinessSchema(), null, 2));
   }
 
-  if (seoConfig.structuredData?.enableFAQSchema) {
-    ld.push(JSON.stringify(generateFAQSchema(), null, 2));
-  }
-
-  if (seoConfig.structuredData?.enableServiceSchema) {
-    ld.push(JSON.stringify(generateServiceSchema(), null, 2));
-  }
-
-  if (seoConfig.structuredData?.enableBreadcrumbSchema) {
-    ld.push(JSON.stringify(generateBreadcrumbSchema(), null, 2));
-  }
-
   return (
-    <html lang="en" className={`${roboto.className} ${displayFont.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Favicons and manifest */}
         <link rel="icon" href="/favicon.ico" />
@@ -189,7 +169,7 @@ export default function RootLayout({
             />
             <Script id="gtag-init" strategy="afterInteractive">
               {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);} 
+function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${gtagId}');`}
             </Script>
@@ -201,9 +181,9 @@ gtag('config', '${gtagId}');`}
         {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
         {/* GA4 gtag removed — tracking now handled via Google Tag Manager */}
         <Providers>{children}</Providers>
-        <FloatingCallButton />
-        <FloatingFollowButtons />
-        <TopCTAs />
+        <StudioUtilities />
+
+
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import { getPageSEOConfig } from '../../config/seo.config';
 import { Gallery } from '../../components/Gallery';
 import { ClientHeader } from '../../components/ClientHeader';
 import { Footer } from '../../components/Footer';
+import { PageIntro } from '../../components/PageIntro';
 
 export default function Page() {
   const cfg = getPageSEOConfig('home'); // use home config as base; can add specific config later
@@ -20,6 +21,7 @@ export default function Page() {
       <ClientHeader />
 
       <main>
+        <PageIntro eyebrow="THE DETAILS MAKE THE DIFFERENCE" title="A closer look at our work." description="Explore nail finishes, colors and inspiration from our Ocean Beach salon. Select a photo to see the details." />
         <Gallery />
       </main>
 

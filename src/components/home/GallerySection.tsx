@@ -72,14 +72,6 @@ export function GallerySection() {
   }, []);
 
   useEffect(() => {
-    if (selectedImage) return;
-    const intervalId = window.setInterval(() => {
-      goNext();
-    }, 5000);
-    return () => window.clearInterval(intervalId);
-  }, [goNext, selectedImage]);
-
-  useEffect(() => {
     if (pageIndex < totalPages) return;
     setPageIndex(0);
   }, [pageIndex, totalPages]);
@@ -115,10 +107,15 @@ export function GallerySection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
                 onClick={() => setSelectedImage(image)}
+                role="button"
+                tabIndex={0}
+                aria-label={`View salon gallery photo ${pageIndex * imagesPerPage + index + 1}`}
+                onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setSelectedImage(image); } }}
                 className="relative aspect-square rounded-2xl overflow-hidden cursor-pointer group"
               >
                 <ImageWithFallback
                   src={image}
+                  loading="lazy"
                   alt={`Gallery ${pageIndex * imagesPerPage + index + 1}`}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -152,10 +149,15 @@ export function GallerySection() {
       {/* Lightbox */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-(--overlay-backdrop-strong) flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Salon gallery photo"
+          className="fixed inset-0 z-[200] bg-(--overlay-backdrop-strong) flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
           <button
+            aria-label="Close gallery photo"
+            autoFocus
             onClick={() => setSelectedImage(null)}
             className="absolute top-4 right-4 w-12 h-12 bg-(--glass-on-image-bg) hover:bg-(--glass-on-image-bg-hover) border border-(--glass-on-image-border) rounded-full flex items-center justify-center transition-colors backdrop-blur-sm outline-none focus-visible:ring-[3px] focus-visible:ring-focus-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >

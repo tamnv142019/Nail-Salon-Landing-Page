@@ -11,7 +11,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>('light');
   const [hasInitialized, setHasInitialized] = useState(false);
 
   useEffect(() => {
@@ -26,9 +26,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    const initialTheme: Theme = systemPrefersLight ? 'light' : 'dark';
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
+
+    const initialTheme: Theme = 'light';
+    document.documentElement.classList.remove('dark');
     document.documentElement.style.colorScheme = initialTheme;
     setTheme(initialTheme);
     setHasInitialized(true);

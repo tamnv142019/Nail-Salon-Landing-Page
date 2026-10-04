@@ -13,6 +13,7 @@ interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   preSelectedService?: string;
+  inline?: boolean;
 }
 
 const timeSlots = [
@@ -40,12 +41,14 @@ const getTodayDate = () => {
   return `${year}-${month}-${day}`;
 };
 
-export function BookingModal({ isOpen, onClose, preSelectedService }: BookingModalProps) {
+export function BookingModal({ isOpen, onClose, preSelectedService, inline = false }: BookingModalProps) {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [search, setSearch] = useState('');
+  const [submitError, setSubmitError] = useState('');
   const { t } = useLanguage();
   const dateInputRef = useRef<HTMLInputElement | null>(null);
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -124,7 +127,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      if (!inline) document.body.style.overflow = 'hidden';
       setSelectedDate(getTodayDate());
       setSelectedTime('');
       const pre = findBookingServiceByName(preSelectedService);
@@ -133,8 +136,8 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
       setStep(preName ? 2 : 1);
       // mark booking modal open for other UI to react (e.g., floating buttons)
       try {
-        (document.body.dataset as any).bookingOpen = 'true';
-        (document.body.dataset as any).modalOpen = 'true';
+        if (!inline) (document.body.dataset as any).bookingOpen = 'true';
+        if (!inline) (document.body.dataset as any).modalOpen = 'true';
       } catch (e) {}
       // Track booking modal open
       trackBookingModalOpen(preSelectedService ? 'service_cta' : 'main_cta');
@@ -152,7 +155,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
         delete (document.body.dataset as any).modalOpen;
       } catch (e) {}
     };
-  }, [isOpen, preSelectedService]);
+  }, [isOpen, preSelectedService, inline]);
 
   const isDetailsComplete = Boolean(
     formData.name &&
@@ -189,14 +192,14 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape' && isOpen && !inline) {
         handleClose();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, inline]);
 
   const handleClose = useCallback(() => {
     setSelectedDate('');
@@ -211,6 +214,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
+    setSubmitError('');
 
     try {
       const res = await fetch('/api/book', {
@@ -250,7 +254,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Booking submission error', error);
-      alert('Could not complete booking. Please try again later.');
+      setSubmitError('We could not send your request. Please try again or call (619) 224-5050.');
     } finally {
       setIsSending(false);
     }
@@ -260,11 +264,11 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
 
   return (
     <div
-      onClick={() => handleClose()}
-      className="fixed inset-0 z-999999 flex items-stretch sm:items-center justify-center p-0 sm:p-4 bg-black/55 animate-in fade-in duration-200 overflow-hidden"
+      onClick={() => { if (!inline) handleClose(); }}
+      className={inline ? "booking-inline" : "fixed inset-0 z-999999 flex items-stretch sm:items-center justify-center p-0 sm:p-4 bg-black/55 animate-in fade-in duration-200 overflow-hidden"}
     >
       <div 
-        className="relative w-full max-w-none sm:max-w-6xl sm:w-[min(96vw,72rem)] bg-background/95 dark:bg-card/90 rounded-none sm:rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border-0 sm:border sm:border-border/40 ring-0 sm:ring-1 sm:ring-inset sm:ring-(--glass-ring) h-full sm:h-[92vh] max-h-full sm:max-h-[98vh] flex flex-col min-h-0"
+        className="booking-surface relative w-full max-w-none sm:max-w-6xl sm:w-[min(96vw,72rem)] bg-background/95 dark:bg-card/90 rounded-none sm:rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border-0 sm:border sm:border-border/40 ring-0 sm:ring-1 sm:ring-inset sm:ring-(--glass-ring) h-full sm:h-[92vh] max-h-full sm:max-h-[98vh] flex flex-col min-h-0"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header (green / wizard) */}
@@ -293,7 +297,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                   </p>
                 </div>
 
-                <div className="flex items-start justify-end">
+                <div className={inline ? "hidden" : "flex items-start justify-end"}>
                   <button
                     type="button"
                     onClick={handleClose}
@@ -358,12 +362,12 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
               <div className="w-20 h-20 bg-brand-emerald/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-emerald/20">
                 <Check className="text-brand-emerald" size={40} />
               </div>
-              <h3 className="text-2xl mb-4 text-foreground">{t('booking.successTitle', 'Booking Confirmed!')}</h3>
+              <h3 className="text-2xl mb-4 text-foreground">Appointment request received</h3>
               <p className="text-foreground mb-2">
                 {t('common.thankYou', 'Thank you')}, {formData.name}!
               </p>
               <p className="text-foreground">
-                {t('booking.successMessage', 'Your appointment has been successfully booked.')}
+                Our team will contact you to confirm availability.
               </p>
               <p className="text-foreground mt-2">
                 {new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {selectedTime}
@@ -407,9 +411,11 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                     ) : null}
                   </div>
 
+                  <Input type="search" aria-label="Search services" placeholder="Search services…" value={search} onChange={(event) => setSearch(event.target.value)} className="mt-4 h-12" />
+                  {search && !bookingServices.some(service => service.name.toLowerCase().includes(search.toLowerCase())) && <p className="mt-4 text-sm" role="status">No matching services. Try another search.</p>}
                   <div className="mt-4 max-h-[min(72vh,44rem)] sm:max-h-[min(60vh,36rem)] overflow-y-auto overscroll-contain pr-1 [scrollbar-gutter:stable]">
                     {categories.map((category) => {
-                      const items = bookingServices.filter((s) => s.category === category);
+                      const items = bookingServices.filter((s) => s.category === category && s.name.toLowerCase().includes(search.toLowerCase()));
                       if (items.length === 0) return null;
 
                       const accent = getCategoryAccent(category);
@@ -634,7 +640,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       {t('booking.yourName', 'Your Name')}
                     </Label>
                     <Input
-                      type="text"
+                      id="booking-name" aria-label="Your name" autoComplete="name" type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -649,6 +655,9 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       {t('booking.yourEmail', 'Your Email')}
                     </Label>
                     <Input
+                      id="booking-email"
+                      aria-label="Your email"
+                      autoComplete="email"
                       type="email"
                       required
                       value={formData.email}
@@ -664,6 +673,9 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       {t('booking.yourPhone', 'Your Phone')}
                     </Label>
                     <Input
+                      id="booking-phone"
+                      aria-label="Your phone"
+                      autoComplete="tel"
                       type="tel"
                       required
                       value={formData.phone}
@@ -677,6 +689,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
             </div>
 
             {/* Fixed footer (always visible) */}
+            {submitError && <p role="alert" className="px-6 py-3 text-destructive">{submitError}</p>}
             <div className="shrink-0 border-t border-border/40 bg-background/90 dark:bg-card/85 px-4 sm:px-8 py-3 sm:py-4 pb-[env(safe-area-inset-bottom)]">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
                 <div className="text-xs sm:text-base text-foreground/80">
@@ -721,7 +734,7 @@ export function BookingModal({ isOpen, onClose, preSelectedService }: BookingMod
                       disabled={!isDetailsComplete || isSending}
                       className="w-full sm:w-auto h-11 sm:h-12 text-base"
                     >
-                      {isSending ? t('booking.sending', 'Sending...') : t('booking.bookBtn', 'Confirm Booking')}
+                      {isSending ? t('booking.sending', 'Sending...') : 'Send appointment request'}
                     </Button>
                   )}
                 </div>

@@ -42,14 +42,14 @@ export function AboutSection() {
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="/images/logos/logo.png"
+                src="/images/backgrounds/queens-nails-hair-skincare-ocean-beach-salon-03.jpg"
                 alt="Queens OB Nail salon interior"
                 className="w-full h-130 md:h-140 object-cover"  
               />
             </div>
             
             {/* Floating Stats Card */}
-            <div className="absolute -bottom-6 -right-6 bg-background/95 dark:bg-card/85 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-border/70">
+            <div className="absolute bottom-4 right-4 bg-background/95 dark:bg-card/85 backdrop-blur-xl rounded-2xl shadow-2xl p-6 border border-border/70">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-background/90 dark:bg-card/70 backdrop-blur-xl border border-border/60 shadow-sm ring-1 ring-inset ring-(--glass-ring) text-amber-600 flex items-center justify-center transition-[transform,background-color,box-shadow] duration-200 ease-out hover:bg-background/95 dark:hover:bg-card/80 hover:-translate-y-0.5 hover:shadow-md">
                   <Award className="text-current" size={22} />

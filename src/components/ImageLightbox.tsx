@@ -44,11 +44,16 @@ export function ImageLightbox({
 
   return (
     <div 
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm animate-in fade-in duration-300"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Salon gallery"
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 backdrop-blur-sm animate-in fade-in duration-300"
       onClick={onClose}
     >
       {/* Close Button */}
       <button
+        aria-label="Close gallery"
+        autoFocus
         onClick={onClose}
         className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-10"
       >
@@ -62,6 +67,7 @@ export function ImageLightbox({
 
       {/* Previous Button */}
       <button
+        aria-label="Previous photo"
         onClick={(e) => {
           e.stopPropagation();
           onPrevious();
@@ -73,6 +79,7 @@ export function ImageLightbox({
 
       {/* Next Button */}
       <button
+        aria-label="Next photo"
         onClick={(e) => {
           e.stopPropagation();
           onNext();

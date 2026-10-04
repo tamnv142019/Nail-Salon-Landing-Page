@@ -103,10 +103,10 @@ export default function Page() {
 
       <ClientHeader />
 
-      <main className="min-h-screen bg-secondary dark:bg-background transition-colors duration-500 pt-24">
+      <main className="min-h-screen bg-secondary dark:bg-background transition-colors duration-500 pt-6">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
           <header className="mb-10 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground">Blog</h1>
+            <h1 className="text-3xl md:text-5xl font-bold text-foreground">The beauty journal.</h1>
             <p className="mt-3 text-foreground/80 leading-relaxed max-w-3xl mx-auto">
               Here, we share nail care tips, salon guidance, and simple routines to keep your manicure looking fresh.
             </p>

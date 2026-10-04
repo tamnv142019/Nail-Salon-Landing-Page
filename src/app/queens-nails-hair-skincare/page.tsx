@@ -5,6 +5,7 @@ import { AboutSection } from '@/components/home/AboutSection';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import { ClientHeader } from '@/components/ClientHeader';
 import { Footer } from '@/components/Footer';
+import { PageIntro } from '@/components/PageIntro';
 
 export const metadata: Metadata = {
   title: "Queens Nails Hair and Skincare — Top‑Rated Nails Salon in Ocean Beach, San Diego",
@@ -66,6 +67,7 @@ export default function QueensNailsPage() {
       <ClientHeader />
 
       <main>
+        <PageIntro eyebrow="AT HOME IN OCEAN BEACH" title="Beauty care. A personal touch." description="Get to know Queen’s Nails Hair and Skincare, your neighborhood salon on Santa Monica Avenue in San Diego." />
         {/* About Section from HomePage */}
         <AboutSection />
       </main>

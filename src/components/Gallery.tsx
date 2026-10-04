@@ -70,6 +70,10 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
   return (
     <div
       ref={imageRef}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${image.title}`}
+      onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); onClick(); } }}
       onClick={() => {
         trackGalleryImageClick(index);
         onClick();
@@ -86,6 +90,7 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
     >
       <ImageWithFallback
         src={image.url}
+        loading="lazy"
         alt={image.title}
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
@@ -109,6 +114,9 @@ function GalleryImage({ image, index, onClick }: { image: typeof galleryImages[0
 const MemoizedGalleryImage = memo(GalleryImage);
 
 export function Gallery() {
+  const [category, setCategory] = useState('All');
+  const categories = ['All', ...Array.from(new Set(galleryImages.map(image => image.category)))];
+  const filteredImages = galleryImages.map((image, index) => ({ image, index })).filter(({ image }) => category === 'All' || image.category === category);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const magicClick = useMagicClickAnimation({ particleCount: 15, duration: 500 });
@@ -154,9 +162,13 @@ export function Gallery() {
             </p>
           </div>
 
+          <div className="studio-gallery-filters" role="group" aria-label="Filter gallery by category">
+            {categories.map(item => <button key={item} type="button" aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
+          </div>
+          <p className="studio-gallery-count" role="status">{filteredImages.length} photos · {category}</p>
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            {galleryImages.map((image, index) => (
+            {filteredImages.map(({ image, index }) => (
               <MemoizedGalleryImage 
                 key={index} 
                 image={image} 

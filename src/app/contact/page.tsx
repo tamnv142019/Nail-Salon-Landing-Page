@@ -6,6 +6,7 @@ import { getPageSEOConfig } from '../../config/seo.config';
 import { Contact } from '../../components/Contact';
 import { Navigation } from '../../components/home/Navigation';
 import { BookingModal } from '../../components/BookingModal';
+import { Footer } from '../../components/Footer';
 
 export default function Page() {
   const cfg = getPageSEOConfig('contact');
@@ -26,6 +27,7 @@ export default function Page() {
       <main className="max-w-7xl mx-auto py-12 px-4">
         <Contact />
       </main>
+      <Footer />
 
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>

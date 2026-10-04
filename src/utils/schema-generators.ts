@@ -98,13 +98,6 @@ export function generateLocalBusinessSchema(props?: BusinessSchemaProps) {
       "opens": h.opens,
       "closes": h.closes,
     })),
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "127",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
     "sameAs": Array.from(
       new Set(
         [

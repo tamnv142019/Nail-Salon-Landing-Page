@@ -180,9 +180,9 @@ export function Contact() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-5xl mb-4 font-bold text-black dark:text-white">
-              Get in Touch
-            </h2>
+            <h1 className="text-3xl md:text-5xl mb-4 font-bold text-black dark:text-white">
+              Come in. Feel at home.
+            </h1>
             <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Experience exceptional nail care in Ocean Beach. We're here to make your beauty dreams come true.
             </p>

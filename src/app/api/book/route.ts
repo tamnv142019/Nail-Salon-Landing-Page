@@ -95,8 +95,8 @@ export async function POST(req: Request) {
     await sendSMTPMail({
       from: user,
       to: email,
-      subject: 'Your booking confirmation',
-      text: `Hi ${name}, your booking is confirmed for ${formattedDate} at ${time}.`,
+      subject: 'Your appointment request',
+      text: `Hi ${name}, we received your appointment request for ${formattedDate} at ${time}.`,
       html: userHtml,
     });
 

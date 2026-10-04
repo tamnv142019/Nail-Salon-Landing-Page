@@ -62,7 +62,7 @@ export function bookingConfirmationEmail({
           <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;background:#ffffff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;">
             <tr>
               <td style="background:linear-gradient(90deg,#89CFF0 0%,#6FBDE8 100%);padding:28px 32px;">
-                <h1 style="margin:0;color:#0F172A;font-size:20px;line-height:1.1;font-weight:700">Booking Confirmed</h1>
+                <h1 style="margin:0;color:#0F172A;font-size:20px;line-height:1.1;font-weight:700">Appointment Request Received</h1>
                 <p style="margin:6px 0 0;color:#0F172A;opacity:0.9">Thanks for booking with us, ${name}.</p>
               </td>
             </tr>
